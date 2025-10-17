@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dhiyl4yviryu5"
+path="res://.godot/imported/TestingDeck.obj-61bdb17442570bfd07e76a8be3b2aae0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/TestingDeck.obj-61bdb17442570bfd07e76a8be3b2aae0.mesh"]
+
+source_file="res://assets/3Dmodels/CardDecks/TestingDeck.obj"
+dest_files=["res://.godot/imported/TestingDeck.obj-61bdb17442570bfd07e76a8be3b2aae0.mesh", "res://.godot/imported/TestingDeck.obj-61bdb17442570bfd07e76a8be3b2aae0.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

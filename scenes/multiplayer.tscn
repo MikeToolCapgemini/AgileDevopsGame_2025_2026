@@ -1,0 +1,227 @@
+[gd_scene load_steps=5 format=3 uid="uid://kgixi5xrbejj"]
+
+[ext_resource type="Script" path="res://scripts/Multiplayer.gd" id="1_8yuej"]
+[ext_resource type="PackedScene" uid="uid://bq4jyntltiheo" path="res://scenes/main.tscn" id="2_of8yj"]
+[ext_resource type="Script" path="res://scripts/UX/Toggle.gd" id="3_cuu6e"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_o3rwn"]
+properties/0/path = NodePath(".:incrementValue")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="multiplayer" type="Node"]
+script = ExtResource("1_8yuej")
+GameScene = ExtResource("2_of8yj")
+
+[node name="Debug Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Host Button" type="Button" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 110.0
+offset_right = 250.0
+offset_bottom = 141.0
+text = "Host"
+
+[node name="Join Button" type="Button" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 261.0
+offset_top = 110.0
+offset_right = 361.0
+offset_bottom = 141.0
+text = "Join"
+
+[node name="Start Button" type="Button" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 110.0
+offset_right = 474.0
+offset_bottom = 141.0
+text = "Start Game"
+
+[node name="NameField" type="TextEdit" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 69.0
+offset_right = 473.0
+offset_bottom = 104.0
+text = "testplayername"
+
+[node name="IPField" type="TextEdit" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 246.0
+offset_right = 399.0
+offset_bottom = 281.0
+text = "localhost"
+
+[node name="Label" type="Label" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 71.0
+offset_right = 209.0
+offset_bottom = 97.0
+text = "Name:"
+
+[node name="Debug Button" type="Button" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 152.0
+offset_right = 250.0
+offset_bottom = 183.0
+text = "Debug"
+
+[node name="Tag Name" type="Label" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 31.0
+offset_right = 209.0
+offset_bottom = 57.0
+text = "DevOps Game v0.1.4"
+
+[node name="TextField" type="Label" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 66.0
+offset_right = 689.0
+offset_bottom = 254.0
+scale = Vector2(0.7, 0.7)
+
+[node name="Tag Players" type="Label" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 53.0
+offset_right = 638.0
+offset_bottom = 79.0
+scale = Vector2(0.6, 0.6)
+text = "Connected Players:"
+
+[node name="Plus Button" type="Button" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 418.0
+offset_right = 235.0
+offset_bottom = 449.0
+text = "+"
+
+[node name="Minus Button" type="Button" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 418.0
+offset_right = 340.0
+offset_bottom = 449.0
+text = "-"
+
+[node name="Data Test Text1" type="Label" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 350.0
+offset_right = 432.0
+offset_bottom = 376.0
+text = "Multiplayer live data transmission test"
+
+[node name="ValueText" type="Label" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 197.0
+offset_top = 380.0
+offset_right = 325.0
+offset_bottom = 406.0
+text = "0"
+
+[node name="DataTestText3" type="Label" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 380.0
+offset_right = 432.0
+offset_bottom = 406.0
+text = "Value: "
+
+[node name="Tag Name2" type="Label" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 217.0
+offset_right = 317.0
+offset_bottom = 243.0
+text = "Connection Adress:"
+
+[node name="Cards Tag" type="Label" parent="Debug Interface"]
+layout_mode = 0
+offset_left = 547.0
+offset_top = 341.0
+offset_right = 844.0
+offset_bottom = 367.0
+text = "What cards to use:"
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckButton" type="CheckButton" parent="Debug Interface/Cards Tag"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 25.0
+offset_right = 47.0
+offset_bottom = 49.0
+button_pressed = true
+script = ExtResource("3_cuu6e")
+QuestionsType = "basic"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Debug Interface/Cards Tag/CheckButton"]
+layout_mode = 0
+offset_left = 45.0
+offset_right = 228.0
+offset_bottom = 24.0
+text = "Basic"
+
+[node name="CheckButton2" type="CheckButton" parent="Debug Interface/Cards Tag"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 46.0
+offset_right = 47.0
+offset_bottom = 70.0
+button_pressed = true
+script = ExtResource("3_cuu6e")
+QuestionsType = "pro"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Debug Interface/Cards Tag/CheckButton2"]
+layout_mode = 0
+offset_left = 45.0
+offset_right = 228.0
+offset_bottom = 24.0
+text = "Pro"
+
+[node name="Show Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Toggle Button" type="Button" parent="Show Interface"]
+visible = false
+layout_mode = 0
+offset_left = -108.0
+offset_top = -48.0
+offset_right = -17.0
+offset_bottom = -17.0
+text = "Toggle C"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_o3rwn")
+
+[connection signal="pressed" from="Debug Interface/Host Button" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="Debug Interface/Join Button" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="Debug Interface/Start Button" to="." method="_on_start_button_pressed"]
+[connection signal="text_changed" from="Debug Interface/IPField" to="." method="_on_ip_field_text_changed"]
+[connection signal="pressed" from="Debug Interface/Debug Button" to="." method="_on_debug_button_pressed"]
+[connection signal="button_up" from="Debug Interface/Plus Button" to="." method="_on_plus_button_button_up"]
+[connection signal="button_up" from="Debug Interface/Minus Button" to="." method="_on_minus_button_button_up"]
+[connection signal="pressed" from="Debug Interface/Cards Tag/CheckButton" to="Debug Interface/Cards Tag/CheckButton" method="_on_pressed"]
+[connection signal="pressed" from="Debug Interface/Cards Tag/CheckButton2" to="Debug Interface/Cards Tag/CheckButton2" method="_on_pressed"]
+[connection signal="pressed" from="Show Interface/Toggle Button" to="." method="_on_toggle_button_pressed"]

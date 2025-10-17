@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dh4gbxmuqn0w4"
+path="res://.godot/imported/YellowPlayer1.obj-426296df60ff74a5e40478dbbc4b624e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/YellowPlayer1.obj-426296df60ff74a5e40478dbbc4b624e.mesh"]
+
+source_file="res://assets/3Dmodels/PlayerModels/YellowPlayer1.obj"
+dest_files=["res://.godot/imported/YellowPlayer1.obj-426296df60ff74a5e40478dbbc4b624e.mesh", "res://.godot/imported/YellowPlayer1.obj-426296df60ff74a5e40478dbbc4b624e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

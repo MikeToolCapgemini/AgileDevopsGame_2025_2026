@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://be5ktag5cq0ha"
+path="res://.godot/imported/RedPlayer2.obj-105b1773edb69d92e8cd487b0660d021.mesh"
+
+[deps]
+
+files=["res://.godot/imported/RedPlayer2.obj-105b1773edb69d92e8cd487b0660d021.mesh"]
+
+source_file="res://assets/3Dmodels/PlayerModels/RedPlayer2.obj"
+dest_files=["res://.godot/imported/RedPlayer2.obj-105b1773edb69d92e8cd487b0660d021.mesh", "res://.godot/imported/RedPlayer2.obj-105b1773edb69d92e8cd487b0660d021.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dn6jcyt7o1jbp"
+path="res://.godot/imported/Field_8.obj-049d480de5f2290728ccd69dd7659766.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Field_8.obj-049d480de5f2290728ccd69dd7659766.mesh"]
+
+source_file="res://assets/PlayingField/Field_8.obj"
+dest_files=["res://.godot/imported/Field_8.obj-049d480de5f2290728ccd69dd7659766.mesh", "res://.godot/imported/Field_8.obj-049d480de5f2290728ccd69dd7659766.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

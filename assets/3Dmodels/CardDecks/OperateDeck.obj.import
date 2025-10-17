@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://l8fmpqrmdy5u"
+path="res://.godot/imported/OperateDeck.obj-0ef8a625bb7d7fc1117e0f2dd32711fa.mesh"
+
+[deps]
+
+files=["res://.godot/imported/OperateDeck.obj-0ef8a625bb7d7fc1117e0f2dd32711fa.mesh"]
+
+source_file="res://assets/3Dmodels/CardDecks/OperateDeck.obj"
+dest_files=["res://.godot/imported/OperateDeck.obj-0ef8a625bb7d7fc1117e0f2dd32711fa.mesh", "res://.godot/imported/OperateDeck.obj-0ef8a625bb7d7fc1117e0f2dd32711fa.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
