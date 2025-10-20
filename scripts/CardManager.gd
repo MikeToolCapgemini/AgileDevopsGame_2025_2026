@@ -1,3 +1,4 @@
+class_name CardManager
 extends Control
 
 @export var QuestionObject : RichTextLabel
@@ -186,6 +187,7 @@ func show_answer():
 	$"Panel/Answer".visible = true
 	$"Panel/AnswerPanelBG".visible = true
 	_sync_answershown.rpc(true)
+
 
 
 func _on_close_button_pressed():
