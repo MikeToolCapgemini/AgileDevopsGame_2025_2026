@@ -89,7 +89,7 @@
 [ext_resource type="Script" uid="uid://j2ei46pc4ata" path="res://scripts/UX/DelayedHide.gd" id="53_u67wn"]
 [ext_resource type="Texture2D" uid="uid://bvtwyxeygyxn1" path="res://assets/guides/Guide2_1.png" id="57_e28cd"]
 [ext_resource type="Texture2D" uid="uid://eayil001qvqf" path="res://assets/3Dmodels/CardDecks/TestingDeck.png" id="57_v1ccq"]
-[ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
+[ext_resource type="Script" path="res://scripts/repick_role.gd" id="84_r4ag1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vr6f0"]
 albedo_color = Color(0.905882, 0.662745, 0, 1)
