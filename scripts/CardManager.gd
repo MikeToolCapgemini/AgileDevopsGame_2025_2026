@@ -92,7 +92,8 @@ func draw(type):
 	
 	# action cards
 	var rng = RandomNumberGenerator.new()
-	if rng.randi_range(1, 21) >= 19:
+	var actionRng = rng.randi_range(1, 21)
+	if actionRng >= 19:
 		var actionDict = [
 			"Your delivery does not fit in the release calendar: skip a turn",
 			"Synchronization issue: Move your front pawn back to the square where your second pawn is. If you only have one pawn in the game, you can take your second pawn, and place both pawns on your starting space",
@@ -120,6 +121,7 @@ func draw(type):
 		set_bg_color.rpc(bgColor)
 		curType = type
 		curKey = d
+		card_discard(cardTypeData,type,d)
 		card_discard.rpc(cardTypeData, type, d)
 	
 	_sync_cardshown.rpc(visible, AnswerObject.text, QuestionObject.text)
@@ -137,6 +139,7 @@ func card_bookmark():
 
 @rpc
 func card_discard(cardTypeDataVar, cardTypeString, keyVar):
+	print("Discarded card")
 	cardTypeData.erase(keyVar)
 	ImportData.card_pop(cardTypeDataVar, keyVar)
 	var DiscardedCard = {"cardTypeString": cardTypeString,"keyVar": keyVar}

@@ -6,7 +6,6 @@ var SaveData = {}
 
 func save_game():
 	var file = FileAccess.open(SavePath, FileAccess.WRITE)
-	
 	SaveData["DataDiscardedCards"] = GlobalSettings.DataDiscardedCards
 	SaveData["DiscardedCards"] = GlobalSettings.DiscardedCards
 	SaveData["BookmarkedCards"] = GlobalSettings.BookmarkedCards

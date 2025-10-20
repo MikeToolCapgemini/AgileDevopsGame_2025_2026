@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8pmtq0jgc4ps"]
+
+[ext_resource type="Script" uid="uid://bacj8h4eqovoe" path="res://scripts/save_label.gd" id="1_gn852"]
+
+[sub_resource type="FontFile" id="FontFile_gn852"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_r8wn3"]
+font = SubResource("FontFile_gn852")
+
+[node name="SaveLabel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gn852")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Saving...."
+label_settings = SubResource("LabelSettings_r8wn3")
+
+[node name="SaveLabelTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 4096.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="SaveLabelTimer" to="." method="_on_save_label_timer_timeout"]
