@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://caqvelt0nx2d5"]
+
+[ext_resource type="Script" uid="uid://x47go3q8yv3t" path="res://scripts/Dice.gd" id="1_qj5l1"]
+[ext_resource type="Texture2D" uid="uid://ra7yq2n7m4fo" path="res://assets/3Dmodels/Dice/Dice.png" id="2_buedo"]
+[ext_resource type="ArrayMesh" uid="uid://c24oibbkq810a" path="res://assets/3Dmodels/Dice/Dice.obj" id="3_eoemq"]
+[ext_resource type="Script" uid="uid://da2rarcckekxp" path="res://scripts/3DLabel.gd" id="4_tw16t"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yxog0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2dde"]
+albedo_texture = ExtResource("2_buedo")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ikbhs"]
+viewport_path = NodePath("World/Interactables/Dice/StaticBody3D/3DLabel/SubViewport")
+
+[node name="Dice" type="Node3D" node_paths=PackedStringArray("LabelObject")]
+script = ExtResource("1_qj5l1")
+LabelObject = NodePath("StaticBody3D/3DLabel/SubViewport/Label")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(0.365, 0, 0, 0, 0.365, 0, 0, 0, 0.365, 2.18191, 0.238887, 1.25599)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_yxog0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.221102, 0.388253)
+material_override = SubResource("StandardMaterial3D_h2dde")
+mesh = ExtResource("3_eoemq")
+skeleton = NodePath("../..")
+
+[node name="3DLabel" type="Sprite3D" parent="StaticBody3D"]
+transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 0, 2.2, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_ikbhs")
+
+[node name="SubViewport" type="SubViewport" parent="StaticBody3D/3DLabel" node_paths=PackedStringArray("Labelobject")]
+transparent_bg = true
+size = Vector2i(50, 50)
+script = ExtResource("4_tw16t")
+Labelobject = NodePath("Label")
+
+[node name="Label" type="Label" parent="StaticBody3D/3DLabel/SubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -13.0
+offset_right = 20.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "[1]"
+
+[connection signal="mouse_entered" from="StaticBody3D" to="." method="_on_static_body_3d_mouse_entered"]
+[connection signal="mouse_exited" from="StaticBody3D" to="." method="_on_static_body_3d_mouse_exited"]

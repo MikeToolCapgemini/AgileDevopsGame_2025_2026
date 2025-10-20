@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bhlpt1ka2drrj"
+path="res://.godot/imported/PurplePlayer1.obj-e2f1b5c59d6721dc467e4cbc70345915.mesh"
+
+[deps]
+
+files=["res://.godot/imported/PurplePlayer1.obj-e2f1b5c59d6721dc467e4cbc70345915.mesh"]
+
+source_file="res://assets/3Dmodels/PlayerModels/PurplePlayer1.obj"
+dest_files=["res://.godot/imported/PurplePlayer1.obj-e2f1b5c59d6721dc467e4cbc70345915.mesh", "res://.godot/imported/PurplePlayer1.obj-e2f1b5c59d6721dc467e4cbc70345915.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
