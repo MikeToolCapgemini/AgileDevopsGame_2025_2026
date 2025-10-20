@@ -17,21 +17,17 @@ func _on_facilitator_pressed():
 	role = "facilitator"
 	self.visible = false
 	print(role)
-	toggleFacilitatorbuttons(true)
+	TimerObject.visible = true
+	FacilitatorCardPanel.visible = true
+	FacilitatorUI.visible = true
+	FacilitatorKitButton.visible = true
 	OptionsPanel.visible = true
 	pass # Replace with function body.
-
-func toggleFacilitatorbuttons(visible : bool):
-	TimerObject.visible = visible
-	FacilitatorCardPanel.visible = visible
-	FacilitatorUI.visible = visible
-	FacilitatorKitButton.visible = visible
 
 
 func _on_player_pressed():
 	role = "player"
 	print(role)
 	self.visible = false
-	toggleFacilitatorbuttons(false)
 	OptionsPanel.visible = true
 	pass # Replace with function body.

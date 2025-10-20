@@ -1,4 +1,3 @@
-class_name Resume
 extends Node
 
 @export var hideObject : Control

@@ -89,7 +89,7 @@
 [ext_resource type="Script" uid="uid://j2ei46pc4ata" path="res://scripts/UX/DelayedHide.gd" id="53_u67wn"]
 [ext_resource type="Texture2D" uid="uid://bvtwyxeygyxn1" path="res://assets/guides/Guide2_1.png" id="57_e28cd"]
 [ext_resource type="Texture2D" uid="uid://eayil001qvqf" path="res://assets/3Dmodels/CardDecks/TestingDeck.png" id="57_v1ccq"]
-[ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scenes/repick_role.gd" id="84_r4ag1"]
+[ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vr6f0"]
 albedo_color = Color(0.905882, 0.662745, 0, 1)
@@ -1388,7 +1388,6 @@ far = 25.0
 [node name="Connections" type="Node" parent="."]
 
 [node name="Interface_Facilitator" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -1460,7 +1459,7 @@ offset_bottom = -25.0
 text = "Save Game (temp)"
 script = ExtResource("42_u5l1c")
 
-[node name="LoadGameButton" type="Button" parent="Interface_Facilitator" node_paths=PackedStringArray("DiscardPileText", "BookmarkPileText")]
+[node name="LoadGameButton" type="Button" parent="Interface_Facilitator"]
 layout_mode = 0
 offset_left = 538.0
 offset_top = -71.0
@@ -1468,8 +1467,6 @@ offset_right = 745.0
 offset_bottom = -24.0
 text = "Load Saved Game"
 script = ExtResource("42_u5l1c")
-DiscardPileText = NodePath("../../Interface_DiscardPile/Panel/DiscardedCardsText")
-BookmarkPileText = NodePath("../../Interface_DiscardPile/Panel/BookmarkedText")
 
 [node name="ResetPawnPositionButton" type="Button" parent="Interface_Facilitator"]
 layout_mode = 0
@@ -2382,7 +2379,7 @@ text = "Resume"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
 
-[node name="RepickRole" type="Button" parent="Interface_Options/Panel" node_paths=PackedStringArray("hideObject")]
+[node name="RolePick" type="Button" parent="Interface_Options/Panel" node_paths=PackedStringArray("hideObject")]
 layout_mode = 0
 offset_left = 82.0
 offset_top = 192.0
@@ -2400,8 +2397,31 @@ theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_av375")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ycate")
-text = "Repick Role"
+text = "Repick role"
 script = ExtResource("84_r4ag1")
+hideObject = NodePath("../..")
+
+[node name="Refresh UI" type="Button" parent="Interface_Options/Panel" node_paths=PackedStringArray("hideObject")]
+visible = false
+layout_mode = 0
+offset_left = 82.0
+offset_top = 192.0
+offset_right = 209.0
+offset_bottom = 235.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_av375")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ycate")
+text = "Refresh UI"
+script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
 
 [node name="Quit Game" type="Button" parent="Interface_Options/Panel"]
@@ -3619,7 +3639,8 @@ hideObject = NodePath("../..")
 [connection signal="pressed" from="Interface_Buttons/Interrupts2" to="Interface_Buttons/Interrupts2" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Buttons/Quick Ref2" to="Interface_Buttons/Quick Ref2" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/Panel/Resume" to="Interface_Options/Panel/Resume" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Options/Panel/RepickRole" to="Interface_Options/Panel/RepickRole" method="on_repick"]
+[connection signal="pressed" from="Interface_Options/Panel/RolePick" to="Interface_Options/Panel/RolePick" method="on_repick"]
+[connection signal="pressed" from="Interface_Options/Panel/Refresh UI" to="Interface_Options/Panel/Refresh UI" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/Panel/Quit Game" to="Interface_Options/Panel/Quit Game" method="_on_pressed"]
 [connection signal="pressed" from="Interface_DiscardPile/Panel/Resume" to="Interface_DiscardPile/Panel/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator/Panel/Show" to="Interface_InterruptFacilitator/Panel/Show" method="_on_pressed"]

@@ -1,10 +1,10 @@
-class_name CardManager
 extends Control
 
 @export var QuestionObject : RichTextLabel
 @export var AnswerObject : RichTextLabel
 @export var AnswerBackGround : Panel
 @export var UXTagObject : Panel
+@export var DiscardedCardsTextObject : Node
 @onready var ImportData = get_node("/root/ImportData")
 
 var active = false
@@ -24,12 +24,11 @@ func _process(_delta):
 	pass
 
 @rpc("any_peer")
-func set_bg_color(newStyle : Color):
+func set_bg_color(newStyle):
 	if !UXTagObject.visible:
 		UXTagObject.visible = true
-	var currentstylebox = UXTagObject.get_theme_stylebox("panel").duplicate()
-	currentstylebox.bg_color = newStyle
-	UXTagObject.add_theme_stylebox_override("panel",currentstylebox)
+	var currentstylebox = UXTagObject.get_theme_stylebox("panel")
+	currentstylebox.bg_color = newStyle.bg_color
 	print("set color of "," to ", newStyle)
 
 func draw(type):
@@ -37,7 +36,6 @@ func draw(type):
 	visible = true
 	$"Panel/Answer".visible = false
 	$"Panel/AnswerPanelBG".visible = false
-	$Panel/bookmark.visible = false
 	_sync_answershown.rpc(false)
 	## temp draw card function, seperate function from show_panel later (time!!)
 	print("-- card drawn --")
@@ -46,39 +44,38 @@ func draw(type):
 	var bgColor = GlobalColors.CapgeminiBlue
 	if type == "Plan":
 		cardTypeData = ImportData.PlanCardData
-		bgColor = GlobalColors.PlanningYellow
-		set_bg_color(GlobalColors.PlanningYellow)
-		set_bg_color.rpc(GlobalColors.PlanningYellow)
+		bgColor = GlobalColors.PlanningYellowStyle
+		set_bg_color(GlobalColors.PlanningYellowStyle)
+		set_bg_color.rpc(GlobalColors.PlanningYellowStyle)
 	if type == "Code":
 		cardTypeData = ImportData.CodeCardData
-		bgColor = GlobalColors.CodeRed
-		set_bg_color(GlobalColors.CodeRed)
+		bgColor = GlobalColors.CodeRedStyle
+		set_bg_color(GlobalColors.CodeRedStyle)
 	if type == "Build":
 		cardTypeData = ImportData.BuildCardData
-		bgColor = GlobalColors.BuildOrange 
-		set_bg_color(GlobalColors.BuildOrange)
+		bgColor = GlobalColors.BuildOrangeStyle
+		set_bg_color(GlobalColors.BuildOrangeStyle)
 	if type == "Test":
 		cardTypeData = ImportData.TestCardData
-		bgColor = GlobalColors.TestGreen 
-		set_bg_color(GlobalColors.TestGreen)
+		bgColor = GlobalColors.TestGreenStyle
+		set_bg_color(GlobalColors.TestGreenStyle)
 	if type == "Release":
 		cardTypeData = ImportData.ReleaseCardData
-		bgColor = GlobalColors.ReleasePurple 
-		set_bg_color(GlobalColors.ReleasePurple)
+		bgColor = GlobalColors.ReleasePurpleStyle
+		set_bg_color(GlobalColors.ReleasePurpleStyle)
 	if type == "Deploy":
 		cardTypeData = ImportData.DeployCardData
-		bgColor = GlobalColors.DeployTeal 
-		set_bg_color(GlobalColors.DeployTeal)
+		bgColor = GlobalColors.DeployTealStyle
+		set_bg_color(GlobalColors.DeployTealStyle)
 	if type == "Operate":
 		cardTypeData = ImportData.OperateCardData
-		bgColor = GlobalColors.OperateBrown 
-		set_bg_color(GlobalColors.OperateBrown)
-		set_bg_color.rpc(GlobalColors.OperateBrown)
+		bgColor = GlobalColors.OperateBrownStyle
+		set_bg_color(GlobalColors.OperateBrownStyle)
 	if type == "Monitor":
 		cardTypeData = ImportData.MonitorCardData
-		bgColor = GlobalColors.MonitorBlue 
-		set_bg_color(GlobalColors.MonitorBlue)
-		set_bg_color.rpc(GlobalColors.MonitorBlue)
+		bgColor = GlobalColors.MonitorBlueStyle
+		set_bg_color(GlobalColors.MonitorBlueStyle)
+		set_bg_color.rpc(GlobalColors.MonitorBlueStyle)
 		
 	var d = randi_range(0, cardTypeData.size() - 1)
 	print(d)
@@ -94,8 +91,7 @@ func draw(type):
 	
 	# action cards
 	var rng = RandomNumberGenerator.new()
-	var actionRng = rng.randi_range(1, 21)
-	if actionRng >= 19:
+	if rng.randi_range(1, 21) >= 19:
 		var actionDict = [
 			"Your delivery does not fit in the release calendar: skip a turn",
 			"Synchronization issue: Move your front pawn back to the square where your second pawn is. If you only have one pawn in the game, you can take your second pawn, and place both pawns on your starting space",
@@ -123,7 +119,6 @@ func draw(type):
 		set_bg_color.rpc(bgColor)
 		curType = type
 		curKey = d
-		card_discard(cardTypeData,type,d)
 		card_discard.rpc(cardTypeData, type, d)
 	
 	_sync_cardshown.rpc(visible, AnswerObject.text, QuestionObject.text)
@@ -137,23 +132,18 @@ func set_card_choice_string(tag, cardTypeData):
 func card_bookmark():
 	GlobalSettings.BookmarkedCards.append(curType + "_" + str(curKey))
 	print(GlobalSettings.BookmarkedCards)
-	#SaveSystem.save_game()
-	
-func card_cancel_bookmark():
-	GlobalSettings.BookmarkedCards.erase(curType + "_" + str(curKey))
-	print(GlobalSettings.BookmarkedCards)
-	#SaveSystem.save_game()
+	SaveSystem.save_game()
 
 @rpc
 func card_discard(cardTypeDataVar, cardTypeString, keyVar):
-	print("Discarded card")
 	cardTypeData.erase(keyVar)
 	ImportData.card_pop(cardTypeDataVar, keyVar)
 	var DiscardedCard = {"cardTypeString": cardTypeString,"keyVar": keyVar}
 	GlobalSettings.DataDiscardedCards.append(DiscardedCard)
 	print(GlobalSettings.DataDiscardedCards)
 	GlobalSettings.DiscardedCards.append(cardTypeString + "_" + str(keyVar))
-	#SaveSystem.save_game()
+	DiscardedCardsTextObject.update_text()
+	SaveSystem.save_game()
 
 @rpc("any_peer")
 func card_setup(type, question, choiceA, choiceB, choiceC, choiceD, choiceE, answer):
@@ -186,8 +176,6 @@ func _sync_answershown(state):
 
 @rpc("call_local")
 func close_answer():
-	$Panel2/SaveQuestion.show()
-	$Panel2/CancelSave.hide()
 	active = false
 	visible = false
 	if !$"Panel".visible:
@@ -198,7 +186,6 @@ func show_answer():
 	$"Panel/Answer".visible = true
 	$"Panel/AnswerPanelBG".visible = true
 	_sync_answershown.rpc(true)
-
 
 
 func _on_close_button_pressed():
