@@ -36,6 +36,7 @@ func draw(type):
 	visible = true
 	$"Panel/Answer".visible = false
 	$"Panel/AnswerPanelBG".visible = false
+	$Panel/bookmark.visible = false
 	_sync_answershown.rpc(false)
 	## temp draw card function, seperate function from show_panel later (time!!)
 	print("-- card drawn --")
@@ -133,6 +134,11 @@ func card_bookmark():
 	GlobalSettings.BookmarkedCards.append(curType + "_" + str(curKey))
 	print(GlobalSettings.BookmarkedCards)
 	SaveSystem.save_game()
+	
+func card_cancel_bookmark():
+	GlobalSettings.BookmarkedCards.erase(curType + "_" + str(curKey))
+	print(GlobalSettings.BookmarkedCards)
+	SaveSystem.save_game()
 
 @rpc
 func card_discard(cardTypeDataVar, cardTypeString, keyVar):
@@ -176,6 +182,8 @@ func _sync_answershown(state):
 
 @rpc("call_local")
 func close_answer():
+	$Panel2/SaveQuestion.show()
+	$Panel2/CancelSave.hide()
 	active = false
 	visible = false
 	if !$"Panel".visible:
