@@ -133,12 +133,12 @@ func set_card_choice_string(tag, cardTypeData):
 func card_bookmark():
 	GlobalSettings.BookmarkedCards.append(curType + "_" + str(curKey))
 	print(GlobalSettings.BookmarkedCards)
-	SaveSystem.save_game()
+	#SaveSystem.save_game()
 	
 func card_cancel_bookmark():
 	GlobalSettings.BookmarkedCards.erase(curType + "_" + str(curKey))
 	print(GlobalSettings.BookmarkedCards)
-	SaveSystem.save_game()
+	#SaveSystem.save_game()
 
 @rpc
 func card_discard(cardTypeDataVar, cardTypeString, keyVar):
@@ -149,7 +149,7 @@ func card_discard(cardTypeDataVar, cardTypeString, keyVar):
 	print(GlobalSettings.DataDiscardedCards)
 	GlobalSettings.DiscardedCards.append(cardTypeString + "_" + str(keyVar))
 	DiscardedCardsTextObject.update_text()
-	SaveSystem.save_game()
+	#SaveSystem.save_game()
 
 @rpc("any_peer")
 func card_setup(type, question, choiceA, choiceB, choiceC, choiceD, choiceE, answer):
