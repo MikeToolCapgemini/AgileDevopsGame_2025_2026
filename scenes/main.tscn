@@ -1,4 +1,4 @@
-[gd_scene load_steps=154 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=155 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -90,7 +90,8 @@
 [ext_resource type="Texture2D" uid="uid://bvtwyxeygyxn1" path="res://assets/guides/Guide2_1.png" id="57_e28cd"]
 [ext_resource type="Texture2D" uid="uid://eayil001qvqf" path="res://assets/3Dmodels/CardDecks/TestingDeck.png" id="57_v1ccq"]
 [ext_resource type="Texture2D" uid="uid://cy075i613at82" path="res://assets/icons/bookmark.png" id="79_v0wtd"]
-[ext_resource type="Script" path="res://scripts/repick_role.gd" id="84_r4ag1"]
+[ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
+[ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/multi_save.tscn" id="92_sgvw8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vr6f0"]
 albedo_color = Color(0.905882, 0.662745, 0, 1)
@@ -1441,42 +1442,6 @@ offset_bottom = -23.0
 text = "Stop
 "
 
-[node name="DiscardPileButton" type="Button" parent="Interface_Facilitator" node_paths=PackedStringArray("hideObject")]
-layout_mode = 0
-offset_left = 322.0
-offset_top = -71.0
-offset_right = 447.0
-offset_bottom = -24.0
-text = "Discard Pile & Bookmarks"
-script = ExtResource("49_4jv7h")
-hideObject = NodePath("../../Interface_DiscardPile")
-
-[node name="SaveGameButton" type="Button" parent="Interface_Facilitator"]
-layout_mode = 0
-offset_left = 975.0
-offset_top = -72.0
-offset_right = 1182.0
-offset_bottom = -25.0
-text = "Save Game (temp)"
-script = ExtResource("42_u5l1c")
-
-[node name="LoadGameButton" type="Button" parent="Interface_Facilitator"]
-layout_mode = 0
-offset_left = 538.0
-offset_top = -71.0
-offset_right = 745.0
-offset_bottom = -24.0
-text = "Load Saved Game"
-script = ExtResource("42_u5l1c")
-
-[node name="ResetPawnPositionButton" type="Button" parent="Interface_Facilitator"]
-layout_mode = 0
-offset_left = 755.0
-offset_top = -71.0
-offset_right = 962.0
-offset_bottom = -24.0
-text = "Reset Pawn Positions"
-
 [node name="Refresh" type="Button" parent="Interface_Facilitator"]
 visible = false
 layout_mode = 0
@@ -1513,6 +1478,38 @@ offset_bottom = -84.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("41_giosr")
+
+[node name="FacilitatorsideBtns" type="HBoxContainer" parent="Interface_Facilitator"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 310.0
+offset_top = -40.0
+offset_right = 996.0
+grow_vertical = 0
+
+[node name="DiscardPileButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns" node_paths=PackedStringArray("hideObject")]
+layout_mode = 2
+text = "Discard Pile & Bookmarks"
+script = ExtResource("49_4jv7h")
+hideObject = NodePath("../../../Interface_DiscardPile")
+
+[node name="ResetPawnPositionButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns"]
+layout_mode = 2
+text = "Reset Pawn Positions"
+
+[node name="SaveGameButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns"]
+visible = false
+layout_mode = 2
+text = "Save Game (temp)"
+script = ExtResource("42_u5l1c")
+
+[node name="LoadGameButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns"]
+visible = false
+layout_mode = 2
+text = "Load Saved Game"
+script = ExtResource("42_u5l1c")
 
 [node name="Set" type="Button" parent="Interface_Facilitator" node_paths=PackedStringArray("hideObject")]
 layout_mode = 0
@@ -1579,6 +1576,11 @@ offset_top = 60.0
 offset_right = 183.0
 offset_bottom = 100.0
 text = ":"
+
+[node name="MultiSave" parent="Interface_Facilitator" instance=ExtResource("92_sgvw8")]
+layout_mode = 1
+offset_left = 1920.0
+offset_right = 1920.0
 
 [node name="Interface_Cards" type="Control" parent="." node_paths=PackedStringArray("QuestionObject", "AnswerObject", "AnswerBackGround", "UXTagObject", "DiscardedCardsTextObject")]
 visible = false
@@ -1657,15 +1659,6 @@ script = ExtResource("45_n88qk")
 cardManagerObject = NodePath("../..")
 textObject = NodePath("../../../Interface_DiscardPile/Panel/BookmarkedText")
 bookmarkIcon = NodePath("../../Panel/bookmark")
-
-[node name="CancelSave" type="Button" parent="Interface_Cards/Panel2"]
-visible = false
-layout_mode = 0
-offset_left = 10.0
-offset_top = 135.0
-offset_right = 154.0
-offset_bottom = 166.0
-text = "Cancel Bookmark"
 
 [node name="Panel" type="Panel" parent="Interface_Cards/Panel2"]
 layout_mode = 1
@@ -3627,32 +3620,31 @@ hideObject = NodePath("../..")
 [connection signal="pressed" from="Interface_Facilitator/StartButton" to="World/Interactables/Timer" method="_on_start_button_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/ResetButton" to="World/Interactables/Timer" method="_on_reset_button_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/StopButton" to="World/Interactables/Timer" method="_on_stop_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/DiscardPileButton" to="Interface_Facilitator/DiscardPileButton" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/SaveGameButton" to="Interface_Facilitator/LoadGameButton" method="_on_save_game_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/LoadGameButton" to="Interface_Facilitator/LoadGameButton" method="_on_load_game_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/LoadGameButton" to="Interface_Facilitator/LoadGameButton" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn0" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn1" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn2" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn3" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn4" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn5" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn6" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn7" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn8" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn9" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn10" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn11" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn12" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn13" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn14" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn15" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton" to="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn0" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn1" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn2" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn3" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn4" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn5" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn6" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn7" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn8" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn9" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn10" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn11" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn12" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn13" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn14" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn15" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/SaveGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_save_game_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_load_game_button_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/Set" to="Interface_Facilitator/Set" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/SetPanel/Set" to="World/Interactables/Timer" method="_on_set_pressed"]
 [connection signal="pressed" from="Interface_Cards/Panel2/RevealButton" to="Interface_Cards" method="_on_reveal_button_pressed"]
 [connection signal="pressed" from="Interface_Cards/Panel2/CloseButton" to="Interface_Cards" method="_on_close_button_pressed"]
 [connection signal="pressed" from="Interface_Cards/Panel2/SaveQuestion" to="Interface_Cards/Panel2/SaveQuestion" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Cards/Panel2/CancelSave" to="Interface_Cards/Panel2/SaveQuestion" method="on_Cancel"]
 [connection signal="pressed" from="Interface_Cards/Hide_Show" to="Interface_Cards/Hide_Show" method="_on_pressed"]
 [connection signal="pressed" from="Setup/Panel/Facilitator" to="Setup" method="_on_facilitator_pressed"]
 [connection signal="pressed" from="Setup/Panel/Player" to="Setup" method="_on_player_pressed"]

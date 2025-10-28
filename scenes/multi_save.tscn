@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbxyj6ca7okx3"]
+
+[ext_resource type="Script" uid="uid://pb8rquvjh5r4" path="res://scripts/Global/SaveSystem.gd" id="1_tovra"]
+
+[node name="MultiSave" type="Control"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -204.0
+offset_top = -71.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="SaveNameField" type="LineEdit" parent="GridContainer"]
+layout_mode = 2
+placeholder_text = "Save Name"
+alignment = 1
+
+[node name="SplitContainer" type="SplitContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="GridContainer/SplitContainer" node_paths=PackedStringArray("SaveNameField")]
+layout_mode = 2
+text = "Save Game"
+script = ExtResource("1_tovra")
+SaveNameField = NodePath("../../SaveNameField")
+
+[node name="LoadButton" type="Button" parent="GridContainer/SplitContainer"]
+layout_mode = 2
+text = "Load Game"
+
+[node name="LoadedsaveGames" type="HSplitContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -346.0
+offset_top = -130.0
+offset_right = -203.0
+offset_bottom = -107.0
+
+[node name="TitleLabel" type="Label" parent="LoadedsaveGames"]
+layout_mode = 2
+text = "Save Games"
+
+[node name="Scrolbar" type="ScrollContainer" parent="LoadedsaveGames/TitleLabel"]
+layout_mode = 0
+offset_top = 22.0
+offset_right = 143.0
+offset_bottom = 138.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LoadedSaves" type="VBoxContainer" parent="LoadedsaveGames/TitleLabel/Scrolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlaceHolder" type="Button" parent="LoadedsaveGames/TitleLabel/Scrolbar/LoadedSaves"]
+layout_mode = 2
+
+[node name="HideSavedgames" type="Button" parent="LoadedsaveGames"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = ">"
+
+[connection signal="pressed" from="GridContainer/SplitContainer/SaveButton" to="GridContainer/SplitContainer/SaveButton" method="_on_save_game_button_pressed"]
+[connection signal="pressed" from="GridContainer/SplitContainer/LoadButton" to="GridContainer/SplitContainer/SaveButton" method="_on_load_game_button_pressed"]
+[connection signal="pressed" from="LoadedsaveGames/HideSavedgames" to="GridContainer/SplitContainer/SaveButton" method="_on_hide_savedgames_pressed"]

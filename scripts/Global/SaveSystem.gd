@@ -3,25 +3,20 @@ extends Node
 var SavePath = "user://saves/"
 var DefaultData = {}
 var SaveData = {}
-var currentSave
+var currentSave : String = ""
 @export var SaveNameField : LineEdit
-
-func _ready() -> void:
-	var saves = get_save_files()
-	if saves.size() > 0:
-		print("exsisting saves ", saves)
-	else:
-		print("No Saves Found")
+@export var LoadedSavesContainer : GridContainer
 
 func save_game():
 	check_save_dir()
 	var saveName = get_save_name()
 	var savePath
-	if currentSave != saveName:
-		savePath = SavePath + currentSave + ".json"
-	else:
-		savePath = SavePath + saveName + ".json"
-		currentSave = saveName
+	savePath = SavePath + saveName + ".json"
+	#if currentSave != saveName:
+		#savePath = SavePath + currentSave + ".json"
+	#else:
+		#savePath = SavePath + saveName + ".json"
+		#currentSave = saveName
 	var file = FileAccess.open(savePath, FileAccess.WRITE)
 	SaveData["DataDiscardedCards"] = GlobalSettings.DataDiscardedCards
 	SaveData["DiscardedCards"] = GlobalSettings.DiscardedCards
@@ -33,10 +28,23 @@ func save_game():
 	print("Game saved...")
 	
 func loadSaveGames() :
-	pass
+	for btn in %LoadedSaves.get_children():
+		btn.queue_free()
+	%LoadedsaveGames.show()
+	var saves = get_save_files()
+	if saves.size() > 0:
+		for save in saves:
+			print(save)
+			var Loadbutton := Button.new()
+			Loadbutton.text = save
+			Loadbutton.pressed.connect(func():
+				load_game(save))
+			%LoadedSaves.add_child(Loadbutton)
+	else:
+		print("No Saves Found")
 
 func load_game(saveName : String):
-	var save = SavePath + saveName + ".json"
+	var save = SavePath + saveName
 	var file = FileAccess.open(save, FileAccess.READ)
 	if (file == null):
 		reset_data()
@@ -91,3 +99,7 @@ func _on_load_game_button_pressed():
 
 func _on_save_game_button_pressed() -> void:
 	save_game()
+
+
+func _on_hide_savedgames_pressed() -> void:
+	%LoadedsaveGames.hide()
