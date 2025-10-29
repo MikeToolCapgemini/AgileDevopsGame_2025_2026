@@ -1,7 +1,6 @@
 extends Control
 
 @export var cardManagerObject : Node
-@export var textObject :RichTextLabel
 @export var bookmarkIcon : TextureRect
 
 
@@ -10,7 +9,6 @@ func _on_pressed():
 	hide()
 	$"../CancelSave".show()
 	bookmarkIcon.visible = true
-	textObject.update_text()
 	
 
 func on_Cancel():
@@ -18,4 +16,3 @@ func on_Cancel():
 	$"../CancelSave".hide()
 	bookmarkIcon.visible = false
 	cardManagerObject.card_cancel_bookmark()
-	textObject.update_text()

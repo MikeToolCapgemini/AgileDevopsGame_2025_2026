@@ -1,4 +1,4 @@
-[gd_scene load_steps=155 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=156 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -89,6 +89,7 @@
 [ext_resource type="Script" uid="uid://j2ei46pc4ata" path="res://scripts/UX/DelayedHide.gd" id="53_u67wn"]
 [ext_resource type="Texture2D" uid="uid://bvtwyxeygyxn1" path="res://assets/guides/Guide2_1.png" id="57_e28cd"]
 [ext_resource type="Texture2D" uid="uid://eayil001qvqf" path="res://assets/3Dmodels/CardDecks/TestingDeck.png" id="57_v1ccq"]
+[ext_resource type="Script" uid="uid://1kxnvwbcvkqf" path="res://scripts/BookmarkedList.gd" id="73_6nfnn"]
 [ext_resource type="Texture2D" uid="uid://cy075i613at82" path="res://assets/icons/bookmark.png" id="79_v0wtd"]
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/multi_save.tscn" id="92_sgvw8"]
@@ -1489,10 +1490,12 @@ offset_top = -40.0
 offset_right = 996.0
 grow_vertical = 0
 
-[node name="DiscardPileButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns" node_paths=PackedStringArray("hideObject")]
+[node name="DiscardPileButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns" node_paths=PackedStringArray("discardedList", "bookmarkedList", "hideObject")]
 layout_mode = 2
 text = "Discard Pile & Bookmarks"
-script = ExtResource("49_4jv7h")
+script = ExtResource("73_6nfnn")
+discardedList = NodePath("../../../Interface_DiscardPile/Panel/DiscardedCardsText")
+bookmarkedList = NodePath("../../../Interface_DiscardPile/Panel/BookmarkedText")
 hideObject = NodePath("../../../Interface_DiscardPile")
 
 [node name="ResetPawnPositionButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns"]
@@ -1579,10 +1582,10 @@ text = ":"
 
 [node name="MultiSave" parent="Interface_Facilitator" instance=ExtResource("92_sgvw8")]
 layout_mode = 1
-offset_left = 1920.0
-offset_right = 1920.0
+offset_left = 1050.0
+offset_right = 1050.0
 
-[node name="Interface_Cards" type="Control" parent="." node_paths=PackedStringArray("QuestionObject", "AnswerObject", "AnswerBackGround", "UXTagObject", "DiscardedCardsTextObject")]
+[node name="Interface_Cards" type="Control" parent="." node_paths=PackedStringArray("QuestionObject", "AnswerObject", "AnswerBackGround", "UXTagObject")]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -1601,7 +1604,6 @@ QuestionObject = NodePath("Panel/Question")
 AnswerObject = NodePath("Panel/Answer")
 AnswerBackGround = NodePath("Panel/AnswerPanelBG")
 UXTagObject = NodePath("Panel/TagBG")
-DiscardedCardsTextObject = NodePath("../Interface_DiscardPile/Panel/DiscardedCardsText")
 
 [node name="Panel2" type="Panel" parent="Interface_Cards"]
 layout_mode = 1
@@ -1648,7 +1650,7 @@ offset_right = 140.0
 offset_bottom = 470.0
 text = "Close Answer"
 
-[node name="SaveQuestion" type="Button" parent="Interface_Cards/Panel2" node_paths=PackedStringArray("cardManagerObject", "textObject", "bookmarkIcon")]
+[node name="SaveQuestion" type="Button" parent="Interface_Cards/Panel2" node_paths=PackedStringArray("cardManagerObject", "bookmarkIcon")]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 135.0
@@ -1657,8 +1659,17 @@ offset_bottom = 166.0
 text = "Bookmark"
 script = ExtResource("45_n88qk")
 cardManagerObject = NodePath("../..")
-textObject = NodePath("../../../Interface_DiscardPile/Panel/BookmarkedText")
 bookmarkIcon = NodePath("../../Panel/bookmark")
+
+[node name="CancelSave" type="Button" parent="Interface_Cards/Panel2"]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 135.0
+offset_right = 140.0
+offset_bottom = 166.0
+text = "Cancel Bookmark
+"
 
 [node name="Panel" type="Panel" parent="Interface_Cards/Panel2"]
 layout_mode = 1
@@ -3645,6 +3656,7 @@ hideObject = NodePath("../..")
 [connection signal="pressed" from="Interface_Cards/Panel2/RevealButton" to="Interface_Cards" method="_on_reveal_button_pressed"]
 [connection signal="pressed" from="Interface_Cards/Panel2/CloseButton" to="Interface_Cards" method="_on_close_button_pressed"]
 [connection signal="pressed" from="Interface_Cards/Panel2/SaveQuestion" to="Interface_Cards/Panel2/SaveQuestion" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Cards/Panel2/CancelSave" to="Interface_Cards/Panel2/SaveQuestion" method="on_Cancel"]
 [connection signal="pressed" from="Interface_Cards/Hide_Show" to="Interface_Cards/Hide_Show" method="_on_pressed"]
 [connection signal="pressed" from="Setup/Panel/Facilitator" to="Setup" method="_on_facilitator_pressed"]
 [connection signal="pressed" from="Setup/Panel/Player" to="Setup" method="_on_player_pressed"]
