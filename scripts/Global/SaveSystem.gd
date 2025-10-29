@@ -36,7 +36,8 @@ func loadSaveGames() :
 		for save in saves:
 			print(save)
 			var Loadbutton := Button.new()
-			Loadbutton.text = save
+			var SaveName: String = save.replace('.json','')
+			Loadbutton.text = SaveName
 			Loadbutton.pressed.connect(func():
 				load_game(save))
 			%LoadedSaves.add_child(Loadbutton)
