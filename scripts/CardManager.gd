@@ -4,7 +4,6 @@ extends Control
 @export var AnswerObject : RichTextLabel
 @export var AnswerBackGround : Panel
 @export var UXTagObject : Panel
-@export var DiscardedCardsTextObject : Node
 @onready var ImportData = get_node("/root/ImportData")
 
 var active = false
@@ -148,7 +147,6 @@ func card_discard(cardTypeDataVar, cardTypeString, keyVar):
 	GlobalSettings.DataDiscardedCards.append(DiscardedCard)
 	print(GlobalSettings.DataDiscardedCards)
 	GlobalSettings.DiscardedCards.append(cardTypeString + "_" + str(keyVar))
-	DiscardedCardsTextObject.update_text()
 	#SaveSystem.save_game()
 
 @rpc("any_peer")
