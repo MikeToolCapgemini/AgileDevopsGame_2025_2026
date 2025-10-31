@@ -24,11 +24,12 @@ func _process(_delta):
 	pass
 
 @rpc("any_peer")
-func set_bg_color(newStyle):
+func set_bg_color(newStyle : Color):
 	if !UXTagObject.visible:
 		UXTagObject.visible = true
-	var currentstylebox = UXTagObject.get_theme_stylebox("panel")
-	currentstylebox.bg_color = newStyle.bg_color
+	var currentstylebox = UXTagObject.get_theme_stylebox("panel").duplicate()
+	currentstylebox.bg_color = newStyle
+	UXTagObject.add_theme_stylebox_override("panel",currentstylebox)
 	print("set color of "," to ", newStyle)
 
 func draw(type):
@@ -45,38 +46,39 @@ func draw(type):
 	var bgColor = GlobalColors.CapgeminiBlue
 	if type == "Plan":
 		cardTypeData = ImportData.PlanCardData
-		bgColor = GlobalColors.PlanningYellowStyle
-		set_bg_color(GlobalColors.PlanningYellowStyle)
-		set_bg_color.rpc(GlobalColors.PlanningYellowStyle)
+		bgColor = GlobalColors.PlanningYellow
+		set_bg_color(GlobalColors.PlanningYellow)
+		set_bg_color.rpc(GlobalColors.PlanningYellow)
 	if type == "Code":
 		cardTypeData = ImportData.CodeCardData
-		bgColor = GlobalColors.CodeRedStyle
-		set_bg_color(GlobalColors.CodeRedStyle)
+		bgColor = GlobalColors.CodeRed
+		set_bg_color(GlobalColors.CodeRed)
 	if type == "Build":
 		cardTypeData = ImportData.BuildCardData
-		bgColor = GlobalColors.BuildOrangeStyle
-		set_bg_color(GlobalColors.BuildOrangeStyle)
+		bgColor = GlobalColors.BuildOrange 
+		set_bg_color(GlobalColors.BuildOrange)
 	if type == "Test":
 		cardTypeData = ImportData.TestCardData
-		bgColor = GlobalColors.TestGreenStyle
-		set_bg_color(GlobalColors.TestGreenStyle)
+		bgColor = GlobalColors.TestGreen 
+		set_bg_color(GlobalColors.TestGreen)
 	if type == "Release":
 		cardTypeData = ImportData.ReleaseCardData
-		bgColor = GlobalColors.ReleasePurpleStyle
-		set_bg_color(GlobalColors.ReleasePurpleStyle)
+		bgColor = GlobalColors.ReleasePurple 
+		set_bg_color(GlobalColors.ReleasePurple)
 	if type == "Deploy":
 		cardTypeData = ImportData.DeployCardData
-		bgColor = GlobalColors.DeployTealStyle
-		set_bg_color(GlobalColors.DeployTealStyle)
+		bgColor = GlobalColors.DeployTeal 
+		set_bg_color(GlobalColors.DeployTeal)
 	if type == "Operate":
 		cardTypeData = ImportData.OperateCardData
-		bgColor = GlobalColors.OperateBrownStyle
-		set_bg_color(GlobalColors.OperateBrownStyle)
+		bgColor = GlobalColors.OperateBrown 
+		set_bg_color(GlobalColors.OperateBrown)
+		set_bg_color.rpc(GlobalColors.OperateBrown)
 	if type == "Monitor":
 		cardTypeData = ImportData.MonitorCardData
-		bgColor = GlobalColors.MonitorBlueStyle
-		set_bg_color(GlobalColors.MonitorBlueStyle)
-		set_bg_color.rpc(GlobalColors.MonitorBlueStyle)
+		bgColor = GlobalColors.MonitorBlue 
+		set_bg_color(GlobalColors.MonitorBlue)
+		set_bg_color.rpc(GlobalColors.MonitorBlue)
 		
 	var d = randi_range(0, cardTypeData.size() - 1)
 	print(d)

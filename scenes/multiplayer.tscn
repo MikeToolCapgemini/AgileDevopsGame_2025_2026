@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://kgixi5xrbejj"]
 
-[ext_resource type="Script" path="res://scripts/Multiplayer.gd" id="1_8yuej"]
+[ext_resource type="Script" uid="uid://bt5vowngsleoc" path="res://scripts/Multiplayer.gd" id="1_8yuej"]
 [ext_resource type="PackedScene" uid="uid://bq4jyntltiheo" path="res://scenes/main.tscn" id="2_of8yj"]
-[ext_resource type="Script" path="res://scripts/UX/Toggle.gd" id="3_cuu6e"]
+[ext_resource type="Script" uid="uid://df05tjlkygvok" path="res://scripts/UX/Toggle.gd" id="3_cuu6e"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_o3rwn"]
 properties/0/path = NodePath(".:incrementValue")

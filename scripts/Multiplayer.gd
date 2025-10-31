@@ -5,7 +5,7 @@ extends Node
 @export var Adress = "localhost"
 @export var Port = 8080
 @export var MaxPlayers = 12
-var peer = WebSocketMultiplayerPeer.new()
+var peer = ENetMultiplayerPeer.new()
 
 
 func _ready():
@@ -71,7 +71,8 @@ func update_text_field():
 func host_game():
 	var serverCert = load("res://Fullchain.crt")
 	var serverKey = load("res://DevopsPrivate.key")
-	var error = peer.create_server(Port, "*", TLSOptions.server(serverKey, serverCert))
+	#var error = peer.create_server(Port, "*", TLSOptions.server(serverKey, serverCert))
+	var error = peer.create_server(Port)
 	print("cannot host: " + str(error))
 	multiplayer.set_multiplayer_peer(peer)
 	GameManager.You = multiplayer.get_unique_id()
@@ -87,7 +88,8 @@ func host_game():
 
 func join_game():
 	var clientCAS = load("res://Fullchain.crt")
-	peer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
+	#peer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
+	peer.create_client(Adress,Port)
 	multiplayer.set_multiplayer_peer(peer)
 	GameManager.You = multiplayer.get_unique_id()
 	
