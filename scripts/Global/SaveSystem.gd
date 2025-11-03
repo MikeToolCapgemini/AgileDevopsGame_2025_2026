@@ -56,7 +56,7 @@ func load_game(saveName : String):
 	if multiplayer.is_server():
 		load_game_from_file(saveName)
 	else:
-		rpc_id(1,"request_file_load")
+		rpc_id(1,"request_file_load",saveName)
 
 @rpc('any_peer')
 func request_file_load(saveName: String):
@@ -76,6 +76,7 @@ func load_game_from_file(saveName : String):
 	GlobalSettings.DataDiscardedCards = SaveData["DataDiscardedCards"]
 	GlobalSettings.DiscardedCards = SaveData["DiscardedCards"]
 	GlobalSettings.BookmarkedCards = SaveData["BookmarkedCards"]
+	GlobalSettings.sync_self_to_clients()
 	print("Game loaded...")
 
 func check_save_dir():
