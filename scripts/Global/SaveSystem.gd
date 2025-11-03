@@ -31,8 +31,18 @@ func loadSaveGames() :
 	for btn in %LoadedSaves.get_children():
 		btn.queue_free()
 	%LoadedsaveGames.show()
-	var saves = get_save_files()
-	if saves.size() > 0:
+	if multiplayer.is_server():
+		var saves = get_save_files()
+		if saves.size() > 0:
+			LoadSaveButtons(saves)
+		else:
+			print("No Saves Found")
+	else:
+		rpc_id(1,"request_save_files")
+
+
+
+func LoadSaveButtons(saves: Array):
 		for save in saves:
 			print(save)
 			var Loadbutton := Button.new()
@@ -41,10 +51,21 @@ func loadSaveGames() :
 			Loadbutton.pressed.connect(func():
 				load_game(save))
 			%LoadedSaves.add_child(Loadbutton)
-	else:
-		print("No Saves Found")
 
 func load_game(saveName : String):
+	if multiplayer.is_server():
+		load_game_from_file(saveName)
+	else:
+		rpc_id(1,"request_file_load")
+
+@rpc('any_peer')
+func request_file_load(saveName: String):
+	var sender_id = multiplayer.get_remote_sender_id()
+	load_game_from_file(saveName)
+
+
+
+func load_game_from_file(saveName : String):
 	var save = SavePath + saveName
 	var file = FileAccess.open(save, FileAccess.READ)
 	if (file == null):
@@ -81,6 +102,16 @@ func get_save_files() -> Array:
 			file_name = dir.get_next()
 		dir.list_dir_end()
 	return save_files
+
+@rpc("any_peer")
+func request_save_files():
+	var sender_id = multiplayer.get_remote_sender_id()
+	var saves = get_save_files()
+	rpc_id(sender_id, "receive_save_files", saves)
+
+@rpc("authority")
+func receive_save_files(saves:Array):
+	LoadSaveButtons(saves)
 
 func get_save_name() -> String:
 	var saveName
