@@ -8,20 +8,32 @@ var currentSave : String = ""
 @export var LoadedSavesContainer : GridContainer
 
 func save_game():
-	check_save_dir()
 	var saveName = get_save_name()
+	SaveData["DataDiscardedCards"] = GlobalSettings.DataDiscardedCards
+	SaveData["DiscardedCards"] = GlobalSettings.DiscardedCards
+	SaveData["BookmarkedCards"] = GlobalSettings.BookmarkedCards
+	if multiplayer.is_server():
+		save_game_file(saveName,SaveData)
+	else:
+		rpc_id(1,"request_saving_game",saveName,SaveData)
+
+@rpc("any_peer")
+func request_saving_game(saveName: String,saveData):
+	var sender_id = multiplayer.get_remote_sender_id()
+	save_game_file(saveName,saveData)
+
+func save_game_file(saveName : String,saveData):
+	check_save_dir()
 	var savePath
 	savePath = SavePath + saveName + ".json"
+		
 	#if currentSave != saveName:
 		#savePath = SavePath + currentSave + ".json"
 	#else:
 		#savePath = SavePath + saveName + ".json"
 		#currentSave = saveName
 	var file = FileAccess.open(savePath, FileAccess.WRITE)
-	SaveData["DataDiscardedCards"] = GlobalSettings.DataDiscardedCards
-	SaveData["DiscardedCards"] = GlobalSettings.DiscardedCards
-	SaveData["BookmarkedCards"] = GlobalSettings.BookmarkedCards
-	var json = JSON.stringify(SaveData)
+	var json = JSON.stringify(saveData)
 	
 	file.store_string(json)
 	file.close()
@@ -62,8 +74,6 @@ func load_game(saveName : String):
 func request_file_load(saveName: String):
 	var sender_id = multiplayer.get_remote_sender_id()
 	load_game_from_file(saveName)
-
-
 
 func load_game_from_file(saveName : String):
 	var save = SavePath + saveName
