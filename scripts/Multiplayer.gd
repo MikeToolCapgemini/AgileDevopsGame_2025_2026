@@ -3,7 +3,7 @@ extends Node
 # Basic Server Information
 @export var GameScene : PackedScene
 @export var Adress = "localhost"
-@export var Port = 443
+@export var Port = 8080
 @export var MaxPlayers = 12
 var peer = WebSocketMultiplayerPeer.new()
 
@@ -76,7 +76,14 @@ func host_game():
 	multiplayer.set_multiplayer_peer(peer)
 	GameManager.You = multiplayer.get_unique_id()
 	print("Waiting for players")
-	send_player_information($"Debug Interface/NameField".text, multiplayer.get_unique_id())
+	print("my id is:" + str(multiplayer.get_unique_id()))
+	var playername
+	if OS.has_feature("dedicated_server"):
+		playername = "dedicated_server"
+		
+	else:
+		playername = $"Debug Interface/NameField".text
+	send_player_information(playername, multiplayer.get_unique_id())
 
 func join_game():
 	var clientCAS = load("res://Fullchain.crt")
