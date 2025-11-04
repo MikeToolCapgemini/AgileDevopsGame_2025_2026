@@ -19,7 +19,6 @@ func save_game():
 
 @rpc("any_peer")
 func request_saving_game(saveName: String,saveData):
-	var sender_id = multiplayer.get_remote_sender_id()
 	save_game_file(saveName,saveData)
 
 func save_game_file(saveName : String,saveData):
@@ -65,6 +64,7 @@ func LoadSaveButtons(saves: Array):
 			%LoadedSaves.add_child(Loadbutton)
 
 func load_game(saveName : String):
+	SaveNameField.text = saveName.replace('.json','')
 	if multiplayer.is_server():
 		load_game_from_file(saveName)
 	else:
@@ -72,7 +72,6 @@ func load_game(saveName : String):
 
 @rpc('any_peer')
 func request_file_load(saveName: String):
-	var sender_id = multiplayer.get_remote_sender_id()
 	load_game_from_file(saveName)
 
 func load_game_from_file(saveName : String):
