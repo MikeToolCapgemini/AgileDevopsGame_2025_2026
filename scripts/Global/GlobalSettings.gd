@@ -5,6 +5,7 @@ var QuestionsPro = true
 var DiscardedCards = []
 var DataDiscardedCards = []
 var BookmarkedCards = []
+#var PawnPositions = []
 
 # Called when the node enters the scene tree for the first time.
 func sync_self_to_clients():

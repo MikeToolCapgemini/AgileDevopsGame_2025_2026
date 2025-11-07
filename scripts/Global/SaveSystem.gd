@@ -6,16 +6,22 @@ var SaveData = {}
 var currentSave : String = ""
 @export var SaveNameField : LineEdit
 @export var LoadedSavesContainer : GridContainer
+@export var pawns_path: NodePath
+
+signal save_requested
 
 func save_game():
 	var saveName = get_save_name()
 	SaveData["DataDiscardedCards"] = GlobalSettings.DataDiscardedCards
 	SaveData["DiscardedCards"] = GlobalSettings.DiscardedCards
 	SaveData["BookmarkedCards"] = GlobalSettings.BookmarkedCards
+	#SaveData["PawnPositions"] = GlobalSettings.PawnPositions
 	if multiplayer.is_server():
 		save_game_file(saveName,SaveData)
 	else:
 		rpc_id(1,"request_saving_game",saveName,SaveData)
+
+
 
 @rpc("any_peer")
 func request_saving_game(saveName: String,saveData):

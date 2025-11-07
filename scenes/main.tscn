@@ -89,10 +89,10 @@
 [ext_resource type="Script" uid="uid://j2ei46pc4ata" path="res://scripts/UX/DelayedHide.gd" id="53_u67wn"]
 [ext_resource type="Texture2D" uid="uid://bvtwyxeygyxn1" path="res://assets/guides/Guide2_1.png" id="57_e28cd"]
 [ext_resource type="Texture2D" uid="uid://eayil001qvqf" path="res://assets/3Dmodels/CardDecks/TestingDeck.png" id="57_v1ccq"]
-[ext_resource type="Script" uid="uid://1kxnvwbcvkqf" path="res://scripts/BookmarkedList.gd" id="73_6nfnn"]
+[ext_resource type="Script" path="res://scripts/BookmarkedList.gd" id="73_6nfnn"]
 [ext_resource type="Texture2D" uid="uid://cy075i613at82" path="res://assets/icons/bookmark.png" id="79_v0wtd"]
-[ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
-[ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/multi_save.tscn" id="92_sgvw8"]
+[ext_resource type="Script" path="res://scripts/repick_role.gd" id="84_r4ag1"]
+[ext_resource type="PackedScene" uid="uid://d1ljdrmrmx1m2" path="res://scenes/multi_save.tscn" id="92_sgvw8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vr6f0"]
 albedo_color = Color(0.905882, 0.662745, 0, 1)
@@ -654,6 +654,7 @@ horizontal_alignment = 1
 [node name="Interactables" type="Node3D" parent="World"]
 
 [node name="Pawns" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("CameraObject", "WorldObject")]
+unique_name_in_owner = true
 script = ExtResource("6_u5dtp")
 CameraObject = NodePath("../../../Camera3D")
 WorldObject = NodePath(".")

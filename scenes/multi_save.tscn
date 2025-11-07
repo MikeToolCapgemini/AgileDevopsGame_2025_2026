@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbxyj6ca7okx3"]
+[gd_scene load_steps=2 format=3 uid="uid://d1ljdrmrmx1m2"]
 
 [ext_resource type="Script" uid="uid://pb8rquvjh5r4" path="res://scripts/Global/SaveSystem.gd" id="1_tovra"]
 
