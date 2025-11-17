@@ -1,0 +1,213 @@
+[gd_scene load_steps=7 format=3 uid="uid://dgsqhxiu70w7f"]
+
+[ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="2_rbkc3"]
+[ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="3_cgbqo"]
+[ext_resource type="Script" uid="uid://bria1n2pur5ba" path="res://scripts/UX/Options.gd" id="4_kta7u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gnkp"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ocjn3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n81fi"]
+
+[node name="Interface_Buttons" type="Control"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+
+[node name="Container" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -167.0
+offset_right = -10.0
+offset_bottom = 482.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1gnkp")
+
+[node name="MarginContainer" type="MarginContainer" parent="Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Options" type="Button" parent="Container/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("2_rbkc3")
+theme_override_styles/pressed = ExtResource("3_cgbqo")
+theme_override_styles/hover = ExtResource("3_cgbqo")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Options"
+script = ExtResource("4_kta7u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Container/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(75, 26)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[center]Guides[/center]"
+
+[node name="Preperation" type="Button" parent="Container/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("2_rbkc3")
+theme_override_styles/pressed = ExtResource("3_cgbqo")
+theme_override_styles/hover = ExtResource("3_cgbqo")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Preperation"
+script = ExtResource("4_kta7u")
+
+[node name="HowtoPlay" type="Button" parent="Container/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("2_rbkc3")
+theme_override_styles/pressed = ExtResource("3_cgbqo")
+theme_override_styles/hover = ExtResource("3_cgbqo")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "How to play"
+script = ExtResource("4_kta7u")
+
+[node name="facilitatorkit" type="Button" parent="Container/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("2_rbkc3")
+theme_override_styles/pressed = ExtResource("3_cgbqo")
+theme_override_styles/hover = ExtResource("3_cgbqo")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Facilitator Kit"
+script = ExtResource("4_kta7u")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Container/MarginContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(75, 26)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[center]Quick reference[/center]"
+
+[node name="Rules" type="Button" parent="Container/MarginContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("2_rbkc3")
+theme_override_styles/pressed = ExtResource("3_cgbqo")
+theme_override_styles/hover = ExtResource("3_cgbqo")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Rules"
+script = ExtResource("4_kta7u")
+
+[node name="ExtraRules" type="Button" parent="Container/MarginContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("2_rbkc3")
+theme_override_styles/pressed = ExtResource("3_cgbqo")
+theme_override_styles/hover = ExtResource("3_cgbqo")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Extra Rules"
+script = ExtResource("4_kta7u")
+
+[node name="Interrupts" type="Button" parent="Container/MarginContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("2_rbkc3")
+theme_override_styles/pressed = ExtResource("3_cgbqo")
+theme_override_styles/hover = ExtResource("3_cgbqo")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Interrupts"
+script = ExtResource("4_kta7u")
+
+[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/Options" to="Container/MarginContainer/VBoxContainer/Options" method="_on_pressed"]
+[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/VBoxContainer/Preperation" to="Container/MarginContainer/VBoxContainer/VBoxContainer/Preperation" method="_on_pressed"]
+[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/VBoxContainer/HowtoPlay" to="Container/MarginContainer/VBoxContainer/VBoxContainer/HowtoPlay" method="_on_pressed"]
+[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/VBoxContainer/facilitatorkit" to="Container/MarginContainer/VBoxContainer/VBoxContainer/facilitatorkit" method="_on_pressed"]
+[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/VBoxContainer2/Rules" to="Container/MarginContainer/VBoxContainer/VBoxContainer2/Rules" method="_on_pressed"]
+[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/VBoxContainer2/ExtraRules" to="Container/MarginContainer/VBoxContainer/VBoxContainer2/ExtraRules" method="_on_pressed"]
+[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/VBoxContainer2/Interrupts" to="Container/MarginContainer/VBoxContainer/VBoxContainer2/Interrupts" method="_on_pressed"]

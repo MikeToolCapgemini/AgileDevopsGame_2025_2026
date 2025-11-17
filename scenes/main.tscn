@@ -1,4 +1,4 @@
-[gd_scene load_steps=156 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=159 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -273,9 +273,20 @@ bg_color = Color(0.0117647, 1, 0.6, 0.980392)
 
 [sub_resource type="Theme" id="Theme_sjgq0"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gnkp"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ocjn3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n81fi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6nfnn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ue30"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_av375"]
 
@@ -1391,6 +1402,7 @@ far = 25.0
 [node name="Connections" type="Node" parent="."]
 
 [node name="Interface_Facilitator" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -2093,7 +2105,7 @@ script = ExtResource("42_flrbk")
 TimerObject = NodePath("../World/Interactables/Timer")
 FacilitatorCardPanel = NodePath("../Interface_Cards/Panel2")
 FacilitatorUI = NodePath("../Interface_Facilitator")
-FacilitatorKitButton = NodePath("../Interface_Buttons/Facilitator Kit")
+FacilitatorKitButton = NodePath("../Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/facilitatorkit")
 OptionsPanel = NodePath("../Interface_Buttons")
 
 [node name="Panel2" type="Panel" parent="Setup"]
@@ -2155,35 +2167,39 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Select your role:"
 
 [node name="Interface_Buttons" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
 
-[node name="Panel2" type="Panel" parent="Interface_Buttons"]
-layout_mode = 0
-offset_left = -168.0
-offset_top = 6.0
-offset_right = -14.0
-offset_bottom = 446.0
-theme_override_styles/panel = ExtResource("42_ot4pa")
+[node name="Container" type="PanelContainer" parent="Interface_Buttons"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -167.0
+offset_right = -10.0
+offset_bottom = 482.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1gnkp")
 
-[node name="Panel3" type="Panel" parent="Interface_Buttons"]
-layout_mode = 0
-offset_left = -168.0
-offset_top = 6.0
-offset_right = -14.0
-offset_bottom = 487.0
-theme_override_styles/panel = ExtResource("42_ot4pa")
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Buttons/Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 25
 
-[node name="Options" type="Button" parent="Interface_Buttons" node_paths=PackedStringArray("showObject")]
-layout_mode = 0
-offset_left = -156.0
-offset_top = 24.0
-offset_right = -29.0
-offset_bottom = 67.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Buttons/Container/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Options" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -2198,14 +2214,23 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Options"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../Interface_Options")
+showObject = NodePath("../../../../../Interface_Options")
 
-[node name="How to Play" type="Button" parent="Interface_Buttons" node_paths=PackedStringArray("showObject")]
-layout_mode = 0
-offset_left = -156.0
-offset_top = 118.0
-offset_right = -29.0
-offset_bottom = 161.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(75, 26)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[center]Guides[/center]"
+
+[node name="Preperation" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -2218,16 +2243,15 @@ theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
-text = "Preparation"
+text = "Preperation"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../Interface_Slideout_H2P")
+showObject = NodePath("../../../../../../Interface_Slideout_H2P")
 
-[node name="How to Play2" type="Button" parent="Interface_Buttons" node_paths=PackedStringArray("showObject")]
-layout_mode = 0
-offset_left = -156.0
-offset_top = 167.0
-offset_right = -29.0
-offset_bottom = 210.0
+[node name="HowtoPlay" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -2242,24 +2266,13 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "How to play"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../Interface_Slideout_H2P2")
+showObject = NodePath("../../../../../../Interface_Slideout_H2P2")
 
-[node name="LabelGuides" type="RichTextLabel" parent="Interface_Buttons"]
-layout_mode = 0
-offset_left = -119.0
-offset_top = 91.0
-offset_right = -44.0
-offset_bottom = 117.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Guides"
-
-[node name="Facilitator Kit" type="Button" parent="Interface_Buttons" node_paths=PackedStringArray("showObject")]
-visible = false
-layout_mode = 0
-offset_left = -156.0
-offset_top = 217.0
-offset_right = -29.0
-offset_bottom = 260.0
+[node name="facilitatorkit" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -2274,14 +2287,23 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Facilitator Kit"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../Interface_Slideout_FacK")
+showObject = NodePath("../../../../../../Interface_Slideout_FacK")
 
-[node name="Quick Ref" type="Button" parent="Interface_Buttons" node_paths=PackedStringArray("showObject")]
-layout_mode = 0
-offset_left = -156.0
-offset_top = 312.0
-offset_right = -29.0
-offset_bottom = 355.0
+[node name="VBoxContainer2" type="VBoxContainer" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(75, 26)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[center]Quick reference[/center]"
+
+[node name="Rules" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -2296,45 +2318,13 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Rules"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../Interface_Slideout_QuickRef")
+showObject = NodePath("../../../../../../Interface_Slideout_QuickRef")
 
-[node name="LabelCheatsheet" type="RichTextLabel" parent="Interface_Buttons"]
-layout_mode = 0
-offset_left = -151.0
-offset_top = 281.0
-offset_right = 5.0
-offset_bottom = 307.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Quick Reference"
-
-[node name="Interrupts2" type="Button" parent="Interface_Buttons" node_paths=PackedStringArray("showObject")]
-layout_mode = 0
-offset_left = -156.0
-offset_top = 416.0
-offset_right = -29.0
-offset_bottom = 459.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
-text = "Interrupts"
-script = ExtResource("49_hpq24")
-showObject = NodePath("../../Interface_Slideout_Interrupts")
-
-[node name="Quick Ref2" type="Button" parent="Interface_Buttons" node_paths=PackedStringArray("showObject")]
-layout_mode = 0
-offset_left = -156.0
-offset_top = 363.0
-offset_right = -29.0
-offset_bottom = 406.0
+[node name="ExtraRules" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -2349,7 +2339,28 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Extra Rules"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../Interface_Slideout_QuickRef+")
+showObject = NodePath("../../../../../../Interface_Slideout_QuickRef+")
+
+[node name="Interrupts" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Interrupts"
+script = ExtResource("49_hpq24")
+showObject = NodePath("../../../../../../Interface_Slideout_Interrupts")
 
 [node name="Interface_Options" type="Control" parent="."]
 visible = false
@@ -2401,8 +2412,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
 text = "Resume"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -2538,8 +2549,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
 text = "Resume"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -2795,8 +2806,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
 text = "Close"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -2928,8 +2939,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
 text = "Close"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -3136,8 +3147,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
 text = "Close"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -3249,8 +3260,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
 text = "Close"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -3392,8 +3403,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
 text = "Close"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -3555,8 +3566,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
 text = "Close"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -3660,13 +3671,13 @@ hideObject = NodePath("../..")
 [connection signal="pressed" from="Interface_Cards/Hide_Show" to="Interface_Cards/Hide_Show" method="_on_pressed"]
 [connection signal="pressed" from="Setup/Panel/Facilitator" to="Setup" method="_on_facilitator_pressed"]
 [connection signal="pressed" from="Setup/Panel/Player" to="Setup" method="_on_player_pressed"]
-[connection signal="pressed" from="Interface_Buttons/Options" to="Interface_Buttons/Options" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/How to Play" to="Interface_Buttons/How to Play" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/How to Play2" to="Interface_Buttons/How to Play2" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/Facilitator Kit" to="Interface_Buttons/Facilitator Kit" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/Quick Ref" to="Interface_Buttons/Quick Ref" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/Interrupts2" to="Interface_Buttons/Interrupts2" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/Quick Ref2" to="Interface_Buttons/Quick Ref2" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/Options" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/Options" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/Preperation" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/Preperation" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/HowtoPlay" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/HowtoPlay" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/facilitatorkit" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/facilitatorkit" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/Rules" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/Rules" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/ExtraRules" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/ExtraRules" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/Interrupts" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/Interrupts" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/Panel/Resume" to="Interface_Options/Panel/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/Panel/RolePick" to="Interface_Options/Panel/RolePick" method="on_repick"]
 [connection signal="pressed" from="Interface_Options/Panel/Refresh UI" to="Interface_Options/Panel/Refresh UI" method="_on_pressed"]
