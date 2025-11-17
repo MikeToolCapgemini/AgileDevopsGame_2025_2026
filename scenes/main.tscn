@@ -284,17 +284,17 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n81fi"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6nfnn"]
+
+[sub_resource type="Theme" id="Theme_4ue30"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kwiwa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f37ub"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6nfnn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ue30"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_av375"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ycate"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4myiq"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n6brx"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nw32i"]
 
@@ -2371,7 +2371,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel2" type="Panel" parent="Interface_Options"]
+[node name="BlackoutBG" type="Panel" parent="Interface_Options"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2379,8 +2379,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="Interface_Options"]
-material = SubResource("CanvasItemMaterial_or8bj")
+[node name="MainPanel" type="PanelContainer" parent="Interface_Options"]
+material = SubResource("CanvasItemMaterial_6nfnn")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2393,15 +2393,36 @@ offset_right = 150.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_sjgq0")
+theme = SubResource("Theme_4ue30")
 theme_override_styles/panel = ExtResource("42_ot4pa")
 
-[node name="Resume" type="Button" parent="Interface_Options/Panel" node_paths=PackedStringArray("hideObject")]
-layout_mode = 0
-offset_left = 82.0
-offset_top = 137.0
-offset_right = 209.0
-offset_bottom = 180.0
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Options/MainPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 50
+
+[node name="Options" type="VBoxContainer" parent="Interface_Options/MainPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="OptionsLabel" type="RichTextLabel" parent="Interface_Options/MainPanel/MarginContainer/Options"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[center]Options[center]"
+
+[node name="Buttons" type="VBoxContainer" parent="Interface_Options/MainPanel/MarginContainer/Options"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Resume" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -2412,18 +2433,17 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kwiwa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f37ub")
 text = "Resume"
 script = ExtResource("49_4jv7h")
-hideObject = NodePath("../..")
+hideObject = NodePath("../../../../..")
 
-[node name="RolePick" type="Button" parent="Interface_Options/Panel" node_paths=PackedStringArray("hideObject")]
-layout_mode = 0
-offset_left = 82.0
-offset_top = 192.0
-offset_right = 209.0
-offset_bottom = 235.0
+[node name="RolePick" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -2434,19 +2454,18 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_av375")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ycate")
-text = "Repick role"
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kwiwa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f37ub")
+text = "Repick Role"
 script = ExtResource("84_r4ag1")
-hideObject = NodePath("../..")
+hideObject = NodePath("../../../../..")
 
-[node name="Refresh UI" type="Button" parent="Interface_Options/Panel" node_paths=PackedStringArray("hideObject")]
+[node name="RefreshUI" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
 visible = false
-layout_mode = 0
-offset_left = 82.0
-offset_top = 192.0
-offset_right = 209.0
-offset_bottom = 235.0
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -2457,40 +2476,31 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_av375")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ycate")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kwiwa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f37ub")
 text = "Refresh UI"
 script = ExtResource("49_4jv7h")
-hideObject = NodePath("../..")
+hideObject = NodePath("../../../../..")
 
-[node name="Quit Game" type="Button" parent="Interface_Options/Panel"]
-layout_mode = 0
-offset_left = 83.0
-offset_top = 247.0
-offset_right = 210.0
-offset_bottom = 290.0
+[node name="QuitGame" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_4myiq")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n6brx")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kwiwa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f37ub")
 text = "Quit Game"
 script = ExtResource("52_v5wqd")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Options/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -39.0
-offset_top = 57.0
-offset_right = 226.0
-offset_bottom = 85.0
-grow_horizontal = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Options"
 
 [node name="Interface_DiscardPile" type="Control" parent="."]
 visible = false
@@ -3678,10 +3688,10 @@ hideObject = NodePath("../..")
 [connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/Rules" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/Rules" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/ExtraRules" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/ExtraRules" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/Interrupts" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/Interrupts" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Options/Panel/Resume" to="Interface_Options/Panel/Resume" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Options/Panel/RolePick" to="Interface_Options/Panel/RolePick" method="on_repick"]
-[connection signal="pressed" from="Interface_Options/Panel/Refresh UI" to="Interface_Options/Panel/Refresh UI" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Options/Panel/Quit Game" to="Interface_Options/Panel/Quit Game" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Resume" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Resume" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" method="on_repick"]
+[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" method="_on_pressed"]
 [connection signal="pressed" from="Interface_DiscardPile/Panel/Resume" to="Interface_DiscardPile/Panel/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator/Panel/Show" to="Interface_InterruptFacilitator/Panel/Show" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator/Panel/Delay" to="Interface_InterruptFacilitator/Panel/Delay" method="_on_pressed"]

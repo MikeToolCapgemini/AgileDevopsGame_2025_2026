@@ -22,7 +22,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
 
-[node name="Container" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -33,18 +33,18 @@ offset_bottom = 482.0
 grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1gnkp")
 
-[node name="MarginContainer" type="MarginContainer" parent="Container"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Container/MarginContainer"]
+[node name="AllButtons" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="Options" type="Button" parent="Container/MarginContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="PanelContainer/MarginContainer/AllButtons"]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -64,17 +64,17 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Options"
 script = ExtResource("4_kta7u")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Container/MarginContainer/VBoxContainer"]
+[node name="Guides" type="VBoxContainer" parent="PanelContainer/MarginContainer/AllButtons"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Container/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="GuidesLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/AllButtons/Guides"]
 custom_minimum_size = Vector2(75, 26)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "[center]Guides[/center]"
 
-[node name="Preperation" type="Button" parent="Container/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Preperation" type="Button" parent="PanelContainer/MarginContainer/AllButtons/Guides"]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -94,7 +94,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Preperation"
 script = ExtResource("4_kta7u")
 
-[node name="HowtoPlay" type="Button" parent="Container/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="HowtoPlay" type="Button" parent="PanelContainer/MarginContainer/AllButtons/Guides"]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -114,7 +114,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "How to play"
 script = ExtResource("4_kta7u")
 
-[node name="facilitatorkit" type="Button" parent="Container/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="facilitatorkit" type="Button" parent="PanelContainer/MarginContainer/AllButtons/Guides"]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -134,17 +134,17 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Facilitator Kit"
 script = ExtResource("4_kta7u")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Container/MarginContainer/VBoxContainer"]
+[node name="QuickReference" type="VBoxContainer" parent="PanelContainer/MarginContainer/AllButtons"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Container/MarginContainer/VBoxContainer/VBoxContainer2"]
+[node name="QuickReferenceLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/AllButtons/QuickReference"]
 custom_minimum_size = Vector2(75, 26)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "[center]Quick reference[/center]"
 
-[node name="Rules" type="Button" parent="Container/MarginContainer/VBoxContainer/VBoxContainer2"]
+[node name="Rules" type="Button" parent="PanelContainer/MarginContainer/AllButtons/QuickReference"]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -164,7 +164,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Rules"
 script = ExtResource("4_kta7u")
 
-[node name="ExtraRules" type="Button" parent="Container/MarginContainer/VBoxContainer/VBoxContainer2"]
+[node name="ExtraRules" type="Button" parent="PanelContainer/MarginContainer/AllButtons/QuickReference"]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -184,7 +184,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Extra Rules"
 script = ExtResource("4_kta7u")
 
-[node name="Interrupts" type="Button" parent="Container/MarginContainer/VBoxContainer/VBoxContainer2"]
+[node name="Interrupts" type="Button" parent="PanelContainer/MarginContainer/AllButtons/QuickReference"]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -204,10 +204,10 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Interrupts"
 script = ExtResource("4_kta7u")
 
-[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/Options" to="Container/MarginContainer/VBoxContainer/Options" method="_on_pressed"]
-[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/VBoxContainer/Preperation" to="Container/MarginContainer/VBoxContainer/VBoxContainer/Preperation" method="_on_pressed"]
-[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/VBoxContainer/HowtoPlay" to="Container/MarginContainer/VBoxContainer/VBoxContainer/HowtoPlay" method="_on_pressed"]
-[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/VBoxContainer/facilitatorkit" to="Container/MarginContainer/VBoxContainer/VBoxContainer/facilitatorkit" method="_on_pressed"]
-[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/VBoxContainer2/Rules" to="Container/MarginContainer/VBoxContainer/VBoxContainer2/Rules" method="_on_pressed"]
-[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/VBoxContainer2/ExtraRules" to="Container/MarginContainer/VBoxContainer/VBoxContainer2/ExtraRules" method="_on_pressed"]
-[connection signal="pressed" from="Container/MarginContainer/VBoxContainer/VBoxContainer2/Interrupts" to="Container/MarginContainer/VBoxContainer/VBoxContainer2/Interrupts" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/AllButtons/Options" to="PanelContainer/MarginContainer/AllButtons/Options" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/AllButtons/Guides/Preperation" to="PanelContainer/MarginContainer/AllButtons/Guides/Preperation" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/AllButtons/Guides/HowtoPlay" to="PanelContainer/MarginContainer/AllButtons/Guides/HowtoPlay" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/AllButtons/Guides/facilitatorkit" to="PanelContainer/MarginContainer/AllButtons/Guides/facilitatorkit" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/AllButtons/QuickReference/Rules" to="PanelContainer/MarginContainer/AllButtons/QuickReference/Rules" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/AllButtons/QuickReference/ExtraRules" to="PanelContainer/MarginContainer/AllButtons/QuickReference/ExtraRules" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/AllButtons/QuickReference/Interrupts" to="PanelContainer/MarginContainer/AllButtons/QuickReference/Interrupts" method="_on_pressed"]
