@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqiyt6fiyvro"]
+
+[ext_resource type="Script" uid="uid://dm015sicbwm2" path="res://scripts/PlaytestRoleSetup.gd" id="1_43g3h"]
+[ext_resource type="StyleBox" uid="uid://dijgsweldy4qb" path="res://Styles/Cards_Background.tres" id="2_tpmpd"]
+[ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="3_gnj0a"]
+[ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="4_pkb6o"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n6mxd"]
+
+[sub_resource type="Theme" id="Theme_sjgq0"]
+
+[node name="Setup" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_43g3h")
+
+[node name="Panel" type="PanelContainer" parent="."]
+material = SubResource("CanvasItemMaterial_n6mxd")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -309.0
+offset_top = -120.5
+offset_right = 309.0
+offset_bottom = 120.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sjgq0")
+theme_override_styles/panel = ExtResource("2_tpmpd")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[center]Select your role:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="Facilitator" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("3_gnj0a")
+theme_override_styles/pressed = ExtResource("4_pkb6o")
+theme_override_styles/hover = ExtResource("4_pkb6o")
+text = "Facilitator"
+
+[node name="Player" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("3_gnj0a")
+theme_override_styles/pressed = ExtResource("4_pkb6o")
+theme_override_styles/hover = ExtResource("4_pkb6o")
+text = "Player
+"
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/Facilitator" to="." method="_on_facilitator_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/Player" to="." method="_on_player_pressed"]
