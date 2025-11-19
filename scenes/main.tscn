@@ -1,4 +1,4 @@
-[gd_scene load_steps=167 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=168 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -321,6 +321,8 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="Theme" id="Theme_673bd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gr8w0"]
 
@@ -1043,7 +1045,7 @@ script = ExtResource("39_g6ss1")
 LabelObject = NodePath("StaticBody3D/3DLabel/SubViewport/Label")
 EditMinObject = NodePath("../../../Interface_Facilitator/SetPanel/TextEditMinutes")
 EditSecObject = NodePath("../../../Interface_Facilitator/SetPanel/TextEditSeconds")
-InterruptUI = NodePath("../../../Interface_InterruptFacilitator")
+InterruptUI = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/Timer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.822045, 0, -1.7657)
@@ -2626,7 +2628,7 @@ text = "Resume"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../../..")
 
-[node name="Interface_InterruptFacilitator" type="Control" parent="."]
+[node name="Interface_InterruptFacilitator2" type="Control" parent="."]
 visible = false
 layout_mode = 3
 anchors_preset = 2
@@ -2634,8 +2636,9 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
 
-[node name="Panel" type="Panel" parent="Interface_InterruptFacilitator"]
+[node name="Panel" type="PanelContainer" parent="Interface_InterruptFacilitator2"]
 material = SubResource("CanvasItemMaterial_nw32i")
+custom_minimum_size = Vector2(522, 56)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -2648,40 +2651,27 @@ grow_vertical = 0
 theme = SubResource("Theme_6nfnn")
 theme_override_styles/panel = SubResource("StyleBoxFlat_8b7kw")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Interface_InterruptFacilitator/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -176.0
-offset_top = 17.0
-offset_right = -18.0
-offset_bottom = 45.0
-grow_horizontal = 2
+[node name="MarginContainer" type="MarginContainer" parent="Interface_InterruptFacilitator2/Panel"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_InterruptFacilitator2/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(158, 28)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-text = "Interrupt!"
+bbcode_enabled = true
+text = "[right]Interrupt![/right]"
 
-[node name="Show" type="Button" parent="Interface_InterruptFacilitator/Panel" node_paths=PackedStringArray("InterruptUIFac")]
-layout_mode = 0
-offset_left = 334.0
-offset_top = 8.0
-offset_right = 514.0
-offset_bottom = 51.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-text = "Show to Players"
-script = ExtResource("52_4vkqy")
-InterruptUIFac = NodePath("../..")
-
-[node name="Delay" type="Button" parent="Interface_InterruptFacilitator/Panel" node_paths=PackedStringArray("TimerObject", "InterruptUIFac")]
-layout_mode = 0
-offset_left = 181.0
-offset_top = 8.0
-offset_right = 324.0
-offset_bottom = 51.0
+[node name="Delay" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("TimerObject", "InterruptUIFac")]
+custom_minimum_size = Vector2(143, 43)
+layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
@@ -2689,8 +2679,21 @@ theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
 text = "Delay (+5 min)"
 script = ExtResource("53_nl7a3")
-TimerObject = NodePath("../../../World/Interactables/Timer")
-InterruptUIFac = NodePath("../..")
+TimerObject = NodePath("../../../../../World/Interactables/Timer")
+InterruptUIFac = NodePath("../../../..")
+
+[node name="Show" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("InterruptUIPlayers", "InterruptUIFac")]
+custom_minimum_size = Vector2(180, 43)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+text = "Show to Players"
+script = ExtResource("52_4vkqy")
+InterruptUIPlayers = NodePath("../../../../../Interface_Interrupt")
+InterruptUIFac = NodePath("../../../..")
 
 [node name="Interface_Interrupt" type="Control" parent="."]
 visible = false
@@ -2757,7 +2760,7 @@ offset_top = -0.13999939
 offset_bottom = 0.14001465
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_6nfnn")
+theme = SubResource("Theme_673bd")
 theme_override_styles/panel = ExtResource("41_giosr")
 
 [node name="Container" type="Control" parent="Interface_Slideout_H2P/Panel"]
@@ -2854,7 +2857,7 @@ offset_top = -45.14
 offset_bottom = 45.14
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_6nfnn")
+theme = SubResource("Theme_673bd")
 theme_override_styles/panel = ExtResource("41_giosr")
 
 [node name="Container" type="Control" parent="Interface_Slideout_FacK/Panel"]
@@ -2987,7 +2990,7 @@ offset_top = -0.140001
 offset_bottom = 0.140015
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_6nfnn")
+theme = SubResource("Theme_673bd")
 theme_override_styles/panel = ExtResource("41_giosr")
 
 [node name="Container" type="Control" parent="Interface_Slideout_QuickRef/Panel"]
@@ -3195,7 +3198,7 @@ offset_top = -0.140001
 offset_bottom = 0.140015
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_6nfnn")
+theme = SubResource("Theme_673bd")
 theme_override_styles/panel = ExtResource("41_giosr")
 
 [node name="Container" type="Control" parent="Interface_Slideout_QuickRef+/Panel"]
@@ -3308,7 +3311,7 @@ offset_top = -0.140001
 offset_bottom = 0.140015
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_6nfnn")
+theme = SubResource("Theme_673bd")
 theme_override_styles/panel = ExtResource("41_giosr")
 
 [node name="Container" type="Control" parent="Interface_Slideout_Interrupts/Panel"]
@@ -3451,7 +3454,7 @@ offset_top = -0.140001
 offset_bottom = 0.140015
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_6nfnn")
+theme = SubResource("Theme_673bd")
 theme_override_styles/panel = ExtResource("41_giosr")
 
 [node name="Container" type="Control" parent="Interface_Slideout_H2P2/Panel"]
@@ -3695,8 +3698,8 @@ hideObject = NodePath("../..")
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" method="_on_pressed"]
 [connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Resume" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Resume" method="_on_pressed"]
-[connection signal="pressed" from="Interface_InterruptFacilitator/Panel/Show" to="Interface_InterruptFacilitator/Panel/Show" method="_on_pressed"]
-[connection signal="pressed" from="Interface_InterruptFacilitator/Panel/Delay" to="Interface_InterruptFacilitator/Panel/Delay" method="_on_pressed"]
+[connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" method="_on_pressed"]
+[connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" method="_on_pressed"]
 [connection signal="visibility_changed" from="Interface_Interrupt" to="Interface_Interrupt" method="_on_visibility_changed"]
 [connection signal="pressed" from="Interface_Slideout_H2P/Panel/Resume" to="Interface_Slideout_H2P/Panel/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Slideout_FacK/Panel/Resume" to="Interface_Slideout_FacK/Panel/Resume" method="_on_pressed"]
