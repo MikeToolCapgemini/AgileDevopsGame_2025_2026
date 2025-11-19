@@ -1,4 +1,4 @@
-[gd_scene load_steps=159 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=164 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -92,7 +92,7 @@
 [ext_resource type="Script" uid="uid://1kxnvwbcvkqf" path="res://scripts/BookmarkedList.gd" id="73_6nfnn"]
 [ext_resource type="Texture2D" uid="uid://cy075i613at82" path="res://assets/icons/bookmark.png" id="79_v0wtd"]
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
-[ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/multi_save.tscn" id="92_sgvw8"]
+[ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vr6f0"]
 albedo_color = Color(0.905882, 0.662745, 0, 1)
@@ -292,11 +292,17 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f37ub"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4ue30"]
+
+[sub_resource type="Theme" id="Theme_k42av"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6nfnn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ue30"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nw32i"]
+
+[sub_resource type="Theme" id="Theme_6nfnn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b7kw"]
 bg_color = Color(1, 0.305882, 0.301961, 1)
@@ -304,6 +310,10 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gr8w0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_673bd"]
 
 [node name="Main" type="Node" node_paths=PackedStringArray("Cursors", "World", "Camera")]
 script = ExtResource("1_b3gvj")
@@ -1506,8 +1516,8 @@ grow_vertical = 0
 layout_mode = 2
 text = "Discard Pile & Bookmarks"
 script = ExtResource("73_6nfnn")
-discardedList = NodePath("../../../Interface_DiscardPile/Panel/DiscardedCardsText")
-bookmarkedList = NodePath("../../../Interface_DiscardPile/Panel/BookmarkedText")
+discardedList = NodePath("../../../Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/DiscardedCardsContainer/DiscardedCardsText")
+bookmarkedList = NodePath("../../../Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/BookmarkedCardsContainer/BookmarkedText")
 hideObject = NodePath("../../../Interface_DiscardPile")
 
 [node name="ResetPawnPositionButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns"]
@@ -1617,7 +1627,7 @@ AnswerObject = NodePath("Panel/Answer")
 AnswerBackGround = NodePath("Panel/AnswerPanelBG")
 UXTagObject = NodePath("Panel/TagBG")
 
-[node name="Panel2" type="Panel" parent="Interface_Cards"]
+[node name="FacilitatorCardPanel" type="Panel" parent="Interface_Cards"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1633,7 +1643,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7l7aa")
 script = ExtResource("42_pfsrv")
 
-[node name="TypeTag" type="RichTextLabel" parent="Interface_Cards/Panel2"]
+[node name="TypeTag" type="RichTextLabel" parent="Interface_Cards/FacilitatorCardPanel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1646,7 +1656,7 @@ grow_horizontal = 2
 text = "Facilitator Panel"
 scroll_active = false
 
-[node name="RevealButton" type="Button" parent="Interface_Cards/Panel2"]
+[node name="RevealButton" type="Button" parent="Interface_Cards/FacilitatorCardPanel"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 90.0
@@ -1654,7 +1664,7 @@ offset_right = 141.0
 offset_bottom = 123.0
 text = "Reveal Answer"
 
-[node name="CloseButton" type="Button" parent="Interface_Cards/Panel2"]
+[node name="CloseButton" type="Button" parent="Interface_Cards/FacilitatorCardPanel"]
 layout_mode = 0
 offset_left = 19.0
 offset_top = 437.0
@@ -1662,7 +1672,7 @@ offset_right = 140.0
 offset_bottom = 470.0
 text = "Close Answer"
 
-[node name="SaveQuestion" type="Button" parent="Interface_Cards/Panel2" node_paths=PackedStringArray("cardManagerObject", "bookmarkIcon")]
+[node name="SaveQuestion" type="Button" parent="Interface_Cards/FacilitatorCardPanel" node_paths=PackedStringArray("cardManagerObject", "bookmarkIcon")]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 135.0
@@ -1673,7 +1683,7 @@ script = ExtResource("45_n88qk")
 cardManagerObject = NodePath("../..")
 bookmarkIcon = NodePath("../../Panel/bookmark")
 
-[node name="CancelSave" type="Button" parent="Interface_Cards/Panel2"]
+[node name="CancelSave" type="Button" parent="Interface_Cards/FacilitatorCardPanel"]
 visible = false
 layout_mode = 0
 offset_left = 20.0
@@ -1683,7 +1693,7 @@ offset_bottom = 166.0
 text = "Cancel Bookmark
 "
 
-[node name="Panel" type="Panel" parent="Interface_Cards/Panel2"]
+[node name="Panel" type="Panel" parent="Interface_Cards/FacilitatorCardPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -2.206
@@ -1696,7 +1706,7 @@ offset_right = 340.93
 offset_bottom = 130.176
 theme_override_styles/panel = SubResource("StyleBoxFlat_ann2e")
 
-[node name="AnswerF" type="RichTextLabel" parent="Interface_Cards/Panel2/Panel"]
+[node name="AnswerF" type="RichTextLabel" parent="Interface_Cards/FacilitatorCardPanel/Panel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1711,7 +1721,7 @@ Answer
 Asnwer"
 scroll_active = false
 
-[node name="AnswerF2" type="RichTextLabel" parent="Interface_Cards/Panel2/Panel"]
+[node name="AnswerF2" type="RichTextLabel" parent="Interface_Cards/FacilitatorCardPanel/Panel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2103,35 +2113,57 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("42_flrbk")
 TimerObject = NodePath("../World/Interactables/Timer")
-FacilitatorCardPanel = NodePath("../Interface_Cards/Panel2")
+FacilitatorCardPanel = NodePath("../Interface_Cards/FacilitatorCardPanel")
 FacilitatorUI = NodePath("../Interface_Facilitator")
 FacilitatorKitButton = NodePath("../Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/facilitatorkit")
 OptionsPanel = NodePath("../Interface_Buttons")
 
-[node name="Panel2" type="Panel" parent="Setup"]
-layout_mode = 0
-offset_left = -320.0
-offset_top = -207.0
-offset_right = 298.0
-offset_bottom = 32.0
-theme_override_styles/panel = ExtResource("49_6ggbb")
-
-[node name="Panel" type="Panel" parent="Setup"]
+[node name="Panel" type="PanelContainer" parent="Setup"]
 material = SubResource("CanvasItemMaterial_n6mxd")
-layout_mode = 0
-offset_left = -317.0
-offset_top = -209.0
-offset_right = 301.0
-offset_bottom = 32.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -309.0
+offset_top = -120.5
+offset_right = 309.0
+offset_bottom = 120.5
+grow_horizontal = 2
+grow_vertical = 2
 theme = SubResource("Theme_sjgq0")
 theme_override_styles/panel = ExtResource("49_6ggbb")
 
-[node name="Facilitator" type="Button" parent="Setup/Panel"]
-layout_mode = 0
-offset_left = 162.0
-offset_top = 125.0
-offset_right = 289.0
-offset_bottom = 168.0
+[node name="MarginContainer" type="MarginContainer" parent="Setup/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Setup/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Setup/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[center]Select your role:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Setup/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="Facilitator" type="Button" parent="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
@@ -2139,12 +2171,9 @@ theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
 text = "Facilitator"
 
-[node name="Player" type="Button" parent="Setup/Panel"]
-layout_mode = 0
-offset_left = 336.0
-offset_top = 125.0
-offset_right = 463.0
-offset_bottom = 168.0
+[node name="Player" type="Button" parent="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
@@ -2152,19 +2181,6 @@ theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
 text = "Player
 "
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Setup/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -132.0
-offset_top = 67.0
-offset_right = 133.0
-offset_bottom = 95.0
-grow_horizontal = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Select your role:"
 
 [node name="Interface_Buttons" type="Control" parent="."]
 layout_mode = 3
@@ -2511,7 +2527,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel2" type="Panel" parent="Interface_DiscardPile"]
+[node name="BlackoutBG" type="PanelContainer" parent="Interface_DiscardPile"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2519,36 +2535,70 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="Interface_DiscardPile"]
-material = SubResource("CanvasItemMaterial_or8bj")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -257.0
-offset_top = -200.0
-offset_right = 257.0
-offset_bottom = 177.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_sjgq0")
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_DiscardPile/BlackoutBG"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Panel" type="PanelContainer" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer"]
+material = SubResource("CanvasItemMaterial_4ue30")
+custom_minimum_size = Vector2(514, 377)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_k42av")
 theme_override_styles/panel = ExtResource("42_ot4pa")
 
-[node name="Resume" type="Button" parent="Interface_DiscardPile/Panel" node_paths=PackedStringArray("hideObject")]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -58.0
-offset_top = 9.0
-offset_right = 69.0
-offset_bottom = 52.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="MarginContainer" type="MarginContainer" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 70
+
+[node name="DiscardedCardsContainer" type="VBoxContainer" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DiscardedLabel" type="RichTextLabel" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/DiscardedCardsContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[center]Discarded Cards[/center]"
+
+[node name="DiscardedCardsText" type="RichTextLabel" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/DiscardedCardsContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+script = ExtResource("51_3t33e")
+cardType = "d"
+
+[node name="BookmarkedCardsContainer" type="VBoxContainer" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BookmarkedLabel" type="RichTextLabel" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/BookmarkedCardsContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[center]Bookmarked Cards[/center]"
+
+[node name="BookmarkedText" type="RichTextLabel" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/BookmarkedCardsContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+script = ExtResource("51_3t33e")
+cardType = "b"
+
+[node name="Resume" type="Button" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer" node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -2563,61 +2613,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
 text = "Resume"
 script = ExtResource("49_4jv7h")
-hideObject = NodePath("../..")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Interface_DiscardPile/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -62.0
-offset_top = 57.0
-offset_right = 68.0
-offset_bottom = 85.0
-grow_horizontal = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Discarded Cards"
-
-[node name="DiscardedCardsText" type="RichTextLabel" parent="Interface_DiscardPile/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -225.0
-offset_top = 82.0
-offset_right = 227.0
-offset_bottom = 183.0
-grow_horizontal = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-script = ExtResource("51_3t33e")
-cardType = "d"
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Interface_DiscardPile/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -69.0
-offset_top = 193.0
-offset_right = 87.0
-offset_bottom = 221.0
-grow_horizontal = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Bookmarked Cards"
-
-[node name="BookmarkedText" type="RichTextLabel" parent="Interface_DiscardPile/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -225.0
-offset_top = 218.0
-offset_right = 227.0
-offset_bottom = 353.0
-grow_horizontal = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-script = ExtResource("51_3t33e")
-cardType = "b"
+hideObject = NodePath("../../..")
 
 [node name="Interface_InterruptFacilitator" type="Control" parent="."]
 visible = false
@@ -2638,7 +2634,7 @@ offset_top = -297.0
 offset_right = 490.0
 offset_bottom = -241.0
 grow_vertical = 0
-theme = SubResource("Theme_sjgq0")
+theme = SubResource("Theme_6nfnn")
 theme_override_styles/panel = SubResource("StyleBoxFlat_8b7kw")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Interface_InterruptFacilitator/Panel"]
@@ -2709,7 +2705,7 @@ offset_right = 1871.0
 offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_sjgq0")
+theme = SubResource("Theme_6nfnn")
 theme_override_styles/panel = SubResource("StyleBoxFlat_8b7kw")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Interface_Interrupt/Panel"]
@@ -2755,7 +2751,7 @@ offset_top = -0.13999939
 offset_bottom = 0.14001465
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_sjgq0")
+theme = SubResource("Theme_6nfnn")
 theme_override_styles/panel = ExtResource("41_giosr")
 
 [node name="Container" type="Control" parent="Interface_Slideout_H2P/Panel"]
@@ -2816,8 +2812,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gr8w0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_673bd")
 text = "Close"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -2852,7 +2848,7 @@ offset_top = -45.14
 offset_bottom = 45.14
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_sjgq0")
+theme = SubResource("Theme_6nfnn")
 theme_override_styles/panel = ExtResource("41_giosr")
 
 [node name="Container" type="Control" parent="Interface_Slideout_FacK/Panel"]
@@ -2949,8 +2945,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gr8w0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_673bd")
 text = "Close"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -2985,7 +2981,7 @@ offset_top = -0.140001
 offset_bottom = 0.140015
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_sjgq0")
+theme = SubResource("Theme_6nfnn")
 theme_override_styles/panel = ExtResource("41_giosr")
 
 [node name="Container" type="Control" parent="Interface_Slideout_QuickRef/Panel"]
@@ -3157,8 +3153,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gr8w0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_673bd")
 text = "Close"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -3193,7 +3189,7 @@ offset_top = -0.140001
 offset_bottom = 0.140015
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_sjgq0")
+theme = SubResource("Theme_6nfnn")
 theme_override_styles/panel = ExtResource("41_giosr")
 
 [node name="Container" type="Control" parent="Interface_Slideout_QuickRef+/Panel"]
@@ -3270,8 +3266,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gr8w0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_673bd")
 text = "Close"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -3306,7 +3302,7 @@ offset_top = -0.140001
 offset_bottom = 0.140015
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_sjgq0")
+theme = SubResource("Theme_6nfnn")
 theme_override_styles/panel = ExtResource("41_giosr")
 
 [node name="Container" type="Control" parent="Interface_Slideout_Interrupts/Panel"]
@@ -3413,8 +3409,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gr8w0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_673bd")
 text = "Close"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -3449,7 +3445,7 @@ offset_top = -0.140001
 offset_bottom = 0.140015
 grow_horizontal = 0
 grow_vertical = 2
-theme = SubResource("Theme_sjgq0")
+theme = SubResource("Theme_6nfnn")
 theme_override_styles/panel = ExtResource("41_giosr")
 
 [node name="Container" type="Control" parent="Interface_Slideout_H2P2/Panel"]
@@ -3576,8 +3572,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gr8w0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_673bd")
 text = "Close"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../..")
@@ -3674,13 +3670,13 @@ hideObject = NodePath("../..")
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_load_game_button_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/Set" to="Interface_Facilitator/Set" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/SetPanel/Set" to="World/Interactables/Timer" method="_on_set_pressed"]
-[connection signal="pressed" from="Interface_Cards/Panel2/RevealButton" to="Interface_Cards" method="_on_reveal_button_pressed"]
-[connection signal="pressed" from="Interface_Cards/Panel2/CloseButton" to="Interface_Cards" method="_on_close_button_pressed"]
-[connection signal="pressed" from="Interface_Cards/Panel2/SaveQuestion" to="Interface_Cards/Panel2/SaveQuestion" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Cards/Panel2/CancelSave" to="Interface_Cards/Panel2/SaveQuestion" method="on_Cancel"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorCardPanel/RevealButton" to="Interface_Cards" method="_on_reveal_button_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorCardPanel/CloseButton" to="Interface_Cards" method="_on_close_button_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorCardPanel/SaveQuestion" to="Interface_Cards/FacilitatorCardPanel/SaveQuestion" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorCardPanel/CancelSave" to="Interface_Cards/FacilitatorCardPanel/SaveQuestion" method="on_Cancel"]
 [connection signal="pressed" from="Interface_Cards/Hide_Show" to="Interface_Cards/Hide_Show" method="_on_pressed"]
-[connection signal="pressed" from="Setup/Panel/Facilitator" to="Setup" method="_on_facilitator_pressed"]
-[connection signal="pressed" from="Setup/Panel/Player" to="Setup" method="_on_player_pressed"]
+[connection signal="pressed" from="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer/Facilitator" to="Setup" method="_on_facilitator_pressed"]
+[connection signal="pressed" from="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer/Player" to="Setup" method="_on_player_pressed"]
 [connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/Options" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/Options" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/Preperation" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/Preperation" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/HowtoPlay" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/HowtoPlay" method="_on_pressed"]
@@ -3692,7 +3688,7 @@ hideObject = NodePath("../..")
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" method="on_repick"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" method="_on_pressed"]
-[connection signal="pressed" from="Interface_DiscardPile/Panel/Resume" to="Interface_DiscardPile/Panel/Resume" method="_on_pressed"]
+[connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Resume" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator/Panel/Show" to="Interface_InterruptFacilitator/Panel/Show" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator/Panel/Delay" to="Interface_InterruptFacilitator/Panel/Delay" method="_on_pressed"]
 [connection signal="visibility_changed" from="Interface_Interrupt" to="Interface_Interrupt" method="_on_visibility_changed"]

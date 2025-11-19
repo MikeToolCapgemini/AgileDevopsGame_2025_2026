@@ -22,7 +22,7 @@ func _on_facilitator_pressed():
 	pass # Replace with function body.
 
 func toggleFacilitatorbuttons(visible : bool):
-	TimerObject.visible = visible
+	#TimerObject.visible = visible
 	FacilitatorCardPanel.visible = visible
 	FacilitatorUI.visible = visible
 	FacilitatorKitButton.visible = visible
