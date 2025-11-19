@@ -1,4 +1,4 @@
-[gd_scene load_steps=164 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=167 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -305,6 +305,17 @@ corner_radius_bottom_left = 20
 [sub_resource type="Theme" id="Theme_6nfnn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b7kw"]
+bg_color = Color(1, 0.305882, 0.301961, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k42av"]
+
+[sub_resource type="Theme" id="Theme_gr8w0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_673bd"]
 bg_color = Color(1, 0.305882, 0.301961, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
@@ -2650,7 +2661,7 @@ grow_horizontal = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 text = "Interrupt!"
 
-[node name="Show" type="Button" parent="Interface_InterruptFacilitator/Panel" node_paths=PackedStringArray("InterruptUIPlayers", "InterruptUIFac")]
+[node name="Show" type="Button" parent="Interface_InterruptFacilitator/Panel" node_paths=PackedStringArray("InterruptUIFac")]
 layout_mode = 0
 offset_left = 334.0
 offset_top = 8.0
@@ -2663,7 +2674,6 @@ theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
 text = "Show to Players"
 script = ExtResource("52_4vkqy")
-InterruptUIPlayers = NodePath("../../../Interface_Interrupt")
 InterruptUIFac = NodePath("../..")
 
 [node name="Delay" type="Button" parent="Interface_InterruptFacilitator/Panel" node_paths=PackedStringArray("TimerObject", "InterruptUIFac")]
@@ -2691,8 +2701,8 @@ anchor_right = 0.5
 grow_horizontal = 2
 script = ExtResource("53_u67wn")
 
-[node name="Panel" type="Panel" parent="Interface_Interrupt"]
-material = SubResource("CanvasItemMaterial_nw32i")
+[node name="Panel" type="PanelContainer" parent="Interface_Interrupt"]
+material = SubResource("CanvasItemMaterial_k42av")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2705,21 +2715,17 @@ offset_right = 1871.0
 offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_6nfnn")
-theme_override_styles/panel = SubResource("StyleBoxFlat_8b7kw")
+theme = SubResource("Theme_gr8w0")
+theme_override_styles/panel = SubResource("StyleBoxFlat_673bd")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Interface_Interrupt/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -38.0
-offset_top = 17.0
-offset_right = 120.0
-offset_bottom = 45.0
-grow_horizontal = 2
+custom_minimum_size = Vector2(100, 27)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-text = "Interrupt!"
+bbcode_enabled = true
+text = "[center]Interrupt![/center]"
 
 [node name="Interface_Slideout_H2P" type="Control" parent="."]
 visible = false

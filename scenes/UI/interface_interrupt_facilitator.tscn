@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmhktim0fyqv1"]
+
+[ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="1_ea43o"]
+[ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="2_5w1i7"]
+[ext_resource type="Script" uid="uid://bs6qeceanga72" path="res://scripts/UX/Interrupt.gd" id="3_fm5wy"]
+[ext_resource type="Script" uid="uid://by0f41oghp2rr" path="res://scripts/UX/DelayTimer.gd" id="4_hfh1n"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nw32i"]
+
+[sub_resource type="Theme" id="Theme_6nfnn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b7kw"]
+bg_color = Color(1, 0.305882, 0.301961, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Interface_InterruptFacilitator" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="Panel" type="PanelContainer" parent="."]
+material = SubResource("CanvasItemMaterial_nw32i")
+custom_minimum_size = Vector2(522, 56)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -297.0
+offset_right = 490.0
+offset_bottom = -241.0
+grow_vertical = 0
+theme = SubResource("Theme_6nfnn")
+theme_override_styles/panel = SubResource("StyleBoxFlat_8b7kw")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(158, 28)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+bbcode_enabled = true
+text = "[right]Interrupt![/right]"
+
+[node name="Delay" type="Button" parent="Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("InterruptUIFac")]
+custom_minimum_size = Vector2(143, 43)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("1_ea43o")
+theme_override_styles/pressed = ExtResource("2_5w1i7")
+theme_override_styles/hover = ExtResource("2_5w1i7")
+text = "Delay (+5 min)"
+script = ExtResource("4_hfh1n")
+InterruptUIFac = NodePath("../../../..")
+
+[node name="Show" type="Button" parent="Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("InterruptUIFac")]
+custom_minimum_size = Vector2(180, 43)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("1_ea43o")
+theme_override_styles/pressed = ExtResource("2_5w1i7")
+theme_override_styles/hover = ExtResource("2_5w1i7")
+text = "Show to Players"
+script = ExtResource("3_fm5wy")
+InterruptUIFac = NodePath("../../../..")
+
+[connection signal="pressed" from="Panel/MarginContainer/HBoxContainer/Delay" to="Panel/MarginContainer/HBoxContainer/Delay" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/HBoxContainer/Show" to="Panel/MarginContainer/HBoxContainer/Show" method="_on_pressed"]
