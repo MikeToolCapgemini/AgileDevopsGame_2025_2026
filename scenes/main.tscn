@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=169 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -90,7 +90,8 @@
 [ext_resource type="Texture2D" uid="uid://bvtwyxeygyxn1" path="res://assets/guides/Guide2_1.png" id="57_e28cd"]
 [ext_resource type="Texture2D" uid="uid://eayil001qvqf" path="res://assets/3Dmodels/CardDecks/TestingDeck.png" id="57_v1ccq"]
 [ext_resource type="Script" uid="uid://1kxnvwbcvkqf" path="res://scripts/BookmarkedList.gd" id="73_6nfnn"]
-[ext_resource type="Texture2D" uid="uid://cy075i613at82" path="res://assets/icons/bookmark.png" id="79_v0wtd"]
+[ext_resource type="Script" uid="uid://yhh3kfgvk00x" path="res://scripts/UX/CardUIManager.gd" id="81_4ue30"]
+[ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
 
@@ -258,13 +259,13 @@ bg_color = Color(0.415686, 0.14902, 0.184314, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05u6v"]
 bg_color = Color(1, 1, 1, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8yg7"]
+bg_color = Color(0.262745, 0.643137, 0.843137, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlsfy"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8yg7"]
-bg_color = Color(0.262745, 0.643137, 0.843137, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpru0"]
 bg_color = Color(0.0117647, 1, 0.6, 0.980392)
@@ -1039,13 +1040,12 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "[1]"
 
-[node name="Timer" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject", "EditMinObject", "EditSecObject", "InterruptUI")]
+[node name="Timer" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject", "EditMinObject", "EditSecObject")]
 transform = Transform3D(0.366, 0, 0, 0, 0.366, 0, 0, 0, 0.366, -0.433018, 0.401228, 5.40797)
 script = ExtResource("39_g6ss1")
 LabelObject = NodePath("StaticBody3D/3DLabel/SubViewport/Label")
 EditMinObject = NodePath("../../../Interface_Facilitator/SetPanel/TextEditMinutes")
 EditSecObject = NodePath("../../../Interface_Facilitator/SetPanel/TextEditSeconds")
-InterruptUI = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/Timer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.822045, 0, -1.7657)
@@ -1620,7 +1620,7 @@ layout_mode = 1
 offset_left = 1050.0
 offset_right = 1050.0
 
-[node name="Interface_Cards" type="Control" parent="." node_paths=PackedStringArray("QuestionObject", "AnswerObject", "AnswerBackGround", "UXTagObject")]
+[node name="Interface_Cards" type="Control" parent="." node_paths=PackedStringArray("CardUIManager")]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -1628,126 +1628,125 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -380.0
+offset_left = -350.0
 offset_top = -250.0
-offset_right = 320.0
+offset_right = 350.0
 offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("41_lgecp")
-QuestionObject = NodePath("Panel/Question")
-AnswerObject = NodePath("Panel/Answer")
-AnswerBackGround = NodePath("Panel/AnswerPanelBG")
-UXTagObject = NodePath("Panel/TagBG")
+CardUIManager = NodePath("CardPanel")
 
-[node name="FacilitatorCardPanel" type="Panel" parent="Interface_Cards"]
+[node name="FacilitatorPanels" type="Control" parent="Interface_Cards"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FacilitatorCardPanel" type="PanelContainer" parent="Interface_Cards/FacilitatorPanels"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 343.0
-offset_top = -240.0
-offset_right = 498.0
-offset_bottom = 249.0
+offset_left = 673.0
+offset_top = -10.0
+offset_right = 828.0
+offset_bottom = 479.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7l7aa")
 script = ExtResource("42_pfsrv")
 
-[node name="TypeTag" type="RichTextLabel" parent="Interface_Cards/FacilitatorCardPanel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -55.0
-offset_top = 15.0
-offset_right = 56.0
-offset_bottom = 66.0
-grow_horizontal = 2
-text = "Facilitator Panel"
-scroll_active = false
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
 
-[node name="RevealButton" type="Button" parent="Interface_Cards/FacilitatorCardPanel"]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 90.0
-offset_right = 141.0
-offset_bottom = 123.0
-text = "Reveal Answer"
-
-[node name="CloseButton" type="Button" parent="Interface_Cards/FacilitatorCardPanel"]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 437.0
-offset_right = 140.0
-offset_bottom = 470.0
+[node name="CloseButton" type="Button" parent="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer"]
+custom_minimum_size = Vector2(120, 33)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 text = "Close Answer"
 
-[node name="SaveQuestion" type="Button" parent="Interface_Cards/FacilitatorCardPanel" node_paths=PackedStringArray("cardManagerObject", "bookmarkIcon")]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 135.0
-offset_right = 140.0
-offset_bottom = 166.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer"]
+custom_minimum_size = Vector2(0, 410)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="PanelLabel" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(111, 51)
+layout_mode = 2
+text = "Facilitator 
+Panel"
+scroll_active = false
+
+[node name="RevealButton" type="Button" parent="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(121, 33)
+layout_mode = 2
+text = "Reveal Answer"
+
+[node name="SaveQuestion" type="Button" parent="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("cardManagerObject", "bookmarkIcon")]
+custom_minimum_size = Vector2(120, 33)
+layout_mode = 2
 text = "Bookmark"
 script = ExtResource("45_n88qk")
-cardManagerObject = NodePath("../..")
-bookmarkIcon = NodePath("../../Panel/bookmark")
+cardManagerObject = NodePath("../../../../..")
+bookmarkIcon = NodePath("../../../../../CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/TypeBG/bookmark")
 
-[node name="CancelSave" type="Button" parent="Interface_Cards/FacilitatorCardPanel"]
+[node name="CancelSave" type="Button" parent="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
 visible = false
-layout_mode = 0
-offset_left = 20.0
-offset_top = 135.0
-offset_right = 140.0
-offset_bottom = 166.0
-text = "Cancel Bookmark
+custom_minimum_size = Vector2(120, 54)
+layout_mode = 2
+text = "Cancel
+Bookmark
 "
 
-[node name="Panel" type="Panel" parent="Interface_Cards/FacilitatorCardPanel"]
+[node name="AnswerPanel" type="PanelContainer" parent="Interface_Cards/FacilitatorPanels"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -2.206
 anchor_top = 1.016
 anchor_right = -2.206
 anchor_bottom = 1.016
-offset_left = -341.07
-offset_top = -9.82401
-offset_right = 340.93
-offset_bottom = 130.176
+offset_left = 98.240005
+offset_top = 456.36
+offset_right = 780.24
+offset_bottom = 596.36
 theme_override_styles/panel = SubResource("StyleBoxFlat_ann2e")
 
-[node name="AnswerF" type="RichTextLabel" parent="Interface_Cards/FacilitatorCardPanel/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -314.0
-offset_top = 47.0
-offset_right = 315.0
-offset_bottom = 119.0
-grow_horizontal = 2
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="AnswerF2" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/AnswerPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(653, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Answer:"
+scroll_active = false
+
+[node name="AnswerF" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/AnswerPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(629, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Answer
 Answer
 Asnwer"
 scroll_active = false
 
-[node name="AnswerF2" type="RichTextLabel" parent="Interface_Cards/FacilitatorCardPanel/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -328.0
-offset_top = 22.0
-offset_right = 325.0
-offset_bottom = 52.0
-grow_horizontal = 2
-text = "Answer:"
-scroll_active = false
-
-[node name="Panel" type="Panel" parent="Interface_Cards"]
+[node name="CardPanel" type="PanelContainer" parent="Interface_Cards" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "QuestionObject", "AnswerObject", "AnswerFacilitatorTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "bookmark")]
 custom_minimum_size = Vector2(700, 300)
 layout_mode = 1
 anchors_preset = 8
@@ -1756,110 +1755,126 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -350.0
-offset_top = -250.0
+offset_top = -253.5
 offset_right = 350.0
-offset_bottom = 257.0
+offset_bottom = 253.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("42_ot4pa")
+script = ExtResource("81_4ue30")
+CardPanel = NodePath("..")
+TypeTextObject = NodePath("MarginContainer2/MarginContainer/VBoxContainer/TypeBox/TypeBox/MarginContainer/HBoxContainer/TypeTag")
+QuestionObject = NodePath("MarginContainer2/MarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/Question")
+AnswerObject = NodePath("MarginContainer2/MarginContainer/VBoxContainer/AnswerPanelBG/Answer")
+AnswerFacilitatorTextObject = NodePath("../FacilitatorPanels/AnswerPanel/MarginContainer/VBoxContainer/AnswerF")
+AnswerBackground = NodePath("MarginContainer2/MarginContainer/VBoxContainer/AnswerPanelBG")
+AnswerATextObject = NodePath("MarginContainer2/MarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceA")
+AnswerBTextObject = NodePath("MarginContainer2/MarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceB")
+AnswerCTextObject = NodePath("MarginContainer2/MarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceC")
+AnswerDTextObject = NodePath("MarginContainer2/MarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceD")
+BookmarkButton = NodePath("../FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion")
+CancelBookmarkButton = NodePath("../FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer/CancelSave")
+UXTagObject = NodePath("MarginContainer2/MarginContainer/VBoxContainer/TypeBox/TypeBG")
+bookmark = NodePath("MarginContainer2/MarginContainer/VBoxContainer/TypeBox/TypeBG/bookmark")
 
-[node name="Panel" type="Panel" parent="Interface_Cards/Panel"]
-custom_minimum_size = Vector2(700, 300)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -350.0
-offset_top = -253.0
-offset_right = 350.0
-offset_bottom = 254.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = ExtResource("42_ot4pa")
+[node name="MarginContainer2" type="MarginContainer" parent="Interface_Cards/CardPanel"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
 
-[node name="TagBGWarning" type="Panel" parent="Interface_Cards/Panel"]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 20.0
-offset_right = 700.0
-offset_bottom = 70.0
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/CardPanel/MarginContainer2"]
+custom_minimum_size = Vector2(688, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="TypeBox" type="MarginContainer" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(688, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="ActionCardBG" type="Panel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox"]
+custom_minimum_size = Vector2(700, 50)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_x52v5")
 
-[node name="TagBGAction" type="Control" parent="Interface_Cards/Panel/TagBGWarning"]
+[node name="TagBGAction" type="Control" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Polygon2D" type="Polygon2D" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="Polygon2D" type="Polygon2D" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 position = Vector2(-24, -18)
 color = Color(1, 0.72549, 0.0470588, 1)
 polygon = PackedVector2Array(254, 14, 223, 70, 234, 70, 263, 16)
 
-[node name="Polygon2D2" type="Polygon2D" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="Polygon2D2" type="Polygon2D" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 position = Vector2(16, -18)
 color = Color(1, 0.72549, 0.0470588, 1)
 polygon = PackedVector2Array(254, 14, 223, 70, 234, 70, 263, 16)
 
-[node name="Polygon2D3" type="Polygon2D" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="Polygon2D3" type="Polygon2D" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 position = Vector2(56, -18)
 color = Color(1, 0.72549, 0.0470588, 1)
 polygon = PackedVector2Array(254, 14, 223, 70, 234, 70, 263, 16)
 
-[node name="Polygon2D4" type="Polygon2D" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="Polygon2D4" type="Polygon2D" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 position = Vector2(96, -18)
 color = Color(1, 0.72549, 0.0470588, 1)
 polygon = PackedVector2Array(254, 14, 223, 70, 234, 70, 263, 16)
 
-[node name="Polygon2D5" type="Polygon2D" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="Polygon2D5" type="Polygon2D" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 position = Vector2(136, -18)
 color = Color(1, 0.72549, 0.0470588, 1)
 polygon = PackedVector2Array(254, 14, 223, 70, 234, 70, 263, 16)
 
-[node name="Polygon2D6" type="Polygon2D" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="Polygon2D6" type="Polygon2D" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 position = Vector2(176, -18)
 color = Color(1, 0.72549, 0.0470588, 1)
 polygon = PackedVector2Array(254, 14, 223, 70, 234, 70, 263, 16)
 
-[node name="Polygon2D7" type="Polygon2D" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="Polygon2D7" type="Polygon2D" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 position = Vector2(216, -18)
 color = Color(1, 0.72549, 0.0470588, 1)
 polygon = PackedVector2Array(254, 14, 223, 70, 234, 70, 263, 16)
 
-[node name="Polygon2D8" type="Polygon2D" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="Polygon2D8" type="Polygon2D" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 position = Vector2(256, -18)
 color = Color(1, 0.72549, 0.0470588, 1)
 polygon = PackedVector2Array(254, 14, 223, 70, 234, 70, 263, 16)
 
-[node name="Polygon2D9" type="Polygon2D" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="Polygon2D9" type="Polygon2D" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 position = Vector2(296, -18)
 color = Color(1, 0.72549, 0.0470588, 1)
 polygon = PackedVector2Array(254, 14, 223, 70, 234, 70, 263, 16)
 
-[node name="Polygon2D10" type="Polygon2D" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="Polygon2D10" type="Polygon2D" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 position = Vector2(336, -18)
 color = Color(1, 0.72549, 0.0470588, 1)
 polygon = PackedVector2Array(254, 14, 223, 70, 234, 70, 263, 16)
 
-[node name="Polygon2D11" type="Polygon2D" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="Polygon2D11" type="Polygon2D" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 position = Vector2(376, -18)
 color = Color(1, 0.72549, 0.0470588, 1)
 polygon = PackedVector2Array(254, 14, 223, 70, 234, 70, 263, 16)
 
-[node name="Polygon2D12" type="Polygon2D" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="Polygon2D12" type="Polygon2D" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 position = Vector2(416, -18)
 color = Color(1, 0.72549, 0.0470588, 1)
 polygon = PackedVector2Array(254, 14, 223, 70, 234, 70, 263, 16)
 
-[node name="TagBGWave" type="Panel" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="TagBGWave" type="Panel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 layout_mode = 0
 offset_left = 196.0
 offset_top = -10.0
 offset_right = 681.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_05u6v")
 
-[node name="TagBGWave2" type="Panel" parent="Interface_Cards/Panel/TagBGWarning/TagBGAction"]
+[node name="TagBGWave2" type="Panel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/ActionCardBG/TagBGAction"]
 layout_mode = 0
 offset_left = 197.0
 offset_top = 50.0
@@ -1867,55 +1882,72 @@ offset_right = 682.0
 offset_bottom = 60.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_05u6v")
 
-[node name="TagBGWave" type="Panel" parent="Interface_Cards/Panel/TagBGWarning"]
-layout_mode = 0
-offset_left = -7.0
-offset_top = -1.0
-offset_right = 203.0
-offset_bottom = 51.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_vlsfy")
-
-[node name="TagBG" type="Panel" parent="Interface_Cards/Panel"]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 20.0
-offset_right = 700.0
-offset_bottom = 70.0
+[node name="TypeBG" type="Panel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_b8yg7")
 
-[node name="TagBGWave" type="Panel" parent="Interface_Cards/Panel/TagBG"]
-layout_mode = 0
-offset_left = -7.0
-offset_top = -1.0
-offset_right = 203.0
-offset_bottom = 51.0
+[node name="bookmark" type="TextureRect" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/TypeBG"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("83_6nfnn")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TypeBox" type="PanelContainer" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox"]
+custom_minimum_size = Vector2(210, 52)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_vlsfy")
 
-[node name="QuestionTag" type="RichTextLabel" parent="Interface_Cards/Panel"]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -275.0
-offset_top = 73.0
-offset_right = -141.0
-offset_bottom = 98.0
-grow_horizontal = 2
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/TypeBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/TypeBox/MarginContainer"]
+layout_mode = 2
+
+[node name="TypeTag" type="RichTextLabel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/TypeBox/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Question:"
+text = "Type:"
 scroll_active = false
 
-[node name="Question" type="RichTextLabel" parent="Interface_Cards/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -325.0
-offset_top = 88.0
-offset_right = 329.0
-offset_bottom = 202.0
-grow_horizontal = 2
+[node name="Type" type="RichTextLabel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/TypeBox/TypeBox/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "A. Answer A"
+scroll_active = false
+
+[node name="Question_AnswerBox" type="MarginContainer" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="Question_AnswerVBox" type="VBoxContainer" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/Question_AnswerBox"]
+layout_mode = 2
+
+[node name="Question" type="RichTextLabel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox"]
+custom_minimum_size = Vector2(654, 114)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 20
 text = "Question
@@ -1924,129 +1956,57 @@ Question
 Question"
 scroll_active = false
 
-[node name="Type" type="RichTextLabel" parent="Interface_Cards/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -258.0
-offset_top = 32.0
-offset_right = -121.0
-offset_bottom = 57.0
-grow_horizontal = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "A. Answer A"
-scroll_active = false
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 20
 
-[node name="ChoiceA" type="RichTextLabel" parent="Interface_Cards/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -309.0
-offset_top = 211.0
-offset_right = 191.0
-offset_bottom = 261.0
-grow_horizontal = 2
+[node name="Answers" type="VBoxContainer" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ChoiceA" type="RichTextLabel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers"]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "A. Answer A
 A. Answer A"
 scroll_active = false
 
-[node name="ChoiceB" type="RichTextLabel" parent="Interface_Cards/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -309.0
-offset_top = 255.0
-offset_right = 191.0
-offset_bottom = 306.0
-grow_horizontal = 2
+[node name="ChoiceB" type="RichTextLabel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers"]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "B. Answer B
 B. Answer B"
 scroll_active = false
 
-[node name="ChoiceC" type="RichTextLabel" parent="Interface_Cards/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -309.0
-offset_top = 304.0
-offset_right = 191.0
-offset_bottom = 351.0
-grow_horizontal = 2
+[node name="ChoiceC" type="RichTextLabel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers"]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "C. Answer C
 C. Answer C"
 scroll_active = false
 
-[node name="ChoiceD" type="RichTextLabel" parent="Interface_Cards/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -309.0
-offset_top = 356.0
-offset_right = 191.0
-offset_bottom = 403.0
-grow_horizontal = 2
+[node name="ChoiceD" type="RichTextLabel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers"]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "D. Answer D
 D. Answer D"
 scroll_active = false
 
-[node name="ChoiceE" type="RichTextLabel" parent="Interface_Cards/Panel"]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -250.0
-offset_top = 307.0
-offset_right = 250.0
-offset_bottom = 353.0
-grow_horizontal = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "E. Answer E
-E. Answer E"
-scroll_active = false
-
-[node name="AnswerTag" type="RichTextLabel" parent="Interface_Cards/Panel"]
-visible = false
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 18.0
-offset_top = -96.0
-offset_right = 568.0
-offset_bottom = -71.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Answer:"
-scroll_active = false
-
-[node name="AnswerPanelBG" type="Panel" parent="Interface_Cards/Panel"]
+[node name="AnswerPanelBG" type="Panel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer"]
 visibility_layer = 4
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.605
-anchor_top = 0.5
-anchor_right = 0.605
-anchor_bottom = 0.5
-offset_left = -423.5
-offset_top = 155.5
-offset_right = 276.5
-offset_bottom = 200.5
+custom_minimum_size = Vector2(700, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_xpru0")
 
-[node name="Answer" type="RichTextLabel" parent="Interface_Cards/Panel"]
+[node name="Answer" type="RichTextLabel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer/VBoxContainer/AnswerPanelBG"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2054,49 +2014,31 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -305.0
-offset_top = -91.0
+offset_top = -38.0
 offset_right = 199.0
-offset_bottom = -43.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 text = "Answer Answer Answer Answer Answer Answer Answer Answer Answer Answer Answer Answer Answer Answer Answer Answer Answer Answer Answer Answer Answer Answer Answe"
 scroll_active = false
 
-[node name="TypeTag" type="RichTextLabel" parent="Interface_Cards/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -316.0
-offset_top = 32.0
-offset_right = -182.0
-offset_bottom = 57.0
-grow_horizontal = 2
+[node name="QuestionTag" type="RichTextLabel" parent="Interface_Cards/CardPanel/MarginContainer2/MarginContainer"]
+visible = false
+layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Type:"
+text = "Question:"
 scroll_active = false
 
-[node name="bookmark" type="TextureRect" parent="Interface_Cards/Panel"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -64.0
-offset_top = 22.0
-offset_right = -5.0
-offset_bottom = 95.108696
-grow_horizontal = 0
-texture = ExtResource("79_v0wtd")
-expand_mode = 1
-stretch_mode = 4
-
 [node name="Hide_Show" type="Button" parent="Interface_Cards" node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(127, 43)
 layout_mode = 0
-offset_left = 569.0
-offset_top = 461.0
-offset_right = 696.0
-offset_bottom = 504.0
+offset_left = 573.0
+offset_top = 450.5
+offset_right = 700.0
+offset_bottom = 493.5
+size_flags_horizontal = 8
+size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -2111,7 +2053,7 @@ theme_override_styles/disabled = ExtResource("46_171dt")
 theme_override_styles/focus = ExtResource("46_171dt")
 text = "Hide/Show"
 script = ExtResource("49_4jv7h")
-hideObject = NodePath("../Panel")
+hideObject = NodePath("../CardPanel")
 
 [node name="Setup" type="Control" parent="." node_paths=PackedStringArray("TimerObject", "FacilitatorCardPanel", "FacilitatorUI", "FacilitatorKitButton", "OptionsPanel")]
 unique_name_in_owner = true
@@ -2126,7 +2068,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("42_flrbk")
 TimerObject = NodePath("../World/Interactables/Timer")
-FacilitatorCardPanel = NodePath("../Interface_Cards/FacilitatorCardPanel")
+FacilitatorCardPanel = NodePath("../Interface_Cards/FacilitatorPanels")
 FacilitatorUI = NodePath("../Interface_Facilitator")
 FacilitatorKitButton = NodePath("../Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/facilitatorkit")
 OptionsPanel = NodePath("../Interface_Buttons")
@@ -2196,6 +2138,7 @@ text = "Player
 "
 
 [node name="Interface_Buttons" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -3679,10 +3622,10 @@ hideObject = NodePath("../..")
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_load_game_button_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/Set" to="Interface_Facilitator/Set" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/SetPanel/Set" to="World/Interactables/Timer" method="_on_set_pressed"]
-[connection signal="pressed" from="Interface_Cards/FacilitatorCardPanel/RevealButton" to="Interface_Cards" method="_on_reveal_button_pressed"]
-[connection signal="pressed" from="Interface_Cards/FacilitatorCardPanel/CloseButton" to="Interface_Cards" method="_on_close_button_pressed"]
-[connection signal="pressed" from="Interface_Cards/FacilitatorCardPanel/SaveQuestion" to="Interface_Cards/FacilitatorCardPanel/SaveQuestion" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Cards/FacilitatorCardPanel/CancelSave" to="Interface_Cards/FacilitatorCardPanel/SaveQuestion" method="on_Cancel"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/CloseButton" to="Interface_Cards" method="_on_close_button_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer/RevealButton" to="Interface_Cards" method="_on_reveal_button_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" to="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer/CancelSave" to="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" method="on_Cancel"]
 [connection signal="pressed" from="Interface_Cards/Hide_Show" to="Interface_Cards/Hide_Show" method="_on_pressed"]
 [connection signal="pressed" from="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer/Facilitator" to="Setup" method="_on_facilitator_pressed"]
 [connection signal="pressed" from="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer/Player" to="Setup" method="_on_player_pressed"]

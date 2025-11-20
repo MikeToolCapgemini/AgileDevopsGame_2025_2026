@@ -1,6 +1,6 @@
 extends Node3D
 @export var LabelObject : Label
-@export var CardManager : Node
+@export var CardManager : CardManager
 @export var cardType : String
 
 var hover = false

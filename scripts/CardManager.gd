@@ -1,9 +1,10 @@
 extends Control
-
-@export var QuestionObject : RichTextLabel
-@export var AnswerObject : RichTextLabel
-@export var AnswerBackGround : Panel
-@export var UXTagObject : Panel
+class_name CardManager
+#@export var QuestionObject : RichTextLabel
+#@export var AnswerObject : RichTextLabel
+#@export var AnswerBackGround : Panel
+#@export var UXTagObject : Panel
+@export var CardUIManager: CardUIManager
 @onready var ImportData = get_node("/root/ImportData")
 
 var active = false
@@ -24,19 +25,19 @@ func _process(_delta):
 
 @rpc("any_peer")
 func set_bg_color(newStyle : Color):
-	if !UXTagObject.visible:
-		UXTagObject.visible = true
-	var currentstylebox = UXTagObject.get_theme_stylebox("panel").duplicate()
+	if !CardUIManager.UXTagObject.visible:
+		CardUIManager.UXTagObject.visible = true
+	var currentstylebox = CardUIManager.UXTagObject.get_theme_stylebox("panel").duplicate()
 	currentstylebox.bg_color = newStyle
-	UXTagObject.add_theme_stylebox_override("panel",currentstylebox)
+	CardUIManager.UXTagObject.add_theme_stylebox_override("panel",currentstylebox)
 	print("set color of "," to ", newStyle)
 
 func draw(type):
 	active = true
 	visible = true
-	$"Panel/Answer".visible = false
-	$"Panel/AnswerPanelBG".visible = false
-	$Panel/bookmark.visible = false
+	CardUIManager.AnswerObject.visible = false
+	CardUIManager.AnswerBackground.visible = false
+	CardUIManager.bookmark.visible = false
 	_sync_answershown.rpc(false)
 	## temp draw card function, seperate function from show_panel later (time!!)
 	print("-- card drawn --")
@@ -87,7 +88,7 @@ func draw(type):
 	var cChoiceB = set_card_choice_string("B. ", cardTypeData[d]["ChoiceB"])
 	var cChoiceC = set_card_choice_string("C. ", cardTypeData[d]["ChoiceC"])
 	var cChoiceD = set_card_choice_string("D. ", cardTypeData[d]["ChoiceD"])
-	var cChoiceE = set_card_choice_string("E. ", cardTypeData[d]["ChoiceE"])
+	#var cChoiceE = set_card_choice_string("E. ", cardTypeData[d]["ChoiceE"])
 	
 	var cAnswer = cardTypeData[d]["Answer"]
 	
@@ -109,21 +110,21 @@ func draw(type):
 			"Management: CICD chain no longer works, put all pawns (of all players) back a whole phase"
 			]
 		var roll = rng.randi_range(1,actionDict.size()-1)
-		UXTagObject.visible = false
-		card_setup("action", actionDict[roll], "", "", "", "", "", "")
-		card_setup.rpc("action", actionDict[roll], "", "", "", "", "", "")
+		CardUIManager.UXTagObject.visible = false
+		card_setup("action", actionDict[roll], "", "", "", "", "")
+		card_setup.rpc("action", actionDict[roll], "", "", "", "", "")
 	else:
 		print("###")
 		print(cQuestion)
-		card_setup(cType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cChoiceE, cAnswer)
-		card_setup.rpc(cType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cChoiceE, cAnswer)
+		card_setup(cType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer)
+		card_setup.rpc(cType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer)
 
 		set_bg_color.rpc(bgColor)
 		curType = type
 		curKey = d
-		card_discard.rpc(cardTypeData, type, d)
-	
-	_sync_cardshown.rpc(visible, AnswerObject.text, QuestionObject.text)
+		card_discard.rpc(cardTypeData,cardTypeData, type, d)
+		print(curType + str(curKey))
+	_sync_cardshown.rpc(visible, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)
 
 func set_card_choice_string(tag, cardTypeData):
 	if cardTypeData == "":
@@ -142,7 +143,7 @@ func card_cancel_bookmark():
 	#SaveSystem.save_game()
 
 @rpc
-func card_discard(cardTypeDataVar, cardTypeString, keyVar):
+func card_discard(cardTypeData,cardTypeDataVar, cardTypeString, keyVar):
 	cardTypeData.erase(keyVar)
 	ImportData.card_pop(cardTypeDataVar, keyVar)
 	var DiscardedCard = {"cardTypeString": cardTypeString,"keyVar": keyVar}
@@ -152,47 +153,47 @@ func card_discard(cardTypeDataVar, cardTypeString, keyVar):
 	#SaveSystem.save_game()
 
 @rpc("any_peer")
-func card_setup(type, question, choiceA, choiceB, choiceC, choiceD, choiceE, answer):
+func card_setup(type, question, choiceA, choiceB, choiceC, choiceD, answer):
 	print("####")
 	print(type)
-	$"Panel/Type".text = type
-	$"Panel/Question".text = question
-	$"Panel/ChoiceA".text = choiceA
-	$"Panel/ChoiceB".text = choiceB
-	$"Panel/ChoiceC".text = choiceC
-	$"Panel/ChoiceD".text = choiceD
-	$"Panel/Answer".text = answer
-	$"Panel2/Panel/AnswerF".text = answer
+	CardUIManager.TypeTextObject.text = type
+	CardUIManager.QuestionObject.text = question
+	CardUIManager.AnswerATextObject.text = choiceA
+	CardUIManager.AnswerBTextObject.text = choiceB
+	CardUIManager.AnswerCTextObject.text = choiceC
+	CardUIManager.AnswerDTextObject.text = choiceD
+	CardUIManager.AnswerObject.text = answer
+	CardUIManager.AnswerFacilitatorTextObject.text = answer
 
 @rpc("any_peer")
 func _sync_cardshown(state, answer = "-", question = "-"):
 	print("syncing card")
 	#var tPanel = $"Panel"
-	if !$"Panel".visible:
-		$"Panel".visible = true
-	QuestionObject.text = question
-	AnswerObject.text = answer
+	if !CardUIManager.CardPanel.visible:
+		CardUIManager.CardPanel.visible = true
+	CardUIManager.QuestionObject.text = question
+	CardUIManager.AnswerObject.text = answer
 	visible = state
 	#set_bg_color(bgColor)
 
 @rpc("any_peer")
 func _sync_answershown(state):
-	$"Panel/Answer".visible = state
-	$"Panel/AnswerPanelBG".visible = state
+	CardUIManager.AnswerObject.visible = state
+	CardUIManager.AnswerBackground.visible = state
 
 @rpc("call_local")
 func close_answer():
-	$Panel2/SaveQuestion.show()
-	$Panel2/CancelSave.hide()
+	CardUIManager.BookmarkButton.show()
+	CardUIManager.CancelBookmarkButton.hide()
 	active = false
 	visible = false
-	if !$"Panel".visible:
-		$"Panel".visible = true
+	#if !$"Panel".visible:
+		#$"Panel".visible = true
 	_sync_cardshown.rpc(active, "", "")
 
 func show_answer():
-	$"Panel/Answer".visible = true
-	$"Panel/AnswerPanelBG".visible = true
+	CardUIManager.AnswerObject.visible = true
+	CardUIManager.AnswerBackground.visible = true
 	_sync_answershown.rpc(true)
 
 
