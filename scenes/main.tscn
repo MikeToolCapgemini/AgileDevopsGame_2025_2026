@@ -1,4 +1,4 @@
-[gd_scene load_steps=169 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=170 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -239,9 +239,10 @@ albedo_texture = ExtResource("49_qc7wb")
 albedo_color = Color(0.930763, 0.953832, 0.990685, 1)
 albedo_texture = ExtResource("57_v1ccq")
 
-[sub_resource type="GDScript" id="GDScript_kvygq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xk8il"]
+bg_color = Color(0.05882353, 0.05882353, 0.05882353, 0.65882355)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_or8bj"]
+[sub_resource type="GDScript" id="GDScript_kvygq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7l7aa"]
 bg_color = Color(0.0901961, 0.258824, 0.384314, 1)
@@ -322,6 +323,8 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_or8bj"]
 
 [sub_resource type="Theme" id="Theme_673bd"]
 
@@ -1040,12 +1043,10 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "[1]"
 
-[node name="Timer" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject", "EditMinObject", "EditSecObject")]
+[node name="Timer" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject")]
 transform = Transform3D(0.366, 0, 0, 0, 0.366, 0, 0, 0, 0.366, -0.433018, 0.401228, 5.40797)
 script = ExtResource("39_g6ss1")
 LabelObject = NodePath("StaticBody3D/3DLabel/SubViewport/Label")
-EditMinObject = NodePath("../../../Interface_Facilitator/SetPanel/TextEditMinutes")
-EditSecObject = NodePath("../../../Interface_Facilitator/SetPanel/TextEditSeconds")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/Timer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.822045, 0, -1.7657)
@@ -1425,95 +1426,134 @@ far = 25.0
 [node name="Connections" type="Node" parent="."]
 
 [node name="Interface_Facilitator" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
 
-[node name="Panel" type="Panel" parent="Interface_Facilitator"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = -115.0
-offset_right = 310.0
+[node name="TimerPanels" type="VBoxContainer" parent="Interface_Facilitator"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -230.0
+offset_right = 309.0
+grow_vertical = 0
+theme_override_constants/separation = 0
+alignment = 2
 
-[node name="Panel2" type="Panel" parent="Interface_Facilitator"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = -115.0
-offset_right = 310.0
-
-[node name="Debug Button" type="Button" parent="Interface_Facilitator"]
+[node name="SetTimerPanel" type="PanelContainer" parent="Interface_Facilitator/TimerPanels"]
 visible = false
-layout_mode = 0
-offset_left = 19.0
-offset_top = -65.0
-offset_right = 77.0
-offset_bottom = -34.0
+custom_minimum_size = Vector2(309, 115)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Facilitator/TimerPanels/SetTimerPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="SetTimerLabel" type="RichTextLabel" parent="Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(205, 30)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Set Timer:"
+
+[node name="SetButtons" type="HBoxContainer" parent="Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 50
+
+[node name="Set" type="Button" parent="Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Set"
+
+[node name="TimerEditField" type="HBoxContainer" parent="Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="TextEditMinutes" type="TextEdit" parent="Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField"]
+custom_minimum_size = Vector2(38, 35)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+placeholder_text = "15"
+
+[node name="TimerDivider" type="RichTextLabel" parent="Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField"]
+custom_minimum_size = Vector2(17, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = ":"
+
+[node name="TextEditSeconds" type="TextEdit" parent="Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField"]
+custom_minimum_size = Vector2(38, 35)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+placeholder_text = "00"
+
+[node name="TimerPanel" type="PanelContainer" parent="Interface_Facilitator/TimerPanels"]
+custom_minimum_size = Vector2(309, 115)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xk8il")
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Facilitator/TimerPanels/TimerPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="TimerToolLabel" type="RichTextLabel" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Facilitator Timer Tools:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="Debug Button" type="Button" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
 text = "Debug"
 
-[node name="StartButton" type="Button" parent="Interface_Facilitator"]
-layout_mode = 0
-offset_left = 20.0
-offset_top = -70.0
-offset_right = 71.0
-offset_bottom = -23.0
+[node name="StartButton" type="Button" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
 text = "Start"
 
-[node name="ResetButton" type="Button" parent="Interface_Facilitator"]
-layout_mode = 0
-offset_left = 90.0
-offset_top = -70.0
-offset_right = 141.0
-offset_bottom = -23.0
+[node name="ResetButton" type="Button" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
 text = "Reset"
 
-[node name="StopButton" type="Button" parent="Interface_Facilitator"]
-layout_mode = 0
-offset_left = 160.0
-offset_top = -70.0
-offset_right = 211.0
-offset_bottom = -23.0
+[node name="StopButton" type="Button" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
 text = "Stop
 "
 
-[node name="Refresh" type="Button" parent="Interface_Facilitator"]
-visible = false
-layout_mode = 0
-offset_left = 861.0
-offset_top = -39.0
-offset_right = 950.0
-offset_bottom = -8.0
-text = "Refresh UI"
-script = SubResource("GDScript_kvygq")
-
-[node name="Rules2" type="Button" parent="Interface_Facilitator"]
-visible = false
-layout_mode = 0
-offset_left = 852.0
-offset_top = -74.0
-offset_right = 947.0
-offset_bottom = -43.0
-text = "Basic Rules"
-script = SubResource("GDScript_kvygq")
-
-[node name="Rules Panel" type="Panel" parent="Interface_Facilitator"]
-visible = false
-material = SubResource("CanvasItemMaterial_or8bj")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 181.0
-offset_top = -472.0
-offset_right = 799.0
-offset_bottom = -84.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = ExtResource("41_giosr")
+[node name="Set" type="Button" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Set"
+script = ExtResource("49_4jv7h")
 
 [node name="FacilitatorsideBtns" type="HBoxContainer" parent="Interface_Facilitator"]
 layout_mode = 1
@@ -1549,76 +1589,30 @@ layout_mode = 2
 text = "Load Saved Game"
 script = ExtResource("42_u5l1c")
 
-[node name="Set" type="Button" parent="Interface_Facilitator" node_paths=PackedStringArray("hideObject")]
-layout_mode = 0
-offset_left = 230.0
-offset_top = -70.0
-offset_right = 281.0
-offset_bottom = -23.0
-text = "Set"
-script = ExtResource("49_4jv7h")
-hideObject = NodePath("../SetPanel")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Facilitator"]
-layout_mode = 0
-offset_left = 20.0
-offset_top = -102.0
-offset_right = 227.0
-offset_bottom = -62.0
-text = "Facilitator Timer Tools:"
-
-[node name="SetPanel" type="Panel" parent="Interface_Facilitator"]
-visible = false
-layout_mode = 0
-offset_left = 1.0
-offset_top = -231.0
-offset_right = 310.0
-offset_bottom = -116.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Facilitator/SetPanel"]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 13.0
-offset_right = 227.0
-offset_bottom = 53.0
-text = "Set Timer:"
-
-[node name="Set" type="Button" parent="Interface_Facilitator/SetPanel"]
-layout_mode = 0
-offset_left = 18.0
-offset_top = 49.0
-offset_right = 69.0
-offset_bottom = 96.0
-text = "Set"
-
-[node name="TextEditMinutes" type="TextEdit" parent="Interface_Facilitator/SetPanel"]
-layout_mode = 0
-offset_left = 114.0
-offset_top = 54.0
-offset_right = 152.0
-offset_bottom = 89.0
-placeholder_text = "15"
-
-[node name="TextEditSeconds" type="TextEdit" parent="Interface_Facilitator/SetPanel"]
-layout_mode = 0
-offset_left = 187.0
-offset_top = 54.0
-offset_right = 226.0
-offset_bottom = 89.0
-placeholder_text = "00"
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Interface_Facilitator/SetPanel"]
-layout_mode = 0
-offset_left = 166.0
-offset_top = 60.0
-offset_right = 183.0
-offset_bottom = 100.0
-text = ":"
-
 [node name="MultiSave" parent="Interface_Facilitator" instance=ExtResource("92_sgvw8")]
 layout_mode = 1
 offset_left = 1050.0
 offset_right = 1050.0
+
+[node name="Refresh" type="Button" parent="Interface_Facilitator"]
+visible = false
+layout_mode = 0
+offset_left = 861.0
+offset_top = -39.0
+offset_right = 950.0
+offset_bottom = -8.0
+text = "Refresh UI"
+script = SubResource("GDScript_kvygq")
+
+[node name="Rules2" type="Button" parent="Interface_Facilitator"]
+visible = false
+layout_mode = 0
+offset_left = 852.0
+offset_top = -74.0
+offset_right = 947.0
+offset_bottom = -43.0
+text = "Basic Rules"
+script = SubResource("GDScript_kvygq")
 
 [node name="Interface_Cards" type="Control" parent="." node_paths=PackedStringArray("CardUIManager")]
 visible = false
@@ -2055,7 +2049,7 @@ text = "Hide/Show"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../CardPanel")
 
-[node name="Setup" type="Control" parent="." node_paths=PackedStringArray("TimerObject", "FacilitatorCardPanel", "FacilitatorUI", "FacilitatorKitButton", "OptionsPanel")]
+[node name="Setup" type="Control" parent="." node_paths=PackedStringArray("TimerObject", "FacilitatorCardPanel", "FacilitatorKitButton", "OptionsPanel")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 3
@@ -2069,7 +2063,6 @@ grow_vertical = 2
 script = ExtResource("42_flrbk")
 TimerObject = NodePath("../World/Interactables/Timer")
 FacilitatorCardPanel = NodePath("../Interface_Cards/FacilitatorPanels")
-FacilitatorUI = NodePath("../Interface_Facilitator")
 FacilitatorKitButton = NodePath("../Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/facilitatorkit")
 OptionsPanel = NodePath("../Interface_Buttons")
 
@@ -3596,32 +3589,11 @@ hideObject = NodePath("../..")
 [connection signal="mouse_exited" from="World/Interactables/Cards7/StaticBody3D" to="World/Interactables/Cards7" method="_on_static_body_3d_mouse_exited"]
 [connection signal="mouse_entered" from="World/Interactables/Cards8/StaticBody3D" to="World/Interactables/Cards8" method="_on_static_body_3d_mouse_entered"]
 [connection signal="mouse_exited" from="World/Interactables/Cards8/StaticBody3D" to="World/Interactables/Cards8" method="_on_static_body_3d_mouse_exited"]
-[connection signal="pressed" from="Interface_Facilitator/Debug Button" to="Game/InterfaceManager" method="_on_debug_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/StartButton" to="World/Interactables/Timer" method="_on_start_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/ResetButton" to="World/Interactables/Timer" method="_on_reset_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/StopButton" to="World/Interactables/Timer" method="_on_stop_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/Set" to="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/Set" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton" to="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn0" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn1" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn2" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn3" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn4" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn5" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn6" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn7" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn8" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn9" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn10" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn11" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn12" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn13" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn14" method="_on_reset_pawn_position_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns/Pawn15" method="_on_reset_pawn_position_button_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/SaveGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_save_game_button_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_load_game_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/Set" to="Interface_Facilitator/Set" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/SetPanel/Set" to="World/Interactables/Timer" method="_on_set_pressed"]
 [connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/CloseButton" to="Interface_Cards" method="_on_close_button_pressed"]
 [connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer/RevealButton" to="Interface_Cards" method="_on_reveal_button_pressed"]
 [connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" to="Interface_Cards/FacilitatorPanels/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" method="_on_pressed"]

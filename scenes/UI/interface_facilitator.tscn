@@ -1,0 +1,204 @@
+[gd_scene load_steps=7 format=3 uid="uid://yl6rle4w8kun"]
+
+[ext_resource type="Script" uid="uid://1kxnvwbcvkqf" path="res://scripts/BookmarkedList.gd" id="2_n1mpe"]
+[ext_resource type="Script" uid="uid://pb8rquvjh5r4" path="res://scripts/Global/SaveSystem.gd" id="3_55rat"]
+[ext_resource type="Script" uid="uid://hc7yfgq2unoi" path="res://scripts/UX/Resume.gd" id="4_obgba"]
+[ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="5_764em"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xk8il"]
+bg_color = Color(0.05882353, 0.05882353, 0.05882353, 0.65882355)
+
+[sub_resource type="GDScript" id="GDScript_kvygq"]
+
+[node name="Interface_Facilitator" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="TimerPanels" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -230.0
+offset_right = 309.0
+grow_vertical = 0
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="SetTimerPanel" type="PanelContainer" parent="TimerPanels"]
+visible = false
+custom_minimum_size = Vector2(309, 115)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TimerPanels/SetTimerPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TimerPanels/SetTimerPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="SetTimerLabel" type="RichTextLabel" parent="TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(205, 30)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Set Timer:"
+
+[node name="SetButtons" type="HBoxContainer" parent="TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 50
+
+[node name="Set" type="Button" parent="TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Set"
+
+[node name="TimerEditField" type="HBoxContainer" parent="TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="TextEditMinutes" type="TextEdit" parent="TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField"]
+custom_minimum_size = Vector2(38, 35)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+placeholder_text = "15"
+
+[node name="TimerDivider" type="RichTextLabel" parent="TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField"]
+custom_minimum_size = Vector2(17, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = ":"
+
+[node name="TextEditSeconds" type="TextEdit" parent="TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField"]
+custom_minimum_size = Vector2(38, 35)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+placeholder_text = "00"
+
+[node name="TimerPanel" type="PanelContainer" parent="TimerPanels"]
+custom_minimum_size = Vector2(309, 115)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xk8il")
+
+[node name="MarginContainer" type="MarginContainer" parent="TimerPanels/TimerPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TimerPanels/TimerPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="TimerToolLabel" type="RichTextLabel" parent="TimerPanels/TimerPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Facilitator Timer Tools:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TimerPanels/TimerPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="Debug Button" type="Button" parent="TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Debug"
+
+[node name="StartButton" type="Button" parent="TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Start"
+
+[node name="ResetButton" type="Button" parent="TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Reset"
+
+[node name="StopButton" type="Button" parent="TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Stop
+"
+
+[node name="Set" type="Button" parent="TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Set"
+script = ExtResource("4_obgba")
+hideObject = NodePath("")
+
+[node name="FacilitatorsideBtns" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 310.0
+offset_top = -40.0
+offset_right = 996.0
+grow_vertical = 0
+
+[node name="DiscardPileButton" type="Button" parent="FacilitatorsideBtns"]
+layout_mode = 2
+text = "Discard Pile & Bookmarks"
+script = ExtResource("2_n1mpe")
+
+[node name="ResetPawnPositionButton" type="Button" parent="FacilitatorsideBtns"]
+layout_mode = 2
+text = "Reset Pawn Positions"
+
+[node name="SaveGameButton" type="Button" parent="FacilitatorsideBtns"]
+visible = false
+layout_mode = 2
+text = "Save Game (temp)"
+script = ExtResource("3_55rat")
+
+[node name="LoadGameButton" type="Button" parent="FacilitatorsideBtns"]
+visible = false
+layout_mode = 2
+text = "Load Saved Game"
+script = ExtResource("3_55rat")
+
+[node name="MultiSave" parent="." instance=ExtResource("5_764em")]
+layout_mode = 1
+offset_left = 1050.0
+offset_right = 1050.0
+
+[node name="Refresh" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 861.0
+offset_top = -39.0
+offset_right = 950.0
+offset_bottom = -8.0
+text = "Refresh UI"
+script = SubResource("GDScript_kvygq")
+
+[node name="Rules2" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 852.0
+offset_top = -74.0
+offset_right = 947.0
+offset_bottom = -43.0
+text = "Basic Rules"
+script = SubResource("GDScript_kvygq")
+
+[connection signal="pressed" from="TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/Set" to="TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/Set" method="_on_pressed"]
+[connection signal="pressed" from="FacilitatorsideBtns/DiscardPileButton" to="FacilitatorsideBtns/DiscardPileButton" method="_on_pressed"]
+[connection signal="pressed" from="FacilitatorsideBtns/SaveGameButton" to="FacilitatorsideBtns/LoadGameButton" method="_on_save_game_button_pressed"]
+[connection signal="pressed" from="FacilitatorsideBtns/LoadGameButton" to="FacilitatorsideBtns/LoadGameButton" method="_on_pressed"]
+[connection signal="pressed" from="FacilitatorsideBtns/LoadGameButton" to="FacilitatorsideBtns/LoadGameButton" method="_on_load_game_button_pressed"]
