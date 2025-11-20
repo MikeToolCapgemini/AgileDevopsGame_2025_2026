@@ -72,8 +72,8 @@ func update_text_field():
 func host_game():
 	var serverCert = load("res://Fullchain.crt")
 	var serverKey = load("res://DevopsPrivate.key")
-	var error = webPeer.create_server(Port)
-	#var error = peer.create_server(Port, "*", TLSOptions.server(serverKey, serverCert))
+	#var error = webPeer.create_server(Port)
+	var error = webPeer.create_server(Port, "*", TLSOptions.server(serverKey, serverCert))
 	#var error = peer.create_server(Port)
 	print("cannot host: " + str(error))
 	multiplayer.set_multiplayer_peer(webPeer)
@@ -83,9 +83,9 @@ func host_game():
 
 func join_game():
 	var clientCAS = load("res://Fullchain.crt")
-	#peer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
-	peer.create_client(Adress,Port)
-	webPeer.create_client("wss://" + Adress + ":" + str(Port))
+	webPeer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
+	#peer.create_client(Adress,Port)
+	#webPeer.create_client("wss://" + Adress + ":" + str(Port))
 	multiplayer.set_multiplayer_peer(webPeer)
 	GameManager.You = multiplayer.get_unique_id()
 	
