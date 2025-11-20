@@ -1,0 +1,130 @@
+[gd_scene load_steps=9 format=3 uid="uid://bcwtwnmvt1mhg"]
+
+[ext_resource type="StyleBox" uid="uid://o223wkfjc2wh" path="res://Styles/Panel_Slideout.tres" id="1_ymgl4"]
+[ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="2_s5y2p"]
+[ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="3_cs4or"]
+[ext_resource type="Script" uid="uid://hc7yfgq2unoi" path="res://scripts/UX/Resume.gd" id="4_ouu53"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_or8bj"]
+
+[sub_resource type="Theme" id="Theme_673bd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ymgl4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s5y2p"]
+
+[node name="Interface_Slideout_FacK" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="."]
+material = SubResource("CanvasItemMaterial_or8bj")
+custom_minimum_size = Vector2(1000, 600)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1000.0
+offset_top = -45.140015
+offset_bottom = 45.140015
+grow_horizontal = 0
+grow_vertical = 2
+theme = SubResource("Theme_673bd")
+theme_override_styles/panel = ExtResource("1_ymgl4")
+
+[node name="Container" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Container"]
+visible = false
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Facilitator Kit"
+
+[node name="RichTextLabelGameLeaderManual" type="RichTextLabel" parent="Panel/Container"]
+custom_minimum_size = Vector2(480, 300)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 17
+bbcode_enabled = true
+text = "[b]DevOps Infinity Game - Game Leader Manual[/b]
+
+[b]Goal of the game and how to play[/b]
+
+This game has been developed to playfully learn to make trade-offs and to get to know DevOps from all perspectives. The game is further intended to develop team spirit by providing an opportunity to help each other and have open discussions.
+The game leader should instigate team spirit as much as possible by encouraging participants to work together to answer questions. The participant who is asked a question should be encouraged to answer on their own, however if they are unable to figure it out, the game leader should challenge the other participants to help. Discussions among participants about (answering) a question often also provide great insight into, among other things, the functioning of the team and where improvements can be made. Record these improvement opportunities, so that they can be included in a retrospective.
+Express to the participants that playing the game is meant to be fun as well. To encourage participation, you could also use treatments (e.g. candies).
+
+[b]Who is the game leader?[/b]
+The game can be played by a DevOps team, in which the scrum master himself also plays. The scrum master is therefore the game leader. The game can also be played by a DevOps team, where playing the game is facilitated by a third party.
+
+[b]Putting teams together or not[/b]
+Read the rules carefully and explain them to the players. The rules of the game indicate how the game should be set up. Everyone can play for themselves up to 8 participants. If there are more than 8 participants, the game master divides the participants into teams of two. You can also choose to form teams of two participants with fewer than eight participants. When composing the teams, consider the experience of the participants.
+"
+
+[node name="RichTextLabelOverviewQuestions&Answers" type="RichTextLabel" parent="Panel/Container"]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 17
+bbcode_enabled = true
+text = "[b]Overview questions and answers[/b]
+
+The game box contains an overview of all questions and answers. This overview can be used by the game leader to find out the answer to a question more quickly. If a scrum master participates himself (and is the game leader), it is advised to not use this overview; otherwise, he/she will have easy access to all the answers, while also answering the questions.
+There is a subdivision between Basic Cards and Professional Cards. The question cards for professionals can be played if more experienced players participate.
+A PowerPoint has been developed, where you can indicate at the beginning which question should be shown on the screen. A booklet is also included with this game. There are 4 questions printed on one page in this booklet. This booklet can be used by the participants when a question is asked.
+Answering the questions
+The game leader ensures that it does not take too long to answer a question. Incidentally, not all questions of the game are addressed when the game is played once. If the game is intended to be played several times, the game leader can keep track of which questions have been discussed, so that they can be removed from the next game.
+The game contains several open questions. Please note that the question and answer period should take no more than 5 minutes. The overview of questions and answers includes several points for attention for these open questions."
+
+[node name="CloseBtn" type="Button" parent="." node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = -43.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("2_s5y2p")
+theme_override_styles/pressed = ExtResource("3_cs4or")
+theme_override_styles/hover = ExtResource("3_cs4or")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ymgl4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s5y2p")
+text = "Close"
+script = ExtResource("4_ouu53")
+hideObject = NodePath("..")
+
+[connection signal="pressed" from="CloseBtn" to="CloseBtn" method="_on_pressed"]

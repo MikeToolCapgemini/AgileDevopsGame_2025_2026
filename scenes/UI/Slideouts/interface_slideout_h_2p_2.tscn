@@ -1,0 +1,153 @@
+[gd_scene load_steps=9 format=3 uid="uid://cwiem647kmseo"]
+
+[ext_resource type="StyleBox" uid="uid://o223wkfjc2wh" path="res://Styles/Panel_Slideout.tres" id="1_ahgjo"]
+[ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="2_4g26o"]
+[ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="3_b5wci"]
+[ext_resource type="Script" uid="uid://hc7yfgq2unoi" path="res://scripts/UX/Resume.gd" id="4_jr0xg"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_or8bj"]
+
+[sub_resource type="Theme" id="Theme_673bd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ahgjo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4g26o"]
+
+[node name="Interface_Slideout_H2P2" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="."]
+material = SubResource("CanvasItemMaterial_or8bj")
+custom_minimum_size = Vector2(1000, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -300.0
+offset_right = 500.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_673bd")
+theme_override_styles/panel = ExtResource("1_ahgjo")
+
+[node name="Container" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabelInterruptSlideout" type="RichTextLabel" parent="Panel/Container"]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]Interrupt![/b]
+
+At the start of the game, the interrupt hourglass is turned. Whoever is on his/her turn or is still on his/her turn when the hourglass finishes, must perform the task associated with the interrupt. The task is determined by rolling the die:
+
+1. Production incident - move any other player's pawn back to the starting square in the color of this pawn.
+2.  Security incident - your pawn must move back one phase (2 steps).
+3. Privacy incident - you have to surrender an already finished pawn or (if you do not have an already finished pawn) you must return to start.
+4. Retrofit problem - your pawn must return to the first square of the phase Plan.
+5. Your team is super productive! Throw again.
+6. Technical windfall - move immediately to the next phase (2 steps ahead). No need to draw a card.
+
+[b]Important![/b]
+Your turn is not over until your pawn is standing and any card have been placed down! Until then, you are out of luck if the hourglass is empty.
+
+[b]Important![/b] 
+Once the action has been performed and the player's turn is over, the hourglass must be turned over again.
+
+
+[b]End of the game[/b]
+The team (or player) that is first to lead both pawns into their own end square after a complete round wins the game!"
+
+[node name="RichTextLabelGameDesignGameplay" type="RichTextLabel" parent="Panel/Container"]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]Game design and game play[/b]
+
+The game board has 16 squares.
+
+• Each color has a stack of cards: Plan, Code, Build, Test, Release, Deploy, Operate, Monitor.
+Each player starts on the first square of phase Plan (if they get to play a pawn).
+
+• Choose a player to start and flip the hourglass. This player rolls the dice and moves their pawn the number of squares indicated on the dice. The first step is to place the pawn on the game board. More than one pawn may be on 1 square at a time.
+Take a card from the pile belonging to the square you end up on and read it out loud.
+
+• Do you draw an action card? Then the action on the card applies.
+Each question card comes with an answer card. This may be turned over by one of the other players after answering the question. If a facilitator is present, the answer cards are not needed, you can look at the booklet of questions and answers.
+
+• Did you get the answer right? Then you may keep your new spot. If you get the question wrong, you return to where you were initially standing.
+
+• Place the answered cards with the answer card on a discard pile.
+
+• After this, in clockwise order, it is the next player's turn.
+
+There are 3 types of questions:
+   - Open-ended questions - has an answer card with a suggestion. The group decides if you answered correctly.
+   - Statement - explains if and how you apply this. If the group agrees with your answer, you may move forward.
+   - Multiple choice questions - if you answer correctly, you may move forward.
+
+[b]Important![/b] 
+Events in the game can cause you to have multiple pawns in play. If you have multiple pawns running, after rolling the dice you may choose which one to move forward:
+• When your first pawn crosses the finish square - 2nd square phase Monitor (you don't have to finish exactly on it) answer the question. If you answered the question wrong, go back to the square you came from. If you answered the question correctly, this pawn has finished, and you may place this pawn on the die square of your color.
+• Then you continue playing with your 2nd pawn.
+
+"
+
+[node name="CloseBtn" type="Button" parent="." node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = -43.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("2_4g26o")
+theme_override_styles/pressed = ExtResource("3_b5wci")
+theme_override_styles/hover = ExtResource("3_b5wci")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ahgjo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4g26o")
+text = "Close"
+script = ExtResource("4_jr0xg")
+hideObject = NodePath("..")
+
+[connection signal="pressed" from="CloseBtn" to="CloseBtn" method="_on_pressed"]
