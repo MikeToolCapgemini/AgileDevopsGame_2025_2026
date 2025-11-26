@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd67gsekt2ymx"]
+
+[ext_resource type="Script" path="res://assets/3Dmodels/Dice/Animated Dice/die_raycast_3d.gd" id="1_gvto7"]
+
+[node name="dieRaycast3d" type="RayCast3D"]
+target_position = Vector3(0, -0.1, 0)
+collision_mask = 2
+hit_from_inside = true
+script = ExtResource("1_gvto7")

@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmn848tpgrduh"]
+
+[ext_resource type="Script" uid="uid://dtgwt65ofg3jg" path="res://assets/3Dmodels/Dice/Animated Dice/dice.gd" id="1_ju2fo"]
+[ext_resource type="PackedScene" uid="uid://cd67gsekt2ymx" path="res://assets/3Dmodels/Dice/Animated Dice/die_raycast_3d.tscn" id="2_m4jp2"]
+[ext_resource type="Texture2D" uid="uid://ra7yq2n7m4fo" path="res://assets/3Dmodels/Dice/Dice.png" id="2_xak8u"]
+[ext_resource type="ArrayMesh" uid="uid://c24oibbkq810a" path="res://assets/3Dmodels/Dice/Dice.obj" id="3_8eu0n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0c8ac"]
+albedo_texture = ExtResource("2_xak8u")
+
+[node name="Dice" type="RigidBody3D" node_paths=PackedStringArray("returnTimer")]
+script = ExtResource("1_ju2fo")
+roll_strength = 5
+returnTimer = NodePath("ReturnTimer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+shape = SubResource("BoxShape3D_lquwl")
+
+[node name="DiceMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.4, 0)
+material_override = SubResource("StandardMaterial3D_0c8ac")
+mesh = ExtResource("3_8eu0n")
+skeleton = NodePath("../..")
+
+[node name="Raycasts" type="Node3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="dieRaycast3d1" parent="Raycasts" instance=ExtResource("2_m4jp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+opposite_side = 5
+
+[node name="dieRaycast3d3" parent="Raycasts" instance=ExtResource("2_m4jp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
+target_position = Vector3(-0.1, 0, 0)
+opposite_side = 1
+
+[node name="dieRaycast3d2" parent="Raycasts" instance=ExtResource("2_m4jp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
+target_position = Vector3(0, 0, -0.1)
+opposite_side = 4
+
+[node name="dieRaycast3d4" parent="Raycasts" instance=ExtResource("2_m4jp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+target_position = Vector3(0, 0.1, 0)
+opposite_side = 2
+
+[node name="dieRaycast3d5" parent="Raycasts" instance=ExtResource("2_m4jp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
+target_position = Vector3(0.1, 0, 0)
+opposite_side = 6
+
+[node name="dieRaycast3d6" parent="Raycasts" instance=ExtResource("2_m4jp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25)
+target_position = Vector3(0, 0, 0.1)
+opposite_side = 3
+
+[node name="ReturnTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="mouse_entered" from="." to="." method="_on_body_3d_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_body_3d_mouse_exited"]
+[connection signal="roll_finished" from="." to="." method="_on_roll_finished"]
+[connection signal="sleeping_state_changed" from="." to="." method="_on_sleeping_state_changed"]
+[connection signal="timeout" from="ReturnTimer" to="." method="_on_return_timer_timeout"]
