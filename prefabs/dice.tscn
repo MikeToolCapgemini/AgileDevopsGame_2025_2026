@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://caqvelt0nx2d5"]
 
-[ext_resource type="Script" uid="uid://x47go3q8yv3t" path="res://scripts/Dice.gd" id="1_qj5l1"]
+[ext_resource type="Script" uid="uid://x47go3q8yv3t" path="res://scripts/DiceLegacy.gd" id="1_qj5l1"]
 [ext_resource type="Texture2D" uid="uid://ra7yq2n7m4fo" path="res://assets/3Dmodels/Dice/Dice.png" id="2_buedo"]
 [ext_resource type="ArrayMesh" uid="uid://c24oibbkq810a" path="res://assets/3Dmodels/Dice/Dice.obj" id="3_eoemq"]
 [ext_resource type="Script" uid="uid://da2rarcckekxp" path="res://scripts/3DLabel.gd" id="4_tw16t"]
