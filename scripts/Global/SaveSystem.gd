@@ -5,7 +5,8 @@ var DefaultData = {}
 var SaveData = {}
 var currentSave : String = ""
 @export var SaveNameField : LineEdit
-@export var LoadedSavesContainer : GridContainer
+@export var LoadedSavesContainer : VBoxContainer
+@export var LoadBtn : PackedScene
 
 func save_game():
 	check_save_dir()
@@ -35,7 +36,7 @@ func loadSaveGames() :
 	if saves.size() > 0:
 		for save in saves:
 			print(save)
-			var Loadbutton := Button.new()
+			var Loadbutton : Button = LoadBtn.instantiate()
 			var SaveName: String = save.replace('.json','')
 			Loadbutton.text = SaveName
 			Loadbutton.pressed.connect(func():

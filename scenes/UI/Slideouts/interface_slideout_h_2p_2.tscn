@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwiem647kmseo"]
+[gd_scene load_steps=11 format=3 uid="uid://cwiem647kmseo"]
 
 [ext_resource type="StyleBox" uid="uid://o223wkfjc2wh" path="res://Styles/Panel_Slideout.tres" id="1_ahgjo"]
 [ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="2_4g26o"]
+[ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="2_b5wci"]
 [ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="3_b5wci"]
+[ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="3_jr0xg"]
 [ext_resource type="Script" uid="uid://hc7yfgq2unoi" path="res://scripts/UX/Resume.gd" id="4_jr0xg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_or8bj"]
@@ -58,7 +60,9 @@ theme_override_constants/margin_bottom = 10
 custom_minimum_size = Vector2(480, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_b5wci")
+theme_override_fonts/bold_font = ExtResource("3_jr0xg")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[b]Interrupt![/b]
@@ -86,7 +90,9 @@ The team (or player) that is first to lead both pawns into their own end square 
 custom_minimum_size = Vector2(480, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_b5wci")
+theme_override_fonts/bold_font = ExtResource("3_jr0xg")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[b]Game design and game play[/b]
@@ -134,13 +140,14 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_b5wci")
 theme_override_styles/normal = ExtResource("2_4g26o")
 theme_override_styles/pressed = ExtResource("3_b5wci")
 theme_override_styles/hover = ExtResource("3_b5wci")

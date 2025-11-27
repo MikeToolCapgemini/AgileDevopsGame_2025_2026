@@ -1,60 +1,113 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbxyj6ca7okx3"]
+[gd_scene load_steps=9 format=3 uid="uid://dbxyj6ca7okx3"]
 
+[ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="1_i0ouf"]
 [ext_resource type="Script" uid="uid://pb8rquvjh5r4" path="res://scripts/Global/SaveSystem.gd" id="1_tovra"]
+[ext_resource type="PackedScene" uid="uid://bf50kvuakddvu" path="res://prefabs/load_button.tscn" id="3_p3b0w"]
 
-[node name="MultiSave" type="Control"]
-layout_mode = 3
-anchors_preset = 7
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p3b0w"]
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 0.95686275)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.34509805, 0.67058825, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2x0m5"]
+bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8xcl"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uamr3"]
+bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5yltm"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+
+[node name="MultiSave" type="PanelContainer"]
+custom_minimum_size = Vector2(373, 128)
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_left = -186.5
+offset_top = -64.0
+offset_right = 186.5
+offset_bottom = 64.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_p3b0w")
 
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -204.0
-offset_top = -71.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="SaveNameField" type="LineEdit" parent="GridContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(204, 71)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="SaveNameField" type="LineEdit" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.69803923)
+theme_override_styles/normal = SubResource("StyleBoxFlat_2x0m5")
 placeholder_text = "Save Name"
 alignment = 1
 
-[node name="SplitContainer" type="SplitContainer" parent="GridContainer"]
+[node name="SplitContainer" type="SplitContainer" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 
-[node name="SaveButton" type="Button" parent="GridContainer/SplitContainer" node_paths=PackedStringArray("SaveNameField")]
+[node name="SaveButton" type="Button" parent="MarginContainer/GridContainer/SplitContainer" node_paths=PackedStringArray("SaveNameField", "LoadedSavesContainer")]
+custom_minimum_size = Vector2(94, 31)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_i0ouf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_g8xcl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_uamr3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uamr3")
 text = "Save Game"
 script = ExtResource("1_tovra")
 SaveNameField = NodePath("../../SaveNameField")
+LoadedSavesContainer = NodePath("../../../LoadedsaveGames/TitleLabel/Scrolbar/LoadedSaves")
+LoadBtn = ExtResource("3_p3b0w")
 
-[node name="LoadButton" type="Button" parent="GridContainer/SplitContainer"]
+[node name="LoadButton" type="Button" parent="MarginContainer/GridContainer/SplitContainer"]
+custom_minimum_size = Vector2(94, 31)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_i0ouf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_g8xcl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_uamr3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uamr3")
 text = "Load Game"
 
-[node name="LoadedsaveGames" type="HSplitContainer" parent="."]
+[node name="LoadedsaveGames" type="HSplitContainer" parent="MarginContainer"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = -346.0
-offset_top = -130.0
-offset_right = -203.0
-offset_bottom = -107.0
-
-[node name="TitleLabel" type="Label" parent="LoadedsaveGames"]
+custom_minimum_size = Vector2(143, 20)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/LoadedsaveGames"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_i0ouf")
 text = "Save Games"
 
-[node name="Scrolbar" type="ScrollContainer" parent="LoadedsaveGames/TitleLabel"]
+[node name="Scrolbar" type="ScrollContainer" parent="MarginContainer/LoadedsaveGames/TitleLabel"]
 layout_mode = 0
 offset_top = 22.0
 offset_right = 143.0
@@ -62,20 +115,25 @@ offset_bottom = 138.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LoadedSaves" type="VBoxContainer" parent="LoadedsaveGames/TitleLabel/Scrolbar"]
+[node name="LoadedSaves" type="VBoxContainer" parent="MarginContainer/LoadedsaveGames/TitleLabel/Scrolbar"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlaceHolder" type="Button" parent="LoadedsaveGames/TitleLabel/Scrolbar/LoadedSaves"]
+[node name="PlaceHolder" type="Button" parent="MarginContainer/LoadedsaveGames/TitleLabel/Scrolbar/LoadedSaves"]
 layout_mode = 2
 
-[node name="HideSavedgames" type="Button" parent="LoadedsaveGames"]
+[node name="HideSavedgames" type="Button" parent="MarginContainer/LoadedsaveGames"]
+custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_i0ouf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5yltm")
 text = ">"
 
-[connection signal="pressed" from="GridContainer/SplitContainer/SaveButton" to="GridContainer/SplitContainer/SaveButton" method="_on_save_game_button_pressed"]
-[connection signal="pressed" from="GridContainer/SplitContainer/LoadButton" to="GridContainer/SplitContainer/SaveButton" method="_on_load_game_button_pressed"]
-[connection signal="pressed" from="LoadedsaveGames/HideSavedgames" to="GridContainer/SplitContainer/SaveButton" method="_on_hide_savedgames_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/SplitContainer/SaveButton" to="MarginContainer/GridContainer/SplitContainer/SaveButton" method="_on_save_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/SplitContainer/LoadButton" to="MarginContainer/GridContainer/SplitContainer/SaveButton" method="_on_load_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/LoadedsaveGames/HideSavedgames" to="MarginContainer/GridContainer/SplitContainer/SaveButton" method="_on_hide_savedgames_pressed"]

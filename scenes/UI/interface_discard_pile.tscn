@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbnuqf2x410s"]
+[gd_scene load_steps=11 format=3 uid="uid://dbnuqf2x410s"]
 
 [ext_resource type="StyleBox" uid="uid://w6rqcv3acgjg" path="res://Styles/Panel_Popup.tres" id="1_haslp"]
 [ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="2_43m0u"]
+[ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="3_ftat8"]
 [ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="3_whpmy"]
 [ext_resource type="Script" uid="uid://hc7yfgq2unoi" path="res://scripts/UX/Resume.gd" id="4_oytxn"]
 [ext_resource type="Script" uid="uid://by8ovl60teylr" path="res://scripts/UX/DiscardedCardsText.gd" id="5_yn2a2"]
@@ -61,14 +62,14 @@ layout_mode = 2
 [node name="DiscardedLabel" type="RichTextLabel" parent="BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/DiscardedCardsContainer"]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
 text = "[center]Discarded Cards[/center]"
 
 [node name="DiscardedCardsText" type="RichTextLabel" parent="BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/DiscardedCardsContainer"]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 script = ExtResource("5_yn2a2")
 cardType = "d"
 
@@ -78,14 +79,14 @@ layout_mode = 2
 [node name="BookmarkedLabel" type="RichTextLabel" parent="BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/BookmarkedCardsContainer"]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
 text = "[center]Bookmarked Cards[/center]"
 
 [node name="BookmarkedText" type="RichTextLabel" parent="BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/BookmarkedCardsContainer"]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 script = ExtResource("5_yn2a2")
 cardType = "b"
 
@@ -94,13 +95,15 @@ custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_ftat8")
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = ExtResource("2_43m0u")
 theme_override_styles/pressed = ExtResource("3_whpmy")
 theme_override_styles/hover = ExtResource("3_whpmy")

@@ -1,9 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://3s0dvjmvgucr"]
+[gd_scene load_steps=15 format=3 uid="uid://3s0dvjmvgucr"]
 
 [ext_resource type="StyleBox" uid="uid://w6rqcv3acgjg" path="res://Styles/Panel_Popup.tres" id="1_x1kyp"]
 [ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="2_fvg0l"]
+[ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="2_obthm"]
+[ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="3_4buk7"]
 [ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="3_kwiwa"]
+[ext_resource type="FontFile" uid="uid://2ike7sp4qiyi" path="res://assets/fonts/Ubuntu/Ubuntu-BoldItalic.ttf" id="4_cl2yq"]
 [ext_resource type="Script" uid="uid://hc7yfgq2unoi" path="res://scripts/UX/Resume.gd" id="4_f37ub"]
+[ext_resource type="FontFile" uid="uid://b23akitg4yjxd" path="res://assets/fonts/Ubuntu/Ubuntu-Italic.ttf" id="5_stoyr"]
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="5_yiw7c"]
 [ext_resource type="Script" uid="uid://cuklitumim1gx" path="res://scripts/UX/QuitGame.gd" id="6_vb4u6"]
 
@@ -16,7 +20,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f37ub"]
 
 [node name="Interface_Options" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,16 +37,17 @@ grow_vertical = 2
 
 [node name="MainPanel" type="PanelContainer" parent="."]
 material = SubResource("CanvasItemMaterial_6nfnn")
+custom_minimum_size = Vector2(200, 300)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -200.0
-offset_right = 150.0
-offset_bottom = 200.0
+offset_left = -100.0
+offset_top = -150.0
+offset_right = 100.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_4ue30")
@@ -52,37 +56,46 @@ theme_override_styles/panel = ExtResource("1_x1kyp")
 [node name="MarginContainer" type="MarginContainer" parent="MainPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 50
+theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 50
 
 [node name="Options" type="VBoxContainer" parent="MainPanel/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 10
 
 [node name="OptionsLabel" type="RichTextLabel" parent="MainPanel/MarginContainer/Options"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_obthm")
+theme_override_fonts/bold_font = ExtResource("3_4buk7")
+theme_override_fonts/bold_italics_font = ExtResource("4_cl2yq")
+theme_override_fonts/italics_font = ExtResource("5_stoyr")
+theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "[center]Options[center]"
 
 [node name="Buttons" type="VBoxContainer" parent="MainPanel/MarginContainer/Options"]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 10
 
 [node name="Resume" type="Button" parent="MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
-custom_minimum_size = Vector2(127, 43)
+custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_obthm")
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = ExtResource("2_fvg0l")
 theme_override_styles/pressed = ExtResource("3_kwiwa")
 theme_override_styles/hover = ExtResource("3_kwiwa")
@@ -93,17 +106,19 @@ script = ExtResource("4_f37ub")
 hideObject = NodePath("../../../../..")
 
 [node name="RolePick" type="Button" parent="MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
-custom_minimum_size = Vector2(127, 43)
+custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_obthm")
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = ExtResource("2_fvg0l")
 theme_override_styles/pressed = ExtResource("3_kwiwa")
 theme_override_styles/hover = ExtResource("3_kwiwa")
@@ -115,17 +130,19 @@ hideObject = NodePath("../../../../..")
 
 [node name="RefreshUI" type="Button" parent="MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
 visible = false
-custom_minimum_size = Vector2(127, 43)
+custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_obthm")
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = ExtResource("2_fvg0l")
 theme_override_styles/pressed = ExtResource("3_kwiwa")
 theme_override_styles/hover = ExtResource("3_kwiwa")
@@ -136,17 +153,19 @@ script = ExtResource("4_f37ub")
 hideObject = NodePath("../../../../..")
 
 [node name="QuitGame" type="Button" parent="MainPanel/MarginContainer/Options/Buttons"]
-custom_minimum_size = Vector2(127, 43)
+custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_obthm")
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = ExtResource("2_fvg0l")
 theme_override_styles/pressed = ExtResource("3_kwiwa")
 theme_override_styles/hover = ExtResource("3_kwiwa")

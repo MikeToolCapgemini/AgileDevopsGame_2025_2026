@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bcwtwnmvt1mhg"]
+[gd_scene load_steps=11 format=3 uid="uid://bcwtwnmvt1mhg"]
 
 [ext_resource type="StyleBox" uid="uid://o223wkfjc2wh" path="res://Styles/Panel_Slideout.tres" id="1_ymgl4"]
+[ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="2_cs4or"]
 [ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="2_s5y2p"]
 [ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="3_cs4or"]
+[ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="3_ouu53"]
 [ext_resource type="Script" uid="uid://hc7yfgq2unoi" path="res://scripts/UX/Resume.gd" id="4_ouu53"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_or8bj"]
@@ -33,15 +35,16 @@ grow_vertical = 2
 material = SubResource("CanvasItemMaterial_or8bj")
 custom_minimum_size = Vector2(1000, 600)
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1000.0
-offset_top = -45.140015
-offset_bottom = 45.140015
-grow_horizontal = 0
+offset_left = -500.0
+offset_top = -300.0
+offset_right = 500.0
+offset_bottom = 300.0
+grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_673bd")
 theme_override_styles/panel = ExtResource("1_ymgl4")
@@ -56,14 +59,16 @@ theme_override_constants/margin_bottom = 20
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel/Container"]
 visible = false
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 text = "Facilitator Kit"
 
 [node name="RichTextLabelGameLeaderManual" type="RichTextLabel" parent="Panel/Container"]
 custom_minimum_size = Vector2(480, 300)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_cs4or")
+theme_override_fonts/bold_font = ExtResource("3_ouu53")
 theme_override_font_sizes/normal_font_size = 17
 bbcode_enabled = true
 text = "[b]DevOps Infinity Game - Game Leader Manual[/b]
@@ -85,7 +90,7 @@ Read the rules carefully and explain them to the players. The rules of the game 
 custom_minimum_size = Vector2(480, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 17
 bbcode_enabled = true
 text = "[b]Overview questions and answers[/b]
@@ -111,13 +116,13 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = ExtResource("2_s5y2p")
 theme_override_styles/pressed = ExtResource("3_cs4or")
 theme_override_styles/hover = ExtResource("3_cs4or")

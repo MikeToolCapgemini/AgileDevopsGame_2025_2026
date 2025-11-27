@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqiyt6fiyvro"]
+[gd_scene load_steps=8 format=3 uid="uid://dqiyt6fiyvro"]
 
 [ext_resource type="Script" uid="uid://dm015sicbwm2" path="res://scripts/PlaytestRoleSetup.gd" id="1_43g3h"]
 [ext_resource type="StyleBox" uid="uid://dijgsweldy4qb" path="res://Styles/Cards_Background.tres" id="2_tpmpd"]
 [ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="3_gnj0a"]
+[ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="3_o8do8"]
 [ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="4_pkb6o"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n6mxd"]
@@ -54,7 +55,8 @@ theme_override_constants/separation = 15
 custom_minimum_size = Vector2(0, 27)
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_o8do8")
 bbcode_enabled = true
 text = "[center]Select your role:"
 
@@ -66,8 +68,9 @@ theme_override_constants/separation = 50
 [node name="Facilitator" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("3_o8do8")
 theme_override_styles/normal = ExtResource("3_gnj0a")
 theme_override_styles/pressed = ExtResource("4_pkb6o")
 theme_override_styles/hover = ExtResource("4_pkb6o")
@@ -76,8 +79,9 @@ text = "Facilitator"
 [node name="Player" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("3_o8do8")
 theme_override_styles/normal = ExtResource("3_gnj0a")
 theme_override_styles/pressed = ExtResource("4_pkb6o")
 theme_override_styles/hover = ExtResource("4_pkb6o")

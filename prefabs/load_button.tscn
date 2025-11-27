@@ -1,4 +1,17 @@
-[gd_scene format=3 uid="uid://bf50kvuakddvu"]
+[gd_scene load_steps=3 format=3 uid="uid://bf50kvuakddvu"]
+
+[ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="1_y3pjk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_krt54"]
+bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="LoadedButton" type="Button"]
 anchors_preset = 15
@@ -6,4 +19,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_y3pjk")
+theme_override_styles/normal = SubResource("StyleBoxFlat_krt54")
 text = "Name"

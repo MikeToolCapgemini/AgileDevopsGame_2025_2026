@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=186 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -92,6 +92,10 @@
 [ext_resource type="Script" uid="uid://yhh3kfgvk00x" path="res://scripts/UX/CardUIManager.gd" id="81_4ue30"]
 [ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
+[ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="87_1uevf"]
+[ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="88_0tljd"]
+[ext_resource type="FontFile" uid="uid://2ike7sp4qiyi" path="res://assets/fonts/Ubuntu/Ubuntu-BoldItalic.ttf" id="89_mgpkq"]
+[ext_resource type="FontFile" uid="uid://b23akitg4yjxd" path="res://assets/fonts/Ubuntu/Ubuntu-Italic.ttf" id="90_xmrkg"]
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
 [ext_resource type="PackedScene" uid="uid://cu1ot8k00utk8" path="res://scenes/UI/Slideouts/interface_slideout_h_2p.tscn" id="93_akjxb"]
 [ext_resource type="PackedScene" uid="uid://bcwtwnmvt1mhg" path="res://scenes/UI/Slideouts/interface_slideout_fac_k.tscn" id="94_vrx01"]
@@ -262,8 +266,64 @@ size = Vector3(25, 5, 0.5)
 [sub_resource type="BoxMesh" id="BoxMesh_1uevf"]
 size = Vector3(25, 5, 0.5)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_engxj"]
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 0.79607844)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_color = Color(0, 0.34509805, 0.67058825, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0tljd"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmrkg"]
+bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_raiwf"]
+bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xk8il"]
-bg_color = Color(0.05882353, 0.05882353, 0.05882353, 0.65882355)
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0.34509805, 0.67058825, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvlrk"]
+bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mgpkq"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.34509805, 0.67058825, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="GDScript" id="GDScript_kvygq"]
 
@@ -298,17 +358,6 @@ bg_color = Color(0.0117647, 1, 0.6, 0.980392)
 
 [sub_resource type="Theme" id="Theme_sjgq0"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gnkp"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ocjn3"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n81fi"]
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6nfnn"]
 
 [sub_resource type="Theme" id="Theme_4ue30"]
@@ -316,6 +365,22 @@ corner_radius_bottom_left = 20
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kwiwa"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f37ub"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gnkp"]
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0.34509805, 0.67058825, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ocjn3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n81fi"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4ue30"]
 
@@ -1496,11 +1561,12 @@ far = 25.0
 [node name="Connections" type="Node" parent="."]
 
 [node name="Interface_Facilitator" type="Control" parent="."]
-visible = false
 layout_mode = 3
-anchors_preset = 2
+anchors_preset = 12
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 0
 
 [node name="TimerPanels" type="VBoxContainer" parent="Interface_Facilitator"]
@@ -1518,6 +1584,7 @@ alignment = 2
 visible = false
 custom_minimum_size = Vector2(309, 115)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_engxj")
 
 [node name="MarginContainer" type="MarginContainer" parent="Interface_Facilitator/TimerPanels/SetTimerPanel"]
 layout_mode = 2
@@ -1534,6 +1601,7 @@ theme_override_constants/separation = 5
 custom_minimum_size = Vector2(205, 30)
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
 text = "Set Timer:"
 
 [node name="SetButtons" type="HBoxContainer" parent="Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer"]
@@ -1547,6 +1615,10 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0tljd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xmrkg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xmrkg")
 text = "Set"
 
 [node name="TimerEditField" type="HBoxContainer" parent="Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons"]
@@ -1559,6 +1631,8 @@ custom_minimum_size = Vector2(38, 35)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_raiwf")
 placeholder_text = "15"
 
 [node name="TimerDivider" type="RichTextLabel" parent="Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField"]
@@ -1566,6 +1640,7 @@ custom_minimum_size = Vector2(17, 40)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
 text = ":"
 
 [node name="TextEditSeconds" type="TextEdit" parent="Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField"]
@@ -1573,6 +1648,8 @@ custom_minimum_size = Vector2(38, 35)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_raiwf")
 placeholder_text = "00"
 
 [node name="TimerPanel" type="PanelContainer" parent="Interface_Facilitator/TimerPanels"]
@@ -1591,6 +1668,7 @@ layout_mode = 2
 [node name="TimerToolLabel" type="RichTextLabel" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
 text = "Facilitator Timer Tools:"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer"]
@@ -1602,27 +1680,55 @@ theme_override_constants/separation = 20
 visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_0tljd")
 text = "Debug"
 
 [node name="StartButton" type="Button" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_0tljd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xmrkg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wvlrk")
 text = "Start"
 
 [node name="ResetButton" type="Button" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_0tljd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xmrkg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wvlrk")
 text = "Reset"
 
 [node name="StopButton" type="Button" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_0tljd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xmrkg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wvlrk")
 text = "Stop
 "
 
 [node name="Set" type="Button" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_0tljd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xmrkg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wvlrk")
 text = "Set"
 script = ExtResource("49_4jv7h")
 
@@ -1635,9 +1741,15 @@ offset_left = 310.0
 offset_top = -40.0
 offset_right = 996.0
 grow_vertical = 0
+theme_override_constants/separation = 4
 
 [node name="DiscardPileButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns" node_paths=PackedStringArray("discardedList", "bookmarkedList", "hideObject")]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_mgpkq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xmrkg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wvlrk")
 text = "Discard Pile & Bookmarks"
 script = ExtResource("73_6nfnn")
 discardedList = NodePath("../../../Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/DiscardedCardsContainer/DiscardedCardsText")
@@ -1646,6 +1758,11 @@ hideObject = NodePath("../../../Interface_DiscardPile")
 
 [node name="ResetPawnPositionButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_mgpkq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xmrkg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wvlrk")
 text = "Reset Pawn Positions"
 
 [node name="SaveGameButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns"]
@@ -1662,8 +1779,17 @@ script = ExtResource("42_u5l1c")
 
 [node name="MultiSave" parent="Interface_Facilitator" instance=ExtResource("92_sgvw8")]
 layout_mode = 1
-offset_left = 1050.0
-offset_right = 1050.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -373.0
+offset_top = -128.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="Refresh" type="Button" parent="Interface_Facilitator"]
 visible = false
@@ -2135,7 +2261,7 @@ script = ExtResource("42_flrbk")
 TimerObject = NodePath("../World/Interactables/Timer")
 FacilitatorCardPanel = NodePath("../Interface_Cards/FacilitatorPanels")
 FacilitatorUI = NodePath("../Interface_Facilitator")
-FacilitatorKitButton = NodePath("../Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/facilitatorkit")
+FacilitatorKitButton = NodePath("../Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides/facilitatorkit")
 OptionsPanel = NodePath("../Interface_Buttons")
 
 [node name="Panel" type="PanelContainer" parent="Setup"]
@@ -2172,7 +2298,8 @@ theme_override_constants/separation = 15
 custom_minimum_size = Vector2(0, 27)
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
 bbcode_enabled = true
 text = "[center]Select your role:"
 
@@ -2184,8 +2311,9 @@ theme_override_constants/separation = 50
 [node name="Facilitator" type="Button" parent="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
@@ -2194,210 +2322,14 @@ text = "Facilitator"
 [node name="Player" type="Button" parent="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
 text = "Player
 "
-
-[node name="Interface_Buttons" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-grow_horizontal = 0
-
-[node name="Container" type="PanelContainer" parent="Interface_Buttons"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -167.0
-offset_right = -10.0
-offset_bottom = 482.0
-grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_1gnkp")
-
-[node name="MarginContainer" type="MarginContainer" parent="Interface_Buttons/Container"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 25
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Buttons/Container/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="Options" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer" node_paths=PackedStringArray("showObject")]
-custom_minimum_size = Vector2(127, 43)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
-text = "Options"
-script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../Interface_Options")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(75, 26)
-layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-bbcode_enabled = true
-text = "[center]Guides[/center]"
-
-[node name="Preperation" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer" node_paths=PackedStringArray("showObject")]
-custom_minimum_size = Vector2(127, 43)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
-text = "Preperation"
-script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../Interface_Slideout_H2P")
-
-[node name="HowtoPlay" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer" node_paths=PackedStringArray("showObject")]
-custom_minimum_size = Vector2(127, 43)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
-text = "How to play"
-script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../Interface_Slideout_H2P2")
-
-[node name="facilitatorkit" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer" node_paths=PackedStringArray("showObject")]
-custom_minimum_size = Vector2(127, 43)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
-text = "Facilitator Kit"
-script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../Interface_Slideout_FacK")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(75, 26)
-layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-bbcode_enabled = true
-text = "[center]Quick reference[/center]"
-
-[node name="Rules" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2" node_paths=PackedStringArray("showObject")]
-custom_minimum_size = Vector2(127, 43)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
-text = "Rules"
-script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../Interface_Slideout_QuickRef")
-
-[node name="ExtraRules" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2" node_paths=PackedStringArray("showObject")]
-custom_minimum_size = Vector2(127, 43)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
-text = "Extra Rules"
-script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../Interface_Slideout_QuickRef+")
-
-[node name="Interrupts" type="Button" parent="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2" node_paths=PackedStringArray("showObject")]
-custom_minimum_size = Vector2(127, 43)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
-text = "Interrupts"
-script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../Interface_Slideout_Interrupts")
 
 [node name="Interface_Options" type="Control" parent="."]
 visible = false
@@ -2418,16 +2350,17 @@ grow_vertical = 2
 
 [node name="MainPanel" type="PanelContainer" parent="Interface_Options"]
 material = SubResource("CanvasItemMaterial_6nfnn")
+custom_minimum_size = Vector2(200, 300)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -200.0
-offset_right = 150.0
-offset_bottom = 200.0
+offset_left = -100.0
+offset_top = -150.0
+offset_right = 100.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_4ue30")
@@ -2436,37 +2369,46 @@ theme_override_styles/panel = ExtResource("42_ot4pa")
 [node name="MarginContainer" type="MarginContainer" parent="Interface_Options/MainPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 50
+theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 50
 
 [node name="Options" type="VBoxContainer" parent="Interface_Options/MainPanel/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 10
 
 [node name="OptionsLabel" type="RichTextLabel" parent="Interface_Options/MainPanel/MarginContainer/Options"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+theme_override_fonts/bold_font = ExtResource("88_0tljd")
+theme_override_fonts/bold_italics_font = ExtResource("89_mgpkq")
+theme_override_fonts/italics_font = ExtResource("90_xmrkg")
+theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "[center]Options[center]"
 
 [node name="Buttons" type="VBoxContainer" parent="Interface_Options/MainPanel/MarginContainer/Options"]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 10
 
 [node name="Resume" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
-custom_minimum_size = Vector2(127, 43)
+custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
@@ -2477,17 +2419,19 @@ script = ExtResource("49_4jv7h")
 hideObject = NodePath("../../../../..")
 
 [node name="RolePick" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
-custom_minimum_size = Vector2(127, 43)
+custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
@@ -2499,17 +2443,19 @@ hideObject = NodePath("../../../../..")
 
 [node name="RefreshUI" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
 visible = false
-custom_minimum_size = Vector2(127, 43)
+custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
@@ -2520,17 +2466,19 @@ script = ExtResource("49_4jv7h")
 hideObject = NodePath("../../../../..")
 
 [node name="QuitGame" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
-custom_minimum_size = Vector2(127, 43)
+custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
@@ -2538,6 +2486,214 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_kwiwa")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_f37ub")
 text = "Quit Game"
 script = ExtResource("52_v5wqd")
+
+[node name="Interface_Buttons" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="Interface_Buttons"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -167.0
+offset_right = -10.0
+offset_bottom = 482.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1gnkp")
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Buttons/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 25
+
+[node name="AllButtons" type="VBoxContainer" parent="Interface_Buttons/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Options" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Options"
+script = ExtResource("49_hpq24")
+showObject = NodePath("../../../../../Interface_Options")
+
+[node name="Guides" type="VBoxContainer" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons"]
+layout_mode = 2
+
+[node name="GuidesLabel" type="RichTextLabel" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides"]
+custom_minimum_size = Vector2(75, 26)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Guides[/center]"
+
+[node name="Preperation" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Preperation"
+script = ExtResource("49_hpq24")
+showObject = NodePath("../../../../../../Interface_Slideout_H2P")
+
+[node name="HowtoPlay" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "How to play"
+script = ExtResource("49_hpq24")
+showObject = NodePath("../../../../../../Interface_Slideout_H2P2")
+
+[node name="facilitatorkit" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Facilitator Kit"
+script = ExtResource("49_hpq24")
+showObject = NodePath("../../../../../../Interface_Slideout_FacK")
+
+[node name="QuickReference" type="VBoxContainer" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons"]
+layout_mode = 2
+
+[node name="QuickReferenceLabel" type="RichTextLabel" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QuickReference"]
+custom_minimum_size = Vector2(75, 26)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Quick reference[/center]"
+
+[node name="Rules" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QuickReference" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Rules"
+script = ExtResource("49_hpq24")
+showObject = NodePath("../../../../../../Interface_Slideout_QuickRef")
+
+[node name="ExtraRules" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QuickReference" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Extra Rules"
+script = ExtResource("49_hpq24")
+showObject = NodePath("../../../../../../Interface_Slideout_QuickRef+")
+
+[node name="Interrupts" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QuickReference" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Interrupts"
+script = ExtResource("49_hpq24")
+showObject = NodePath("../../../../../../Interface_Slideout_Interrupts")
 
 [node name="Interface_DiscardPile" type="Control" parent="."]
 visible = false
@@ -2587,14 +2743,14 @@ layout_mode = 2
 [node name="DiscardedLabel" type="RichTextLabel" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/DiscardedCardsContainer"]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
 text = "[center]Discarded Cards[/center]"
 
 [node name="DiscardedCardsText" type="RichTextLabel" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/DiscardedCardsContainer"]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 script = ExtResource("51_3t33e")
 cardType = "d"
 
@@ -2604,14 +2760,14 @@ layout_mode = 2
 [node name="BookmarkedLabel" type="RichTextLabel" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/BookmarkedCardsContainer"]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
 text = "[center]Bookmarked Cards[/center]"
 
 [node name="BookmarkedText" type="RichTextLabel" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/BookmarkedCardsContainer"]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 script = ExtResource("51_3t33e")
 cardType = "b"
 
@@ -2620,13 +2776,13 @@ custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
@@ -2680,8 +2836,8 @@ text = "[right]Interrupt![/right]"
 [node name="Delay" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("TimerObject", "InterruptUIFac")]
 custom_minimum_size = Vector2(143, 43)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
@@ -2693,8 +2849,8 @@ InterruptUIFac = NodePath("../../../..")
 [node name="Show" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("InterruptUIPlayers", "InterruptUIFac")]
 custom_minimum_size = Vector2(180, 43)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
@@ -2735,6 +2891,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
 bbcode_enabled = true
 text = "[center]Interrupt![/center]"
 
@@ -2834,17 +2991,17 @@ visible = false
 [connection signal="pressed" from="Interface_Cards/Hide_Show" to="Interface_Cards/Hide_Show" method="_on_pressed"]
 [connection signal="pressed" from="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer/Facilitator" to="Setup" method="_on_facilitator_pressed"]
 [connection signal="pressed" from="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer/Player" to="Setup" method="_on_player_pressed"]
-[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/Options" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/Options" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/Preperation" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/Preperation" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/HowtoPlay" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/HowtoPlay" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/facilitatorkit" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer/facilitatorkit" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/Rules" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/Rules" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/ExtraRules" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/ExtraRules" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/Interrupts" to="Interface_Buttons/Container/MarginContainer/VBoxContainer/VBoxContainer2/Interrupts" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Resume" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" method="on_repick"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Options" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Options" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides/Preperation" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides/Preperation" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides/HowtoPlay" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides/HowtoPlay" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides/facilitatorkit" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides/facilitatorkit" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QuickReference/Rules" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QuickReference/Rules" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QuickReference/ExtraRules" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QuickReference/ExtraRules" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QuickReference/Interrupts" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QuickReference/Interrupts" method="_on_pressed"]
 [connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Resume" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" method="_on_pressed"]
