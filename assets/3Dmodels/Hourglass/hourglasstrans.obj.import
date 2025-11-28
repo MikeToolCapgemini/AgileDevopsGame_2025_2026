@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://b1warejf7hx58"
-path="res://.godot/imported/hourglasstrans.obj-199c88866d38c05a408c0387f44db5f1.mesh"
+path="res://.godot/imported/hourglasstrans.obj-ef145dc797f1c7b8092588fab5b7df1c.mesh"
 
 [deps]
 
-files=["res://.godot/imported/hourglasstrans.obj-199c88866d38c05a408c0387f44db5f1.mesh"]
+files=["res://.godot/imported/hourglasstrans.obj-ef145dc797f1c7b8092588fab5b7df1c.mesh"]
 
-source_file="res://new test files/hourglasstrans.obj"
-dest_files=["res://.godot/imported/hourglasstrans.obj-199c88866d38c05a408c0387f44db5f1.mesh", "res://.godot/imported/hourglasstrans.obj-199c88866d38c05a408c0387f44db5f1.mesh"]
+source_file="res://assets/3Dmodels/Hourglass/hourglasstrans.obj"
+dest_files=["res://.godot/imported/hourglasstrans.obj-ef145dc797f1c7b8092588fab5b7df1c.mesh", "res://.godot/imported/hourglasstrans.obj-ef145dc797f1c7b8092588fab5b7df1c.mesh"]
 
 [params]
 
