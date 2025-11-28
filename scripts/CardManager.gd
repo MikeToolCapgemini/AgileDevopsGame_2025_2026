@@ -83,6 +83,7 @@ func draw(type):
 	var d = randi_range(0, cardTypeData.size() - 1)
 	print(d)
 	var cType = cardTypeData[d]["Type"]
+	var cSubType = cardTypeData[d]["Subtype"]
 	var cQuestion = cardTypeData[d]["Question"]
 	var cChoiceA = set_card_choice_string("A. ", cardTypeData[d]["ChoiceA"])
 	var cChoiceB = set_card_choice_string("B. ", cardTypeData[d]["ChoiceB"])
@@ -94,7 +95,7 @@ func draw(type):
 	
 	# action cards
 	var rng = RandomNumberGenerator.new()
-	if rng.randi_range(1, 21) >= 19:
+	if rng.randi_range(1, 21) >= 19: #19 is defualt
 		var actionDict = [
 			"Your delivery does not fit in the release calendar: skip a turn",
 			"Synchronization issue: Move your front pawn back to the square where your second pawn is. If you only have one pawn in the game, you can take your second pawn, and place both pawns on your starting space",
@@ -111,13 +112,14 @@ func draw(type):
 			]
 		var roll = rng.randi_range(1,actionDict.size()-1)
 		CardUIManager.UXTagObject.visible = false
-		card_setup("action", actionDict[roll], "", "", "", "", "")
-		card_setup.rpc("action", actionDict[roll], "", "", "", "", "")
+		CardUIManager.ActionTagObject.visible = true
+		card_setup("action", "", actionDict[roll], "", "", "", "", "")
+		card_setup.rpc("action", "", actionDict[roll], "", "", "", "", "")
 	else:
 		print("###")
 		print(cQuestion)
-		card_setup(cType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer)
-		card_setup.rpc(cType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer)
+		card_setup(cType,cSubType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer)
+		card_setup.rpc(cType,cSubType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer)
 
 		set_bg_color.rpc(bgColor)
 		curType = type
@@ -153,10 +155,11 @@ func card_discard(cardTypeData,cardTypeDataVar, cardTypeString, keyVar):
 	#SaveSystem.save_game()
 
 @rpc("any_peer")
-func card_setup(type, question, choiceA, choiceB, choiceC, choiceD, answer):
+func card_setup(type, subtype, question, choiceA, choiceB, choiceC, choiceD, answer):
 	print("####")
 	print(type)
 	CardUIManager.TypeTextObject.text = type
+	CardUIManager.SubtypeTextObject.text = subtype
 	CardUIManager.QuestionObject.text = question
 	CardUIManager.AnswerATextObject.text = choiceA
 	CardUIManager.AnswerBTextObject.text = choiceB

@@ -220,7 +220,7 @@ Answer
 Answer"
 scroll_active = false
 
-[node name="CardPanel" type="PanelContainer" parent="." node_paths=PackedStringArray("CardPanel", "TypeTextObject", "QuestionObject", "AnswerObject", "AnswerFacilitatorTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "bookmark")]
+[node name="CardPanel" type="PanelContainer" parent="." node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionObject", "AnswerObject", "AnswerFacilitatorTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "bookmark")]
 custom_minimum_size = Vector2(600, 300)
 layout_mode = 1
 anchors_preset = 5
@@ -233,7 +233,8 @@ grow_horizontal = 2
 theme_override_styles/panel = ExtResource("4_nvb0l")
 script = ExtResource("5_jegtj")
 CardPanel = NodePath(".")
-TypeTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/HBoxContainer/Type")
+TypeTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/VBoxContainer/HBoxContainer/SubType")
+SubtypeTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/VBoxContainer/HBoxContainer/SubType")
 QuestionObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/Question")
 AnswerObject = NodePath("CardPanelMarginContainer/VBoxContainer/AnswerPanelBG/Answer")
 AnswerFacilitatorTextObject = NodePath("../FacilitatorPanels/AnswerPanelMargin/AnswerPanel/MarginContainer/VBoxContainer/MarginContainer/AnswerFNote")
@@ -381,36 +382,75 @@ theme_override_constants/margin_bottom = 5
 [node name="TypeBox" type="PanelContainer" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin"]
 custom_minimum_size = Vector2(210, 52)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_vlsfy")
 
 [node name="MarginContainer" type="MarginContainer" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox"]
 layout_mode = 2
-theme_override_constants/margin_left = 5
+theme_override_constants/margin_left = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer"]
 layout_mode = 2
+alignment = 2
 
-[node name="TypeTag" type="RichTextLabel" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TypeTag" type="RichTextLabel" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("3_nvb0l")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
 text = "[left]Type:"
 scroll_active = false
 
-[node name="Type" type="RichTextLabel" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/HBoxContainer"]
+[node name="Type" type="RichTextLabel" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_nvb0l")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+text = "Question"
+scroll_active = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SubtypeTag" type="RichTextLabel" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("3_nvb0l")
-text = "A. Answer A"
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+bbcode_enabled = true
+text = "[center]SubType:"
+scroll_active = false
+
+[node name="SubType" type="RichTextLabel" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_nvb0l")
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+text = "Deploy"
 scroll_active = false
 
 [node name="Question_AnswerBox" type="MarginContainer" parent="CardPanel/CardPanelMarginContainer/VBoxContainer"]
