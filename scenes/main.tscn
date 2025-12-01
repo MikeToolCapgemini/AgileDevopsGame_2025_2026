@@ -2140,7 +2140,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
 text = "Bookmark"
 script = ExtResource("45_n88qk")
 cardManagerObject = NodePath("../../../../../..")
-bookmarkIcon = NodePath("")
+bookmarkIcon = NodePath("../../../../../../CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/bookmark")
 
 [node name="CancelSave" type="Button" parent="Interface_Cards/FacilitatorPanels/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
 visible = false
