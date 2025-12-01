@@ -1602,7 +1602,6 @@ far = 25.0
 [node name="Connections" type="Node" parent="."]
 
 [node name="Interface_Facilitator" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
