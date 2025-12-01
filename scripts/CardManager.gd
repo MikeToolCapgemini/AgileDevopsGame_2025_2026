@@ -160,6 +160,7 @@ func card_setup(type, subtype, question, choiceA, choiceB, choiceC, choiceD, ans
 	print("####")
 	print(type)
 	set_card_icon(type)
+	set_panel_layout(type)
 	CardUIManager.TypeTextObject.text = type
 	CardUIManager.SubtypeTextObject.text = subtype
 	CardUIManager.QuestionObject.text = question
@@ -167,8 +168,13 @@ func card_setup(type, subtype, question, choiceA, choiceB, choiceC, choiceD, ans
 	CardUIManager.AnswerBTextObject.text = choiceB
 	CardUIManager.AnswerCTextObject.text = choiceC
 	CardUIManager.AnswerDTextObject.text = choiceD
+	if answer == "":
+		CardUIManager.AnswerPanel.visible = false
+	else:
+		CardUIManager.AnswerPanel.visible = true
 	CardUIManager.AnswerObject.text = answer
 	CardUIManager.AnswerFacilitatorTextObject.text = answer
+	
 
 func set_card_icon(type):
 	if type == "Discussion":
@@ -177,6 +183,20 @@ func set_card_icon(type):
 	if type == "Question":
 		CardUIManager.QuestionIcon.visible = true
 		CardUIManager.DiscussionIcon.visible = false
+
+func set_panel_layout(type):
+	if type == "Discussion":
+		CardUIManager.QuestionPanel.visible = false
+		CardUIManager.DiscussionPanel.visible = true
+		CardUIManager.QuestionObject = CardUIManager.DiscussionPanelTextObject
+	if type == "Question":
+		CardUIManager.QuestionPanel.visible = true
+		CardUIManager.DiscussionPanel.visible = false
+		CardUIManager.QuestionObject = CardUIManager.QuestionPanelTextObject
+	if type == "action":
+		CardUIManager.QuestionPanel.visible = false
+		CardUIManager.DiscussionPanel.visible = true
+		CardUIManager.QuestionObject = CardUIManager.DiscussionPanelTextObject
 
 @rpc("any_peer")
 func _sync_cardshown(state, answer = "-", question = "-"):

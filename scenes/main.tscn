@@ -2213,7 +2213,7 @@ Answer
 Answer"
 scroll_active = false
 
-[node name="CardPanel" type="PanelContainer" parent="Interface_Cards" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionObject", "AnswerObject", "AnswerFacilitatorTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
+[node name="CardPanel" type="PanelContainer" parent="Interface_Cards" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionPanel", "DiscussionPanel", "QuestionPanelTextObject", "DiscussionPanelTextObject", "QuestionObject", "AnswerObject", "AnswerPanel", "AnswerFacilitatorTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
 custom_minimum_size = Vector2(600, 300)
 layout_mode = 1
 anchors_preset = 5
@@ -2228,8 +2228,13 @@ script = ExtResource("81_4ue30")
 CardPanel = NodePath(".")
 TypeTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/VBoxContainer/HBoxContainer2/Type")
 SubtypeTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/VBoxContainer/HBoxContainer/SubType")
+QuestionPanel = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox")
+DiscussionPanel = NodePath("CardPanelMarginContainer/VBoxContainer/Discussion")
+QuestionPanelTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/Question")
+DiscussionPanelTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Discussion/QuestionD")
 QuestionObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/Question")
 AnswerObject = NodePath("CardPanelMarginContainer/VBoxContainer/AnswerPanelBG/Answer")
+AnswerPanel = NodePath("../FacilitatorPanels/AnswerPanelMargin/AnswerPanel")
 AnswerFacilitatorTextObject = NodePath("../FacilitatorPanels/AnswerPanelMargin/AnswerPanel/MarginContainer/VBoxContainer/MarginContainer/AnswerFNote")
 AnswerBackground = NodePath("CardPanelMarginContainer/VBoxContainer/AnswerPanelBG")
 AnswerATextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceA")
@@ -2527,6 +2532,7 @@ text = "Deploy"
 scroll_active = false
 
 [node name="Question_AnswerBox" type="MarginContainer" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2597,6 +2603,30 @@ theme_override_fonts/normal_font = ExtResource("87_1uevf")
 text = "D. Answer D
 D. Answer D"
 scroll_active = false
+
+[node name="Discussion" type="MarginContainer" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+
+[node name="QuestionD" type="RichTextLabel" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer/Discussion"]
+custom_minimum_size = Vector2(654, 330)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+theme_override_font_sizes/normal_font_size = 40
+text = "Question
+Question
+Question
+Question"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 3
 
 [node name="AnswerPanelBG" type="Panel" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer"]
 visibility_layer = 4

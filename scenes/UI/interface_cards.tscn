@@ -225,7 +225,7 @@ Answer
 Answer"
 scroll_active = false
 
-[node name="CardPanel" type="PanelContainer" parent="." node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionObject", "AnswerObject", "AnswerFacilitatorTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
+[node name="CardPanel" type="PanelContainer" parent="." node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionObject", "AnswerObject", "AnswerPanel", "AnswerFacilitatorTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
 custom_minimum_size = Vector2(600, 300)
 layout_mode = 1
 anchors_preset = 5
@@ -242,6 +242,7 @@ TypeTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBo
 SubtypeTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBoxMargin/TypeBox/MarginContainer/VBoxContainer/HBoxContainer/SubType")
 QuestionObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/Question")
 AnswerObject = NodePath("CardPanelMarginContainer/VBoxContainer/AnswerPanelBG/Answer")
+AnswerPanel = NodePath("../FacilitatorPanels/AnswerPanelMargin/AnswerPanel")
 AnswerFacilitatorTextObject = NodePath("../FacilitatorPanels/AnswerPanelMargin/AnswerPanel/MarginContainer/VBoxContainer/MarginContainer/AnswerFNote")
 AnswerBackground = NodePath("CardPanelMarginContainer/VBoxContainer/AnswerPanelBG")
 AnswerATextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceA")
