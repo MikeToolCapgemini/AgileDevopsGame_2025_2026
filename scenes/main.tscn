@@ -1,4 +1,4 @@
-[gd_scene load_steps=190 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=193 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -93,7 +93,9 @@
 [ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="87_1uevf"]
+[ext_resource type="FontFile" uid="uid://bgwubnrnnxe2s" path="res://addons/fontawesome/fonts/fa-regular-400.woff2" id="87_xmrkg"]
 [ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="88_0tljd"]
+[ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="88_wvlrk"]
 [ext_resource type="FontFile" uid="uid://2ike7sp4qiyi" path="res://assets/fonts/Ubuntu/Ubuntu-BoldItalic.ttf" id="89_mgpkq"]
 [ext_resource type="FontFile" uid="uid://b23akitg4yjxd" path="res://assets/fonts/Ubuntu/Ubuntu-Italic.ttf" id="90_xmrkg"]
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
@@ -386,8 +388,11 @@ border_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8yg7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gm02q"]
 bg_color = Color(0.262745, 0.643137, 0.843137, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07pt3"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x52v5"]
 bg_color = Color(0.415686, 0.14902, 0.184314, 1)
@@ -2135,7 +2140,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
 text = "Bookmark"
 script = ExtResource("45_n88qk")
 cardManagerObject = NodePath("../../../../../..")
-bookmarkIcon = NodePath("../../../../../../CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/bookmark")
+bookmarkIcon = NodePath("")
 
 [node name="CancelSave" type="Button" parent="Interface_Cards/FacilitatorPanels/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
 visible = false
@@ -2208,7 +2213,7 @@ Answer
 Answer"
 scroll_active = false
 
-[node name="CardPanel" type="PanelContainer" parent="Interface_Cards" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionObject", "AnswerObject", "AnswerFacilitatorTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "bookmark")]
+[node name="CardPanel" type="PanelContainer" parent="Interface_Cards" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionObject", "AnswerObject", "AnswerFacilitatorTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
 custom_minimum_size = Vector2(600, 300)
 layout_mode = 1
 anchors_preset = 5
@@ -2235,7 +2240,9 @@ BookmarkButton = NodePath("../FacilitatorPanels/FacilitatorPanelMargin/Facilitat
 CancelBookmarkButton = NodePath("../FacilitatorPanels/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/CancelSave")
 UXTagObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG")
 ActionTagObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/ActionCardBG")
-bookmark = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/bookmark")
+bookmark = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/bookmark")
+QuestionIcon = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon/MarginContainer/Question")
+DiscussionIcon = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon/MarginContainer/Discussion")
 
 [node name="CardPanelMarginContainer" type="MarginContainer" parent="Interface_Cards/CardPanel"]
 custom_minimum_size = Vector2(600, 0)
@@ -2254,28 +2261,65 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_constants/margin_top = 10
 
-[node name="TypeBG" type="Panel" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox"]
-visible = false
-custom_minimum_size = Vector2(700, 0)
+[node name="TypeBG" type="PanelContainer" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox"]
+custom_minimum_size = Vector2(700, 62)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_b8yg7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_gm02q")
 
-[node name="bookmark" type="TextureRect" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG"]
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="bookmark" type="TextureRect" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer"]
 custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -20.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 texture = ExtResource("83_6nfnn")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Icon" type="PanelContainer" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_07pt3")
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Question" type="Label" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon/MarginContainer"]
+auto_translate_mode = 2
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("87_xmrkg")
+theme_override_font_sizes/font_size = 40
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 40
+icon_type = "regular"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="Discussion" type="Label" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon/MarginContainer"]
+auto_translate_mode = 2
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("87_xmrkg")
+theme_override_font_sizes/font_size = 40
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 40
+icon_type = "regular"
+icon_name = "comments"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="ActionCardBG" type="Panel" parent="Interface_Cards/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox"]
 visible = false
@@ -3148,8 +3192,8 @@ visible = false
 [connection signal="pressed" from="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/Set" to="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/Set" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton" to="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/SaveGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_save_game_button_pressed"]
-[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_load_game_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Options" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Options" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides/Preperation" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides/Preperation" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides/HowtoPlay" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Guides/HowtoPlay" method="_on_pressed"]

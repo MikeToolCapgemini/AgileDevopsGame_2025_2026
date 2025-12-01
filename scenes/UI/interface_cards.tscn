@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://brfmira3k886n"]
+[gd_scene load_steps=24 format=3 uid="uid://brfmira3k886n"]
 
 [ext_resource type="Script" uid="uid://dyiem726lcmu" path="res://scripts/CardManager.gd" id="1_palqu"]
 [ext_resource type="Script" uid="uid://bbmlrkjtnpomu" path="res://scripts/FacilitatorPanel.gd" id="2_jegtj"]
@@ -10,6 +10,8 @@
 [ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="6_h2xon"]
 [ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="7_w8u2x"]
 [ext_resource type="Script" uid="uid://hc7yfgq2unoi" path="res://scripts/UX/Resume.gd" id="8_w8xe8"]
+[ext_resource type="FontFile" uid="uid://bgwubnrnnxe2s" path="res://addons/fontawesome/fonts/fa-regular-400.woff2" id="8_ykn3p"]
+[ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="9_h2xon"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7l7aa"]
 bg_color = Color(0, 0.34509805, 0.67058825, 1)
@@ -56,6 +58,9 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8yg7"]
 bg_color = Color(0.262745, 0.643137, 0.843137, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w8xe8"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x52v5"]
 bg_color = Color(0.415686, 0.14902, 0.184314, 1)
@@ -147,7 +152,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
 text = "Bookmark"
 script = ExtResource("3_hssls")
 cardManagerObject = NodePath("../../../../../..")
-bookmarkIcon = NodePath("../../../../../../CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/bookmark")
+bookmarkIcon = NodePath("../../../../../../CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/bookmark")
 
 [node name="CancelSave" type="Button" parent="FacilitatorPanels/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
 visible = false
@@ -220,7 +225,7 @@ Answer
 Answer"
 scroll_active = false
 
-[node name="CardPanel" type="PanelContainer" parent="." node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionObject", "AnswerObject", "AnswerFacilitatorTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "bookmark")]
+[node name="CardPanel" type="PanelContainer" parent="." node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionObject", "AnswerObject", "AnswerFacilitatorTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
 custom_minimum_size = Vector2(600, 300)
 layout_mode = 1
 anchors_preset = 5
@@ -246,7 +251,10 @@ AnswerDTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_An
 BookmarkButton = NodePath("../FacilitatorPanels/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion")
 CancelBookmarkButton = NodePath("../FacilitatorPanels/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/CancelSave")
 UXTagObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG")
-bookmark = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/bookmark")
+ActionTagObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/ActionCardBG")
+bookmark = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/bookmark")
+QuestionIcon = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon/MarginContainer/Question")
+DiscussionIcon = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon/MarginContainer/Discussion")
 
 [node name="CardPanelMarginContainer" type="MarginContainer" parent="CardPanel"]
 custom_minimum_size = Vector2(600, 0)
@@ -265,27 +273,66 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_constants/margin_top = 10
 
-[node name="TypeBG" type="Panel" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox"]
-custom_minimum_size = Vector2(700, 0)
+[node name="TypeBG" type="PanelContainer" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox"]
+custom_minimum_size = Vector2(700, 62)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_b8yg7")
 
-[node name="bookmark" type="TextureRect" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG"]
+[node name="MarginContainer" type="MarginContainer" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="bookmark" type="TextureRect" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer"]
 custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -20.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 texture = ExtResource("5_palqu")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Icon" type="PanelContainer" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_w8xe8")
+
+[node name="MarginContainer" type="MarginContainer" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Question" type="Label" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon/MarginContainer"]
+auto_translate_mode = 2
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("8_ykn3p")
+theme_override_font_sizes/font_size = 40
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_h2xon")
+icon_size = 40
+icon_type = "regular"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="Discussion" type="Label" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon/MarginContainer"]
+auto_translate_mode = 2
+visible = false
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("8_ykn3p")
+theme_override_font_sizes/font_size = 40
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_h2xon")
+icon_size = 40
+icon_type = "regular"
+icon_name = "comments"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="ActionCardBG" type="Panel" parent="CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox"]
 visible = false

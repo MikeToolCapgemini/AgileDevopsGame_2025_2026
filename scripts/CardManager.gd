@@ -120,7 +120,8 @@ func draw(type):
 		print(cQuestion)
 		card_setup(cType,cSubType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer)
 		card_setup.rpc(cType,cSubType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer)
-
+		CardUIManager.UXTagObject.visible = true
+		CardUIManager.ActionTagObject.visible = false
 		set_bg_color.rpc(bgColor)
 		curType = type
 		curKey = d
@@ -158,6 +159,7 @@ func card_discard(cardTypeData,cardTypeDataVar, cardTypeString, keyVar):
 func card_setup(type, subtype, question, choiceA, choiceB, choiceC, choiceD, answer):
 	print("####")
 	print(type)
+	set_card_icon(type)
 	CardUIManager.TypeTextObject.text = type
 	CardUIManager.SubtypeTextObject.text = subtype
 	CardUIManager.QuestionObject.text = question
@@ -167,6 +169,14 @@ func card_setup(type, subtype, question, choiceA, choiceB, choiceC, choiceD, ans
 	CardUIManager.AnswerDTextObject.text = choiceD
 	CardUIManager.AnswerObject.text = answer
 	CardUIManager.AnswerFacilitatorTextObject.text = answer
+
+func set_card_icon(type):
+	if type == "Discussion":
+		CardUIManager.QuestionIcon.visible = false
+		CardUIManager.DiscussionIcon.visible = true
+	if type == "Question":
+		CardUIManager.QuestionIcon.visible = true
+		CardUIManager.DiscussionIcon.visible = false
 
 @rpc("any_peer")
 func _sync_cardshown(state, answer = "-", question = "-"):

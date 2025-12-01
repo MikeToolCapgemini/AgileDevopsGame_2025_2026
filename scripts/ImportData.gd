@@ -70,7 +70,7 @@ func import_data():
 				TestCardData[TestCardData.size()] = Card
 				
 	for Card in CardData:
-		if Card["Type"] == "Question" or "Discussion":
+		if Card["Type"] == "Discussion":
 			if Card["Subtype"] == "Deploy":
 				DeployCardData[DeployCardData.size()] = Card
 				

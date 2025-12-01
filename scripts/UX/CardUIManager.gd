@@ -13,6 +13,8 @@ class_name CardUIManager
 @export var AnswerDTextObject : RichTextLabel
 @export var BookmarkButton : Button
 @export var CancelBookmarkButton : Button
-@export var UXTagObject : Panel
+@export var UXTagObject : PanelContainer
 @export var ActionTagObject : Panel
 @export var bookmark : TextureRect
+@export var QuestionIcon : FontAwesome
+@export var DiscussionIcon : FontAwesome

@@ -32,6 +32,10 @@ window/stretch/aspect="expand"
 
 project/assembly_name="Dev Ops Game V 1.1"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/fontawesome/plugin.cfg")
+
 [input]
 
 mouse_left_click={
