@@ -1,3 +1,4 @@
+class_name Multiplayer
 extends Node
 
 # Basic Server Information
@@ -6,6 +7,7 @@ extends Node
 @export var Port = 8080
 @export var MaxPlayers = 12
 var peer = ENetMultiplayerPeer.new()
+var webPeer = WebSocketMultiplayerPeer.new()
 
 
 func _ready():
@@ -71,26 +73,21 @@ func update_text_field():
 func host_game():
 	var serverCert = load("res://Fullchain.crt")
 	var serverKey = load("res://DevopsPrivate.key")
-	#var error = peer.create_server(Port, "*", TLSOptions.server(serverKey, serverCert))
-	var error = peer.create_server(Port)
+	#var error = webPeer.create_server(Port)
+	var error = webPeer.create_server(Port, "*", TLSOptions.server(serverKey, serverCert))
+	#var error = peer.create_server(Port)
 	print("cannot host: " + str(error))
-	multiplayer.set_multiplayer_peer(peer)
+	multiplayer.set_multiplayer_peer(webPeer)
 	GameManager.You = multiplayer.get_unique_id()
 	print("Waiting for players")
-	print("my id is:" + str(multiplayer.get_unique_id()))
-	var playername
-	if OS.has_feature("dedicated_server"):
-		playername = "dedicated_server"
-		
-	else:
-		playername = $"Debug Interface/NameField".text
-	send_player_information(playername, multiplayer.get_unique_id())
+	send_player_information($"Debug Interface/NameField".text, multiplayer.get_unique_id())
 
 func join_game():
 	var clientCAS = load("res://Fullchain.crt")
-	#peer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
-	peer.create_client(Adress,Port)
-	multiplayer.set_multiplayer_peer(peer)
+	webPeer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
+	#peer.create_client(Adress,Port)
+	#webPeer.create_client("wss://" + Adress + ":" + str(Port))
+	multiplayer.set_multiplayer_peer(webPeer)
 	GameManager.You = multiplayer.get_unique_id()
 	
 

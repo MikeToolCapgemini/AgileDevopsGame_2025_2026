@@ -5,24 +5,40 @@ var DefaultData = {}
 var SaveData = {}
 var currentSave : String = ""
 @export var SaveNameField : LineEdit
-@export var LoadedSavesContainer : VBoxContainer
-@export var LoadBtn : PackedScene
+@export var LoadedSavesContainer : GridContainer
+@export var pawns_path: NodePath
+
+signal save_requested
 
 func save_game():
-	check_save_dir()
 	var saveName = get_save_name()
+	SaveData["DataDiscardedCards"] = GlobalSettings.DataDiscardedCards
+	SaveData["DiscardedCards"] = GlobalSettings.DiscardedCards
+	SaveData["BookmarkedCards"] = GlobalSettings.BookmarkedCards
+	#SaveData["PawnPositions"] = GlobalSettings.PawnPositions
+	if multiplayer.is_server():
+		save_game_file(saveName,SaveData)
+	else:
+		rpc_id(1,"request_saving_game",saveName,SaveData)
+
+
+
+@rpc("any_peer")
+func request_saving_game(saveName: String,saveData):
+	save_game_file(saveName,saveData)
+
+func save_game_file(saveName : String,saveData):
+	check_save_dir()
 	var savePath
 	savePath = SavePath + saveName + ".json"
+		
 	#if currentSave != saveName:
 		#savePath = SavePath + currentSave + ".json"
 	#else:
 		#savePath = SavePath + saveName + ".json"
 		#currentSave = saveName
 	var file = FileAccess.open(savePath, FileAccess.WRITE)
-	SaveData["DataDiscardedCards"] = GlobalSettings.DataDiscardedCards
-	SaveData["DiscardedCards"] = GlobalSettings.DiscardedCards
-	SaveData["BookmarkedCards"] = GlobalSettings.BookmarkedCards
-	var json = JSON.stringify(SaveData)
+	var json = JSON.stringify(saveData)
 	
 	file.store_string(json)
 	file.close()
@@ -32,20 +48,39 @@ func loadSaveGames() :
 	for btn in %LoadedSaves.get_children():
 		btn.queue_free()
 	%LoadedsaveGames.show()
-	var saves = get_save_files()
-	if saves.size() > 0:
+	if multiplayer.is_server():
+		var saves = get_save_files()
+		if saves.size() > 0:
+			LoadSaveButtons(saves)
+		else:
+			print("No Saves Found")
+	else:
+		rpc_id(1,"request_save_files")
+
+
+
+func LoadSaveButtons(saves: Array):
 		for save in saves:
 			print(save)
-			var Loadbutton : Button = LoadBtn.instantiate()
+			var Loadbutton := Button.new()
 			var SaveName: String = save.replace('.json','')
 			Loadbutton.text = SaveName
 			Loadbutton.pressed.connect(func():
 				load_game(save))
 			%LoadedSaves.add_child(Loadbutton)
-	else:
-		print("No Saves Found")
 
 func load_game(saveName : String):
+	SaveNameField.text = saveName.replace('.json','')
+	if multiplayer.is_server():
+		load_game_from_file(saveName)
+	else:
+		rpc_id(1,"request_file_load",saveName)
+
+@rpc('any_peer')
+func request_file_load(saveName: String):
+	load_game_from_file(saveName)
+
+func load_game_from_file(saveName : String):
 	var save = SavePath + saveName
 	var file = FileAccess.open(save, FileAccess.READ)
 	if (file == null):
@@ -56,6 +91,7 @@ func load_game(saveName : String):
 	GlobalSettings.DataDiscardedCards = SaveData["DataDiscardedCards"]
 	GlobalSettings.DiscardedCards = SaveData["DiscardedCards"]
 	GlobalSettings.BookmarkedCards = SaveData["BookmarkedCards"]
+	GlobalSettings.sync_self_to_clients()
 	print("Game loaded...")
 
 func check_save_dir():
@@ -82,6 +118,16 @@ func get_save_files() -> Array:
 			file_name = dir.get_next()
 		dir.list_dir_end()
 	return save_files
+
+@rpc("any_peer")
+func request_save_files():
+	var sender_id = multiplayer.get_remote_sender_id()
+	var saves = get_save_files()
+	rpc_id(sender_id, "receive_save_files", saves)
+
+@rpc("authority")
+func receive_save_files(saves:Array):
+	LoadSaveButtons(saves)
 
 func get_save_name() -> String:
 	var saveName
