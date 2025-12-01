@@ -23,11 +23,6 @@ GlobalColors="*res://scripts/Global/GlobalColors.gd"
 SaveSystem="*res://scripts/Global/SaveSystem.gd"
 GlobalSettings="*res://scripts/Global/GlobalSettings.gd"
 
-[display]
-
-window/stretch/mode="viewport"
-window/stretch/aspect="expand"
-
 [dotnet]
 
 project/assembly_name="Dev Ops Game V 1.1"
