@@ -11,6 +11,16 @@ var is_rolling := false
 @export var returnTimer : Timer
 @export var returnSpeed : float = .5
 
+# ---- variables for client interpolation
+var target_position : Vector3
+var target_rotation : Vector3
+var target_lin_vel : Vector3 = Vector3.ZERO
+var target_ang_vel : Vector3 = Vector3.ZERO
+var interp_speed := 10.0
+var lerp_speed := 10.0
+
+@onready var synchronizer := $DiceSynchronizer
+
 signal roll_finished(value)
 
 #outline variables
@@ -19,15 +29,39 @@ signal roll_finished(value)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if synchronizer:
+		synchronizer.connect("synchronized", Callable(self, "_on_synchronizer_synchronized"))
+		synchronizer.connect("delta_synchronized", Callable(self, "_on_synchronizer_synchronized"))
+
+	if multiplayer.is_server():
+		set_multiplayer_authority(multiplayer.get_unique_id())
+	else:
+		freeze = true
+		sleeping = true
 	start_pos = global_position
 	start_y_rot = global_rotation.y
 
 
+
+func _on_synchronizer_synchronized() -> void:
+	target_position = position
+	target_rotation = rotation
+	target_lin_vel = linear_velocity
+	target_ang_vel = angular_velocity
+
 func _process(delta: float) -> void:
+	if !multiplayer.is_server():
+		global_position = global_position.lerp(target_position, delta * interp_speed)
+		global_rotation = global_rotation.lerp(target_rotation, delta * interp_speed)
+		
 	_update_dice_outline()
 	if hover && Input.is_action_just_pressed("mouse_left_click") && !is_rolling:
 		if !is_rolling:
-			roll()
+			if multiplayer.is_server():
+				roll()
+			else:
+				rpc_id(1, "server_roll")
+			#roll()
 
 func _on_roll_finished(value):
 	set_label_text(str(value))
@@ -45,6 +79,10 @@ func _update_dice_outline():
 		ObjectToColor.material_overlay = OutlineMaterial #enables the outline via enabling the material shader
 	else:
 		ObjectToColor.material_overlay = null #Likewise this disables the outline via the same method.
+
+@rpc("any_peer")
+func server_roll():
+	roll()
 
 func roll():
 	sleeping = false

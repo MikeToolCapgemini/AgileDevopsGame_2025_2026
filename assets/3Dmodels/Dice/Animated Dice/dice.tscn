@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmn848tpgrduh"]
+[gd_scene load_steps=11 format=3 uid="uid://dmn848tpgrduh"]
 
 [ext_resource type="Script" uid="uid://dtgwt65ofg3jg" path="res://assets/3Dmodels/Dice/Animated Dice/dice.gd" id="1_ju2fo"]
 [ext_resource type="PackedScene" uid="uid://cd67gsekt2ymx" path="res://assets/3Dmodels/Dice/Animated Dice/die_raycast_3d.tscn" id="2_m4jp2"]
 [ext_resource type="Texture2D" uid="uid://ra7yq2n7m4fo" path="res://assets/3Dmodels/Dice/Dice.png" id="2_xak8u"]
 [ext_resource type="ArrayMesh" uid="uid://c24oibbkq810a" path="res://assets/3Dmodels/Dice/Dice.obj" id="3_8eu0n"]
 [ext_resource type="Shader" uid="uid://dtq64iucowo6b" path="res://shaders/main.gdshader" id="3_uwug4"]
+[ext_resource type="Script" uid="uid://cxd4swpms2qhr" path="res://assets/3Dmodels/Dice/Animated Dice/dice_synchronizer.gd" id="6_pq2sn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pq2sn"]
 render_priority = 0
@@ -17,6 +18,20 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0c8ac"]
 albedo_texture = ExtResource("2_xak8u")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4pg27"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:linear_velocity")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:angular_velocity")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
 [node name="Dice" type="RigidBody3D" node_paths=PackedStringArray("returnTimer", "ObjectToColor")]
 script = ExtResource("1_ju2fo")
@@ -70,6 +85,10 @@ opposite_side = 3
 
 [node name="ReturnTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="DiceSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4pg27")
+script = ExtResource("6_pq2sn")
 
 [connection signal="mouse_entered" from="." to="." method="_on_body_3d_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_body_3d_mouse_exited"]
