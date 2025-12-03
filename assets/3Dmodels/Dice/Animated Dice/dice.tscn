@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ra7yq2n7m4fo" path="res://assets/3Dmodels/Dice/Dice.png" id="2_xak8u"]
 [ext_resource type="ArrayMesh" uid="uid://c24oibbkq810a" path="res://assets/3Dmodels/Dice/Dice.obj" id="3_8eu0n"]
 [ext_resource type="Shader" uid="uid://dtq64iucowo6b" path="res://shaders/main.gdshader" id="3_uwug4"]
-[ext_resource type="Script" uid="uid://cxd4swpms2qhr" path="res://assets/3Dmodels/Dice/Animated Dice/dice_synchronizer.gd" id="6_pq2sn"]
+[ext_resource type="Script" path="res://assets/3Dmodels/Dice/Animated Dice/dice_synchronizer.gd" id="6_pq2sn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pq2sn"]
 render_priority = 0
