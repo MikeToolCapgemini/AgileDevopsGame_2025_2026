@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dmn848tpgrduh"]
+[gd_scene load_steps=10 format=3 uid="uid://dmn848tpgrduh"]
 
 [ext_resource type="Script" uid="uid://dtgwt65ofg3jg" path="res://assets/3Dmodels/Dice/Animated Dice/dice.gd" id="1_ju2fo"]
 [ext_resource type="PackedScene" uid="uid://cd67gsekt2ymx" path="res://assets/3Dmodels/Dice/Animated Dice/die_raycast_3d.tscn" id="2_m4jp2"]
 [ext_resource type="Texture2D" uid="uid://ra7yq2n7m4fo" path="res://assets/3Dmodels/Dice/Dice.png" id="2_xak8u"]
 [ext_resource type="ArrayMesh" uid="uid://c24oibbkq810a" path="res://assets/3Dmodels/Dice/Dice.obj" id="3_8eu0n"]
 [ext_resource type="Shader" uid="uid://dtq64iucowo6b" path="res://shaders/main.gdshader" id="3_uwug4"]
-[ext_resource type="Script" path="res://assets/3Dmodels/Dice/Animated Dice/dice_synchronizer.gd" id="6_pq2sn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pq2sn"]
 render_priority = 0
@@ -88,7 +87,6 @@ one_shot = true
 
 [node name="DiceSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4pg27")
-script = ExtResource("6_pq2sn")
 
 [connection signal="mouse_entered" from="." to="." method="_on_body_3d_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_body_3d_mouse_exited"]

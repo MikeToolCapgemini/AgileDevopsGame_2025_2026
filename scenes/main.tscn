@@ -1,4 +1,4 @@
-[gd_scene load_steps=193 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=195 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -33,6 +33,7 @@
 [ext_resource type="ArrayMesh" uid="uid://b43mlbc40mwix" path="res://assets/PlayingField/cLogo.obj" id="25_0fbar"]
 [ext_resource type="Material" uid="uid://djhvqdjphsfso" path="res://Materials/OperateBrown.tres" id="25_vdcw4"]
 [ext_resource type="Material" uid="uid://1f7o3gmnp21r" path="res://Materials/MonitorBlue.tres" id="28_5raag"]
+[ext_resource type="PackedScene" uid="uid://caqw2dnkgwhrt" path="res://assets/3Dmodels/Hourglass/hourglass_animated.tscn" id="31_wvlrk"]
 [ext_resource type="ArrayMesh" uid="uid://cvhi2w0mt62l8" path="res://assets/3Dmodels/PlayerModels/PurplePlayer2.obj" id="37_08rwi"]
 [ext_resource type="Script" uid="uid://cgi4v4ccbscpm" path="res://scripts/Pawn.gd" id="37_d7tjx"]
 [ext_resource type="ArrayMesh" uid="uid://bhlpt1ka2drrj" path="res://assets/3Dmodels/PlayerModels/PurplePlayer1.obj" id="37_quj2y"]
@@ -88,6 +89,7 @@
 [ext_resource type="Script" uid="uid://j2ei46pc4ata" path="res://scripts/UX/DelayedHide.gd" id="53_u67wn"]
 [ext_resource type="PackedScene" uid="uid://dmn848tpgrduh" path="res://assets/3Dmodels/Dice/Animated Dice/dice.tscn" id="56_vrx01"]
 [ext_resource type="Texture2D" uid="uid://eayil001qvqf" path="res://assets/3Dmodels/CardDecks/TestingDeck.png" id="57_v1ccq"]
+[ext_resource type="FontFile" uid="uid://blhm6j4s1uy2f" path="res://assets/fonts/Ubuntu/Ubuntu-Medium.ttf" id="58_engxj"]
 [ext_resource type="Script" uid="uid://1kxnvwbcvkqf" path="res://scripts/BookmarkedList.gd" id="73_6nfnn"]
 [ext_resource type="Script" uid="uid://yhh3kfgvk00x" path="res://scripts/UX/CardUIManager.gd" id="81_4ue30"]
 [ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
@@ -228,15 +230,15 @@ size = Vector3(1, 1, 1.0571289)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2dde"]
 albedo_texture = ExtResource("52_fjhjs")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_oyljp"]
+viewport_path = NodePath("World/Interactables/Timer/StaticBody3D/3DLabel/SubViewport")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd1xg"]
 albedo_texture = ExtResource("42_bp8v8")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_dxvl1"]
 height = 3.0109863
 radius = 0.66015625
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_oyljp"]
-viewport_path = NodePath("World/Interactables/Timer/StaticBody3D/3DLabel/SubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v0wtd"]
 
@@ -1184,8 +1186,42 @@ LabelObject = NodePath("../DiceLabel/SubViewport/Label")
 roll_strength = 8
 returnSpeed = 0.8
 
+[node name="hourglassAnimated" parent="World/Interactables" node_paths=PackedStringArray("EditMinObject", "EditSecObject", "InterruptUI", "LabelObject") instance=ExtResource("31_wvlrk")]
+transform = Transform3D(-2.7097084e-08, 0, 0.6003961, 0, 0.62, 0, -0.64024085, 0, -2.7104909e-08, -1.6736532, 0.03572201, 4.5901628)
+EditMinObject = NodePath("../../../Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditMinutes")
+EditSecObject = NodePath("../../../Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditSeconds")
+InterruptUI = NodePath("../../../Interface_InterruptFacilitator2")
+LabelObject = NodePath("3DLabel/SubViewport/HourglassLabel")
+
+[node name="3DLabel" type="Sprite3D" parent="World/Interactables/hourglassAnimated"]
+transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 0, 4.17, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_oyljp")
+
+[node name="SubViewport" type="SubViewport" parent="World/Interactables/hourglassAnimated/3DLabel" node_paths=PackedStringArray("Labelobject")]
+transparent_bg = true
+size = Vector2i(50, 50)
+script = ExtResource("38_g5xr8")
+Labelobject = NodePath("HourglassLabel")
+
+[node name="HourglassLabel" type="Label" parent="World/Interactables/hourglassAnimated/3DLabel/SubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -13.0
+offset_right = 20.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("58_engxj")
+text = "[00:00]"
+
 [node name="Timer" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject")]
 transform = Transform3D(0.366, 0, 0, 0, 0.366, 0, 0, 0, 0.366, -1.2657995, 0.401228, 4.9685917)
+visible = false
 script = ExtResource("39_g6ss1")
 LabelObject = NodePath("StaticBody3D/3DLabel/SubViewport/Label")
 
@@ -1202,7 +1238,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5091847, 0)
 shape = SubResource("CylinderShape3D_dxvl1")
 
 [node name="3DLabel" type="Sprite3D" parent="World/Interactables/Timer/StaticBody3D"]
-transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 0, 4.17, 0)
+transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 4.5851054, 4.17, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_oyljp")
 
@@ -1217,9 +1253,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -26.0
 offset_top = -13.0
-offset_right = 20.0
+offset_right = 26.0
 offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -1770,7 +1806,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_wvlrk")
 text = "Stop
 "
 
-[node name="Set" type="Button" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Set" type="Button" parent="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("hideObject")]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -1781,6 +1817,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_xmrkg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wvlrk")
 text = "Set"
 script = ExtResource("49_4jv7h")
+hideObject = NodePath("../../../../../SetTimerPanel")
 
 [node name="FacilitatorsideBtns" type="HBoxContainer" parent="Interface_Facilitator"]
 layout_mode = 1
@@ -3227,6 +3264,10 @@ visible = false
 [connection signal="mouse_exited" from="World/Interactables/Cards7/StaticBody3D" to="World/Interactables/Cards7" method="_on_static_body_3d_mouse_exited"]
 [connection signal="mouse_entered" from="World/Interactables/Cards8/StaticBody3D" to="World/Interactables/Cards8" method="_on_static_body_3d_mouse_entered"]
 [connection signal="mouse_exited" from="World/Interactables/Cards8/StaticBody3D" to="World/Interactables/Cards8" method="_on_static_body_3d_mouse_exited"]
+[connection signal="pressed" from="Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/Set" to="World/Interactables/hourglassAnimated" method="_on_set_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/StartButton" to="World/Interactables/hourglassAnimated" method="_on_start_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/ResetButton" to="World/Interactables/hourglassAnimated" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/StopButton" to="World/Interactables/hourglassAnimated" method="_on_stop_button_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/Set" to="Interface_Facilitator/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/Set" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton" to="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/SaveGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_save_game_button_pressed"]
