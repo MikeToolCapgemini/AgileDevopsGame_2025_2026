@@ -307,7 +307,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(1, 1, 1)]
+"values": [Vector3(1, 1, 0.01)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -319,7 +319,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(1, 0.00999999, 1)]
+"values": [Vector3(1, 1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -549,7 +549,7 @@ mesh = SubResource("ArrayMesh_b4m5t")
 skeleton = NodePath("")
 
 [node name="bottomSand" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.00999999, 0, 0, 0, 1, -0.0018243561, 0.21211343, 0.4512367)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0018243561, 0.21211343, 0.4512367)
 mesh = SubResource("ArrayMesh_ejpl4")
 skeleton = NodePath("")
 
@@ -559,7 +559,7 @@ mesh = SubResource("ArrayMesh_qerep")
 skeleton = NodePath("")
 
 [node name="topSand" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.00086142006, 1.8933237, 0.273322)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -0.01, 0, 1, -4.3711387e-10, 0.00086142006, 1.8933237, 0.273322)
 mesh = SubResource("ArrayMesh_vypva")
 skeleton = NodePath("")
 

@@ -33,8 +33,9 @@ func _process(delta):
 	var secondsText = int(currentTime) % 60
 	var coolString = "[" + str(minutesText) + ":" + str(secondsText) + "]"
 	#print(coolString)
-	#print(LabelObject.text)
+	print(LabelObject.text)
 	LabelObject.text = str(coolString)
+	LabelObject.queue_redraw()
 
 
 var animation_duration : float
@@ -55,9 +56,12 @@ func _on_start_button_pressed():
 	_start_animation(newTime)
 	pass # Replace with function body.
 
+func reset_speed():
+	animator.speed_scale = 1
+
 func _on_reset_button_pressed():
 	currentTime = newTime
-	animator.speed_scale = 1
+	reset_speed()
 	_reset_animation()
 	pass # Replace with function body.
 
