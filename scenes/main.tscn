@@ -1,4 +1,4 @@
-[gd_scene load_steps=195 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=198 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -443,6 +443,39 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37xlc"]
+bg_color = Color(1, 0.30588236, 0.3019608, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83607"]
+bg_color = Color(1, 0.30588236, 0.3019608, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vny5k"]
+bg_color = Color(0.999999, 0.20262602, 0.23371297, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k42av"]
 
@@ -1186,25 +1219,18 @@ LabelObject = NodePath("../DiceLabel/SubViewport/Label")
 roll_strength = 8
 returnSpeed = 0.8
 
-[node name="hourglassAnimated" parent="World/Interactables" node_paths=PackedStringArray("EditMinObject", "EditSecObject", "InterruptUI", "LabelObject") instance=ExtResource("31_wvlrk")]
-transform = Transform3D(-2.7097084e-08, 0, 0.6003961, 0, 0.62, 0, -0.64024085, 0, -2.7104909e-08, -1.6736532, 0.03572201, 4.5901628)
-EditMinObject = NodePath("../../../Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditMinutes")
-EditSecObject = NodePath("../../../Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditSeconds")
-InterruptUI = NodePath("../../../Interface_InterruptFacilitator2")
-LabelObject = NodePath("3DLabel/SubViewport/HourglassLabel")
-
-[node name="3DLabel" type="Sprite3D" parent="World/Interactables/hourglassAnimated"]
-transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 0, 4.17, 0)
+[node name="3DLabel" type="Sprite3D" parent="World/Interactables"]
+transform = Transform3D(-0.2214588, -1.1796012, 1.1796012, 0, 1.2011138, 1.2011138, -1.6858971, 0.23276514, -0.23276514, -1.6839311, 3.5167432, 4.427964)
 billboard = 1
 texture = SubResource("ViewportTexture_oyljp")
 
-[node name="SubViewport" type="SubViewport" parent="World/Interactables/hourglassAnimated/3DLabel" node_paths=PackedStringArray("Labelobject")]
+[node name="SubViewport" type="SubViewport" parent="World/Interactables/3DLabel" node_paths=PackedStringArray("Labelobject")]
 transparent_bg = true
 size = Vector2i(50, 50)
 script = ExtResource("38_g5xr8")
 Labelobject = NodePath("HourglassLabel")
 
-[node name="HourglassLabel" type="Label" parent="World/Interactables/hourglassAnimated/3DLabel/SubViewport"]
+[node name="HourglassLabel" type="Label" parent="World/Interactables/3DLabel/SubViewport"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1218,6 +1244,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("58_engxj")
 text = "[00:00]"
+
+[node name="hourglassAnimated" parent="World/Interactables" node_paths=PackedStringArray("EditMinObject", "EditSecObject", "InterruptUI", "LabelObject") instance=ExtResource("31_wvlrk")]
+transform = Transform3D(0.27134666, 0, 0.35325634, 0, 0.45, 0, -0.37761885, 0, 0.25384042, -1.6839311, 0.7542974, 4.427964)
+EditMinObject = NodePath("../../../Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditMinutes")
+EditSecObject = NodePath("../../../Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditSeconds")
+InterruptUI = NodePath("../../../Interface_InterruptFacilitator2")
+LabelObject = NodePath("../3DLabel/SubViewport/HourglassLabel")
 
 [node name="Timer" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject")]
 transform = Transform3D(0.366, 0, 0, 0, 0.366, 0, 0, 0, 0.366, -1.2657995, 0.401228, 4.9685917)
@@ -3110,7 +3143,7 @@ layout_mode = 2
 theme_override_constants/separation = 5
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(158, 28)
+custom_minimum_size = Vector2(140, 28)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
@@ -3143,6 +3176,18 @@ text = "Show to Players"
 script = ExtResource("52_4vkqy")
 InterruptUIPlayers = NodePath("../../../../../Interface_Interrupt")
 InterruptUIFac = NodePath("../../../..")
+
+[node name="Hide" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(43, 43)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_37xlc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_83607")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vny5k")
+text = "X"
+script = ExtResource("49_4jv7h")
+hideObject = NodePath("../../../..")
 
 [node name="Interface_Interrupt" type="Control" parent="."]
 visible = false
@@ -3294,4 +3339,5 @@ visible = false
 [connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Resume" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" method="_on_pressed"]
+[connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Hide" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Hide" method="_on_pressed"]
 [connection signal="visibility_changed" from="Interface_Interrupt" to="Interface_Interrupt" method="_on_visibility_changed"]

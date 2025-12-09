@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://caqw2dnkgwhrt"]
+[gd_scene load_steps=28 format=4 uid="uid://caqw2dnkgwhrt"]
 
 [ext_resource type="Script" uid="uid://brej21hn3ujic" path="res://assets/3Dmodels/Hourglass/hourglass_animated.gd" id="1_o248h"]
 
@@ -509,10 +509,87 @@ tracks/4/keys = {
 "values": [Vector3(0.0008614231, 2.61965, 0.041574135)]
 }
 
+[sub_resource type="Animation" id="Animation_bktnb"]
+resource_name = "SandFlow_Flipped"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D/topSand:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 0.01), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D/bottomSand:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.4333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.01, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node3D/Middlesand:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 1.44),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 4.5), Vector3(1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Node3D/topSand:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Node3D/Middlesand:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.02, 1.4333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.00086142006, 1.8933237, 0.041574128), Vector3(0.001, 2.5, 0.042)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.1415927, 0.9477138, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_272bh"]
 _data = {
 &"RESET": SubResource("Animation_7mycd"),
 &"SandFlow": SubResource("Animation_lquwl"),
+&"SandFlow_Flipped": SubResource("Animation_bktnb"),
 &"Spin": SubResource("Animation_cr4lx")
 }
 

@@ -1,7 +1,8 @@
 extends Node3D
 
 
-@onready var animator  := $AnimationPlayer
+@onready var animator  := $Node3D/AnimationPlayer
+@onready var SpinTimer := $SpinTimer
 
 var currentTime = 900
 var newTime = 900
@@ -16,6 +17,7 @@ func _ready():
 	var tempV = 3
 	currentTime = tempV
 	newTime = tempV
+	SpinTimer.wait_time = animator.get_animation("Spin").length
 	pass # Replace with function body.
 
 
@@ -24,7 +26,6 @@ func _process(delta):
 	if timerRunning:
 		if currentTime <= 0:
 			timerRunning = false
-			interrupt()
 		currentTime = currentTime - (1*delta)
 	
 	
@@ -32,33 +33,31 @@ func _process(delta):
 	var secondsText = int(currentTime) % 60
 	var coolString = "[" + str(minutesText) + ":" + str(secondsText) + "]"
 	#print(coolString)
-	print(LabelObject.text)
+	#print(LabelObject.text)
 	LabelObject.text = str(coolString)
 
 
+var animation_duration : float
 func _start_animation(target_duration : float):
-	_reset_animation()
-	var anim_length = animator.get_animation("SandFlow").length
-	if target_duration == null:
-		target_duration = anim_length
-	var speed_scale = anim_length / target_duration
-	animator.speed_scale = speed_scale
-	animator.play("SandFlow")
+	animator.queue("Spin")
+	animation_duration = target_duration
+	SpinTimer.start()
+	
+	animator.queue("SandFlow")
 
 func _stop_animation():
-	_reset_animation()
-	animator.stop()
+	animator.pause()
 
 func _reset_animation():
 	animator.play("RESET")
 
 func _on_start_button_pressed():
-	timerRunning = true
 	_start_animation(newTime)
 	pass # Replace with function body.
 
 func _on_reset_button_pressed():
 	currentTime = newTime
+	animator.speed_scale = 1
 	_reset_animation()
 	pass # Replace with function body.
 
@@ -75,3 +74,18 @@ func _on_set_pressed():
 func interrupt():
 	InterruptUI.visible = true
 	pass
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	print(anim_name + " is finished")
+	if anim_name == "SandFlow":
+		interrupt()
+
+
+func _on_spin_timer_timeout() -> void:
+	timerRunning = true
+	var anim_length = animator.get_animation("SandFlow").length
+	if animation_duration == null:
+		animation_duration = anim_length
+	var speed_scale = anim_length / animation_duration
+	animator.speed_scale = speed_scale
