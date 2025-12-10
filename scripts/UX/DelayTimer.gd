@@ -4,7 +4,7 @@ extends Node
 
 @rpc("any_peer", "call_local")
 func _on_pressed():
-	TimerObject.reset_speed()
-	TimerObject.currentTime += 300
-	TimerObject._start_animation(TimerObject.currentTime)
+	TimerObject.reset_speed.rpc()
+	TimerObject.updateTime.rpc(300)
+	TimerObject._start_animation.rpc(TimerObject.currentTime)
 	InterruptUIFac.visible = false

@@ -22,6 +22,7 @@ ImportData="*res://scripts/ImportData.gd"
 GlobalColors="*res://scripts/Global/GlobalColors.gd"
 SaveSystem="*res://scripts/Global/SaveSystem.gd"
 GlobalSettings="*res://scripts/Global/GlobalSettings.gd"
+PlayerSettings="*res://scripts/Global/PlayerSettings.gd"
 
 [dotnet]
 

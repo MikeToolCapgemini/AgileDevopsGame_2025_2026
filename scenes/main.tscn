@@ -230,7 +230,7 @@ size = Vector3(1, 1, 1.0571289)
 albedo_texture = ExtResource("52_fjhjs")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_oyljp"]
-viewport_path = NodePath("World/Interactables/3DLabel/HourglassViewPort")
+viewport_path = NodePath("World/Interactables/Hourglass3DLabel/HourglassViewPort")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd1xg"]
 albedo_texture = ExtResource("42_bp8v8")
@@ -1218,18 +1218,18 @@ LabelObject = NodePath("../DiceLabel/SubViewport/Label")
 roll_strength = 8
 returnSpeed = 0.8
 
-[node name="3DLabel" type="Sprite3D" parent="World/Interactables"]
+[node name="Hourglass3DLabel" type="Sprite3D" parent="World/Interactables"]
 transform = Transform3D(-0.2214588, -1.1796012, 1.1796012, 0, 1.2011138, 1.2011138, -1.6858971, 0.23276514, -0.23276514, -1.6426096, 1.7972403, 4.4082575)
 billboard = 1
 texture = SubResource("ViewportTexture_oyljp")
 
-[node name="HourglassViewPort" type="SubViewport" parent="World/Interactables/3DLabel" node_paths=PackedStringArray("Labelobject")]
+[node name="HourglassViewPort" type="SubViewport" parent="World/Interactables/Hourglass3DLabel" node_paths=PackedStringArray("Labelobject")]
 transparent_bg = true
 size = Vector2i(50, 50)
 script = ExtResource("38_g5xr8")
 Labelobject = NodePath("HourglassLabel")
 
-[node name="HourglassLabel" type="Label" parent="World/Interactables/3DLabel/HourglassViewPort"]
+[node name="HourglassLabel" type="Label" parent="World/Interactables/Hourglass3DLabel/HourglassViewPort"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1245,11 +1245,11 @@ theme_override_fonts/font = ExtResource("58_engxj")
 text = "[00:00]"
 
 [node name="hourglassAnimated" parent="World/Interactables" node_paths=PackedStringArray("EditMinObject", "EditSecObject", "InterruptUI", "LabelObject") instance=ExtResource("31_wvlrk")]
-transform = Transform3D(0.27134666, 0, 0.35325637, 0, 0.45, 0, -0.37761885, 0, 0.25384045, -1.6839311, 0.7542974, 4.427964)
+transform = Transform3D(0.27134666, 0, 0.3532564, 0, 0.45, 0, -0.37761885, 0, 0.25384048, -1.6839311, 0.7542974, 4.427964)
 EditMinObject = NodePath("../../../Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditMinutes")
 EditSecObject = NodePath("../../../Interface_Facilitator/TimerPanels/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditSeconds")
 InterruptUI = NodePath("../../../Interface_InterruptFacilitator2")
-LabelObject = NodePath("../3DLabel/HourglassViewPort/HourglassLabel")
+LabelObject = NodePath("../Hourglass3DLabel/HourglassViewPort/HourglassLabel")
 
 [node name="Timer" type="Node3D" parent="World/Interactables"]
 transform = Transform3D(0.366, 0, 0, 0, 0.366, 0, 0, 0, 0.366, -1.2657995, 0.401228, 4.9685917)

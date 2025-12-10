@@ -21,63 +21,74 @@ func _ready():
 	pass # Replace with function body.
 
 
+	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if timerRunning:
 		if currentTime <= 0:
-			timerRunning = false
+			setTimerRunning.rpc(false)
 		currentTime = currentTime - (1*delta)
 	
 	
 	var minutesText = int(currentTime) / 60
 	var secondsText = int(currentTime) % 60
 	var coolString = "[" + str(minutesText) + ":" + str(secondsText) + "]"
-	#print(coolString)
-	print(LabelObject.text)
 	LabelObject.text = str(coolString)
-	LabelObject.queue_redraw()
 
 
 var animation_duration : float
+@rpc("any_peer", "call_local")
 func _start_animation(target_duration : float):
 	animator.queue("Spin")
 	animation_duration = target_duration
 	SpinTimer.start()
 	
 	animator.queue("SandFlow")
-
+	
+@rpc("any_peer", "call_local")
 func _stop_animation():
 	animator.pause()
-
+	
+@rpc("any_peer", "call_local")
 func _reset_animation():
 	animator.play("RESET")
 
 func _on_start_button_pressed():
-	_start_animation(newTime)
-	pass # Replace with function body.
+	_start_animation.rpc(newTime)
 
+@rpc("any_peer", "call_local")
 func reset_speed():
 	animator.speed_scale = 1
 
 func _on_reset_button_pressed():
-	currentTime = newTime
-	reset_speed()
-	_reset_animation()
+	updateTime.rpc(newTime)
+	setTimerRunning.rpc(false)
+	reset_speed.rpc()
+	_reset_animation.rpc()
 	pass # Replace with function body.
 
 func _on_stop_button_pressed():
-	timerRunning = false
-	_stop_animation()
+	setTimerRunning.rpc(false)
+	_stop_animation.rpc()
 	pass # Replace with function body.
+
+@rpc("any_peer","call_local")
+func setTimerRunning(running: bool):
+	timerRunning = running
+
+@rpc("any_peer", "call_local")
+func updateTime(updatedTime : float):
+	newTime = updatedTime
+	currentTime = newTime
 
 func _on_set_pressed():
 	var minToSec = int(EditMinObject.text) * 60
-	newTime = int(EditSecObject.text) + minToSec
-	currentTime = newTime
+	updateTime.rpc(int(EditSecObject.text) + minToSec)
 
 func interrupt():
-	InterruptUI.visible = true
-	pass
+	if PlayerSettings.role == "facilitator":
+		InterruptUI.visible = true
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -87,7 +98,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_spin_timer_timeout() -> void:
-	timerRunning = true
+	setTimerRunning.rpc(true)
 	var anim_length = animator.get_animation("SandFlow").length
 	if animation_duration == null:
 		animation_duration = anim_length
