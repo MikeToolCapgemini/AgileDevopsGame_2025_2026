@@ -1,3 +1,4 @@
+class_name Pawn
 extends Node3D
 
 @export var CameraObject : Camera3D

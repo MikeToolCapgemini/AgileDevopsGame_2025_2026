@@ -16,9 +16,11 @@ func _swap_icon():
 
 func _on_collapse_open():
 	collapse.open_tween()
+	folded = false
 	
 func _on_collapse_close():
 	collapse.close_tween()
+	folded = true
 	
 func _toggle_collapse():
 	if folded:

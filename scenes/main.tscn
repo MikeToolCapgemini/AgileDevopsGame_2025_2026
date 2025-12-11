@@ -1,4 +1,4 @@
-[gd_scene load_steps=203 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=204 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -379,6 +379,18 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ga3rw"]
+bg_color = Color(0.56078434, 0.19607843, 0.21568628, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.5058824, 0.43137255, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7l7aa"]
 bg_color = Color(0, 0.34509805, 0.67058825, 1)
@@ -888,10 +900,11 @@ horizontal_alignment = 1
 
 [node name="Interactables" type="Node3D" parent="World"]
 
-[node name="Pawns" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("CameraObject", "WorldObject")]
+[node name="Pawns" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("CameraObject", "WorldObject", "pawns")]
 script = ExtResource("6_u5dtp")
 CameraObject = NodePath("../../../Camera3D")
 WorldObject = NodePath(".")
+pawns = [NodePath("Pawn0"), NodePath("Pawn1"), NodePath("Pawn2"), NodePath("Pawn3"), NodePath("Pawn4"), NodePath("Pawn5"), NodePath("Pawn6"), NodePath("Pawn7"), NodePath("Pawn8"), NodePath("Pawn9"), NodePath("Pawn10"), NodePath("Pawn11"), NodePath("Pawn12"), NodePath("Pawn13"), NodePath("Pawn14"), NodePath("Pawn15")]
 
 [node name="Pawn0" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.64913, 0, -3.31022)
@@ -1247,7 +1260,7 @@ mesh = ExtResource("53_bfu41")
 skeleton = NodePath("../..")
 
 [node name="Dice" parent="World/Interactables" node_paths=PackedStringArray("LabelObject") instance=ExtResource("56_vrx01")]
-transform = Transform3D(0.32604668, 0, 0.9453537, 0, 1, 0, -0.9453537, 0, 0.32604668, -0.7334024, 0.20816578, 4.0923376)
+transform = Transform3D(0.32604668, 0, 0.9453537, 0, 1, 0, -0.9453537, 0, 0.32604668, -0.7334024, 0.20816578, 3.9809027)
 LabelObject = NodePath("../DiceLabel/SubViewport/Label")
 roll_strength = 8
 returnSpeed = 0.8
@@ -1279,7 +1292,7 @@ theme_override_fonts/font = ExtResource("58_engxj")
 text = "[00:00]"
 
 [node name="hourglassAnimated" parent="World/Interactables" node_paths=PackedStringArray("EditMinObject", "EditSecObject", "InterruptUI", "LabelObject") instance=ExtResource("31_wvlrk")]
-transform = Transform3D(0.27134666, 0, 0.3532564, 0, 0.45, 0, -0.37761885, 0, 0.25384048, -1.6839311, 0.7542974, 4.427964)
+transform = Transform3D(0.27134666, 0, 0.3532564, 0, 0.45, 0, -0.37761885, 0, 0.25384048, -1.5627818, 0.7542974, 4.6778045)
 EditMinObject = NodePath("../../../Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/SetTimer/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditMinutes")
 EditSecObject = NodePath("../../../Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/SetTimer/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditSeconds")
 InterruptUI = NodePath("../../../Interface_InterruptFacilitator2")
@@ -2006,7 +2019,7 @@ icon_name = "x"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="DiscardPileButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns" node_paths=PackedStringArray("discardedList", "bookmarkedList", "hideObject")]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(50, 40)
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("87_1uevf")
@@ -2014,14 +2027,55 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_mgpkq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xmrkg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wvlrk")
-text = "Discard Pile & Bookmarks"
 script = ExtResource("73_6nfnn")
 discardedList = NodePath("../../../Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/DiscardedCardsContainer/DiscardedCardsText")
 bookmarkedList = NodePath("../../../Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/BookmarkedCardsContainer/BookmarkedText")
 hideObject = NodePath("../../../Interface_DiscardPile")
 
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton"]
+layout_mode = 0
+offset_right = 51.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="FontAwesome" type="Label" parent="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton/MarginContainer/HBoxContainer"]
+auto_translate_mode = 2
+layout_mode = 2
+size_flags_vertical = 1
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 20
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 20
+icon_name = "bookmark"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="FontAwesome2" type="Label" parent="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton/MarginContainer/HBoxContainer"]
+auto_translate_mode = 2
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 20
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 20
+icon_name = "list"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
 [node name="ResetPawnPositionButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(50, 40)
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("87_1uevf")
@@ -2029,7 +2083,48 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_mgpkq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xmrkg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wvlrk")
-text = "Reset Pawn Positions"
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton"]
+layout_mode = 0
+offset_right = 21.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="FontAwesome" type="Label" parent="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton/MarginContainer/HBoxContainer"]
+auto_translate_mode = 2
+layout_mode = 2
+size_flags_vertical = 1
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 25
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 25
+icon_name = "chess-pawn"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="FontAwesome2" type="Label" parent="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton/MarginContainer/HBoxContainer"]
+auto_translate_mode = 2
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 20
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 20
+icon_name = "rotate-left"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="SaveGameButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns"]
 visible = false
@@ -2080,25 +2175,81 @@ text = "Basic Rules"
 script = SubResource("GDScript_kvygq")
 
 [node name="Interface_Buttons" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="Interface_Buttons"]
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Buttons"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -188.0
-offset_right = -10.0
-offset_bottom = 209.0
+offset_left = -158.0
+offset_bottom = 223.0
+grow_horizontal = 0
+
+[node name="OpenOptionsButton" type="Button" parent="Interface_Buttons/MarginContainer" node_paths=PackedStringArray("collapse")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_yton5")
+script = ExtResource("78_raiwf")
+collapse = NodePath("../OptionsContianer")
+folded = true
+
+[node name="FontAwesome" type="Label" parent="Interface_Buttons/MarginContainer/OpenOptionsButton"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 35
+icon_name = "gear"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="OptionsContianer" type="Control" parent="Interface_Buttons/MarginContainer"]
+process_mode = 3
+editor_description = "
+			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
+			
+Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
+clip_contents = true
+custom_minimum_size = Vector2(158, 223)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+script = ExtResource("78_engxj")
+starts_opened = false
+folding_direction_preset = 1
+sizing_node = NodePath("PanelContainer")
+metadata/_custom_type_script = "uid://btlh4wrv04rc3"
+
+[node name="PanelContainer" type="PanelContainer" parent="Interface_Buttons/MarginContainer/OptionsContianer"]
+layout_mode = 0
+offset_right = 158.0
+offset_bottom = 223.0
 grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1gnkp")
 
-[node name="MarginContainer" type="MarginContainer" parent="Interface_Buttons/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/margin_left = 10
@@ -2106,13 +2257,13 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 25
 
-[node name="AllButtons" type="VBoxContainer" parent="Interface_Buttons/PanelContainer/MarginContainer"]
+[node name="AllButtons" type="VBoxContainer" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 25
 
-[node name="Options" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons" node_paths=PackedStringArray("showObject")]
+[node name="Options" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons" node_paths=PackedStringArray("showObject")]
 custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2132,13 +2283,13 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Options"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../Interface_Options")
+showObject = NodePath("../../../../../../../Interface_Options")
 
-[node name="GuidesTitle" type="VBoxContainer" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons"]
+[node name="GuidesTitle" type="VBoxContainer" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="GuidesLabel" type="RichTextLabel" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle"]
+[node name="GuidesLabel" type="RichTextLabel" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle"]
 custom_minimum_size = Vector2(75, 26)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
@@ -2147,7 +2298,7 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center]Guides[/center]"
 
-[node name="GuideFoldableContainer" type="Control" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle"]
+[node name="GuideFoldableContainer" type="Control" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle"]
 process_mode = 3
 editor_description = "
 			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
@@ -2159,19 +2310,20 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 script = ExtResource("78_engxj")
+starts_opened = false
 folding_direction_preset = 10
 sizing_constraint = 1
 sizing_node = NodePath("Guides")
 metadata/_custom_type_script = "uid://btlh4wrv04rc3"
 
-[node name="Guides" type="VBoxContainer" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer"]
+[node name="Guides" type="VBoxContainer" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 167.0
 grow_horizontal = 2
 
-[node name="Preperation" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides" node_paths=PackedStringArray("showObject")]
+[node name="Preperation" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides" node_paths=PackedStringArray("showObject")]
 custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2191,9 +2343,9 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Preperation"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../../../Interface_Slideout_H2P")
+showObject = NodePath("../../../../../../../../../../Interface_Slideout_H2P")
 
-[node name="HowtoPlay" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides" node_paths=PackedStringArray("showObject")]
+[node name="HowtoPlay" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides" node_paths=PackedStringArray("showObject")]
 custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2213,9 +2365,9 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "How to play"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../../../Interface_Slideout_H2P2")
+showObject = NodePath("../../../../../../../../../../Interface_Slideout_H2P2")
 
-[node name="facilitatorkit" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides" node_paths=PackedStringArray("showObject")]
+[node name="facilitatorkit" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides" node_paths=PackedStringArray("showObject")]
 custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2235,9 +2387,9 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Facilitator Kit"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../../../Interface_Slideout_FacK")
+showObject = NodePath("../../../../../../../../../../Interface_Slideout_FacK")
 
-[node name="GuidesListOpener" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle" node_paths=PackedStringArray("collapse", "iconToSwap")]
+[node name="GuidesListOpener" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle" node_paths=PackedStringArray("collapse", "iconToSwap")]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_8lcmr")
@@ -2247,7 +2399,7 @@ iconToSwap = NodePath("FontAwesome")
 foldedIcon = "caret-down"
 unfoldedIcon = "caret-up"
 
-[node name="FontAwesome" type="Label" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuidesListOpener"]
+[node name="FontAwesome" type="Label" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuidesListOpener"]
 auto_translate_mode = 2
 layout_mode = 1
 anchors_preset = 8
@@ -2271,11 +2423,11 @@ script = ExtResource("88_wvlrk")
 icon_name = "caret-down"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
-[node name="QRTitle" type="VBoxContainer" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons"]
+[node name="QRTitle" type="VBoxContainer" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="QuickReferenceLabel" type="RichTextLabel" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle"]
+[node name="QuickReferenceLabel" type="RichTextLabel" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle"]
 custom_minimum_size = Vector2(130, 26)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
@@ -2284,7 +2436,7 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center]Quick reference[/center]"
 
-[node name="QuickRefFoldableContainer2" type="Control" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle"]
+[node name="QuickRefFoldableContainer2" type="Control" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle"]
 process_mode = 3
 editor_description = "
 			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
@@ -2296,19 +2448,20 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 script = ExtResource("78_engxj")
+starts_opened = false
 folding_direction_preset = 10
 sizing_constraint = 1
 sizing_node = NodePath("QuickReference")
 metadata/_custom_type_script = "uid://btlh4wrv04rc3"
 
-[node name="QuickReference" type="VBoxContainer" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2"]
+[node name="QuickReference" type="VBoxContainer" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 167.0
 grow_horizontal = 2
 
-[node name="Rules" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference" node_paths=PackedStringArray("showObject")]
+[node name="Rules" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference" node_paths=PackedStringArray("showObject")]
 custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2328,9 +2481,9 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Rules"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../../../Interface_Slideout_QuickRef")
+showObject = NodePath("../../../../../../../../../../Interface_Slideout_QuickRef")
 
-[node name="ExtraRules" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference" node_paths=PackedStringArray("showObject")]
+[node name="ExtraRules" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference" node_paths=PackedStringArray("showObject")]
 custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2350,9 +2503,9 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Extra Rules"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../../../Interface_Slideout_QuickRef+")
+showObject = NodePath("../../../../../../../../../../Interface_Slideout_QuickRef+")
 
-[node name="Interrupts" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference" node_paths=PackedStringArray("showObject")]
+[node name="Interrupts" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference" node_paths=PackedStringArray("showObject")]
 custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2372,9 +2525,9 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Interrupts"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../../../Interface_Slideout_Interrupts")
+showObject = NodePath("../../../../../../../../../../Interface_Slideout_Interrupts")
 
-[node name="QRListOpener" type="Button" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle" node_paths=PackedStringArray("collapse", "iconToSwap")]
+[node name="QRListOpener" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle" node_paths=PackedStringArray("collapse", "iconToSwap")]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_8lcmr")
@@ -2384,7 +2537,7 @@ iconToSwap = NodePath("FontAwesome")
 foldedIcon = "caret-down"
 unfoldedIcon = "caret-up"
 
-[node name="FontAwesome" type="Label" parent="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle/QRListOpener"]
+[node name="FontAwesome" type="Label" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QRListOpener"]
 auto_translate_mode = 2
 layout_mode = 1
 anchors_preset = 8
@@ -2406,6 +2559,44 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("88_wvlrk")
 icon_name = "caret-down"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="CloseTimerButton" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -25.0
+offset_bottom = 25.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ga3rw")
+
+[node name="FontAwesome" type="Label" parent="Interface_Buttons/MarginContainer/OptionsContianer/CloseTimerButton"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 15
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 15
+icon_name = "x"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Interface_Cards" type="Control" parent="." node_paths=PackedStringArray("CardUIManager")]
@@ -3056,7 +3247,7 @@ script = ExtResource("42_flrbk")
 TimerObject = NodePath("../World/Interactables/Timer")
 FacilitatorCardPanel = NodePath("../Interface_Cards/FacilitatorPanels")
 FacilitatorUI = NodePath("../Interface_Facilitator")
-FacilitatorKitButton = NodePath("../Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/facilitatorkit")
+FacilitatorKitButton = NodePath("../Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/facilitatorkit")
 OptionsPanel = NodePath("../Interface_Buttons")
 
 [node name="Panel" type="PanelContainer" parent="Setup"]
@@ -3586,18 +3777,21 @@ visible = false
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/Set" to="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/Set" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/TimerPanel/CloseTimerButton" to="Interface_Facilitator/FacilitatorsideBtns/OpenTimerButton" method="_on_collapse_close"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton" to="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns" method="_on_reset_pawn_position_button_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/SaveGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_save_game_button_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_load_game_button_pressed"]
-[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Options" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/Options" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/Preperation" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/Preperation" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/HowtoPlay" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/HowtoPlay" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/facilitatorkit" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/facilitatorkit" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuidesListOpener" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuidesListOpener" method="_toggle_collapse"]
-[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/Rules" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/Rules" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/ExtraRules" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/ExtraRules" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/Interrupts" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/Interrupts" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle/QRListOpener" to="Interface_Buttons/PanelContainer/MarginContainer/AllButtons/QRTitle/QRListOpener" method="_toggle_collapse"]
+[connection signal="pressed" from="Interface_Buttons/MarginContainer/OpenOptionsButton" to="Interface_Buttons/MarginContainer/OpenOptionsButton" method="_toggle_collapse"]
+[connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/Options" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/Options" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/Preperation" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/Preperation" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/HowtoPlay" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/HowtoPlay" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/facilitatorkit" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/facilitatorkit" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuidesListOpener" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuidesListOpener" method="_toggle_collapse"]
+[connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/Rules" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/Rules" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/ExtraRules" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/ExtraRules" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/Interrupts" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/Interrupts" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QRListOpener" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QRListOpener" method="_toggle_collapse"]
+[connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/CloseTimerButton" to="Interface_Buttons/MarginContainer/OpenOptionsButton" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/RevealButton" to="Interface_Cards" method="_on_reveal_button_pressed"]
 [connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" to="Interface_Cards/FacilitatorPanels/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/CancelSave" to="Interface_Cards/FacilitatorPanels/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" method="on_Cancel"]
