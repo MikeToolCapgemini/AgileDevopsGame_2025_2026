@@ -7,6 +7,7 @@ var currentSave : String = ""
 @export var SaveNameField : LineEdit
 @export var LoadedSavesContainer : GridContainer
 @export var pawns_path: NodePath
+@export var collapsible : CollapsibleContainer
 
 signal save_requested
 
@@ -47,7 +48,7 @@ func save_game_file(saveName : String,saveData):
 func loadSaveGames() :
 	for btn in %LoadedSaves.get_children():
 		btn.queue_free()
-	%LoadedsaveGames.show()
+	collapsible.open_tween()
 	if multiplayer.is_server():
 		var saves = get_save_files()
 		if saves.size() > 0:
@@ -150,4 +151,4 @@ func _on_save_game_button_pressed() -> void:
 
 
 func _on_hide_savedgames_pressed() -> void:
-	%LoadedsaveGames.hide()
+	collapsible.close_tween()
