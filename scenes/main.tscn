@@ -197,7 +197,8 @@ data = PackedVector3Array(-0.5267, 0.1548, 0.0657, -0.5267, -0.0083, 0.0657, -1.
 size = Vector3(15, 0.2, 15)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mxt03"]
-albedo_color = Color(0.145098, 0.352941, 0.564706, 1)
+albedo_color = Color(0, 0.34509805, 0.67058825, 1)
+metallic_specular = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1uevf"]
 size = Vector3(15, 0.2, 15)
@@ -219,6 +220,18 @@ viewport_path = NodePath("Sprite3D/SubViewport")
 
 [sub_resource type="LabelSettings" id="LabelSettings_y1msk"]
 font_size = 32
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_73205"]
+size = Vector3(0.5, 1, 25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vrx01"]
+size = Vector3(0.5, 5, 25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tc087"]
+size = Vector3(25, 5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1uevf"]
+size = Vector3(25, 5, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_81krc"]
 size = Vector3(1, 2.21143, 1)
@@ -245,7 +258,7 @@ radius = 0.66015625
 [sub_resource type="BoxShape3D" id="BoxShape3D_v0wtd"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lvrla"]
-viewport_path = NodePath("World/Interactables/Cards/StaticBody3D/3DLabel/SubViewport")
+viewport_path = NodePath("World/Interactables/CardsGroup/Cards/StaticBody3D/3DLabel/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xk6q"]
 albedo_texture = ExtResource("45_x2tqf")
@@ -259,18 +272,6 @@ albedo_texture = ExtResource("49_qc7wb")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ofc2t"]
 albedo_color = Color(0.930763, 0.953832, 0.990685, 1)
 albedo_texture = ExtResource("57_v1ccq")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_73205"]
-size = Vector3(0.5, 5, 25)
-
-[sub_resource type="BoxMesh" id="BoxMesh_vrx01"]
-size = Vector3(0.5, 5, 25)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_tc087"]
-size = Vector3(25, 5, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_1uevf"]
-size = Vector3(25, 5, 0.5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yton5"]
 bg_color = Color(0, 0.34509805, 0.67058825, 1)
@@ -563,15 +564,16 @@ script = ExtResource("4_4m4b7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0607452, -0.0804606, -0.0355754)
 
 [node name="Field" type="StaticBody3D" parent="World/PlayingField"]
-transform = Transform3D(0.544472, 0, 0.544472, 0, 0.77, 0, -0.544472, 0, 0.544472, 0.232244, -0.0209274, 0.232244)
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 1.0234771, -0.0209274, -0.11730604)
 collision_layer = 3
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/PlayingField/Field"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029937997, 0, 0.135346)
 shape = SubResource("BoxShape3D_vrx01")
 
 [node name="Field0" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.092478454, 0.0184336, 0.0048125386)
 material_override = SubResource("StandardMaterial3D_vr6f0")
 mesh = ExtResource("6_4vpm6")
 skeleton = NodePath("../../../..")
@@ -610,7 +612,7 @@ mesh = SubResource("ArrayMesh_olwkt")
 surface_material_override/0 = SubResource("StandardMaterial3D_pwnlv")
 
 [node name="Field2" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018264651, 0.0184336, 0.10331893)
 material_override = ExtResource("10_d0dfl")
 mesh = ExtResource("8_irh7k")
 skeleton = NodePath("../../../..")
@@ -620,7 +622,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 mesh = SubResource("TextMesh_vgmr8")
 
 [node name="Field3" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018264651, 0.0184336, 0.10331893)
 material_override = ExtResource("10_d0dfl")
 mesh = ExtResource("9_55j84")
 skeleton = NodePath("../../../..")
@@ -631,7 +633,7 @@ visible = false
 mesh = SubResource("TextMesh_vgmr8")
 
 [node name="Field4" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15781575, 0.0184336, 0.031443894)
 material_override = ExtResource("13_tegyd")
 mesh = ExtResource("10_vgipp")
 skeleton = NodePath("../../../..")
@@ -641,7 +643,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 mesh = SubResource("TextMesh_bcqcv")
 
 [node name="Field5" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15781575, 0.0184336, 0.031443894)
 material_override = ExtResource("13_tegyd")
 mesh = ExtResource("11_edxct")
 skeleton = NodePath("../../../..")
@@ -652,7 +654,7 @@ visible = false
 mesh = SubResource("TextMesh_bcqcv")
 
 [node name="Field6" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09981161, 0.0184336, -0.0370453)
 material_override = SubResource("StandardMaterial3D_qqw4h")
 mesh = ExtResource("12_r3c0g")
 skeleton = NodePath("../../../..")
@@ -662,7 +664,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 mesh = SubResource("TextMesh_h60r5")
 
 [node name="Field7" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07691139, 0.0184336, -0.053476155)
 material_override = SubResource("StandardMaterial3D_2ow75")
 mesh = ExtResource("13_oukgu")
 skeleton = NodePath("../../../..")
@@ -673,7 +675,7 @@ visible = false
 mesh = SubResource("TextMesh_h60r5")
 
 [node name="Field8" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.041741908, 0.0184336, 0.03071481)
 material_override = ExtResource("19_xubj1")
 mesh = ExtResource("14_6q7oi")
 skeleton = NodePath("../../../..")
@@ -683,7 +685,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 mesh = SubResource("TextMesh_c4qfq")
 
 [node name="Field9" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07900268, 0.018433362, 0.035369217)
 material_override = ExtResource("19_xubj1")
 mesh = ExtResource("15_56tl4")
 skeleton = NodePath("../../../..")
@@ -694,7 +696,7 @@ visible = false
 mesh = SubResource("TextMesh_c4qfq")
 
 [node name="Field10" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12402481, 0.01843384, 0.11091024)
 material_override = ExtResource("22_3n8p6")
 mesh = ExtResource("16_xr2is")
 skeleton = NodePath("../../../..")
@@ -704,7 +706,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 mesh = SubResource("TextMesh_5ehjq")
 
 [node name="Field11" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11934513, 0.0184336, 0.14795262)
 material_override = ExtResource("22_3n8p6")
 mesh = ExtResource("17_6dlmp")
 skeleton = NodePath("../../../..")
@@ -715,7 +717,7 @@ visible = false
 mesh = SubResource("TextMesh_5ehjq")
 
 [node name="Field12" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19296259, 0.018433362, 0.10534805)
 material_override = ExtResource("25_vdcw4")
 mesh = ExtResource("18_n7pe8")
 skeleton = NodePath("../../../..")
@@ -725,7 +727,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 mesh = SubResource("TextMesh_u0l00")
 
 [node name="Field13" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18291348, 0.0184336, 0.08370072)
 material_override = ExtResource("25_vdcw4")
 mesh = ExtResource("19_hwcb7")
 skeleton = NodePath("../../../..")
@@ -736,7 +738,7 @@ visible = false
 mesh = SubResource("TextMesh_u0l00")
 
 [node name="Field14" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.089267194, 0.0184336, 0.007925808)
 material_override = ExtResource("28_5raag")
 mesh = ExtResource("20_4qs32")
 skeleton = NodePath("../../../..")
@@ -746,7 +748,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 mesh = SubResource("TextMesh_qdl5p")
 
 [node name="Field15" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0836156, 0.0184336, 0.0045009255)
 material_override = ExtResource("28_5raag")
 mesh = ExtResource("21_v4gpt")
 skeleton = NodePath("../../../..")
@@ -757,12 +759,12 @@ visible = false
 mesh = SubResource("TextMesh_qdl5p")
 
 [node name="Field16" type="MeshInstance3D" parent="World/PlayingField/Field"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0607452, 0.0184336, 0.0355754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08780128, 0.0184336, 0.009346783)
 mesh = ExtResource("22_ifimr")
 skeleton = NodePath("../../../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/PlayingField"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2.19063, -1.87141, 2.01793)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 3.029644, -1.8714095, 1.7163072)
 mesh = SubResource("CylinderMesh_iavad")
 
 [node name="Sky" type="Node3D" parent="World"]
@@ -773,6 +775,7 @@ transform = Transform3D(1.50099, 0, 0, 0, 1, 0, 0, 0, 1.55022, 0, 0, 0)
 [node name="PlayingField_OLD" type="StaticBody3D" parent="World/Floor"]
 transform = Transform3D(0.725, 0, 0, 0, 0.725, 0, 0, 0, 0.725, 0, -0.0974515, 0)
 visible = false
+input_ray_pickable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor/PlayingField_OLD"]
 mesh = ExtResource("6_yd32h")
@@ -791,6 +794,7 @@ shape = SubResource("ConcavePolygonShape3D_vf1ck")
 [node name="StaticBody3D" type="StaticBody3D" parent="World/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 collision_layer = 3
+input_ray_pickable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012799399, 0, -0.0041111372)
@@ -828,7 +832,7 @@ cast_shadow = 0
 multimesh = SubResource("MultiMesh_8h35w")
 
 [node name="CLogo" type="MeshInstance3D" parent="World/Floor"]
-transform = Transform3D(0.219203, 0, 0.219203, 0, 0.31, 0, -0.219203, 0, 0.219203, -1.16783, 0, 1.56103)
+transform = Transform3D(0.21920301, 0, 0.21920301, 0, 0.31, 0, -0.219203, 0, 0.219203, -0.81349957, 0, 1.548981)
 mesh = ExtResource("25_0fbar")
 skeleton = NodePath("../../..")
 
@@ -900,7 +904,60 @@ horizontal_alignment = 1
 
 [node name="Interactables" type="Node3D" parent="World"]
 
+[node name="DiceWall" type="Node3D" parent="World/Interactables"]
+visible = false
+
+[node name="DiceWall3" type="StaticBody3D" parent="World/Interactables/DiceWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.316431, 1.5, 0)
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/DiceWall/DiceWall3"]
+shape = SubResource("BoxShape3D_73205")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/DiceWall/DiceWall3"]
+visible = false
+layers = 2
+mesh = SubResource("BoxMesh_vrx01")
+
+[node name="DiceWall2" type="StaticBody3D" parent="World/Interactables/DiceWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.064823, 1.5, 0.741)
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/DiceWall/DiceWall2"]
+shape = SubResource("BoxShape3D_73205")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/DiceWall/DiceWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66234875, 0, 0)
+visible = false
+layers = 2
+mesh = SubResource("BoxMesh_vrx01")
+
+[node name="DiceWall" type="StaticBody3D" parent="World/Interactables/DiceWall"]
+transform = Transform3D(0.94551855, 0, 0.32556814, 0, 1, 0, -0.32556814, 0, 0.94551855, -1.8820155, 1.5873165, 7.0793767)
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/DiceWall/DiceWall"]
+shape = SubResource("BoxShape3D_tc087")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/DiceWall/DiceWall"]
+visible = false
+layers = 2
+mesh = SubResource("BoxMesh_1uevf")
+
+[node name="DiceWall4" type="StaticBody3D" parent="World/Interactables/DiceWall"]
+transform = Transform3D(0.94551855, 0, -0.32556814, 0, 1, 0, 0.32556814, 0, 0.94551855, -1.8820155, 1.5873165, 6.324715)
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/DiceWall/DiceWall4"]
+shape = SubResource("BoxShape3D_tc087")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/DiceWall/DiceWall4"]
+visible = false
+layers = 2
+mesh = SubResource("BoxMesh_1uevf")
+
 [node name="Pawns" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("CameraObject", "WorldObject", "pawns")]
+transform = Transform3D(0.8131516, 0, 0.582052, 0, 1, 0, -0.582052, 0, 0.8131516, 1.4292494, 0, -0.27552593)
 script = ExtResource("6_u5dtp")
 CameraObject = NodePath("../../../Camera3D")
 WorldObject = NodePath(".")
@@ -1211,7 +1268,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
 [node name="DiceLabel" type="Sprite3D" parent="World/Interactables"]
-transform = Transform3D(0.70710725, -0.49999893, 0.49999893, 0, 0.70710725, 0.70710725, -0.70710725, -0.49999893, 0.49999893, -0.64385176, 1.041887, 4.042552)
+transform = Transform3D(0.70710725, -0.49999893, 0.49999893, 0, 0.70710725, 0.70710725, -0.70710725, -0.49999893, 0.49999893, -1.4266248, 1.0418875, 4.0957756)
 layers = 4
 billboard = 1
 texture = SubResource("ViewportTexture_r4ag1")
@@ -1260,13 +1317,14 @@ mesh = ExtResource("53_bfu41")
 skeleton = NodePath("../..")
 
 [node name="Dice" parent="World/Interactables" node_paths=PackedStringArray("LabelObject") instance=ExtResource("56_vrx01")]
-transform = Transform3D(0.32604668, 0, 0.9453537, 0, 1, 0, -0.9453537, 0, 0.32604668, -0.7334024, 0.20816578, 3.9809027)
+transform = Transform3D(0.32604668, 0, 0.9453537, 0, 1, 0, -0.9453537, 0, 0.32604668, -1.3603702, 0.23731124, 4.232791)
+collision_layer = 3
 LabelObject = NodePath("../DiceLabel/SubViewport/Label")
 roll_strength = 8
 returnSpeed = 0.8
 
 [node name="Hourglass3DLabel" type="Sprite3D" parent="World/Interactables"]
-transform = Transform3D(-0.2214588, -1.1796012, 1.1796012, 0, 1.2011138, 1.2011138, -1.6858971, 0.23276514, -0.23276514, -1.6426096, 1.7972403, 4.4082575)
+transform = Transform3D(-0.2214588, -1.1796012, 1.1796012, 0, 1.2011138, 1.2011138, -1.6858971, 0.23276514, -0.23276514, -2.3497815, 1.7972398, 4.0537663)
 billboard = 1
 texture = SubResource("ViewportTexture_oyljp")
 
@@ -1292,39 +1350,40 @@ theme_override_fonts/font = ExtResource("58_engxj")
 text = "[00:00]"
 
 [node name="hourglassAnimated" parent="World/Interactables" node_paths=PackedStringArray("EditMinObject", "EditSecObject", "InterruptUI", "LabelObject") instance=ExtResource("31_wvlrk")]
-transform = Transform3D(0.27134666, 0, 0.3532564, 0, 0.45, 0, -0.37761885, 0, 0.25384048, -1.5627818, 0.7542974, 4.6778045)
+transform = Transform3D(0.27134666, 0, 0.3532564, 0, 0.45, 0, -0.37761885, 0, 0.25384048, -2.242013, 0.7542969, 4.2151003)
 EditMinObject = NodePath("../../../Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/SetTimer/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditMinutes")
 EditSecObject = NodePath("../../../Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/SetTimer/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditSeconds")
 InterruptUI = NodePath("../../../Interface_InterruptFacilitator2")
 LabelObject = NodePath("../Hourglass3DLabel/HourglassViewPort/HourglassLabel")
 
 [node name="Timer" type="Node3D" parent="World/Interactables"]
-transform = Transform3D(0.366, 0, 0, 0, 0.366, 0, 0, 0, 0.366, -1.2657995, 0.401228, 4.9685917)
+transform = Transform3D(0.366, 0, 0, 0, 0.366, 0, 0, 0, 0.366, -5.2450657, 0.401228, 4.9685917)
 visible = false
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/Timer"]
+[node name="TimerStaticBody3d" type="StaticBody3D" parent="World/Interactables/Timer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8220451, -1.0878603, -0.72502327)
+input_ray_pickable = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/Timer/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/Timer/TimerStaticBody3d"]
 transform = Transform3D(0.086182, 0, 0.99628, 0, 1, 0, -0.99628, 0, 0.086182, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_fd1xg")
 mesh = ExtResource("42_lvvct")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/Timer/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/Timer/TimerStaticBody3d"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5091847, 0)
 shape = SubResource("CylinderShape3D_dxvl1")
 
-[node name="3DLabel" type="Sprite3D" parent="World/Interactables/Timer/StaticBody3D"]
+[node name="3DLabel" type="Sprite3D" parent="World/Interactables/Timer/TimerStaticBody3d"]
 transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 4.5851054, 4.17, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_oyljp")
 
-[node name="SubViewport" type="SubViewport" parent="World/Interactables/Timer/StaticBody3D/3DLabel"]
+[node name="SubViewport" type="SubViewport" parent="World/Interactables/Timer/TimerStaticBody3d/3DLabel"]
 transparent_bg = true
 size = Vector2i(50, 50)
 script = ExtResource("38_g5xr8")
 
-[node name="Label" type="Label" parent="World/Interactables/Timer/StaticBody3D/3DLabel/SubViewport"]
+[node name="Label" type="Label" parent="World/Interactables/Timer/TimerStaticBody3d/3DLabel/SubViewport"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1338,30 +1397,33 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "[00:00]"
 
-[node name="Cards" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject", "CardManager")]
+[node name="CardsGroup" type="Node3D" parent="World/Interactables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20243979, 9.536743e-07, -0.42976308)
+
+[node name="Cards" type="Node3D" parent="World/Interactables/CardsGroup" node_paths=PackedStringArray("LabelObject", "CardManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.456106, 0, -0.705195)
 script = ExtResource("40_yokrb")
 LabelObject = NodePath("StaticBody3D/3DLabel/SubViewport/Label")
-CardManager = NodePath("../../../Interface_Cards")
+CardManager = NodePath("../../../../Interface_Cards")
 cardType = "Plan"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/Cards"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/CardsGroup/Cards"]
 transform = Transform3D(0.365, 0, 0, 0, 0.365, 0, 0, 0, 0.365, -4.0354, 0.238887, 1.60147)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/Cards/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/CardsGroup/Cards/StaticBody3D"]
 shape = SubResource("BoxShape3D_v0wtd")
 
-[node name="3DLabel" type="Sprite3D" parent="World/Interactables/Cards/StaticBody3D"]
+[node name="3DLabel" type="Sprite3D" parent="World/Interactables/CardsGroup/Cards/StaticBody3D"]
 transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 0, 2.2, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_lvrla")
 
-[node name="SubViewport" type="SubViewport" parent="World/Interactables/Cards/StaticBody3D/3DLabel"]
+[node name="SubViewport" type="SubViewport" parent="World/Interactables/CardsGroup/Cards/StaticBody3D/3DLabel"]
 transparent_bg = true
 size = Vector2i(50, 50)
 script = ExtResource("38_g5xr8")
 
-[node name="Label" type="Label" parent="World/Interactables/Cards/StaticBody3D/3DLabel/SubViewport"]
+[node name="Label" type="Label" parent="World/Interactables/CardsGroup/Cards/StaticBody3D/3DLabel/SubViewport"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1375,35 +1437,35 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Cards"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/Cards/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/CardsGroup/Cards/StaticBody3D"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_6xk6q")
 mesh = ExtResource("46_h1e2o")
 
-[node name="Cards2" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject", "CardManager")]
+[node name="Cards2" type="Node3D" parent="World/Interactables/CardsGroup" node_paths=PackedStringArray("LabelObject", "CardManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0958034, 0, -0.501114)
 script = ExtResource("40_yokrb")
 LabelObject = NodePath("../Cards/StaticBody3D/3DLabel/SubViewport/Label")
-CardManager = NodePath("../../../Interface_Cards")
+CardManager = NodePath("../../../../Interface_Cards")
 cardType = "Code"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/Cards2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/CardsGroup/Cards2"]
 transform = Transform3D(0.365, 0, 0, 0, 0.365, 0, 0, 0, 0.365, -3.94269, 0.238887, 1.69024)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/Cards2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/CardsGroup/Cards2/StaticBody3D"]
 shape = SubResource("BoxShape3D_v0wtd")
 
-[node name="3DLabel" type="Sprite3D" parent="World/Interactables/Cards2/StaticBody3D"]
+[node name="3DLabel" type="Sprite3D" parent="World/Interactables/CardsGroup/Cards2/StaticBody3D"]
 transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 0, 2.2, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_lvrla")
 
-[node name="SubViewport" type="SubViewport" parent="World/Interactables/Cards2/StaticBody3D/3DLabel"]
+[node name="SubViewport" type="SubViewport" parent="World/Interactables/CardsGroup/Cards2/StaticBody3D/3DLabel"]
 transparent_bg = true
 size = Vector2i(50, 50)
 script = ExtResource("38_g5xr8")
 
-[node name="Label" type="Label" parent="World/Interactables/Cards2/StaticBody3D/3DLabel/SubViewport"]
+[node name="Label" type="Label" parent="World/Interactables/CardsGroup/Cards2/StaticBody3D/3DLabel/SubViewport"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1417,34 +1479,34 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Cards"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/Cards2/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/CardsGroup/Cards2/StaticBody3D"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 mesh = ExtResource("47_6hf27")
 
-[node name="Cards3" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject", "CardManager")]
+[node name="Cards3" type="Node3D" parent="World/Interactables/CardsGroup" node_paths=PackedStringArray("LabelObject", "CardManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.647338, 0, -1.71228)
 script = ExtResource("40_yokrb")
 LabelObject = NodePath("../Cards/StaticBody3D/3DLabel/SubViewport/Label")
-CardManager = NodePath("../../../Interface_Cards")
+CardManager = NodePath("../../../../Interface_Cards")
 cardType = "Release"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/Cards3"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/CardsGroup/Cards3"]
 transform = Transform3D(0.365, 0, 0, 0, 0.365, 0, 0, 0, 0.365, -3.94269, 0.238887, 1.58069)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/Cards3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/CardsGroup/Cards3/StaticBody3D"]
 shape = SubResource("BoxShape3D_v0wtd")
 
-[node name="3DLabel" type="Sprite3D" parent="World/Interactables/Cards3/StaticBody3D"]
+[node name="3DLabel" type="Sprite3D" parent="World/Interactables/CardsGroup/Cards3/StaticBody3D"]
 transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 0, 2.2, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_lvrla")
 
-[node name="SubViewport" type="SubViewport" parent="World/Interactables/Cards3/StaticBody3D/3DLabel"]
+[node name="SubViewport" type="SubViewport" parent="World/Interactables/CardsGroup/Cards3/StaticBody3D/3DLabel"]
 transparent_bg = true
 size = Vector2i(50, 50)
 script = ExtResource("38_g5xr8")
 
-[node name="Label" type="Label" parent="World/Interactables/Cards3/StaticBody3D/3DLabel/SubViewport"]
+[node name="Label" type="Label" parent="World/Interactables/CardsGroup/Cards3/StaticBody3D/3DLabel/SubViewport"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1458,34 +1520,34 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Cards"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/Cards3/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/CardsGroup/Cards3/StaticBody3D"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0.291546)
 mesh = ExtResource("48_cypso")
 
-[node name="Cards4" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject", "CardManager")]
+[node name="Cards4" type="Node3D" parent="World/Interactables/CardsGroup" node_paths=PackedStringArray("LabelObject", "CardManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.23274, 0, -2.18236)
 script = ExtResource("40_yokrb")
 LabelObject = NodePath("../Cards/StaticBody3D/3DLabel/SubViewport/Label")
-CardManager = NodePath("../../../Interface_Cards")
+CardManager = NodePath("../../../../Interface_Cards")
 cardType = "Operate"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/Cards4"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/CardsGroup/Cards4"]
 transform = Transform3D(0.365, 0, 0, 0, 0.365, 0, 0, 0, 0.365, -3.92836, 0.238887, 1.70567)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/Cards4/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/CardsGroup/Cards4/StaticBody3D"]
 shape = SubResource("BoxShape3D_v0wtd")
 
-[node name="3DLabel" type="Sprite3D" parent="World/Interactables/Cards4/StaticBody3D"]
+[node name="3DLabel" type="Sprite3D" parent="World/Interactables/CardsGroup/Cards4/StaticBody3D"]
 transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 0, 2.2, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_lvrla")
 
-[node name="SubViewport" type="SubViewport" parent="World/Interactables/Cards4/StaticBody3D/3DLabel"]
+[node name="SubViewport" type="SubViewport" parent="World/Interactables/CardsGroup/Cards4/StaticBody3D/3DLabel"]
 transparent_bg = true
 size = Vector2i(50, 50)
 script = ExtResource("38_g5xr8")
 
-[node name="Label" type="Label" parent="World/Interactables/Cards4/StaticBody3D/3DLabel/SubViewport"]
+[node name="Label" type="Label" parent="World/Interactables/CardsGroup/Cards4/StaticBody3D/3DLabel/SubViewport"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1499,34 +1561,34 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Cards"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/Cards4/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/CardsGroup/Cards4/StaticBody3D"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 mesh = ExtResource("46_66ddu")
 
-[node name="Cards5" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject", "CardManager")]
+[node name="Cards5" type="Node3D" parent="World/Interactables/CardsGroup" node_paths=PackedStringArray("LabelObject", "CardManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.090293, 0, -1.18967)
 script = ExtResource("40_yokrb")
 LabelObject = NodePath("../Cards/StaticBody3D/3DLabel/SubViewport/Label")
-CardManager = NodePath("../../../Interface_Cards")
+CardManager = NodePath("../../../../Interface_Cards")
 cardType = "Build"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/Cards5"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/CardsGroup/Cards5"]
 transform = Transform3D(0.365, 0, 0, 0, 0.365, 0, 0, 0, 0.365, -3.94269, 0.238887, 1.60785)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/Cards5/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/CardsGroup/Cards5/StaticBody3D"]
 shape = SubResource("BoxShape3D_v0wtd")
 
-[node name="3DLabel" type="Sprite3D" parent="World/Interactables/Cards5/StaticBody3D"]
+[node name="3DLabel" type="Sprite3D" parent="World/Interactables/CardsGroup/Cards5/StaticBody3D"]
 transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 0, 2.2, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_lvrla")
 
-[node name="SubViewport" type="SubViewport" parent="World/Interactables/Cards5/StaticBody3D/3DLabel"]
+[node name="SubViewport" type="SubViewport" parent="World/Interactables/CardsGroup/Cards5/StaticBody3D/3DLabel"]
 transparent_bg = true
 size = Vector2i(50, 50)
 script = ExtResource("38_g5xr8")
 
-[node name="Label" type="Label" parent="World/Interactables/Cards5/StaticBody3D/3DLabel/SubViewport"]
+[node name="Label" type="Label" parent="World/Interactables/CardsGroup/Cards5/StaticBody3D/3DLabel/SubViewport"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1540,38 +1602,38 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Cards"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/Cards5/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/CardsGroup/Cards5/StaticBody3D"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0.122965)
 mesh = ExtResource("51_u8oyp")
 
-[node name="Cards6" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject", "CardManager")]
+[node name="Cards6" type="Node3D" parent="World/Interactables/CardsGroup" node_paths=PackedStringArray("LabelObject", "CardManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.626615, 0, -1.00783)
 script = ExtResource("40_yokrb")
 LabelObject = NodePath("../Cards/StaticBody3D/3DLabel/SubViewport/Label")
-CardManager = NodePath("../../../Interface_Cards")
+CardManager = NodePath("../../../../Interface_Cards")
 cardType = "Test"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/Cards6"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/CardsGroup/Cards6"]
 transform = Transform3D(0.365, 0, 0, 0, 0.365, 0, 0, 0, 0.365, -3.80903, 0.238887, 1.69336)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/Cards6/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/CardsGroup/Cards6/StaticBody3D"]
 shape = SubResource("BoxShape3D_v0wtd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/Cards6/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/CardsGroup/Cards6/StaticBody3D"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0.126744)
 mesh = ExtResource("52_uv6d5")
 
-[node name="3DLabel" type="Sprite3D" parent="World/Interactables/Cards6/StaticBody3D"]
+[node name="3DLabel" type="Sprite3D" parent="World/Interactables/CardsGroup/Cards6/StaticBody3D"]
 transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 0, 2.2, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_lvrla")
 
-[node name="SubViewport" type="SubViewport" parent="World/Interactables/Cards6/StaticBody3D/3DLabel"]
+[node name="SubViewport" type="SubViewport" parent="World/Interactables/CardsGroup/Cards6/StaticBody3D/3DLabel"]
 transparent_bg = true
 size = Vector2i(50, 50)
 script = ExtResource("38_g5xr8")
 
-[node name="Label" type="Label" parent="World/Interactables/Cards6/StaticBody3D/3DLabel/SubViewport"]
+[node name="Label" type="Label" parent="World/Interactables/CardsGroup/Cards6/StaticBody3D/3DLabel/SubViewport"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1585,36 +1647,36 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Cards"
 
-[node name="Cards7" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject", "CardManager")]
+[node name="Cards7" type="Node3D" parent="World/Interactables/CardsGroup" node_paths=PackedStringArray("LabelObject", "CardManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35342, 0, -0.824319)
 script = ExtResource("40_yokrb")
 LabelObject = NodePath("../Cards/StaticBody3D/3DLabel/SubViewport/Label")
-CardManager = NodePath("../../../Interface_Cards")
+CardManager = NodePath("../../../../Interface_Cards")
 cardType = "Deploy"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/Cards7"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/CardsGroup/Cards7"]
 transform = Transform3D(0.365, 0, 0, 0, 0.365, 0, 0, 0, 0.365, -3.94269, 0.238887, 1.09043)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/Cards7/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/CardsGroup/Cards7/StaticBody3D"]
 shape = SubResource("BoxShape3D_v0wtd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/Cards7/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/CardsGroup/Cards7/StaticBody3D"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_iqglf")
 mesh = ExtResource("49_qe3cn")
 skeleton = NodePath("../..")
 
-[node name="3DLabel" type="Sprite3D" parent="World/Interactables/Cards7/StaticBody3D"]
+[node name="3DLabel" type="Sprite3D" parent="World/Interactables/CardsGroup/Cards7/StaticBody3D"]
 transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 0, 2.2, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_lvrla")
 
-[node name="SubViewport" type="SubViewport" parent="World/Interactables/Cards7/StaticBody3D/3DLabel"]
+[node name="SubViewport" type="SubViewport" parent="World/Interactables/CardsGroup/Cards7/StaticBody3D/3DLabel"]
 transparent_bg = true
 size = Vector2i(50, 50)
 script = ExtResource("38_g5xr8")
 
-[node name="Label" type="Label" parent="World/Interactables/Cards7/StaticBody3D/3DLabel/SubViewport"]
+[node name="Label" type="Label" parent="World/Interactables/CardsGroup/Cards7/StaticBody3D/3DLabel/SubViewport"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1628,37 +1690,37 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Cards"
 
-[node name="Cards8" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("LabelObject", "CardManager")]
+[node name="Cards8" type="Node3D" parent="World/Interactables/CardsGroup" node_paths=PackedStringArray("LabelObject", "CardManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78873, 0, -2.09662)
 script = ExtResource("40_yokrb")
 LabelObject = NodePath("../Cards/StaticBody3D/3DLabel/SubViewport/Label")
-CardManager = NodePath("../../../Interface_Cards")
+CardManager = NodePath("../../../../Interface_Cards")
 cardType = "Monitor"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/Cards8"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Interactables/CardsGroup/Cards8"]
 transform = Transform3D(0.365, 0, 0, 0, 0.365, 0, 0, 0, 0.365, -3.80743, 0.238887, 1.92843)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/Cards8/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/CardsGroup/Cards8/StaticBody3D"]
 shape = SubResource("BoxShape3D_v0wtd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/Cards8/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/CardsGroup/Cards8/StaticBody3D"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_2rjka")
 mesh = ExtResource("50_tlqny")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ofc2t")
 
-[node name="3DLabel" type="Sprite3D" parent="World/Interactables/Cards8/StaticBody3D"]
+[node name="3DLabel" type="Sprite3D" parent="World/Interactables/CardsGroup/Cards8/StaticBody3D"]
 transform = Transform3D(1.93728, -1.36986, 1.36986, 0, 1.93728, 1.93728, -1.93728, -1.36986, 1.36986, 0, 2.2, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_lvrla")
 
-[node name="SubViewport" type="SubViewport" parent="World/Interactables/Cards8/StaticBody3D/3DLabel"]
+[node name="SubViewport" type="SubViewport" parent="World/Interactables/CardsGroup/Cards8/StaticBody3D/3DLabel"]
 transparent_bg = true
 size = Vector2i(50, 50)
 script = ExtResource("38_g5xr8")
 
-[node name="Label" type="Label" parent="World/Interactables/Cards8/StaticBody3D/3DLabel/SubViewport"]
+[node name="Label" type="Label" parent="World/Interactables/CardsGroup/Cards8/StaticBody3D/3DLabel/SubViewport"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1671,49 +1733,6 @@ offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Cards"
-
-[node name="DiceWall" type="Node3D" parent="World/Interactables"]
-visible = false
-
-[node name="DiceWall3" type="StaticBody3D" parent="World/Interactables/DiceWall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.316431, 1.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/DiceWall/DiceWall3"]
-shape = SubResource("BoxShape3D_73205")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/DiceWall/DiceWall3"]
-visible = false
-mesh = SubResource("BoxMesh_vrx01")
-
-[node name="DiceWall2" type="StaticBody3D" parent="World/Interactables/DiceWall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.064823, 1.5, 0.741)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/DiceWall/DiceWall2"]
-shape = SubResource("BoxShape3D_73205")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/DiceWall/DiceWall2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66234875, 0, 0)
-visible = false
-mesh = SubResource("BoxMesh_vrx01")
-
-[node name="DiceWall" type="StaticBody3D" parent="World/Interactables/DiceWall"]
-transform = Transform3D(0.94551855, 0, 0.32556814, 0, 1, 0, -0.32556814, 0, 0.94551855, 0, 1.5873165, 5.1717286)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/DiceWall/DiceWall"]
-shape = SubResource("BoxShape3D_tc087")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/DiceWall/DiceWall"]
-visible = false
-mesh = SubResource("BoxMesh_1uevf")
-
-[node name="DiceWall4" type="StaticBody3D" parent="World/Interactables/DiceWall"]
-transform = Transform3D(0.94551855, 0, -0.32556814, 0, 1, 0, 0.32556814, 0, 0.94551855, 0, 1.5873165, 5.3115287)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/DiceWall/DiceWall4"]
-shape = SubResource("BoxShape3D_tc087")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Interactables/DiceWall/DiceWall4"]
-mesh = SubResource("BoxMesh_1uevf")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 5.7767, 7, 4.76537)
@@ -2175,6 +2194,7 @@ text = "Basic Rules"
 script = SubResource("GDScript_kvygq")
 
 [node name="Interface_Buttons" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -2305,7 +2325,7 @@ editor_description = "
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
 clip_contents = true
-custom_minimum_size = Vector2(121, 0)
+custom_minimum_size = Vector2(121, 167)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -2443,7 +2463,7 @@ editor_description = "
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
 clip_contents = true
-custom_minimum_size = Vector2(121, 0)
+custom_minimum_size = Vector2(121, 167)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -3753,22 +3773,22 @@ visible = false
 [connection signal="mouse_exited" from="World/Interactables/Pawns/Pawn15/StaticBodyPurple1" to="World/Interactables/Pawns/Pawn15" method="_on_static_body_3d_mouse_exited"]
 [connection signal="mouse_entered" from="World/Interactables/LegacyDice/StaticBody3D" to="World/Interactables/LegacyDice" method="_on_static_body_3d_mouse_entered"]
 [connection signal="mouse_exited" from="World/Interactables/LegacyDice/StaticBody3D" to="World/Interactables/LegacyDice" method="_on_static_body_3d_mouse_exited"]
-[connection signal="mouse_entered" from="World/Interactables/Cards/StaticBody3D" to="World/Interactables/Cards" method="_on_static_body_3d_mouse_entered"]
-[connection signal="mouse_exited" from="World/Interactables/Cards/StaticBody3D" to="World/Interactables/Cards" method="_on_static_body_3d_mouse_exited"]
-[connection signal="mouse_entered" from="World/Interactables/Cards2/StaticBody3D" to="World/Interactables/Cards2" method="_on_static_body_3d_mouse_entered"]
-[connection signal="mouse_exited" from="World/Interactables/Cards2/StaticBody3D" to="World/Interactables/Cards2" method="_on_static_body_3d_mouse_exited"]
-[connection signal="mouse_entered" from="World/Interactables/Cards3/StaticBody3D" to="World/Interactables/Cards3" method="_on_static_body_3d_mouse_entered"]
-[connection signal="mouse_exited" from="World/Interactables/Cards3/StaticBody3D" to="World/Interactables/Cards3" method="_on_static_body_3d_mouse_exited"]
-[connection signal="mouse_entered" from="World/Interactables/Cards4/StaticBody3D" to="World/Interactables/Cards4" method="_on_static_body_3d_mouse_entered"]
-[connection signal="mouse_exited" from="World/Interactables/Cards4/StaticBody3D" to="World/Interactables/Cards4" method="_on_static_body_3d_mouse_exited"]
-[connection signal="mouse_entered" from="World/Interactables/Cards5/StaticBody3D" to="World/Interactables/Cards5" method="_on_static_body_3d_mouse_entered"]
-[connection signal="mouse_exited" from="World/Interactables/Cards5/StaticBody3D" to="World/Interactables/Cards5" method="_on_static_body_3d_mouse_exited"]
-[connection signal="mouse_entered" from="World/Interactables/Cards6/StaticBody3D" to="World/Interactables/Cards6" method="_on_static_body_3d_mouse_entered"]
-[connection signal="mouse_exited" from="World/Interactables/Cards6/StaticBody3D" to="World/Interactables/Cards6" method="_on_static_body_3d_mouse_exited"]
-[connection signal="mouse_entered" from="World/Interactables/Cards7/StaticBody3D" to="World/Interactables/Cards7" method="_on_static_body_3d_mouse_entered"]
-[connection signal="mouse_exited" from="World/Interactables/Cards7/StaticBody3D" to="World/Interactables/Cards7" method="_on_static_body_3d_mouse_exited"]
-[connection signal="mouse_entered" from="World/Interactables/Cards8/StaticBody3D" to="World/Interactables/Cards8" method="_on_static_body_3d_mouse_entered"]
-[connection signal="mouse_exited" from="World/Interactables/Cards8/StaticBody3D" to="World/Interactables/Cards8" method="_on_static_body_3d_mouse_exited"]
+[connection signal="mouse_entered" from="World/Interactables/CardsGroup/Cards/StaticBody3D" to="World/Interactables/CardsGroup/Cards" method="_on_static_body_3d_mouse_entered"]
+[connection signal="mouse_exited" from="World/Interactables/CardsGroup/Cards/StaticBody3D" to="World/Interactables/CardsGroup/Cards" method="_on_static_body_3d_mouse_exited"]
+[connection signal="mouse_entered" from="World/Interactables/CardsGroup/Cards2/StaticBody3D" to="World/Interactables/CardsGroup/Cards2" method="_on_static_body_3d_mouse_entered"]
+[connection signal="mouse_exited" from="World/Interactables/CardsGroup/Cards2/StaticBody3D" to="World/Interactables/CardsGroup/Cards2" method="_on_static_body_3d_mouse_exited"]
+[connection signal="mouse_entered" from="World/Interactables/CardsGroup/Cards3/StaticBody3D" to="World/Interactables/CardsGroup/Cards3" method="_on_static_body_3d_mouse_entered"]
+[connection signal="mouse_exited" from="World/Interactables/CardsGroup/Cards3/StaticBody3D" to="World/Interactables/CardsGroup/Cards3" method="_on_static_body_3d_mouse_exited"]
+[connection signal="mouse_entered" from="World/Interactables/CardsGroup/Cards4/StaticBody3D" to="World/Interactables/CardsGroup/Cards4" method="_on_static_body_3d_mouse_entered"]
+[connection signal="mouse_exited" from="World/Interactables/CardsGroup/Cards4/StaticBody3D" to="World/Interactables/CardsGroup/Cards4" method="_on_static_body_3d_mouse_exited"]
+[connection signal="mouse_entered" from="World/Interactables/CardsGroup/Cards5/StaticBody3D" to="World/Interactables/CardsGroup/Cards5" method="_on_static_body_3d_mouse_entered"]
+[connection signal="mouse_exited" from="World/Interactables/CardsGroup/Cards5/StaticBody3D" to="World/Interactables/CardsGroup/Cards5" method="_on_static_body_3d_mouse_exited"]
+[connection signal="mouse_entered" from="World/Interactables/CardsGroup/Cards6/StaticBody3D" to="World/Interactables/CardsGroup/Cards6" method="_on_static_body_3d_mouse_entered"]
+[connection signal="mouse_exited" from="World/Interactables/CardsGroup/Cards6/StaticBody3D" to="World/Interactables/CardsGroup/Cards6" method="_on_static_body_3d_mouse_exited"]
+[connection signal="mouse_entered" from="World/Interactables/CardsGroup/Cards7/StaticBody3D" to="World/Interactables/CardsGroup/Cards7" method="_on_static_body_3d_mouse_entered"]
+[connection signal="mouse_exited" from="World/Interactables/CardsGroup/Cards7/StaticBody3D" to="World/Interactables/CardsGroup/Cards7" method="_on_static_body_3d_mouse_exited"]
+[connection signal="mouse_entered" from="World/Interactables/CardsGroup/Cards8/StaticBody3D" to="World/Interactables/CardsGroup/Cards8" method="_on_static_body_3d_mouse_entered"]
+[connection signal="mouse_exited" from="World/Interactables/CardsGroup/Cards8/StaticBody3D" to="World/Interactables/CardsGroup/Cards8" method="_on_static_body_3d_mouse_exited"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/OpenTimerButton" to="Interface_Facilitator/FacilitatorsideBtns/OpenTimerButton" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/SetTimer/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/Set" to="World/Interactables/hourglassAnimated" method="_on_set_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/StartButton" to="World/Interactables/hourglassAnimated" method="_on_start_button_pressed"]
