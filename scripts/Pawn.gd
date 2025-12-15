@@ -42,7 +42,10 @@ func _update_pawn_position():
 	var intersection = get_world_3d().direct_space_state.intersect_ray(newIntersection)
 	
 	if !intersection.is_empty():
-		set_position(intersection.position) # this line if for debugging purposes.
+		global_position = intersection.position
+		#set_position(intersection.position) # this line if for debugging purposes.
+
+
 
 func _update_pawn_outline():
 	if hover or selected:

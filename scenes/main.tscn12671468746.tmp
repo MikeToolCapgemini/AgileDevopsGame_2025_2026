@@ -960,18 +960,20 @@ layers = 2
 mesh = SubResource("BoxMesh_1uevf")
 
 [node name="Pawns" type="Node3D" parent="World/Interactables" node_paths=PackedStringArray("CameraObject", "WorldObject", "pawns")]
-transform = Transform3D(0.94708717, 0, 0.32097661, 0, 1, 0, -0.32097661, 0, 0.94708717, 0.6938232, 0, 0.025471449)
+transform = Transform3D(0.9999488, 0, -0.010122776, 0, 1, 0, 0.010122776, 0, 0.9999488, 0.39578164, 0, -0.85877025)
 script = ExtResource("6_u5dtp")
 CameraObject = NodePath("../../../Camera3D")
 WorldObject = NodePath(".")
 pawns = [NodePath("Pawn0"), NodePath("Pawn1"), NodePath("Pawn2"), NodePath("Pawn3"), NodePath("Pawn4"), NodePath("Pawn5"), NodePath("Pawn6"), NodePath("Pawn7"), NodePath("Pawn8"), NodePath("Pawn9"), NodePath("Pawn10"), NodePath("Pawn11"), NodePath("Pawn12"), NodePath("Pawn13"), NodePath("Pawn14"), NodePath("Pawn15")]
 
-[node name="Pawn0" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
+[node name="Pawn0" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.64913, 0, -3.31022)
 script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn0"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -985,12 +987,14 @@ mesh = ExtResource("37_08rwi")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
-[node name="Pawn1" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
+[node name="Pawn1" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.14139, 0, -3.31022)
 script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn1"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1004,12 +1008,14 @@ mesh = ExtResource("37_quj2y")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
-[node name="Pawn2" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
+[node name="Pawn2" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15425, 0, -3.31022)
 script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn2"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1023,12 +1029,14 @@ mesh = ExtResource("38_enkil")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
-[node name="Pawn3" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
+[node name="Pawn3" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.647574, 0, -3.31022)
 script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn3"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1042,12 +1050,14 @@ mesh = ExtResource("39_u7r88")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
-[node name="Pawn4" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
+[node name="Pawn4" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.159446, 0, -3.31022)
 script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn4"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1061,12 +1071,14 @@ mesh = ExtResource("40_ahter")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
-[node name="Pawn5" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
+[node name="Pawn5" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.337203, 0, -3.31022)
 script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn5"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1080,13 +1092,15 @@ mesh = ExtResource("41_2hv14")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
-[node name="Pawn6" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CameraObject", "CollisionObject", "ObjectToColor")]
+[node name="Pawn6" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CameraObject", "CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.800183, 0, -3.31022)
 script = ExtResource("37_d7tjx")
 CameraObject = NodePath("../../../../Camera3D")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn6"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1100,12 +1114,14 @@ mesh = ExtResource("42_pxqvb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
-[node name="Pawn7" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
+[node name="Pawn7" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.29677, 0, -3.31022)
 script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn7"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1119,12 +1135,14 @@ mesh = ExtResource("43_ogjn5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
-[node name="Pawn8" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
+[node name="Pawn8" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.29677, 0, -3.88201)
 script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn8"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1138,12 +1156,14 @@ mesh = ExtResource("44_k35nc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
-[node name="Pawn9" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
+[node name="Pawn9" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.797471, 0, -3.88201)
 script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn9"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1157,12 +1177,14 @@ mesh = ExtResource("45_ft84v")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
-[node name="Pawn10" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
+[node name="Pawn10" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30548, 0, -3.88201)
 script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn10"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1176,12 +1198,14 @@ mesh = ExtResource("46_iqxnp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
-[node name="Pawn11" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
+[node name="Pawn11" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.197569, 0, -3.88201)
 script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn11"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1195,12 +1219,14 @@ mesh = ExtResource("47_4mcip")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
-[node name="Pawn12" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
+[node name="Pawn12" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.735894, 0, -3.88201)
 script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn12"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1214,12 +1240,14 @@ mesh = ExtResource("48_ew0yn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15965, 0)
 shape = SubResource("BoxShape3D_81krc")
 
-[node name="Pawn13" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor")]
+[node name="Pawn13" type="Node3D" parent="World/Interactables/Pawns" node_paths=PackedStringArray("CollisionObject", "ObjectToColor", "Cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21284, 0, -3.88201)
 script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
+Cursor = NodePath("../../../../Game/PlayerManager/Player0/CursorManager")
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn13"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1239,6 +1267,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn14"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1258,6 +1287,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+TargetColor = null
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn15"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
