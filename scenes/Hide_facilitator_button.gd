@@ -1,6 +1,7 @@
 extends MarginContainer
 
 @export var FacilitatorPanels : Control
+@export var CardPanel : Container
 var panelhidden : bool
 
 func _ready() -> void:
@@ -8,8 +9,12 @@ func _ready() -> void:
 
 func _toggle_facilitator_panels():
 	if panelhidden:
+		CardPanel.mouse_filter = Control.MOUSE_FILTER_STOP
+		FacilitatorPanels.mouse_filter = Control.MOUSE_FILTER_STOP
 		FacilitatorPanels.show()
 		panelhidden = false
 	else:
+		CardPanel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		FacilitatorPanels.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		FacilitatorPanels.hide()
 		panelhidden = true
