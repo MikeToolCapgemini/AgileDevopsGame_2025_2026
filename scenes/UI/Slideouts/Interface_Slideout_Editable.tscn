@@ -1,0 +1,111 @@
+[gd_scene load_steps=11 format=3 uid="uid://b0eok2eloes3u"]
+
+[ext_resource type="Script" uid="uid://bae534mjgdnxk" path="res://scripts/UX/SlideOutManager.gd" id="1_i3svh"]
+[ext_resource type="StyleBox" uid="uid://o223wkfjc2wh" path="res://Styles/Panel_Slideout.tres" id="1_v0upr"]
+[ext_resource type="PackedScene" uid="uid://dfn3yh1ifelvm" path="res://prefabs/guide_field.tscn" id="2_v0upr"]
+[ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="4_smam4"]
+[ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="5_0cphf"]
+[ext_resource type="Script" uid="uid://hc7yfgq2unoi" path="res://scripts/UX/Resume.gd" id="6_ple1c"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_or8bj"]
+
+[sub_resource type="Theme" id="Theme_673bd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gvqcl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kk7ig"]
+
+[node name="Interface_Slideout_Editable" type="Control" node_paths=PackedStringArray("GuideGrid")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i3svh")
+GuideName = "How To Play"
+GuideGrid = NodePath("Panel/Container/GuideField")
+
+[node name="BlackoutBG" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="."]
+material = SubResource("CanvasItemMaterial_or8bj")
+custom_minimum_size = Vector2(1000, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -513.5
+offset_top = -312.0
+offset_right = 513.5
+offset_bottom = 312.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_673bd")
+theme_override_styles/panel = ExtResource("1_v0upr")
+
+[node name="Container" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GuideField" type="GridContainer" parent="Panel/Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 0
+columns = 3
+
+[node name="GuideField" parent="Panel/Container/GuideField" instance=ExtResource("2_v0upr")]
+layout_mode = 2
+
+[node name="GuideField2" parent="Panel/Container/GuideField" instance=ExtResource("2_v0upr")]
+layout_mode = 2
+
+[node name="GuideField3" parent="Panel/Container/GuideField" instance=ExtResource("2_v0upr")]
+layout_mode = 2
+
+[node name="GuideField4" parent="Panel/Container/GuideField" instance=ExtResource("2_v0upr")]
+layout_mode = 2
+
+[node name="GuideField5" parent="Panel/Container/GuideField" instance=ExtResource("2_v0upr")]
+layout_mode = 2
+
+[node name="GuideField6" parent="Panel/Container/GuideField" instance=ExtResource("2_v0upr")]
+layout_mode = 2
+
+[node name="CloseBtn" type="Button" parent="Panel" node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = ExtResource("4_smam4")
+theme_override_styles/pressed = ExtResource("5_0cphf")
+theme_override_styles/hover = ExtResource("5_0cphf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gvqcl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kk7ig")
+text = "Close"
+script = ExtResource("6_ple1c")
+hideObject = NodePath("../..")
+
+[connection signal="pressed" from="Panel/CloseBtn" to="Panel/CloseBtn" method="_on_pressed"]

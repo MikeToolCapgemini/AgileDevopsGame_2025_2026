@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfn3yh1ifelvm"]
+
+[ext_resource type="Script" uid="uid://bssy37vfbctb6" path="res://scripts/UX/guide_field.gd" id="1_ex3kh"]
+[ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="1_ys7ml"]
+[ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_ex3kh"]
+[ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="3_lmh6x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5xufn"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6ndx"]
+bg_color = Color(0.2, 0.70980394, 0.4117647, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[node name="GuideField" type="MarginContainer" node_paths=PackedStringArray("Icon", "ColorIcon", "Title", "Text")]
+script = ExtResource("1_ex3kh")
+Icon = NodePath("IconMargin/IconSphere/Icon")
+ColorIcon = NodePath("IconMargin/IconSphere")
+Title = NodePath("PanelMargin/PanelContainer/VBoxContainer/Title")
+Text = NodePath("PanelMargin/PanelContainer/VBoxContainer/MarginContainer/SubjectText")
+
+[node name="PanelMargin" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelMargin"]
+custom_minimum_size = Vector2(290, 230)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_5xufn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelMargin/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="RichTextLabel" parent="PanelMargin/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(268.555, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.2627451, 0.6431373, 0.84313726, 1)
+theme_override_fonts/normal_font = ExtResource("1_ys7ml")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "Preperation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelMargin/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+
+[node name="SubjectText" type="RichTextLabel" parent="PanelMargin/PanelContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 170)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_ys7ml")
+theme_override_font_sizes/normal_font_size = 11
+text = "Determine wheter to play with the basic question set and filter out this set if necessary. Complex question cards are marked (+). 
+stack the cards by color and number order for question cards. 
+mix action cards randomly through each set of game cards. 
+If a screen is present, the questions can be shown on the screen during the game."
+fit_content = true
+scroll_active = false
+
+[node name="IconMargin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = -10
+theme_override_constants/margin_top = 15
+
+[node name="IconSphere" type="PanelContainer" parent="IconMargin"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_p6ndx")
+
+[node name="Icon" type="Label" parent="IconMargin/IconSphere"]
+auto_translate_mode = 2
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_ex3kh")
+theme_override_font_sizes/font_size = 40
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_lmh6x")
+icon_size = 40
+icon_name = "users"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"

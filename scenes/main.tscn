@@ -1,4 +1,4 @@
-[gd_scene load_steps=205 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=206 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -110,6 +110,7 @@
 [ext_resource type="PackedScene" uid="uid://bck00323lniek" path="res://scenes/UI/Slideouts/interface_slideout_quick_ref+.tscn" id="96_tc087"]
 [ext_resource type="PackedScene" uid="uid://bt3vkc4xt870l" path="res://scenes/UI/Slideouts/interface_slideout_interrupts.tscn" id="97_73205"]
 [ext_resource type="PackedScene" uid="uid://cwiem647kmseo" path="res://scenes/UI/Slideouts/interface_slideout_h_2p_2.tscn" id="98_0tljd"]
+[ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrx01"]
 size = Vector3(11, 0.7, 5)
@@ -2203,7 +2204,6 @@ text = "Basic Rules"
 script = SubResource("GDScript_kvygq")
 
 [node name="Interface_Buttons" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -2261,7 +2261,7 @@ editor_description = "
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
 clip_contents = true
-custom_minimum_size = Vector2(158, 557)
+custom_minimum_size = Vector2(158, 574)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -2395,7 +2395,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "How to play"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../../../../../Interface_Slideout_H2P2")
+showObject = NodePath("../../../../../../../../../../Interface_Slideout_H2P")
 
 [node name="facilitatorkit" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides" node_paths=PackedStringArray("showObject")]
 custom_minimum_size = Vector2(121, 43)
@@ -2473,7 +2473,7 @@ editor_description = "
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
 clip_contents = true
-custom_minimum_size = Vector2(121, 167)
+custom_minimum_size = Vector2(130, 184)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -2511,7 +2511,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Rules"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../../../../../Interface_Slideout_QuickRef")
+showObject = NodePath("../../../../../../../../../../Interface_Slideout_HowToPlay")
 
 [node name="ExtraRules" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference" node_paths=PackedStringArray("showObject")]
 custom_minimum_size = Vector2(121, 43)
@@ -2533,7 +2533,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Extra Rules"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../../../../../Interface_Slideout_QuickRef+")
+showObject = NodePath("../../../../../../../../../../Interface_Slideout_Extra_rules")
 
 [node name="Interrupts" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference" node_paths=PackedStringArray("showObject")]
 custom_minimum_size = Vector2(121, 43)
@@ -2556,6 +2556,28 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Interrupts"
 script = ExtResource("49_hpq24")
 showObject = NodePath("../../../../../../../../../../Interface_Slideout_Interrupts")
+
+[node name="SlideOutExample" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
+text = "Example"
+script = ExtResource("49_hpq24")
+showObject = NodePath("../../../../../../../../../../Interface_Slideout_Example")
 
 [node name="QRListOpener" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle" node_paths=PackedStringArray("collapse", "iconToSwap")]
 custom_minimum_size = Vector2(0, 10)
@@ -3889,6 +3911,17 @@ theme_override_fonts/normal_font = ExtResource("87_1uevf")
 bbcode_enabled = true
 text = "[center]Interrupt![/center]"
 
+[node name="Interface_Slideout_Example" parent="." instance=ExtResource("105_07pt3")]
+visible = false
+GuideName = "Shorter Example"
+
+[node name="Interface_Slideout_HowToPlay" parent="." instance=ExtResource("105_07pt3")]
+visible = false
+
+[node name="Interface_Slideout_Extra_rules" parent="." instance=ExtResource("105_07pt3")]
+visible = false
+GuideName = "Extra Rules"
+
 [node name="Interface_Slideout_H2P" parent="." instance=ExtResource("93_akjxb")]
 visible = false
 
@@ -3994,6 +4027,7 @@ visible = false
 [connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/Rules" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/Rules" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/ExtraRules" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/ExtraRules" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/Interrupts" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/Interrupts" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/SlideOutExample" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/SlideOutExample" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QRListOpener" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QRListOpener" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/CloseTimerButton" to="Interface_Buttons/MarginContainer/OpenOptionsButton" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/RevealButton" to="Interface_Cards" method="_on_reveal_button_pressed"]
