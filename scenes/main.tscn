@@ -1,4 +1,4 @@
-[gd_scene load_steps=206 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=207 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -110,6 +110,7 @@
 [ext_resource type="PackedScene" uid="uid://bck00323lniek" path="res://scenes/UI/Slideouts/interface_slideout_quick_ref+.tscn" id="96_tc087"]
 [ext_resource type="PackedScene" uid="uid://bt3vkc4xt870l" path="res://scenes/UI/Slideouts/interface_slideout_interrupts.tscn" id="97_73205"]
 [ext_resource type="PackedScene" uid="uid://cwiem647kmseo" path="res://scenes/UI/Slideouts/interface_slideout_h_2p_2.tscn" id="98_0tljd"]
+[ext_resource type="Script" uid="uid://bq01pxakqcfgj" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
 [ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrx01"]
@@ -2160,7 +2161,6 @@ visible = false
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Save Game (temp)"
-script = ExtResource("42_u5l1c")
 
 [node name="LoadGameButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns"]
 visible = false
@@ -3780,7 +3780,11 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 script = ExtResource("51_3t33e")
 cardType = "b"
 
-[node name="Resume" type="Button" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer" node_paths=PackedStringArray("hideObject")]
+[node name="Buttons" type="HBoxContainer" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Resume" type="Button" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons" node_paths=PackedStringArray("hideObject")]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -3799,7 +3803,28 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
 text = "Resume"
 script = ExtResource("49_4jv7h")
-hideObject = NodePath("../../..")
+hideObject = NodePath("../../../..")
+
+[node name="BookmarkSite" type="Button" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons" node_paths=PackedStringArray("saveManager")]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
+text = "Open in website"
+script = ExtResource("102_37xlc")
+saveManager = NodePath("../../../../../Interface_Facilitator/MultiSave")
 
 [node name="Interface_InterruptFacilitator2" type="Control" parent="."]
 visible = false
@@ -4049,7 +4074,8 @@ visible = false
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" method="on_repick"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" method="_on_pressed"]
-[connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Resume" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Resume" method="_on_pressed"]
+[connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/Resume" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/Resume" method="_on_pressed"]
+[connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" method="_on_upload_button_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Hide" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Hide" method="_on_pressed"]
