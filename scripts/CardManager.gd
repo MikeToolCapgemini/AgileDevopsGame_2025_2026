@@ -93,6 +93,7 @@ func draw(type):
 	#var cChoiceE = set_card_choice_string("E. ", cardTypeData[d]["ChoiceE"])
 	
 	var cAnswer = cardTypeData[d]["Answer"]
+	var cExplanation = cardTypeData[d]["Toelichting"]
 	
 	# action cards
 	var rng = RandomNumberGenerator.new()
@@ -114,13 +115,13 @@ func draw(type):
 		var roll = rng.randi_range(1,actionDict.size()-1)
 		CardUIManager.UXTagObject.visible = false
 		CardUIManager.ActionTagObject.visible = true
-		card_setup("action", "", actionDict[roll], "", "", "", "", "")
+		card_setup("action", "", actionDict[roll], "", "", "", "", "","")
 		card_setup.rpc("action", "", actionDict[roll], "", "", "", "", "")
 	else:
 		print("###")
 		print(cQuestion)
-		card_setup(cType,cSubType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer)
-		card_setup.rpc(cType,cSubType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer)
+		card_setup(cType,cSubType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer,cExplanation)
+		card_setup.rpc(cType,cSubType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer,cExplanation)
 		CardUIManager.UXTagObject.visible = true
 		CardUIManager.ActionTagObject.visible = false
 		set_bg_color.rpc(bgColor)
@@ -158,7 +159,7 @@ func card_discard(cardTypeData,cardTypeDataVar, cardTypeString, keyVar):
 	#SaveSystem.save_game()
 
 @rpc("any_peer")
-func card_setup(type, subtype, question, choiceA, choiceB, choiceC, choiceD, answer):
+func card_setup(type, subtype, question, choiceA, choiceB, choiceC, choiceD, answer,explanation):
 	print("####")
 	print(type)
 	set_card_icon(type)
@@ -170,12 +171,20 @@ func card_setup(type, subtype, question, choiceA, choiceB, choiceC, choiceD, ans
 	CardUIManager.AnswerBTextObject.text = choiceB
 	CardUIManager.AnswerCTextObject.text = choiceC
 	CardUIManager.AnswerDTextObject.text = choiceD
-	if answer == "":
-		CardUIManager.AnswerPanel.visible = false
-	else:
+	if answer != "" || explanation != "":
 		CardUIManager.AnswerPanel.visible = true
+	else:
+		CardUIManager.AnswerPanel.visible = false
+		
 	CardUIManager.AnswerObject.text = answer
-	CardUIManager.AnswerFacilitatorTextObject.text = answer
+	CardUIManager.AnswerFacilitatorTextObject.text = "Answer: " + answer
+	if explanation != "" && answer == "":
+		CardUIManager.AnswerFacilitatorTextObject.text = "Possible answers:"
+	if explanation == "":
+		CardUIManager.AnswerExplanationTextObject.visible = false
+	else:
+		CardUIManager.AnswerExplanationTextObject.visible = true
+	CardUIManager.AnswerExplanationTextObject.text = "Explanation: " + explanation
 	
 
 func set_card_icon(type):

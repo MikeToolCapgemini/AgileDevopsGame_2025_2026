@@ -13,6 +13,7 @@ class_name CardUIManager
 @export var AnswerObject : RichTextLabel
 @export var AnswerPanel : Container
 @export var AnswerFacilitatorTextObject : RichTextLabel
+@export var AnswerExplanationTextObject : RichTextLabel
 @export var AnswerBackground : Panel
 @export var AnswerATextObject : RichTextLabel
 @export var AnswerBTextObject : RichTextLabel

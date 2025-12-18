@@ -397,29 +397,6 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gm02q"]
-bg_color = Color(0.262745, 0.643137, 0.843137, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07pt3"]
-bg_color = Color(0, 0.34509805, 0.67058825, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x52v5"]
-bg_color = Color(0.415686, 0.14902, 0.184314, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05u6v"]
-bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_roort"]
-bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlsfy"]
-bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpru0"]
-bg_color = Color(0.0117647, 1, 0.6, 0.980392)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7l7aa"]
 bg_color = Color(0, 0.34509805, 0.67058825, 1)
 border_width_left = 3
@@ -462,6 +439,29 @@ border_width_bottom = 3
 border_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gm02q"]
+bg_color = Color(0.262745, 0.643137, 0.843137, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07pt3"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x52v5"]
+bg_color = Color(0.415686, 0.14902, 0.184314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05u6v"]
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_roort"]
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlsfy"]
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpru0"]
+bg_color = Color(0.0117647, 1, 0.6, 0.980392)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n6mxd"]
 
@@ -2204,6 +2204,7 @@ text = "Basic Rules"
 script = SubResource("GDScript_kvygq")
 
 [node name="Interface_Buttons" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -2335,7 +2336,7 @@ editor_description = "
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
 clip_contents = true
-custom_minimum_size = Vector2(121, 167)
+custom_minimum_size = Vector2(130, 167)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -2665,6 +2666,276 @@ mouse_filter = 2
 script = ExtResource("41_lgecp")
 CardUIManager = NodePath("MarginContainer/CollapsibleContainer/CardPanel")
 
+[node name="FacilitatorPanels" type="Control" parent="Interface_Cards"]
+custom_minimum_size = Vector2(860, 645)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 160.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="FaciltatorPanelMainMargin" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_right = 12.0
+offset_bottom = 466.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/margin_top = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="FacilitatorPanelCollapsable" type="Control" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer"]
+process_mode = 3
+editor_description = "
+			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
+			
+Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
+clip_contents = true
+custom_minimum_size = Vector2(157, 466)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+script = ExtResource("78_engxj")
+folding_direction_preset = 11
+sizing_constraint = 2
+sizing_node = NodePath("FacilitatorPanelMargin")
+metadata/_custom_type_script = "uid://btlh4wrv04rc3"
+
+[node name="FacilitatorPanelMargin" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable"]
+custom_minimum_size = Vector2(157, 466)
+layout_mode = 0
+offset_right = 157.0
+offset_bottom = 466.0
+grow_horizontal = 0
+theme_override_constants/margin_left = -5
+
+[node name="FacilitatorCardPanel" type="PanelContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7l7aa")
+script = ExtResource("42_pfsrv")
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="PanelLabel" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(111, 51)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+text = "Facilitator 
+Panel"
+scroll_active = false
+
+[node name="RevealButton" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 33)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
+text = "Reveal Answer"
+
+[node name="SaveQuestion" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("cardManagerObject", "bookmarkIcon")]
+custom_minimum_size = Vector2(120, 33)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
+text = "Bookmark"
+script = ExtResource("45_n88qk")
+cardManagerObject = NodePath("../../../../../../../../..")
+bookmarkIcon = NodePath("../../../../../../../../../MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/bookmark")
+
+[node name="CancelSave" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(120, 54)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
+text = "Cancel
+Bookmark
+"
+
+[node name="CloseButton" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer"]
+custom_minimum_size = Vector2(120, 33)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
+text = "Close Answer"
+
+[node name="FacilitatorPanelOpener" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer" node_paths=PackedStringArray("collapse", "iconToSwap")]
+custom_minimum_size = Vector2(15, 10)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_8lcmr")
+script = ExtResource("78_raiwf")
+collapse = NodePath("../FacilitatorPanelCollapsable")
+iconToSwap = NodePath("FontAwesome")
+foldedIcon = "caret-right"
+unfoldedIcon = "caret-left"
+
+[node name="FontAwesome" type="Label" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelOpener"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 16
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_name = "caret-right"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="AnswerPanelMargin" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -117.0
+offset_right = 689.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="CollapsibleContainer" type="Control" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer"]
+process_mode = 3
+editor_description = "
+			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
+			
+Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
+clip_contents = true
+custom_minimum_size = Vector2(679, 120)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+script = ExtResource("78_engxj")
+folding_direction_preset = 10
+sizing_constraint = 1
+sizing_node = NodePath("AnswerPanel")
+metadata/_custom_type_script = "uid://btlh4wrv04rc3"
+
+[node name="AnswerPanel" type="PanelContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer"]
+layout_mode = 0
+offset_right = 679.0
+offset_bottom = 90.0
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ann2e")
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="AnswerF" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+text = "Answer:"
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 0
+
+[node name="AnswerFNote" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(600, 70)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+text = "Answer
+Answer
+Answer"
+scroll_active = false
+
+[node name="AnswerBoxOpener" type="Button" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer" node_paths=PackedStringArray("collapse", "iconToSwap")]
+custom_minimum_size = Vector2(15, 10)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_8lcmr")
+script = ExtResource("78_raiwf")
+collapse = NodePath("../CollapsibleContainer")
+iconToSwap = NodePath("FontAwesome")
+foldedIcon = "caret-down"
+unfoldedIcon = "caret-up"
+
+[node name="FontAwesome" type="Label" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/AnswerBoxOpener"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 16
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_name = "caret-down"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
 [node name="MarginContainer" type="MarginContainer" parent="Interface_Cards"]
 layout_mode = 1
 anchors_preset = 5
@@ -2693,7 +2964,7 @@ folding_direction_preset = 3
 sizing_node = NodePath("CardPanel")
 metadata/_custom_type_script = "uid://btlh4wrv04rc3"
 
-[node name="CardPanel" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionPanel", "DiscussionPanel", "QuestionPanelTextObject", "DiscussionPanelTextObject", "QuestionObject", "AnswerObject", "AnswerPanel", "AnswerFacilitatorTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
+[node name="CardPanel" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionPanel", "DiscussionPanel", "QuestionPanelTextObject", "DiscussionPanelTextObject", "QuestionObject", "AnswerObject", "AnswerPanel", "AnswerFacilitatorTextObject", "AnswerExplanationTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
 custom_minimum_size = Vector2(600, 300)
 layout_mode = 0
 offset_right = 706.0
@@ -2712,7 +2983,8 @@ DiscussionPanelTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Dis
 QuestionObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/Question")
 AnswerObject = NodePath("CardPanelMarginContainer/VBoxContainer/AnswerPanelBG/Answer")
 AnswerPanel = NodePath("../../../FacilitatorPanels/AnswerPanelMargin")
-AnswerFacilitatorTextObject = NodePath("../../../FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer/VBoxContainer/MarginContainer/AnswerFNote")
+AnswerFacilitatorTextObject = NodePath("../../../FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer/VBoxContainer/AnswerF")
+AnswerExplanationTextObject = NodePath("../../../FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer/VBoxContainer/MarginContainer/AnswerFNote")
 AnswerBackground = NodePath("CardPanelMarginContainer/VBoxContainer/AnswerPanelBG")
 AnswerATextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceA")
 AnswerBTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceB")
@@ -3152,273 +3424,6 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Question:"
 scroll_active = false
-
-[node name="FacilitatorPanels" type="Control" parent="Interface_Cards"]
-custom_minimum_size = Vector2(860, 645)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 160.0
-offset_bottom = 145.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="FaciltatorPanelMainMargin" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -160.0
-offset_right = 12.0
-offset_bottom = 466.0
-grow_horizontal = 0
-mouse_filter = 2
-theme_override_constants/margin_top = 20
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="FacilitatorPanelCollapsable" type="Control" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer"]
-process_mode = 3
-editor_description = "
-			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
-			
-Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
-clip_contents = true
-custom_minimum_size = Vector2(157, 466)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 3
-script = ExtResource("78_engxj")
-folding_direction_preset = 11
-sizing_constraint = 2
-sizing_node = NodePath("FacilitatorPanelMargin")
-metadata/_custom_type_script = "uid://btlh4wrv04rc3"
-
-[node name="FacilitatorPanelMargin" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable"]
-custom_minimum_size = Vector2(157, 466)
-layout_mode = 0
-offset_right = 157.0
-offset_bottom = 466.0
-grow_horizontal = 0
-theme_override_constants/margin_left = -5
-
-[node name="FacilitatorCardPanel" type="PanelContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_7l7aa")
-script = ExtResource("42_pfsrv")
-
-[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer"]
-custom_minimum_size = Vector2(0, 400)
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 10
-
-[node name="PanelLabel" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(111, 51)
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("87_1uevf")
-text = "Facilitator 
-Panel"
-scroll_active = false
-
-[node name="RevealButton" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(120, 33)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("87_1uevf")
-theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
-theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
-text = "Reveal Answer"
-
-[node name="SaveQuestion" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("cardManagerObject", "bookmarkIcon")]
-custom_minimum_size = Vector2(120, 33)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("87_1uevf")
-theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
-theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
-text = "Bookmark"
-script = ExtResource("45_n88qk")
-cardManagerObject = NodePath("../../../../../../../../..")
-bookmarkIcon = NodePath("../../../../../../../../../MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/bookmark")
-
-[node name="CancelSave" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(120, 54)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("87_1uevf")
-theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
-theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
-text = "Cancel
-Bookmark
-"
-
-[node name="CloseButton" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer"]
-custom_minimum_size = Vector2(120, 33)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("87_1uevf")
-theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
-theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
-text = "Close Answer"
-
-[node name="FacilitatorPanelOpener" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer" node_paths=PackedStringArray("collapse", "iconToSwap")]
-custom_minimum_size = Vector2(15, 10)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_8lcmr")
-script = ExtResource("78_raiwf")
-collapse = NodePath("../FacilitatorPanelCollapsable")
-iconToSwap = NodePath("FontAwesome")
-foldedIcon = "caret-right"
-unfoldedIcon = "caret-left"
-
-[node name="FontAwesome" type="Label" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelOpener"]
-auto_translate_mode = 2
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-localize_numeral_system = false
-theme_override_fonts/font = ExtResource("75_roort")
-theme_override_font_sizes/font_size = 16
-text = ""
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("88_wvlrk")
-icon_name = "caret-right"
-metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
-
-[node name="AnswerPanelMargin" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -117.0
-offset_right = 689.0
-grow_vertical = 0
-mouse_filter = 2
-theme_override_constants/margin_left = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="CollapsibleContainer" type="Control" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer"]
-process_mode = 3
-editor_description = "
-			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
-			
-Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
-clip_contents = true
-custom_minimum_size = Vector2(679, 90)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-script = ExtResource("78_engxj")
-folding_direction_preset = 10
-sizing_constraint = 1
-sizing_node = NodePath("AnswerPanel")
-metadata/_custom_type_script = "uid://btlh4wrv04rc3"
-
-[node name="AnswerPanel" type="PanelContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer"]
-layout_mode = 0
-offset_right = 679.0
-offset_bottom = 90.0
-size_flags_vertical = 4
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ann2e")
-
-[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel"]
-layout_mode = 2
-size_flags_vertical = 0
-mouse_filter = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="AnswerF" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(600, 30)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-mouse_filter = 2
-text = "Answer:"
-scroll_active = false
-
-[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-
-[node name="AnswerFNote" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer/VBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(600, 40)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-mouse_filter = 2
-text = "Answer"
-scroll_active = false
-
-[node name="AnswerBoxOpener" type="Button" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer" node_paths=PackedStringArray("collapse", "iconToSwap")]
-custom_minimum_size = Vector2(15, 10)
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_8lcmr")
-script = ExtResource("78_raiwf")
-collapse = NodePath("../CollapsibleContainer")
-iconToSwap = NodePath("FontAwesome")
-foldedIcon = "caret-down"
-unfoldedIcon = "caret-up"
-
-[node name="FontAwesome" type="Label" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/AnswerBoxOpener"]
-auto_translate_mode = 2
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-localize_numeral_system = false
-theme_override_fonts/font = ExtResource("75_roort")
-theme_override_font_sizes/font_size = 16
-text = ""
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("88_wvlrk")
-icon_name = "caret-down"
-metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="HideButtonMargin" type="MarginContainer" parent="Interface_Cards" node_paths=PackedStringArray("FacilitatorPanels", "CardPanel")]
 custom_minimum_size = Vector2(700, 525)
