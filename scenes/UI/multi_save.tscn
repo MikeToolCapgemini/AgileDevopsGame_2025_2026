@@ -59,7 +59,7 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="MultiSave" type="MarginContainer"]
+[node name="MultiSave" type="MarginContainer" node_paths=PackedStringArray("SaveNameField", "LoadedSavesContainer", "collapsible")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -72,6 +72,10 @@ offset_bottom = 74.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
+script = ExtResource("1_tovra")
+SaveNameField = NodePath("CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SaveNameField")
+LoadedSavesContainer = NodePath("CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer")
+collapsible = NodePath("CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer")
 
 [node name="OpenSaveButton" type="Button" parent="." node_paths=PackedStringArray("collapse")]
 custom_minimum_size = Vector2(50, 50)
@@ -151,7 +155,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 alignment = 2
 
-[node name="CollapsibleContainer" type="Control" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="LoadedSavesCollapsableContainer" type="Control" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
 process_mode = 3
 editor_description = "
 			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
@@ -170,7 +174,7 @@ sizing_node = NodePath("MarginContainer")
 custom_open_size = Vector2(143, 127)
 metadata/_custom_type_script = "uid://btlh4wrv04rc3"
 
-[node name="MarginContainer" type="MarginContainer" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/CollapsibleContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -178,19 +182,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LoadedsaveGames" type="HSplitContainer" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/CollapsibleContainer/MarginContainer"]
+[node name="LoadedsaveGames" type="HSplitContainer" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer/MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(143, 20)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="TitleLabel" type="Label" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/CollapsibleContainer/MarginContainer/LoadedsaveGames"]
+[node name="TitleLabel" type="Label" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer/MarginContainer/LoadedsaveGames"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_i0ouf")
 text = "Save Games"
 
-[node name="Scrolbar" type="ScrollContainer" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/CollapsibleContainer/MarginContainer/LoadedsaveGames/TitleLabel"]
+[node name="Scrolbar" type="ScrollContainer" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer/MarginContainer/LoadedsaveGames/TitleLabel"]
 layout_mode = 0
 offset_top = 22.0
 offset_right = 143.0
@@ -198,17 +202,17 @@ offset_bottom = 118.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LoadedSaves" type="VBoxContainer" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/CollapsibleContainer/MarginContainer/LoadedsaveGames/TitleLabel/Scrolbar"]
+[node name="LoadedSaves" type="VBoxContainer" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer/MarginContainer/LoadedsaveGames/TitleLabel/Scrolbar"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlaceHolder" type="Button" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/CollapsibleContainer/MarginContainer/LoadedsaveGames/TitleLabel/Scrolbar/LoadedSaves"]
+[node name="PlaceHolder" type="Button" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer/MarginContainer/LoadedsaveGames/TitleLabel/Scrolbar/LoadedSaves"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 
-[node name="HideSavedgames" type="Button" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/CollapsibleContainer/MarginContainer/LoadedsaveGames"]
+[node name="HideSavedgames" type="Button" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer/MarginContainer/LoadedsaveGames"]
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -234,7 +238,7 @@ alignment = 1
 [node name="SplitContainer" type="SplitContainer" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer"]
 layout_mode = 2
 
-[node name="SaveButton" type="Button" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer" node_paths=PackedStringArray("SaveNameField", "LoadedSavesContainer", "collapsible")]
+[node name="SaveButton" type="Button" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer"]
 custom_minimum_size = Vector2(94, 31)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -243,10 +247,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_g8xcl")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_uamr3")
 theme_override_styles/hover = SubResource("StyleBoxFlat_uamr3")
 text = "Save Game"
-script = ExtResource("1_tovra")
-SaveNameField = NodePath("../../SaveNameField")
-LoadedSavesContainer = NodePath("../../../CollapsibleContainer/MarginContainer/LoadedsaveGames/TitleLabel/Scrolbar/LoadedSaves")
-collapsible = NodePath("../../../CollapsibleContainer")
 
 [node name="LoadButton" type="Button" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer"]
 custom_minimum_size = Vector2(94, 31)
@@ -291,7 +291,7 @@ icon_name = "x"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [connection signal="pressed" from="OpenSaveButton" to="OpenSaveButton" method="_on_collapse_open"]
-[connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/CollapsibleContainer/MarginContainer/LoadedsaveGames/HideSavedgames" to="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/SaveButton" method="_on_hide_savedgames_pressed"]
-[connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/SaveButton" to="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/SaveButton" method="_on_save_game_button_pressed"]
-[connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/LoadButton" to="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/SaveButton" method="_on_load_game_button_pressed"]
+[connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer/MarginContainer/LoadedsaveGames/HideSavedgames" to="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/SaveButton" method="_on_hide_savedgames_pressed"]
+[connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/SaveButton" to="." method="_on_save_game_button_pressed"]
+[connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/LoadButton" to="." method="_on_load_game_button_pressed"]
 [connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/CloseTimerButton" to="OpenSaveButton" method="_on_collapse_close"]

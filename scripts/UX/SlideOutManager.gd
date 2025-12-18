@@ -27,10 +27,8 @@ func setup_fields():
 		guide.queue_free()
 	for SlideOut in SlideOutData:
 		if SlideOut["GuideName"] == GuideName:
-			print("Found: " + GuideName)
 			var NrOfFields : int = int(SlideOut["NrFields"])
 			for i  in range(1,NrOfFields+1):
-				print("Making Field #" + str(i))
 				var guidefield = guideFieldPrefab.instantiate()
 				GuideGrid.add_child(guidefield)
 				var GuideFieldManager : GuideField = guidefield as GuideField

@@ -5,7 +5,7 @@ var DefaultData = {}
 var SaveData = {}
 var currentSave : String = ""
 @export var SaveNameField : LineEdit
-@export var LoadedSavesContainer : GridContainer
+@export var LoadedSavesContainer : VBoxContainer
 @export var pawns_path: NodePath
 @export var collapsible : CollapsibleContainer
 

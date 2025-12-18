@@ -126,9 +126,9 @@ func draw(type):
 		CardUIManager.ActionTagObject.visible = false
 		set_bg_color.rpc(bgColor)
 		curType = type
-		curKey = d
-		card_discard(cardTypeData,cardTypeData, type, d)
-		card_discard.rpc(cardTypeData,cardTypeData, type, d)
+		curKey = d+1
+		card_discard(cardTypeData,cardTypeData, type, d+1)
+		card_discard.rpc(cardTypeData,cardTypeData, type, d+1)
 		print(curType + str(curKey))
 	_sync_cardshown.rpc(visible, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)
 
