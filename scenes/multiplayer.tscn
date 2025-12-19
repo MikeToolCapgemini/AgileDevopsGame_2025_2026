@@ -1,8 +1,57 @@
-[gd_scene load_steps=5 format=3 uid="uid://kgixi5xrbejj"]
+[gd_scene load_steps=11 format=3 uid="uid://kgixi5xrbejj"]
 
 [ext_resource type="Script" uid="uid://bt5vowngsleoc" path="res://scripts/Multiplayer.gd" id="1_8yuej"]
 [ext_resource type="PackedScene" uid="uid://bq4jyntltiheo" path="res://scenes/main.tscn" id="2_of8yj"]
+[ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="3_4vwpp"]
 [ext_resource type="Script" uid="uid://df05tjlkygvok" path="res://scripts/UX/Toggle.gd" id="3_cuu6e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vwpp"]
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.34509805, 0.67058825, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36d77"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvo4r"]
+bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6lh4"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gpc4n"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_o3rwn"]
 properties/0/path = NodePath(".:incrementValue")
@@ -21,12 +70,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Panel" type="Panel" parent="Debug Interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 102.0
+offset_top = 15.0
+offset_right = -307.0
+offset_bottom = -119.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4vwpp")
+
 [node name="Host Button" type="Button" parent="Debug Interface"]
 layout_mode = 0
 offset_left = 150.0
 offset_top = 110.0
 offset_right = 250.0
 offset_bottom = 141.0
+theme_override_fonts/font = ExtResource("3_4vwpp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_36d77")
 text = "Host"
 
 [node name="Join Button" type="Button" parent="Debug Interface"]
@@ -35,6 +99,8 @@ offset_left = 261.0
 offset_top = 110.0
 offset_right = 361.0
 offset_bottom = 141.0
+theme_override_fonts/font = ExtResource("3_4vwpp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_36d77")
 text = "Join"
 
 [node name="Start Button" type="Button" parent="Debug Interface"]
@@ -43,6 +109,8 @@ offset_left = 374.0
 offset_top = 110.0
 offset_right = 474.0
 offset_bottom = 141.0
+theme_override_fonts/font = ExtResource("3_4vwpp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_36d77")
 text = "Start Game"
 
 [node name="NameField" type="TextEdit" parent="Debug Interface"]
@@ -51,6 +119,7 @@ offset_left = 224.0
 offset_top = 69.0
 offset_right = 473.0
 offset_bottom = 104.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_uvo4r")
 text = "testplayername"
 
 [node name="IPField" type="TextEdit" parent="Debug Interface"]
@@ -59,6 +128,7 @@ offset_left = 150.0
 offset_top = 246.0
 offset_right = 399.0
 offset_bottom = 281.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_uvo4r")
 text = "localhost"
 
 [node name="Label" type="Label" parent="Debug Interface"]
@@ -67,6 +137,7 @@ offset_left = 158.0
 offset_top = 71.0
 offset_right = 209.0
 offset_bottom = 97.0
+theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "Name:"
 
 [node name="Debug Button" type="Button" parent="Debug Interface"]
@@ -75,6 +146,8 @@ offset_left = 150.0
 offset_top = 152.0
 offset_right = 250.0
 offset_bottom = 183.0
+theme_override_fonts/font = ExtResource("3_4vwpp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_36d77")
 text = "Debug"
 
 [node name="Tag Name" type="Label" parent="Debug Interface"]
@@ -83,6 +156,7 @@ offset_left = 158.0
 offset_top = 31.0
 offset_right = 209.0
 offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "DevOps Game v0.1.4"
 
 [node name="TextField" type="Label" parent="Debug Interface"]
@@ -92,6 +166,7 @@ offset_top = 66.0
 offset_right = 689.0
 offset_bottom = 254.0
 scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("3_4vwpp")
 
 [node name="Tag Players" type="Label" parent="Debug Interface"]
 layout_mode = 0
@@ -100,6 +175,7 @@ offset_top = 53.0
 offset_right = 638.0
 offset_bottom = 79.0
 scale = Vector2(0.6, 0.6)
+theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "Connected Players:"
 
 [node name="Plus Button" type="Button" parent="Debug Interface"]
@@ -108,6 +184,8 @@ offset_left = 135.0
 offset_top = 418.0
 offset_right = 235.0
 offset_bottom = 449.0
+theme_override_fonts/font = ExtResource("3_4vwpp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_a6lh4")
 text = "+"
 
 [node name="Minus Button" type="Button" parent="Debug Interface"]
@@ -116,6 +194,8 @@ offset_left = 240.0
 offset_top = 418.0
 offset_right = 340.0
 offset_bottom = 449.0
+theme_override_fonts/font = ExtResource("3_4vwpp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_a6lh4")
 text = "-"
 
 [node name="Data Test Text1" type="Label" parent="Debug Interface"]
@@ -124,6 +204,7 @@ offset_left = 135.0
 offset_top = 350.0
 offset_right = 432.0
 offset_bottom = 376.0
+theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "Multiplayer live data transmission test"
 
 [node name="ValueText" type="Label" parent="Debug Interface"]
@@ -132,6 +213,7 @@ offset_left = 197.0
 offset_top = 380.0
 offset_right = 325.0
 offset_bottom = 406.0
+theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "0"
 
 [node name="DataTestText3" type="Label" parent="Debug Interface"]
@@ -140,6 +222,7 @@ offset_left = 135.0
 offset_top = 380.0
 offset_right = 432.0
 offset_bottom = 406.0
+theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "Value: "
 
 [node name="Tag Name2" type="Label" parent="Debug Interface"]
@@ -148,6 +231,7 @@ offset_left = 158.0
 offset_top = 217.0
 offset_right = 317.0
 offset_bottom = 243.0
+theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "Connection Adress:"
 
 [node name="Cards Tag" type="Label" parent="Debug Interface"]
@@ -156,6 +240,7 @@ offset_left = 547.0
 offset_top = 341.0
 offset_right = 844.0
 offset_bottom = 367.0
+theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "What cards to use:"
 metadata/_edit_use_anchors_ = true
 
@@ -174,6 +259,7 @@ layout_mode = 0
 offset_left = 45.0
 offset_right = 228.0
 offset_bottom = 24.0
+theme_override_fonts/normal_font = ExtResource("3_4vwpp")
 text = "Basic"
 
 [node name="CheckButton2" type="CheckButton" parent="Debug Interface/Cards Tag"]
@@ -191,6 +277,7 @@ layout_mode = 0
 offset_left = 45.0
 offset_right = 228.0
 offset_bottom = 24.0
+theme_override_fonts/normal_font = ExtResource("3_4vwpp")
 text = "Pro"
 
 [node name="Show Interface" type="Control" parent="."]
@@ -210,6 +297,7 @@ offset_left = -108.0
 offset_top = -48.0
 offset_right = -17.0
 offset_bottom = -17.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_gpc4n")
 text = "Toggle C"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
