@@ -3,9 +3,9 @@ extends Node3D
 
 @onready var animator  := $Node3D/AnimationPlayer
 @onready var SpinTimer := $SpinTimer
-
-var currentTime = 900
-var newTime = 900
+var paused : bool = false
+var currentTime = 600
+var newTime = 600
 var timerRunning = false
 @export var EditMinObject : TextEdit
 @export var EditSecObject : TextEdit
@@ -14,9 +14,6 @@ var timerRunning = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var tempV = 3
-	currentTime = tempV
-	newTime = tempV
 	SpinTimer.wait_time = animator.get_animation("Spin").length
 	pass # Replace with function body.
 
@@ -40,22 +37,30 @@ func _process(delta):
 var animation_duration : float
 @rpc("any_peer", "call_local")
 func _start_animation(target_duration : float):
-	animator.queue("Spin")
-	animation_duration = target_duration
-	SpinTimer.start()
-	
-	animator.queue("SandFlow")
+	if paused:
+		setTimerRunning.rpc(true)
+		animator.play()
+		paused = false
+	else:
+		animator.queue("Spin")
+		animation_duration = target_duration
+		SpinTimer.start()
+		
+		animator.queue("SandFlow")
 	
 @rpc("any_peer", "call_local")
 func _stop_animation():
+	paused = true
 	animator.pause()
 	
 @rpc("any_peer", "call_local")
 func _reset_animation():
+	paused = false
 	animator.play("RESET")
 
 func _on_start_button_pressed():
 	_start_animation.rpc(newTime)
+		
 
 @rpc("any_peer", "call_local")
 func reset_speed():
