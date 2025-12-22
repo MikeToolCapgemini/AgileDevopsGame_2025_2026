@@ -203,7 +203,6 @@ size = Vector3(15, 0.2, 15)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mxt03"]
 albedo_color = Color(0, 0.34509805, 0.67058825, 1)
-metallic_specular = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1uevf"]
 size = Vector3(15, 0.2, 15)
@@ -462,7 +461,7 @@ corner_radius_top_right = 6
 bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpru0"]
-bg_color = Color(0.0117647, 1, 0.6, 0.980392)
+bg_color = Color(0, 0.41568628, 0.23529412, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n6mxd"]
 
@@ -3040,6 +3039,7 @@ theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
 [node name="bookmark" type="TextureRect" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer"]
+visible = false
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -3451,7 +3451,7 @@ FacilitatorPanels = NodePath("../FacilitatorPanels")
 CardPanel = NodePath("../MarginContainer")
 
 [node name="Hide_Show" type="Button" parent="Interface_Cards/HideButtonMargin" node_paths=PackedStringArray("collapse", "iconToSwap")]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -3490,12 +3490,12 @@ grow_horizontal = 2
 grow_vertical = 2
 localize_numeral_system = false
 theme_override_fonts/font = ExtResource("75_roort")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 30
 text = ""
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("88_wvlrk")
-icon_size = 35
+icon_size = 30
 icon_name = "eye-slash"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
