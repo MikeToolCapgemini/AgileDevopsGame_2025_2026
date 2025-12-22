@@ -841,6 +841,11 @@ transform = Transform3D(0.21920301, 0, 0.21920301, 0, 0.31, 0, -0.219203, 0, 0.2
 mesh = ExtResource("25_0fbar")
 skeleton = NodePath("../../..")
 
+[node name="CLogo2" type="MeshInstance3D" parent="World/Floor"]
+transform = Transform3D(0.21920304, 0, 0.219203, 0, 0.31, 0, -0.219203, 0, 0.21920304, 1.3488227, 0, -0.53894556)
+mesh = ExtResource("25_0fbar")
+skeleton = NodePath("../../..")
+
 [node name="Lighting" type="Node3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99685, 0)
 
