@@ -1,4 +1,4 @@
-[gd_scene load_steps=207 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=201 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -104,12 +104,6 @@
 [ext_resource type="FontFile" uid="uid://b23akitg4yjxd" path="res://assets/fonts/Ubuntu/Ubuntu-Italic.ttf" id="90_xmrkg"]
 [ext_resource type="Script" uid="uid://wqc4dac2wyhy" path="res://scenes/Hide_facilitator_button.gd" id="92_gm02q"]
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
-[ext_resource type="PackedScene" uid="uid://cu1ot8k00utk8" path="res://scenes/UI/Slideouts/interface_slideout_h_2p.tscn" id="93_akjxb"]
-[ext_resource type="PackedScene" uid="uid://bcwtwnmvt1mhg" path="res://scenes/UI/Slideouts/interface_slideout_fac_k.tscn" id="94_vrx01"]
-[ext_resource type="PackedScene" uid="uid://bx7v671cfqky4" path="res://scenes/UI/Slideouts/interface_slideout_quick_ref.tscn" id="95_1uevf"]
-[ext_resource type="PackedScene" uid="uid://bck00323lniek" path="res://scenes/UI/Slideouts/interface_slideout_quick_ref+.tscn" id="96_tc087"]
-[ext_resource type="PackedScene" uid="uid://bt3vkc4xt870l" path="res://scenes/UI/Slideouts/interface_slideout_interrupts.tscn" id="97_73205"]
-[ext_resource type="PackedScene" uid="uid://cwiem647kmseo" path="res://scenes/UI/Slideouts/interface_slideout_h_2p_2.tscn" id="98_0tljd"]
 [ext_resource type="Script" uid="uid://bq01pxakqcfgj" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
 [ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
 
@@ -2208,7 +2202,6 @@ text = "Basic Rules"
 script = SubResource("GDScript_kvygq")
 
 [node name="Interface_Buttons" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -2266,7 +2259,7 @@ editor_description = "
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
 clip_contents = true
-custom_minimum_size = Vector2(158, 574)
+custom_minimum_size = Vector2(158, 557)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -2378,7 +2371,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Preperation"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../../../../../Interface_Slideout_H2P")
+showObject = NodePath("../../../../../../../../../../Interface_Slideout_Preperation")
 
 [node name="HowtoPlay" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides" node_paths=PackedStringArray("showObject")]
 custom_minimum_size = Vector2(121, 43)
@@ -2398,9 +2391,9 @@ theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
-text = "How to play"
+text = "Game Design"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../../../../../Interface_Slideout_H2P")
+showObject = NodePath("../../../../../../../../../../Interface_Slideout_Game_Design")
 
 [node name="facilitatorkit" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides" node_paths=PackedStringArray("showObject")]
 custom_minimum_size = Vector2(121, 43)
@@ -2422,7 +2415,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Facilitator Kit"
 script = ExtResource("49_hpq24")
-showObject = NodePath("../../../../../../../../../../Interface_Slideout_FacK")
+showObject = NodePath("../../../../../../../../../../Interface_Slideout_Facilitator")
 
 [node name="GuidesListOpener" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle" node_paths=PackedStringArray("collapse", "iconToSwap")]
 custom_minimum_size = Vector2(0, 10)
@@ -2478,7 +2471,7 @@ editor_description = "
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
 clip_contents = true
-custom_minimum_size = Vector2(130, 184)
+custom_minimum_size = Vector2(130, 167)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -2563,6 +2556,7 @@ script = ExtResource("49_hpq24")
 showObject = NodePath("../../../../../../../../../../Interface_Slideout_Interrupts")
 
 [node name="SlideOutExample" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference" node_paths=PackedStringArray("showObject")]
+visible = false
 custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -3976,10 +3970,6 @@ theme_override_fonts/normal_font = ExtResource("87_1uevf")
 bbcode_enabled = true
 text = "[center]Interrupt![/center]"
 
-[node name="Interface_Slideout_Example" parent="." instance=ExtResource("105_07pt3")]
-visible = false
-GuideName = "Shorter Example"
-
 [node name="Interface_Slideout_HowToPlay" parent="." instance=ExtResource("105_07pt3")]
 visible = false
 
@@ -3987,23 +3977,25 @@ visible = false
 visible = false
 GuideName = "Extra Rules"
 
-[node name="Interface_Slideout_H2P" parent="." instance=ExtResource("93_akjxb")]
+[node name="Interface_Slideout_Preperation" parent="." instance=ExtResource("105_07pt3")]
 visible = false
+GuideName = "Preperation"
 
-[node name="Interface_Slideout_H2P2" parent="." instance=ExtResource("98_0tljd")]
+[node name="Interface_Slideout_Interrupts" parent="." instance=ExtResource("105_07pt3")]
 visible = false
+GuideName = "Interrupts"
 
-[node name="Interface_Slideout_FacK" parent="." instance=ExtResource("94_vrx01")]
+[node name="Interface_Slideout_Game_Design" parent="." instance=ExtResource("105_07pt3")]
 visible = false
+GuideName = "Game Design"
 
-[node name="Interface_Slideout_QuickRef" parent="." instance=ExtResource("95_1uevf")]
+[node name="Interface_Slideout_Facilitator" parent="." instance=ExtResource("105_07pt3")]
 visible = false
+GuideName = "Facilitator"
 
-[node name="Interface_Slideout_QuickRef+" parent="." instance=ExtResource("96_tc087")]
+[node name="Interface_Slideout_Example" parent="." instance=ExtResource("105_07pt3")]
 visible = false
-
-[node name="Interface_Slideout_Interrupts" parent="." instance=ExtResource("97_73205")]
-visible = false
+GuideName = "Shorter Example"
 
 [connection signal="input_event" from="World/Interactables/Pawns/Pawn0/StaticBodyPurple1" to="World/Interactables/Pawns/Pawn0" method="_on_static_body_3d_input_event"]
 [connection signal="mouse_entered" from="World/Interactables/Pawns/Pawn0/StaticBodyPurple1" to="World/Interactables/Pawns/Pawn0" method="_on_static_body_3d_mouse_entered"]

@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfn3yh1ifelvm"]
+[gd_scene load_steps=11 format=3 uid="uid://dfn3yh1ifelvm"]
 
 [ext_resource type="Script" uid="uid://bssy37vfbctb6" path="res://scripts/UX/guide_field.gd" id="1_ex3kh"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="1_ys7ml"]
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_ex3kh"]
+[ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="3_kwhs7"]
 [ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="3_lmh6x"]
+[ext_resource type="FontFile" uid="uid://2ike7sp4qiyi" path="res://assets/fonts/Ubuntu/Ubuntu-BoldItalic.ttf" id="4_lk2pa"]
+[ext_resource type="FontFile" uid="uid://b23akitg4yjxd" path="res://assets/fonts/Ubuntu/Ubuntu-Italic.ttf" id="5_vach3"]
+[ext_resource type="FontFile" uid="uid://lcuqkn4dfinl" path="res://assets/fonts/Ubuntu/Ubuntu-MediumItalic.ttf" id="6_2mep6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5xufn"]
 bg_color = Color(0, 0.34509805, 0.67058825, 1)
@@ -31,7 +35,7 @@ corner_radius_bottom_left = 100
 script = ExtResource("1_ex3kh")
 Icon = NodePath("IconMargin/IconSphere/Icon")
 ColorIcon = NodePath("IconMargin/IconSphere")
-Title = NodePath("PanelMargin/PanelContainer/VBoxContainer/Title")
+Title = NodePath("PanelMargin/PanelContainer/VBoxContainer/MarginContainer2/Title")
 Text = NodePath("PanelMargin/PanelContainer/VBoxContainer/MarginContainer/SubjectText")
 
 [node name="PanelMargin" type="MarginContainer" parent="."]
@@ -53,8 +57,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_5xufn")
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Title" type="RichTextLabel" parent="PanelMargin/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(268.555, 30)
+[node name="MarginContainer2" type="MarginContainer" parent="PanelMargin/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+
+[node name="Title" type="RichTextLabel" parent="PanelMargin/PanelContainer/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(250.98, 30)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_colors/default_color = Color(0.2627451, 0.6431373, 0.84313726, 1)
@@ -69,14 +77,23 @@ vertical_alignment = 1
 [node name="MarginContainer" type="MarginContainer" parent="PanelMargin/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 5
 
 [node name="SubjectText" type="RichTextLabel" parent="PanelMargin/PanelContainer/VBoxContainer/MarginContainer"]
 custom_minimum_size = Vector2(0, 170)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_ys7ml")
-theme_override_font_sizes/normal_font_size = 11
+theme_override_fonts/bold_font = ExtResource("3_kwhs7")
+theme_override_fonts/bold_italics_font = ExtResource("4_lk2pa")
+theme_override_fonts/italics_font = ExtResource("5_vach3")
+theme_override_fonts/mono_font = ExtResource("6_2mep6")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+bbcode_enabled = true
 text = "Determine wheter to play with the basic question set and filter out this set if necessary. Complex question cards are marked (+). 
 stack the cards by color and number order for question cards. 
 mix action cards randomly through each set of game cards. 
