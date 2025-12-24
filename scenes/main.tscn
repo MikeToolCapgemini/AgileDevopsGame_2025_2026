@@ -1,4 +1,4 @@
-[gd_scene load_steps=201 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=204 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -90,12 +90,14 @@
 [ext_resource type="Texture2D" uid="uid://eayil001qvqf" path="res://assets/3Dmodels/CardDecks/TestingDeck.png" id="57_v1ccq"]
 [ext_resource type="FontFile" uid="uid://blhm6j4s1uy2f" path="res://assets/fonts/Ubuntu/Ubuntu-Medium.ttf" id="58_engxj"]
 [ext_resource type="Script" uid="uid://1kxnvwbcvkqf" path="res://scripts/BookmarkedList.gd" id="73_6nfnn"]
+[ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="74_roort"]
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="75_roort"]
 [ext_resource type="Script" uid="uid://btlh4wrv04rc3" path="res://addons/collapsible_container/collapsible_elements/collapsible_container.gd" id="78_engxj"]
 [ext_resource type="Script" uid="uid://ddn46v8kt3jwd" path="res://scenes/collapseButton.gd" id="78_raiwf"]
 [ext_resource type="Script" uid="uid://yhh3kfgvk00x" path="res://scripts/UX/CardUIManager.gd" id="81_4ue30"]
 [ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
+[ext_resource type="StyleBox" uid="uid://qlf17vlcegnm" path="res://Styles/Tooltip.tres" id="84_raiwf"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="87_1uevf"]
 [ext_resource type="FontFile" uid="uid://bgwubnrnnxe2s" path="res://addons/fontawesome/fonts/fa-regular-400.woff2" id="87_xmrkg"]
 [ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="88_0tljd"]
@@ -106,6 +108,7 @@
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
 [ext_resource type="Script" uid="uid://bq01pxakqcfgj" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
 [ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
+[ext_resource type="PackedScene" uid="uid://dpukfpr87tc0b" path="res://prefabs/tooltip.tscn" id="107_engxj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrx01"]
 size = Vector3(11, 0.7, 5)
@@ -1748,7 +1751,6 @@ far = 25.0
 [node name="Connections" type="Node" parent="."]
 
 [node name="Interface_Facilitator" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
@@ -1757,6 +1759,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
+theme = ExtResource("74_roort")
 
 [node name="FacilitatorsideBtns" type="HBoxContainer" parent="Interface_Facilitator"]
 layout_mode = 1
@@ -1773,6 +1776,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+tooltip_text = "Open Timer Tool panel"
 theme_override_styles/normal = SubResource("StyleBoxFlat_yton5")
 script = ExtResource("78_raiwf")
 collapse = NodePath("../MarginContainer/CollapsibleContainer")
@@ -1895,6 +1899,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+tooltip_text = "Set timer to the set time"
 theme_override_fonts/font = ExtResource("87_1uevf")
 theme_override_styles/normal = SubResource("StyleBoxFlat_0tljd")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xmrkg")
@@ -1969,6 +1974,7 @@ text = "Debug"
 [node name="StartButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+tooltip_text = "Start Timer or Resume timer"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("87_1uevf")
 theme_override_font_sizes/font_size = 16
@@ -1980,6 +1986,7 @@ text = "Start"
 [node name="ResetButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+tooltip_text = "Reset The timer To 0"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("87_1uevf")
 theme_override_font_sizes/font_size = 16
@@ -1991,6 +1998,7 @@ text = "Reset"
 [node name="StopButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+tooltip_text = "Stop the timer at the current time"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("87_1uevf")
 theme_override_font_sizes/font_size = 16
@@ -2003,6 +2011,7 @@ text = "Stop
 [node name="Set" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("collapse")]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+tooltip_text = "Toggle Set Time Panel"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("87_1uevf")
 theme_override_font_sizes/font_size = 16
@@ -2036,6 +2045,8 @@ offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 localize_numeral_system = false
+tooltip_text = "Close Facilitator timer tools panel"
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("75_roort")
 theme_override_font_sizes/font_size = 15
 text = "X"
@@ -2050,6 +2061,7 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 custom_minimum_size = Vector2(50, 40)
 layout_mode = 2
 size_flags_vertical = 8
+tooltip_text = "Open Discard and Bookmark pile"
 theme_override_fonts/font = ExtResource("87_1uevf")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_mgpkq")
@@ -2106,6 +2118,7 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 custom_minimum_size = Vector2(50, 40)
 layout_mode = 2
 size_flags_vertical = 8
+tooltip_text = "Reset Pawn Positions"
 theme_override_fonts/font = ExtResource("87_1uevf")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_mgpkq")
@@ -2158,12 +2171,14 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 visible = false
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+tooltip_text = "Save Game"
 text = "Save Game (temp)"
 
 [node name="LoadGameButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns"]
 visible = false
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+tooltip_text = "Load Game"
 text = "Load Saved Game"
 script = ExtResource("42_u5l1c")
 
@@ -2202,11 +2217,13 @@ text = "Basic Rules"
 script = SubResource("GDScript_kvygq")
 
 [node name="Interface_Buttons" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
+theme = ExtResource("74_roort")
 
 [node name="MarginContainer" type="MarginContainer" parent="Interface_Buttons"]
 layout_mode = 1
@@ -2222,6 +2239,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+tooltip_text = "Open Options and Guides Panel"
 theme_override_styles/normal = SubResource("StyleBoxFlat_yton5")
 script = ExtResource("78_raiwf")
 collapse = NodePath("../OptionsContianer")
@@ -2296,6 +2314,7 @@ custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Open options"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -2304,11 +2323,6 @@ theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n81fi")
 text = "Options"
 script = ExtResource("49_hpq24")
 showObject = NodePath("../../../../../../../Interface_Options")
@@ -2356,6 +2370,7 @@ custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Open Preperation Guide"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -2378,6 +2393,7 @@ custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Open Game Design guide"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -2400,6 +2416,7 @@ custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Open Facilitator kit (guide)"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -2494,6 +2511,7 @@ custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Open Rules Guide"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -2516,6 +2534,7 @@ custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Open the Extra rules guide"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -2538,6 +2557,7 @@ custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Open Interrupts guide"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -2623,6 +2643,7 @@ offset_bottom = 25.0
 grow_horizontal = 0
 size_flags_horizontal = 8
 size_flags_vertical = 0
+tooltip_text = "Close Timer panel"
 theme_override_styles/normal = SubResource("StyleBoxFlat_ga3rw")
 
 [node name="FontAwesome" type="Label" parent="Interface_Buttons/MarginContainer/OptionsContianer/CloseTimerButton"]
@@ -2665,6 +2686,7 @@ offset_bottom = 186.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("74_roort")
 script = ExtResource("41_lgecp")
 CardUIManager = NodePath("MarginContainer/CollapsibleContainer/CardPanel")
 
@@ -2750,6 +2772,7 @@ scroll_active = false
 [node name="RevealButton" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 33)
 layout_mode = 2
+tooltip_text = "Reveals the answer to everyone"
 theme_override_fonts/font = ExtResource("87_1uevf")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
@@ -2759,6 +2782,7 @@ text = "Reveal Answer"
 [node name="SaveQuestion" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("cardManagerObject", "bookmarkIcon")]
 custom_minimum_size = Vector2(120, 33)
 layout_mode = 2
+tooltip_text = "Bookmark the card for later use"
 theme_override_fonts/font = ExtResource("87_1uevf")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
@@ -2785,11 +2809,12 @@ custom_minimum_size = Vector2(120, 33)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+tooltip_text = "Close the card"
 theme_override_fonts/font = ExtResource("87_1uevf")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
 theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
-text = "Close Answer"
+text = "Close card"
 
 [node name="FacilitatorPanelOpener" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer" node_paths=PackedStringArray("collapse", "iconToSwap")]
 custom_minimum_size = Vector2(15, 10)
@@ -3448,6 +3473,7 @@ custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+tooltip_text = "Hide/Show Card"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -3503,6 +3529,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("74_roort")
 script = ExtResource("42_flrbk")
 TimerObject = NodePath("../World/Interactables/Timer")
 FacilitatorCardPanel = NodePath("../Interface_Cards/FacilitatorPanels")
@@ -3557,6 +3584,7 @@ theme_override_constants/separation = 50
 [node name="Facilitator" type="Button" parent="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
+tooltip_text = "Set Role to Facilitator"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
 theme_override_fonts/font = ExtResource("87_1uevf")
@@ -3568,6 +3596,7 @@ text = "Facilitator"
 [node name="Player" type="Button" parent="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
+tooltip_text = "Set Role by player"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
 theme_override_fonts/font = ExtResource("87_1uevf")
@@ -3585,6 +3614,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("74_roort")
 
 [node name="BlackoutBG" type="Panel" parent="Interface_Options"]
 layout_mode = 1
@@ -3646,6 +3676,7 @@ custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Close options"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -3669,6 +3700,7 @@ custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Pick another role"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -3693,6 +3725,7 @@ custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Refresh UI"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -3716,6 +3749,7 @@ custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Exits the game"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -3741,6 +3775,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("74_roort")
 
 [node name="BlackoutBG" type="PanelContainer" parent="Interface_DiscardPile"]
 layout_mode = 1
@@ -3773,7 +3808,7 @@ theme_override_constants/margin_bottom = 30
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 70
+theme_override_constants/separation = 10
 
 [node name="DiscardedCardsContainer" type="VBoxContainer" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -3786,7 +3821,7 @@ bbcode_enabled = true
 text = "[center]Discarded Cards[/center]"
 
 [node name="DiscardedCardsText" type="RichTextLabel" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/DiscardedCardsContainer"]
-custom_minimum_size = Vector2(0, 26)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 script = ExtResource("51_3t33e")
@@ -3803,7 +3838,7 @@ bbcode_enabled = true
 text = "[center]Bookmarked Cards[/center]"
 
 [node name="BookmarkedText" type="RichTextLabel" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/BookmarkedCardsContainer"]
-custom_minimum_size = Vector2(0, 26)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 script = ExtResource("51_3t33e")
@@ -3818,6 +3853,7 @@ custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+tooltip_text = "Close Discard/Bookmark pile"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -3839,6 +3875,7 @@ custom_minimum_size = Vector2(127, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+tooltip_text = "Go to the bookmark website using the current saved cards"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -3862,6 +3899,7 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
+theme = ExtResource("74_roort")
 
 [node name="Panel" type="PanelContainer" parent="Interface_InterruptFacilitator2"]
 material = SubResource("CanvasItemMaterial_nw32i")
@@ -3899,6 +3937,7 @@ text = "[right]Interrupt![/right]"
 [node name="Delay" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("TimerObject", "InterruptUIFac")]
 custom_minimum_size = Vector2(143, 43)
 layout_mode = 2
+tooltip_text = "Delay Timer by 5 minutes"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
@@ -3912,6 +3951,7 @@ InterruptUIFac = NodePath("../../../..")
 [node name="Show" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("InterruptUIPlayers", "InterruptUIFac")]
 custom_minimum_size = Vector2(180, 43)
 layout_mode = 2
+tooltip_text = "Show to interrupt to players"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = ExtResource("45_fv0h2")
@@ -3925,6 +3965,7 @@ InterruptUIFac = NodePath("../../../..")
 [node name="Hide" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("hideObject")]
 custom_minimum_size = Vector2(43, 43)
 layout_mode = 2
+tooltip_text = "Close interrupt"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_37xlc")
@@ -3941,6 +3982,7 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
+theme = ExtResource("74_roort")
 script = ExtResource("53_u67wn")
 
 [node name="Panel" type="PanelContainer" parent="Interface_Interrupt"]
@@ -3972,30 +4014,48 @@ text = "[center]Interrupt![/center]"
 
 [node name="Interface_Slideout_HowToPlay" parent="." instance=ExtResource("105_07pt3")]
 visible = false
+theme = ExtResource("74_roort")
 
 [node name="Interface_Slideout_Extra_rules" parent="." instance=ExtResource("105_07pt3")]
 visible = false
+theme = ExtResource("74_roort")
 GuideName = "Extra Rules"
 
 [node name="Interface_Slideout_Preperation" parent="." instance=ExtResource("105_07pt3")]
 visible = false
+theme = ExtResource("74_roort")
 GuideName = "Preperation"
 
 [node name="Interface_Slideout_Interrupts" parent="." instance=ExtResource("105_07pt3")]
 visible = false
+theme = ExtResource("74_roort")
 GuideName = "Interrupts"
 
 [node name="Interface_Slideout_Game_Design" parent="." instance=ExtResource("105_07pt3")]
 visible = false
+theme = ExtResource("74_roort")
 GuideName = "Game Design"
 
 [node name="Interface_Slideout_Facilitator" parent="." instance=ExtResource("105_07pt3")]
 visible = false
+theme = ExtResource("74_roort")
 GuideName = "Facilitator"
 
 [node name="Interface_Slideout_Example" parent="." instance=ExtResource("105_07pt3")]
 visible = false
+theme = ExtResource("74_roort")
 GuideName = "Shorter Example"
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Tooltip" parent="Control" instance=ExtResource("107_engxj")]
+layout_mode = 0
+theme_override_styles/panel = ExtResource("84_raiwf")
 
 [connection signal="input_event" from="World/Interactables/Pawns/Pawn0/StaticBodyPurple1" to="World/Interactables/Pawns/Pawn0" method="_on_static_body_3d_input_event"]
 [connection signal="mouse_entered" from="World/Interactables/Pawns/Pawn0/StaticBodyPurple1" to="World/Interactables/Pawns/Pawn0" method="_on_static_body_3d_mouse_entered"]

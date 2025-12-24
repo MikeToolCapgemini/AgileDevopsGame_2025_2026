@@ -82,6 +82,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+tooltip_text = "Open Save Panel"
 theme_override_styles/normal = SubResource("StyleBoxFlat_vikby")
 script = ExtResource("1_2x0m5")
 collapse = NodePath("../CollapsibleContainer")
@@ -217,6 +218,7 @@ custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+tooltip_text = "Close the loaded games list"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_i0ouf")
 theme_override_styles/normal = SubResource("StyleBoxFlat_5yltm")
@@ -241,6 +243,7 @@ layout_mode = 2
 [node name="SaveButton" type="Button" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer"]
 custom_minimum_size = Vector2(94, 31)
 layout_mode = 2
+tooltip_text = "Save current game (bookmarked and discarded cards)"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_i0ouf")
 theme_override_styles/normal = SubResource("StyleBoxFlat_g8xcl")
@@ -251,6 +254,7 @@ text = "Save Game"
 [node name="LoadButton" type="Button" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer"]
 custom_minimum_size = Vector2(94, 31)
 layout_mode = 2
+tooltip_text = "Open The list of loaded games"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_i0ouf")
 theme_override_styles/normal = SubResource("StyleBoxFlat_g8xcl")
@@ -280,6 +284,8 @@ offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 localize_numeral_system = false
+tooltip_text = "Close save panel"
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("2_5yltm")
 theme_override_font_sizes/font_size = 15
 text = "X"
@@ -291,7 +297,7 @@ icon_name = "x"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [connection signal="pressed" from="OpenSaveButton" to="OpenSaveButton" method="_on_collapse_open"]
-[connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer/MarginContainer/LoadedsaveGames/HideSavedgames" to="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/SaveButton" method="_on_hide_savedgames_pressed"]
+[connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer/MarginContainer/LoadedsaveGames/HideSavedgames" to="." method="_on_hide_savedgames_pressed"]
 [connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/SaveButton" to="." method="_on_save_game_button_pressed"]
 [connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/LoadButton" to="." method="_on_load_game_button_pressed"]
 [connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/CloseTimerButton" to="OpenSaveButton" method="_on_collapse_close"]

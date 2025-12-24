@@ -19,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+tooltip_text = "Load previous save"
 theme_override_fonts/font = ExtResource("1_y3pjk")
 theme_override_styles/normal = SubResource("StyleBoxFlat_krt54")
 text = "Name"

@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpukfpr87tc0b"]
+
+[ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="1_lnn7g"]
+[ext_resource type="Script" uid="uid://cgkn8b18thwfe" path="res://scripts/UX/tooltip.gd" id="1_ypy21"]
+[ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="2_ypy21"]
+[ext_resource type="FontFile" uid="uid://2ike7sp4qiyi" path="res://assets/fonts/Ubuntu/Ubuntu-BoldItalic.ttf" id="3_8oqxr"]
+[ext_resource type="FontFile" uid="uid://b23akitg4yjxd" path="res://assets/fonts/Ubuntu/Ubuntu-Italic.ttf" id="4_gcxpu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8tor"]
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 0.7294118)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.34509805, 0.67058825, 1)
+
+[node name="Tooltip" type="PanelContainer"]
+custom_minimum_size = Vector2(100, 50)
+offset_right = 100.0
+offset_bottom = 50.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f8tor")
+script = ExtResource("1_ypy21")
+
+[node name="TooltipText" type="RichTextLabel" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("1_lnn7g")
+theme_override_fonts/bold_font = ExtResource("2_ypy21")
+theme_override_fonts/bold_italics_font = ExtResource("3_8oqxr")
+theme_override_fonts/italics_font = ExtResource("4_gcxpu")
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+bbcode_enabled = true
+text = "Tooltip Text"
+fit_content = true
