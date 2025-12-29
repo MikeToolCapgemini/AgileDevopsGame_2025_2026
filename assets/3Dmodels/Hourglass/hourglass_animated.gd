@@ -1,3 +1,4 @@
+class_name Hourglass
 extends Node3D
 
 

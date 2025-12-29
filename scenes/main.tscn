@@ -1,4 +1,4 @@
-[gd_scene load_steps=205 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=206 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -95,6 +95,7 @@
 [ext_resource type="Script" uid="uid://btlh4wrv04rc3" path="res://addons/collapsible_container/collapsible_elements/collapsible_container.gd" id="78_engxj"]
 [ext_resource type="Script" uid="uid://ddn46v8kt3jwd" path="res://scenes/collapseButton.gd" id="78_raiwf"]
 [ext_resource type="Script" uid="uid://yhh3kfgvk00x" path="res://scripts/UX/CardUIManager.gd" id="81_4ue30"]
+[ext_resource type="Script" uid="uid://chkh3ytq3t6lm" path="res://scripts/reset_game.gd" id="81_raiwf"]
 [ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="87_1uevf"]
@@ -2176,6 +2177,53 @@ icon_size = 20
 icon_name = "rotate-left"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
+[node name="ResetButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns" node_paths=PackedStringArray("pawnmanager", "cardmanager", "hourglass")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 8
+tooltip_text = "fully Reset the game"
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_mgpkq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xmrkg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wvlrk")
+script = ExtResource("81_raiwf")
+pawnmanager = NodePath("../../../World/Interactables/Pawns")
+cardmanager = NodePath("../../../Interface_Cards")
+hourglass = NodePath("../../../World/Interactables/hourglassAnimated")
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Facilitator/FacilitatorsideBtns/ResetButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.5
+offset_top = -20.0
+offset_right = 22.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="FontAwesome2" type="Label" parent="Interface_Facilitator/FacilitatorsideBtns/ResetButton/MarginContainer"]
+auto_translate_mode = 2
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 35
+icon_name = "rotate-left"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
 [node name="SaveGameButton" type="Button" parent="Interface_Facilitator/FacilitatorsideBtns"]
 visible = false
 custom_minimum_size = Vector2(0, 40)
@@ -3531,6 +3579,7 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Setup" type="Control" parent="." node_paths=PackedStringArray("TimerObject", "FacilitatorCardPanel", "FacilitatorUI", "FacilitatorKitButton", "OptionsPanel")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -4256,6 +4305,7 @@ text = "No
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/TimerPanel/CloseTimerButton" to="Interface_Facilitator/FacilitatorsideBtns/OpenTimerButton" method="_on_collapse_close"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton" to="Interface_Facilitator/FacilitatorsideBtns/DiscardPileButton" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetPawnPositionButton" to="World/Interactables/Pawns" method="_on_reset_pawn_position_button_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/ResetButton" to="Interface_Facilitator/FacilitatorsideBtns/ResetButton" method="_on_reset_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/SaveGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_save_game_button_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" to="Interface_Facilitator/FacilitatorsideBtns/LoadGameButton" method="_on_load_game_button_pressed"]

@@ -1,3 +1,4 @@
+class_name PawnManager
 extends Node
  
 @export var CameraObject : Camera3D
