@@ -8,6 +8,8 @@ var currentSave : String = ""
 @export var LoadedSavesContainer : VBoxContainer
 @export var pawns_path: NodePath
 @export var collapsible : CollapsibleContainer
+@export var saveNotificationUI : Control
+@export var saveNotifText : RichTextLabel
 
 signal save_requested
 
@@ -43,6 +45,8 @@ func save_game_file(saveName : String,saveData):
 	
 	file.store_string(json)
 	file.close()
+	saveNotificationUI.show()
+	saveNotifText.text = "Saved game %s!" % saveName
 	print("Game saved...")
 	
 func loadSaveGames() :
@@ -93,6 +97,8 @@ func load_game_from_file(saveName : String):
 	GlobalSettings.DiscardedCards = SaveData["DiscardedCards"]
 	GlobalSettings.BookmarkedCards = SaveData["BookmarkedCards"]
 	GlobalSettings.sync_self_to_clients()
+	saveNotificationUI.show()
+	saveNotifText.text = "loaded game %s!" % saveName
 	print("Game loaded...")
 
 func check_save_dir():

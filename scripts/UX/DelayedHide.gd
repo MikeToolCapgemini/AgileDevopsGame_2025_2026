@@ -1,19 +1,25 @@
 extends Control
 var timerRunning = false
-var delayTime = 3
+@export var delayTime = 3
+var timer
+
+func _ready() -> void:
+	if visible:
+		timer = delayTime
+		timerRunning = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if timerRunning:
-		delayTime -= delta
-		if delayTime <= 0:
+		timer -= delta
+		if timer <= 0:
 			timerRunning = false
 			visible = false
-		print(delayTime)
+		print(timer)
 
 func _on_visibility_changed():
 	if visible:
 		timerRunning = true
 	else:
 		timerRunning = false
-		delayTime = 3
+		timer = delayTime

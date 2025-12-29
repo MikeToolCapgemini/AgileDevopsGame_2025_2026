@@ -1,4 +1,4 @@
-[gd_scene load_steps=204 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=205 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -97,7 +97,6 @@
 [ext_resource type="Script" uid="uid://yhh3kfgvk00x" path="res://scripts/UX/CardUIManager.gd" id="81_4ue30"]
 [ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
-[ext_resource type="StyleBox" uid="uid://qlf17vlcegnm" path="res://Styles/Tooltip.tres" id="84_raiwf"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="87_1uevf"]
 [ext_resource type="FontFile" uid="uid://bgwubnrnnxe2s" path="res://addons/fontawesome/fonts/fa-regular-400.woff2" id="87_xmrkg"]
 [ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="88_0tljd"]
@@ -108,7 +107,6 @@
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
 [ext_resource type="Script" uid="uid://bq01pxakqcfgj" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
 [ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
-[ext_resource type="PackedScene" uid="uid://dpukfpr87tc0b" path="res://prefabs/tooltip.tscn" id="107_engxj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrx01"]
 size = Vector3(11, 0.7, 5)
@@ -530,6 +528,17 @@ corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_673bd"]
 bg_color = Color(1, 0.305882, 0.301961, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_engxj"]
+
+[sub_resource type="Theme" id="Theme_raiwf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5chs"]
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 0.95686275)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -1751,6 +1760,7 @@ far = 25.0
 [node name="Connections" type="Node" parent="."]
 
 [node name="Interface_Facilitator" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
@@ -2182,7 +2192,7 @@ tooltip_text = "Load Game"
 text = "Load Saved Game"
 script = ExtResource("42_u5l1c")
 
-[node name="MultiSave" parent="Interface_Facilitator" instance=ExtResource("92_sgvw8")]
+[node name="MultiSave" parent="Interface_Facilitator" node_paths=PackedStringArray("saveNotificationUI", "saveNotifText") instance=ExtResource("92_sgvw8")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -2195,6 +2205,8 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
+saveNotificationUI = NodePath("../../Interface_Save_notif")
+saveNotifText = NodePath("../../Interface_Save_notif/Panel/save_notif")
 
 [node name="Refresh" type="Button" parent="Interface_Facilitator"]
 visible = false
@@ -4012,6 +4024,45 @@ theme_override_fonts/normal_font = ExtResource("87_1uevf")
 bbcode_enabled = true
 text = "[center]Interrupt![/center]"
 
+[node name="Interface_Save_notif" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+theme = ExtResource("74_roort")
+script = ExtResource("53_u67wn")
+
+[node name="Panel" type="PanelContainer" parent="Interface_Save_notif"]
+material = SubResource("CanvasItemMaterial_engxj")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1871.0
+offset_top = 74.0
+offset_right = 1871.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_raiwf")
+theme_override_styles/panel = SubResource("StyleBoxFlat_f5chs")
+
+[node name="save_notif" type="RichTextLabel" parent="Interface_Save_notif/Panel"]
+custom_minimum_size = Vector2(400, 27)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+bbcode_enabled = true
+text = "[center]Saved![/center]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Interface_Slideout_HowToPlay" parent="." instance=ExtResource("105_07pt3")]
 visible = false
 theme = ExtResource("74_roort")
@@ -4045,17 +4096,6 @@ GuideName = "Facilitator"
 visible = false
 theme = ExtResource("74_roort")
 GuideName = "Shorter Example"
-
-[node name="Control" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Tooltip" parent="Control" instance=ExtResource("107_engxj")]
-layout_mode = 0
-theme_override_styles/panel = ExtResource("84_raiwf")
 
 [connection signal="input_event" from="World/Interactables/Pawns/Pawn0/StaticBodyPurple1" to="World/Interactables/Pawns/Pawn0" method="_on_static_body_3d_input_event"]
 [connection signal="mouse_entered" from="World/Interactables/Pawns/Pawn0/StaticBodyPurple1" to="World/Interactables/Pawns/Pawn0" method="_on_static_body_3d_mouse_entered"]
@@ -4167,3 +4207,4 @@ theme_override_styles/panel = ExtResource("84_raiwf")
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Hide" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Hide" method="_on_pressed"]
 [connection signal="visibility_changed" from="Interface_Interrupt" to="Interface_Interrupt" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="Interface_Save_notif" to="Interface_Save_notif" method="_on_visibility_changed"]

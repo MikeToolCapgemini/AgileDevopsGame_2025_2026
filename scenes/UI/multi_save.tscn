@@ -59,7 +59,7 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="MultiSave" type="MarginContainer" node_paths=PackedStringArray("SaveNameField", "LoadedSavesContainer", "collapsible")]
+[node name="MultiSave" type="MarginContainer" node_paths=PackedStringArray("SaveNameField", "LoadedSavesContainer", "collapsible", "saveNotificationUI", "saveNotifText")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -76,6 +76,8 @@ script = ExtResource("1_tovra")
 SaveNameField = NodePath("CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SaveNameField")
 LoadedSavesContainer = NodePath("CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer")
 collapsible = NodePath("CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer")
+saveNotificationUI = NodePath("")
+saveNotifText = NodePath("")
 
 [node name="OpenSaveButton" type="Button" parent="." node_paths=PackedStringArray("collapse")]
 custom_minimum_size = Vector2(50, 50)
