@@ -11,7 +11,12 @@ var currentSave : String = ""
 @export var saveNotificationUI : Control
 @export var saveNotifText : RichTextLabel
 
-signal save_requested
+@export var SaveOverWriteInterface : save_overwrite_UI
+
+signal save_completed
+
+func _ready() -> void:
+	save_completed.connect(_on_save_completed)
 
 func save_game():
 	var saveName = get_save_name()
@@ -30,10 +35,16 @@ func save_game():
 func request_saving_game(saveName: String,saveData):
 	save_game_file(saveName,saveData)
 
-func save_game_file(saveName : String,saveData):
+func save_game_file(saveName : String,saveData, checkname := true):
 	check_save_dir()
 	var savePath
 	savePath = SavePath + saveName + ".json"
+	if checkname:
+		if check_if_saveName_exists(savePath):
+			SaveOverWriteInterface._show_overwrite_UI(self,saveName,saveData)
+			return
+	
+	
 		
 	#if currentSave != saveName:
 		#savePath = SavePath + currentSave + ".json"
@@ -45,10 +56,16 @@ func save_game_file(saveName : String,saveData):
 	
 	file.store_string(json)
 	file.close()
-	saveNotificationUI.show()
-	saveNotifText.text = "Saved game %s!" % saveName
-	print("Game saved...")
-	
+	emit_signal("save_completed", saveName)
+
+
+func _on_save_completed(saveName: String) -> void:
+	if saveNotificationUI != null:
+		saveNotificationUI.show()
+		saveNotifText.text = "Saved game %s!" % saveName
+		print("Game saved...")
+
+
 func loadSaveGames() :
 	for btn in %LoadedSaves.get_children():
 		btn.queue_free()
@@ -125,6 +142,10 @@ func get_save_files() -> Array:
 			file_name = dir.get_next()
 		dir.list_dir_end()
 	return save_files
+
+func check_if_saveName_exists(savePath):
+	return FileAccess.file_exists(savePath)
+	
 
 @rpc("any_peer")
 func request_save_files():

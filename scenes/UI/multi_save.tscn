@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbxyj6ca7okx3"]
+[gd_scene load_steps=21 format=3 uid="uid://dbxyj6ca7okx3"]
 
 [ext_resource type="Script" uid="uid://ddn46v8kt3jwd" path="res://scenes/collapseButton.gd" id="1_2x0m5"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="1_i0ouf"]
@@ -6,6 +6,11 @@
 [ext_resource type="Script" uid="uid://pb8rquvjh5r4" path="res://scripts/Global/SaveSystem.gd" id="1_tovra"]
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_5yltm"]
 [ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="3_uamr3"]
+[ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="7_vikby"]
+[ext_resource type="Script" uid="uid://brboifcsqoflg" path="res://scripts/UX/save_overwrite_UI.gd" id="8_8abny"]
+[ext_resource type="StyleBox" uid="uid://dijgsweldy4qb" path="res://Styles/Cards_Background.tres" id="9_anvf0"]
+[ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="10_ujgli"]
+[ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="11_7wxx2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vikby"]
 bg_color = Color(0, 0.34509805, 0.67058825, 1)
@@ -59,7 +64,11 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="MultiSave" type="MarginContainer" node_paths=PackedStringArray("SaveNameField", "LoadedSavesContainer", "collapsible", "saveNotificationUI", "saveNotifText")]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4i711"]
+
+[sub_resource type="Theme" id="Theme_v6try"]
+
+[node name="MultiSave" type="MarginContainer" node_paths=PackedStringArray("SaveNameField", "LoadedSavesContainer", "collapsible", "saveNotificationUI", "saveNotifText", "SaveOverWriteInterface")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -78,6 +87,7 @@ LoadedSavesContainer = NodePath("CollapsibleContainer/MarginContainer/PanelConta
 collapsible = NodePath("CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer")
 saveNotificationUI = NodePath("")
 saveNotifText = NodePath("")
+SaveOverWriteInterface = NodePath("Interface_SaveOverwrite")
 
 [node name="OpenSaveButton" type="Button" parent="." node_paths=PackedStringArray("collapse")]
 custom_minimum_size = Vector2(50, 50)
@@ -298,8 +308,105 @@ icon_size = 15
 icon_name = "x"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
+[node name="Interface_SaveOverwrite" type="Control" parent="." node_paths=PackedStringArray("titleTextField")]
+visible = false
+layout_mode = 2
+theme = ExtResource("7_vikby")
+script = ExtResource("8_8abny")
+titleTextField = NodePath("Panel/MarginContainer/VBoxContainer/OverwriteTitle")
+
+[node name="Panel" type="PanelContainer" parent="Interface_SaveOverwrite"]
+material = SubResource("CanvasItemMaterial_4i711")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -214.0
+offset_top = -68.0
+offset_right = 214.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_v6try")
+theme_override_styles/panel = ExtResource("9_anvf0")
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_SaveOverwrite/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_SaveOverwrite/Panel/MarginContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="OverwriteTitle" type="RichTextLabel" parent="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(11.345, 50)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("1_i0ouf")
+bbcode_enabled = true
+text = "A Save with the name SaveName already exists
+Do you want to replace it?
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="Yes" type="Button" parent="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+tooltip_text = "Save Game and overwrite currently existing save"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("1_i0ouf")
+theme_override_styles/normal = ExtResource("10_ujgli")
+theme_override_styles/pressed = ExtResource("11_7wxx2")
+theme_override_styles/hover = ExtResource("11_7wxx2")
+text = "Yes"
+
+[node name="No" type="Button" parent="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+tooltip_text = "Don't save the game under this name"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("1_i0ouf")
+theme_override_styles/normal = ExtResource("10_ujgli")
+theme_override_styles/pressed = ExtResource("11_7wxx2")
+theme_override_styles/hover = ExtResource("11_7wxx2")
+text = "No
+"
+
+[node name="No+" type="Button" parent="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+tooltip_text = "Set Role by player"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("1_i0ouf")
+theme_override_styles/normal = ExtResource("10_ujgli")
+theme_override_styles/pressed = ExtResource("11_7wxx2")
+theme_override_styles/hover = ExtResource("11_7wxx2")
+text = "No but add a number
+"
+
 [connection signal="pressed" from="OpenSaveButton" to="OpenSaveButton" method="_on_collapse_open"]
 [connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer/MarginContainer/LoadedsaveGames/HideSavedgames" to="." method="_on_hide_savedgames_pressed"]
 [connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/SaveButton" to="." method="_on_save_game_button_pressed"]
 [connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/LoadButton" to="." method="_on_load_game_button_pressed"]
 [connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/CloseTimerButton" to="OpenSaveButton" method="_on_collapse_close"]
+[connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/Yes" to="Interface_SaveOverwrite" method="_on_yes_pressed"]
+[connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/No" to="Interface_SaveOverwrite" method="_on_no_pressed"]
