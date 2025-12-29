@@ -4,8 +4,8 @@ var timerRunning = false
 var timer
 
 func _ready() -> void:
+	timer = delayTime
 	if visible:
-		timer = delayTime
 		timerRunning = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
