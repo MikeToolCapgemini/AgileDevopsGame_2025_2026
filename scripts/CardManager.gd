@@ -103,8 +103,8 @@ func draw(type):
 	else:
 		print("###")
 		print(cQuestion)
-		card_setup(cType,cSubType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer,cExplanation)
-		card_setup.rpc(cType,cSubType, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer,cExplanation)
+		card_setup(cType,cSubType,d+1, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer,cExplanation)
+		card_setup.rpc(cType,cSubType,d+1, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer,cExplanation)
 		CardUIManager.UXTagObject.visible = true
 		CardUIManager.ActionTagObject.visible = false
 		set_bg_color.rpc(bgColor)
@@ -136,8 +136,8 @@ func display_action_card():
 	CardUIManager.UXTagObject.visible = false
 	CardUIManager.ActionTagObject.visible = true
 	print(actionDict[roll] + str(multiplayer.get_unique_id()))
-	card_setup("action", "", actionDict[roll], "", "", "", "", "","")
-	card_setup.rpc("action", "", actionDict[roll], "", "", "", "", "")
+	card_setup("action", "","", actionDict[roll], "", "", "", "", "","")
+	card_setup.rpc("action", "","", actionDict[roll], "", "", "", "", "","")
 
 func set_card_choice_string(tag, cardTypeData):
 	if cardTypeData == "":
@@ -168,11 +168,12 @@ func card_discard(cardTypeData,cardTypeDataVar, cardTypeString, keyVar):
 	#SaveSystem.save_game()
 
 @rpc("any_peer")
-func card_setup(type, subtype, question, choiceA, choiceB, choiceC, choiceD, answer,explanation):
+func card_setup(type, subtype, nr, question, choiceA, choiceB, choiceC, choiceD, answer,explanation):
 	print("####")
 	print(type)
 	set_card_icon(type)
 	set_panel_layout(type)
+	CardUIManager.TypeNumberTextObject.text = "#" + str(nr)
 	CardUIManager.TypeTextObject.text = type
 	CardUIManager.SubtypeTextObject.text = subtype
 	CardUIManager.QuestionObject.text = question

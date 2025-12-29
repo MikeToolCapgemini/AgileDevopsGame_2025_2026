@@ -2850,7 +2850,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
 text = "Bookmark"
 script = ExtResource("45_n88qk")
 cardManagerObject = NodePath("../../../../../../../../..")
-bookmarkIcon = NodePath("../../../../../../../../../MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/bookmark")
+bookmarkIcon = NodePath("../../../../../../../../../MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer/bookmark")
 
 [node name="CancelSave" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
 visible = false
@@ -3051,7 +3051,7 @@ folding_direction_preset = 3
 sizing_node = NodePath("CardPanel")
 metadata/_custom_type_script = "uid://btlh4wrv04rc3"
 
-[node name="CardPanel" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionPanel", "DiscussionPanel", "QuestionPanelTextObject", "DiscussionPanelTextObject", "QuestionObject", "AnswerObject", "AnswerPanel", "AnswerFacilitatorTextObject", "AnswerExplanationTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
+[node name="CardPanel" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionPanel", "DiscussionPanel", "QuestionPanelTextObject", "DiscussionPanelTextObject", "QuestionObject", "AnswerObject", "AnswerPanel", "AnswerFacilitatorTextObject", "AnswerExplanationTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "TypeNumberTextObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
 custom_minimum_size = Vector2(600, 300)
 layout_mode = 0
 offset_right = 706.0
@@ -3081,7 +3081,8 @@ BookmarkButton = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainMargin/
 CancelBookmarkButton = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/CancelSave")
 UXTagObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG")
 ActionTagObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/ActionCardBG")
-bookmark = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/bookmark")
+TypeNumberTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer/NumberPanel/NumberTypeText")
+bookmark = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer/bookmark")
 QuestionIcon = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon/MarginContainer/Question")
 DiscussionIcon = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon/MarginContainer/Discussion")
 
@@ -3116,15 +3117,6 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
-
-[node name="bookmark" type="TextureRect" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-texture = ExtResource("83_6nfnn")
-expand_mode = 1
-stretch_mode = 4
 
 [node name="Icon" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer"]
 custom_minimum_size = Vector2(50, 50)
@@ -3167,6 +3159,33 @@ icon_size = 40
 icon_type = "regular"
 icon_name = "comments"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="NumberPanel" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("42_ot4pa")
+
+[node name="NumberTypeText" type="RichTextLabel" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer/NumberPanel"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+text = "#1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="bookmark" type="TextureRect" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = ExtResource("83_6nfnn")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="ActionCardBG" type="Panel" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox"]
 visible = false
