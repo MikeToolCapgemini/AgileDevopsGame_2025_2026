@@ -18,8 +18,9 @@ signal save_completed
 func _ready() -> void:
 	save_completed.connect(_on_save_completed)
 
-func save_game():
-	var saveName = get_save_name()
+func save_game(saveName: String = ""):
+	if saveName == "":
+		saveName = get_save_name()
 	SaveData["DataDiscardedCards"] = GlobalSettings.DataDiscardedCards
 	SaveData["DiscardedCards"] = GlobalSettings.DiscardedCards
 	SaveData["BookmarkedCards"] = GlobalSettings.BookmarkedCards
@@ -29,6 +30,13 @@ func save_game():
 	else:
 		rpc_id(1,"request_saving_game",saveName,SaveData)
 
+func get_save_json() -> String:
+	SaveData["DataDiscardedCards"] = GlobalSettings.DataDiscardedCards
+	SaveData["DiscardedCards"] = GlobalSettings.DiscardedCards
+	SaveData["BookmarkedCards"] = GlobalSettings.BookmarkedCards
+	#SaveData["PawnPositions"] = GlobalSettings.PawnPositions
+
+	return JSON.stringify(SaveData)
 
 
 @rpc("any_peer")

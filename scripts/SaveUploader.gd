@@ -13,16 +13,7 @@ func _ready():
 
 
 func upload_save_and_open_page():
-	saveManager.save_game()
-	
-	var save_path = saveManager.SavePath + saveManager.get_save_name() + ".json"
-	
-	if not FileAccess.open(save_path, FileAccess.READ):
-		push_error("Save file not found: " + save_path)
-	
-	var file = FileAccess.open(save_path,FileAccess.READ)
-	var json_text = file.get_as_text()
-	file.close()
+	var json_text = saveManager.get_save_json()
 	
 	var headers = [
 		"Content-Type: application/json"
