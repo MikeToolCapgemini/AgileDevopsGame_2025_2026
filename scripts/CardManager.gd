@@ -151,6 +151,7 @@ func card_bookmark():
 		print(GlobalSettings.BookmarkedCards)
 	#SaveSystem.save_game()
 	
+@rpc("any_peer")
 func card_cancel_bookmark():
 	if curType != null && curKey != null:
 		GlobalSettings.BookmarkedCards.erase(curType + "_" + str(curKey))
