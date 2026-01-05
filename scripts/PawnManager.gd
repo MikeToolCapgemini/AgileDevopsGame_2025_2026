@@ -28,7 +28,7 @@ func apply_state(state: Dictionary):
 		if pawn:
 			pawn.global_position = pawn_data["position"]
 			pawn.global_rotation = pawn_data["rotation"]
-			print("Setting Pawn " + str(pawn_data["id"]) + "to position " + str(pawn_data["position"]))
+			print("Setting Pawn " + str(pawn_data["id"]) + " to position " + str(pawn_data["position"]))
 
 
 func _on_reset_pawn_position_button_pressed() -> void:
