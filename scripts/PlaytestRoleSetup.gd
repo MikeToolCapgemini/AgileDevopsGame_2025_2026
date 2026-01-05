@@ -11,6 +11,7 @@ extends Node
 
 func _ready():
 	self.visible = true
+	toggleFacilitatorbuttons(false)
 
 func _on_facilitator_pressed():
 	PlayerSettings.role = "facilitator"
