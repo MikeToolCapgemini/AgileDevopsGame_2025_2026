@@ -18,7 +18,12 @@ func _ready():
 	var ImportDataFull = ImportData.duplicate()
 	pass # Replace with function body.
 
+func get_state() -> Dictionary:
+	push_error("get_state() must be implemented in subclass")
+	return {}
 
+func apply_state(state: Dictionary) -> void:
+	push_error("apply_state() must be implemented in subclass")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

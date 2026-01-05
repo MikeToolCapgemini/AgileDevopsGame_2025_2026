@@ -25,6 +25,8 @@ func peer_connected(id):
 	print("Player Connected: " + str(id))
 	if started:
 		rpc_id(id, "join_running_game")
+		var state_sync = get_tree().root.get_node("Main/StateSynchronizer")
+		state_sync.call_deferred("send_state_to_peer",id)
 
 func peer_disconnected(id):
 	print("Player Disconnected: " + str(id))
@@ -53,7 +55,7 @@ func send_player_information(playername, id):
 		
 	update_text_field()
 
-@rpc("any_peer")
+@rpc("any_peer","call_local")
 func request_start_game():
 	if multiplayer.is_server() and not started:
 		start_game()
@@ -79,6 +81,8 @@ func join_running_game():
 
 	call_deferred("toggle_interface")
 	GameManager.set_manager(scene)
+	
+
 
 
 

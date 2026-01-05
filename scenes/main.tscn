@@ -1,7 +1,8 @@
-[gd_scene load_steps=206 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=207 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
+[ext_resource type="Script" uid="uid://ds5sql610u4u7" path="res://scripts/state_synchronizer.gd" id="2_roort"]
 [ext_resource type="Script" uid="uid://d0fm7jh06timq" path="res://scripts/Player.gd" id="3_ogtpu"]
 [ext_resource type="Script" uid="uid://b60tex7gvarge" path="res://scripts/InterfaceManager.gd" id="4_4m4b7"]
 [ext_resource type="Script" uid="uid://cc4a3cr7u20kl" path="res://scripts/CursorManager.gd" id="4_hwpl5"]
@@ -12,7 +13,7 @@
 [ext_resource type="ArrayMesh" uid="uid://menvinsnf4an" path="res://assets/Grass.res" id="7_ttw4a"]
 [ext_resource type="ArrayMesh" uid="uid://b3dcm7uqde6rj" path="res://assets/PlayingField/Field_2.obj" id="8_irh7k"]
 [ext_resource type="ArrayMesh" uid="uid://btu4h5g5xt21m" path="res://assets/PlayingField/Field_3.obj" id="9_55j84"]
-[ext_resource type="Script" uid="uid://0k8d32bhacuo" path="res://scenes/Rotate.gd" id="9_wvxrh"]
+[ext_resource type="Script" uid="uid://0k8d32bhacuo" path="res://scripts/Rotate.gd" id="9_wvxrh"]
 [ext_resource type="Material" uid="uid://cjnca600vhyrw" path="res://Materials/CodeRed.tres" id="10_d0dfl"]
 [ext_resource type="ArrayMesh" uid="uid://dabrtcc33ot6w" path="res://assets/PlayingField/Field_4.obj" id="10_vgipp"]
 [ext_resource type="ArrayMesh" uid="uid://c0w2uclwcr23" path="res://assets/PlayingField/Field_5.obj" id="11_edxct"]
@@ -93,18 +94,18 @@
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="74_roort"]
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="75_roort"]
 [ext_resource type="Script" uid="uid://btlh4wrv04rc3" path="res://addons/collapsible_container/collapsible_elements/collapsible_container.gd" id="78_engxj"]
-[ext_resource type="Script" uid="uid://ddn46v8kt3jwd" path="res://scenes/collapseButton.gd" id="78_raiwf"]
+[ext_resource type="Script" uid="uid://ddn46v8kt3jwd" path="res://scripts/collapseButton.gd" id="78_raiwf"]
 [ext_resource type="Script" uid="uid://yhh3kfgvk00x" path="res://scripts/UX/CardUIManager.gd" id="81_4ue30"]
 [ext_resource type="Script" uid="uid://chkh3ytq3t6lm" path="res://scripts/reset_game.gd" id="81_raiwf"]
 [ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
-[ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
+[ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role (2).gd" id="84_r4ag1"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="87_1uevf"]
 [ext_resource type="FontFile" uid="uid://bgwubnrnnxe2s" path="res://addons/fontawesome/fonts/fa-regular-400.woff2" id="87_xmrkg"]
 [ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="88_0tljd"]
 [ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="88_wvlrk"]
 [ext_resource type="FontFile" uid="uid://2ike7sp4qiyi" path="res://assets/fonts/Ubuntu/Ubuntu-BoldItalic.ttf" id="89_mgpkq"]
 [ext_resource type="FontFile" uid="uid://b23akitg4yjxd" path="res://assets/fonts/Ubuntu/Ubuntu-Italic.ttf" id="90_xmrkg"]
-[ext_resource type="Script" uid="uid://wqc4dac2wyhy" path="res://scenes/Hide_facilitator_button.gd" id="92_gm02q"]
+[ext_resource type="Script" uid="uid://wqc4dac2wyhy" path="res://scripts/Hide_facilitator_button.gd" id="92_gm02q"]
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
 [ext_resource type="Script" uid="uid://bq01pxakqcfgj" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
 [ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
@@ -550,6 +551,11 @@ script = ExtResource("1_b3gvj")
 Cursors = NodePath("World/Cursors")
 World = NodePath("World/Floor")
 Camera = NodePath("Camera3D")
+
+[node name="StateSynchronizer" type="Node" parent="." node_paths=PackedStringArray("pawnManager", "cardManager")]
+script = ExtResource("2_roort")
+pawnManager = NodePath("../World/Interactables/Pawns")
+cardManager = NodePath("../Interface_Cards")
 
 [node name="Game" type="Node" parent="."]
 
