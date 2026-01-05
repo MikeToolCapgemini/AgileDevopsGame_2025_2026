@@ -19,11 +19,19 @@ func _ready():
 	pass # Replace with function body.
 
 func get_state() -> Dictionary:
-	push_error("get_state() must be implemented in subclass")
-	return {}
+	var state = {
+		"active" : active,
+		"type" : curType,
+		"curKey" : curKey,
+		"curTypeData" : cardTypeData
+	}
+	return state
 
 func apply_state(state: Dictionary) -> void:
-	push_error("apply_state() must be implemented in subclass")
+	active = state["active"]
+	curType = state["type"]
+	curKey = state["curKey"]
+	cardTypeData = state["curTypeData"]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -103,8 +111,9 @@ func draw(type):
 	# action cards
 	var rng = RandomNumberGenerator.new()
 	if rng.randi_range(1, 21) >= 19: #19 is defualt
-		display_action_card()
-		display_action_card.rpc()
+		var roll = rng.randi_range(1,actionDict.size()-1)
+		display_action_card(roll)
+		display_action_card.rpc(roll)
 	else:
 		print("###")
 		print(cQuestion)
@@ -120,10 +129,7 @@ func draw(type):
 		print(curType + str(curKey))
 	_sync_cardshown.rpc(visible, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)
 
-@rpc("any_peer")
-func display_action_card():
-	var rng = RandomNumberGenerator.new()
-	var actionDict = [
+var actionDict = [
 	"Your delivery does not fit in the release calendar: skip a turn",
 	"Synchronization issue: Move your front pawn back to the square where your second pawn is. If you only have one pawn in the game, you can take your second pawn, and place both pawns on your starting space",
 	"Fix security issue together: you and the person after you skip this turn",
@@ -137,7 +143,9 @@ func display_action_card():
 	"Test: The acceptance test is successful, go directly into production (to your finish)",
 	"Management: CICD chain no longer works, put all pawns (of all players) back a whole phase"
 	]
-	var roll = rng.randi_range(1,actionDict.size()-1)
+
+@rpc("any_peer")
+func display_action_card(roll : int):
 	CardUIManager.UXTagObject.visible = false
 	CardUIManager.ActionTagObject.visible = true
 	print(actionDict[roll] + str(multiplayer.get_unique_id()))
