@@ -9,6 +9,8 @@ extends Node
 var peer = ENetMultiplayerPeer.new()
 var webPeer = WebSocketMultiplayerPeer.new()
 
+var started : bool = false
+
 
 func _ready():
 	multiplayer.peer_connected.connect(peer_connected)
@@ -21,6 +23,8 @@ func _ready():
 
 func peer_connected(id):
 	print("Player Connected: " + str(id))
+	if started:
+		rpc_id(id, "join_running_game")
 
 func peer_disconnected(id):
 	print("Player Disconnected: " + str(id))
@@ -49,12 +53,35 @@ func send_player_information(playername, id):
 		
 	update_text_field()
 
-@rpc("any_peer", "call_local")
+@rpc("any_peer")
+func request_start_game():
+	if multiplayer.is_server() and not started:
+		start_game()
+
+@rpc("authority")
 func start_game():
 	var scene = GameScene.instantiate()
 	get_tree().root.add_child(scene) # connects Main to Multiplayer as child.
-	toggle_interface() 
+	call_deferred("toggle_interface")
+	started = true
 	GameManager.set_manager(scene)
+	# Tell all connected clients to join
+	for peer_id in multiplayer.get_peers():
+		if peer_id != multiplayer.get_unique_id(): # skip host if already done
+			rpc_id(peer_id, "join_running_game")
+
+
+@rpc("authority")
+func join_running_game():
+
+	var scene = GameScene.instantiate()
+	get_tree().root.add_child(scene)
+
+	call_deferred("toggle_interface")
+	GameManager.set_manager(scene)
+
+
+
 
 # Toggles the connection interface on/off.
 func toggle_interface():
@@ -89,12 +116,10 @@ func join_game():
 	#webPeer.create_client("wss://" + Adress + ":" + str(Port))
 	multiplayer.set_multiplayer_peer(peer)
 	GameManager.You = multiplayer.get_unique_id()
-	
-
 
 ## Interface Functions ##
 func _on_start_button_pressed():
-	start_game.rpc()
+	request_start_game.rpc_id(1)
 
 func _on_host_button_pressed():
 	host_game()
