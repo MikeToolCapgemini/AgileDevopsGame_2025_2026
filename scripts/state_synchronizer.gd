@@ -2,13 +2,13 @@ extends Node
 
 @export var pawnManager : PawnManager
 @export var cardManager : CardManager
-#@export var diceManager 
-#@export var timeManager
+@export var diceManager : Dice
+@export var timeManager : Hourglass
 
 var managers: Array = []
 
 func _ready() -> void:
-	managers = [pawnManager,cardManager]
+	managers = [pawnManager,cardManager,timeManager]
 
 
 # Called when a late joiner connects

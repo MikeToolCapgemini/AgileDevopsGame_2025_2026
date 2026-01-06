@@ -9,6 +9,7 @@ var currentTime = 600
 var newTime = 600
 var timerRunning = false
 var spin_in_progress := false
+var started_at_unix := 0.0
 @export var EditMinObject : TextEdit
 @export var EditSecObject : TextEdit
 @export var InterruptUI : Node
@@ -19,8 +20,61 @@ func _ready():
 	SpinTimer.wait_time = animator.get_animation("Spin").length
 	pass # Replace with function body.
 
+func get_state() -> Dictionary:
+	var state = {
+		"currentTime": currentTime,
+		"timerRunning": timerRunning,
+		"spin_in_progress": spin_in_progress,
+		"paused": paused,
+		"started_at": started_at_unix,
+		"totalTime": newTime
+	}
+	print("Getting hourglass state")
+	return state
 
+func apply_state(state: Dictionary) -> void:
+	print("Applying hourglass state")
+	currentTime = state["currentTime"]
+	timerRunning = state["timerRunning"]
+	spin_in_progress = state["spin_in_progress"]
+	paused = state["paused"]
+	newTime = state["totalTime"]
+	started_at_unix = state["started_at"]
 	
+	_rebuild_animation()
+		
+
+func _rebuild_animation():
+	#stop everything beforehand just in case
+	animator.stop()
+	animator.clear_queue()
+	SpinTimer.stop()
+	
+	if paused:
+		animator.play("SandFlow")
+		animator.pause()
+		return
+	if spin_in_progress:
+		animator.play("Spin")
+		SpinTimer.start()
+		return
+	
+	if timerRunning:
+		_play_sandflow_from_time()
+	
+
+
+func _play_sandflow_from_time():
+	var elapsed := Time.get_unix_time_from_system() - started_at_unix
+	var anim_length = animator.get_animation("SandFlow").length
+
+	var remaining_ratio = currentTime / newTime
+	var target_speed = anim_length / newTime
+	animator.speed_scale = target_speed
+
+	animator.play("SandFlow")
+	animator.seek(anim_length * (1.0 - remaining_ratio), true)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -128,3 +182,4 @@ func _on_spin_timer_timeout() -> void:
 		animation_duration = anim_length
 	var speed_scale = anim_length / animation_duration
 	animator.speed_scale = speed_scale
+	started_at_unix = Time.get_unix_time_from_system()

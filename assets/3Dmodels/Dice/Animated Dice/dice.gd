@@ -1,3 +1,4 @@
+class_name Dice
 extends RigidBody3D
 
 @onready var raycasts = $Raycasts.get_children()

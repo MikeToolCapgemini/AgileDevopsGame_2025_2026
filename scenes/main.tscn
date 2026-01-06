@@ -98,7 +98,7 @@
 [ext_resource type="Script" uid="uid://yhh3kfgvk00x" path="res://scripts/UX/CardUIManager.gd" id="81_4ue30"]
 [ext_resource type="Script" uid="uid://chkh3ytq3t6lm" path="res://scripts/reset_game.gd" id="81_raiwf"]
 [ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
-[ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role (2).gd" id="84_r4ag1"]
+[ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="87_1uevf"]
 [ext_resource type="FontFile" uid="uid://bgwubnrnnxe2s" path="res://addons/fontawesome/fonts/fa-regular-400.woff2" id="87_xmrkg"]
 [ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="88_0tljd"]
@@ -552,10 +552,12 @@ Cursors = NodePath("World/Cursors")
 World = NodePath("World/Floor")
 Camera = NodePath("Camera3D")
 
-[node name="StateSynchronizer" type="Node" parent="." node_paths=PackedStringArray("pawnManager", "cardManager")]
+[node name="StateSynchronizer" type="Node" parent="." node_paths=PackedStringArray("pawnManager", "cardManager", "diceManager", "timeManager")]
 script = ExtResource("2_roort")
 pawnManager = NodePath("../World/Interactables/Pawns")
 cardManager = NodePath("../Interface_Cards")
+diceManager = NodePath("../World/Interactables/Dice")
+timeManager = NodePath("../World/Interactables/hourglassAnimated")
 
 [node name="Game" type="Node" parent="."]
 
