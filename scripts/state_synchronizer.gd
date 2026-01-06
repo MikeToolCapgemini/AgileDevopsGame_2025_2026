@@ -4,14 +4,15 @@ extends Node
 @export var cardManager : CardManager
 @export var diceManager : Dice
 @export var timeManager : Hourglass
+@export var interruptManager : Interrupt
 
 var managers: Array = []
 
 func _ready() -> void:
-	managers = [pawnManager,cardManager,diceManager,timeManager]
+	managers = [pawnManager,cardManager,diceManager,timeManager,interruptManager]
 
 
-# Called when a late joiner connects
+# Called when someone reconnects or someone joins in late
 func send_state_to_peer(peer_id: int):
 	print("sending state to " + str(peer_id))
 	if not multiplayer.is_server():
