@@ -8,7 +8,7 @@ extends Node
 var managers: Array = []
 
 func _ready() -> void:
-	managers = [pawnManager,cardManager,timeManager]
+	managers = [pawnManager,cardManager,diceManager,timeManager]
 
 
 # Called when a late joiner connects
