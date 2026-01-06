@@ -29,7 +29,7 @@ func get_state() -> Dictionary:
 		"started_at": started_at_unix,
 		"totalTime": newTime
 	}
-	print("Getting hourglass state")
+	print("Getting hourglass state" + str(state))
 	return state
 
 func apply_state(state: Dictionary) -> void:

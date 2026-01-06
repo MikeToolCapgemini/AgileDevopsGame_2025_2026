@@ -27,7 +27,7 @@ func get_state() -> Dictionary:
 		"curKey" : curKey,
 		"curTypeData" : cardTypeData
 	}
-	print("CardActive is " + str(active) + " the type is " + str(curType) + " and the key is " + str(curKey))
+	print("Getting current card state: " + str(state))
 	return state
 
 func apply_state(state: Dictionary) -> void:
