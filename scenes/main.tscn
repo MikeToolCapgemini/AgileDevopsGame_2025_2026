@@ -1,4 +1,4 @@
-[gd_scene load_steps=207 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=208 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -460,6 +460,9 @@ bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpru0"]
 bg_color = Color(0, 0.41568628, 0.23529412, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh25q"]
+bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.25882354)
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n6mxd"]
 
 [sub_resource type="Theme" id="Theme_sjgq0"]
@@ -552,12 +555,13 @@ Cursors = NodePath("World/Cursors")
 World = NodePath("World/Floor")
 Camera = NodePath("Camera3D")
 
-[node name="StateSynchronizer" type="Node" parent="." node_paths=PackedStringArray("pawnManager", "cardManager", "diceManager", "timeManager")]
+[node name="StateSynchronizer" type="Node" parent="." node_paths=PackedStringArray("pawnManager", "cardManager", "diceManager", "timeManager", "interruptManager")]
 script = ExtResource("2_roort")
 pawnManager = NodePath("../World/Interactables/Pawns")
 cardManager = NodePath("../Interface_Cards")
 diceManager = NodePath("../World/Interactables/Dice")
 timeManager = NodePath("../World/Interactables/hourglassAnimated")
+interruptManager = NodePath("../Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show")
 
 [node name="Game" type="Node" parent="."]
 
@@ -3609,11 +3613,9 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 unique_name_in_owner = true
 visible = false
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("74_roort")
@@ -3624,8 +3626,18 @@ FacilitatorUI = NodePath("../Interface_Facilitator")
 FacilitatorKitButton = NodePath("../Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/facilitatorkit")
 OptionsPanel = NodePath("../Interface_Buttons")
 
+[node name="BlackoutBG" type="Panel" parent="Setup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eh25q")
+
 [node name="Panel" type="PanelContainer" parent="Setup"]
 material = SubResource("CanvasItemMaterial_n6mxd")
+custom_minimum_size = Vector2(618, 241)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
