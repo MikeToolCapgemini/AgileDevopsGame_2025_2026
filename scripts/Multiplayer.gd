@@ -11,6 +11,8 @@ var webPeer = WebSocketMultiplayerPeer.new()
 
 var started : bool = false
 
+@export var connect_panel : Control
+@export var disconnect_panel : Control
 
 func _ready():
 	multiplayer.peer_connected.connect(peer_connected)
@@ -29,13 +31,19 @@ func peer_connected(id):
 		state_sync.call_deferred("send_state_to_peer",id)
 
 func peer_disconnected(id):
+	disconnect_panel.edit_text("Player:" + str(id) + " Disconnected" )
+	disconnect_panel.show()
 	print("Player Disconnected: " + str(id))
 
 func connected_to_server():
+	connect_panel.edit_text("Connected to server")
+	connect_panel.show()
 	print("Connected to server")
 	send_player_information.rpc_id(1, $"Debug Interface/NameField".text, multiplayer.get_unique_id())
 
 func connection_failed():
+	disconnect_panel.edit_text("Connection Failed")
+	disconnect_panel.show()
 	print("Connection Failed")
 
 # Sends information about the player and updates/synchronizes the Players dict in GameManager
