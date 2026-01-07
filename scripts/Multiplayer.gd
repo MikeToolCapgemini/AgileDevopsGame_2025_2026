@@ -34,8 +34,10 @@ func peer_connected(id):
 		state_sync.call_deferred("send_state_to_peer",id)
 
 func peer_disconnected(id):
-	disconnect_panel.edit_text("Player:" + str(id) + " Disconnected" )
-	disconnect_panel.show()
+	if GameManager.Players.has(id):
+		var pName = GameManager.Players[id].name
+		disconnect_panel.edit_text("Player: " + str(pName) + " Disconnected" )
+		disconnect_panel.show()
 	print("Player Disconnected: " + str(id))
 
 func connected_to_server():
