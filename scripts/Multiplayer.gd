@@ -24,8 +24,9 @@ func _ready():
 		host_game()
 
 func peer_connected(id):
-	connect_panel.edit_text("Player Connected: " + str(id))
-	connect_panel.show()
+	if id != 1:
+		connect_panel.edit_text("Player Connected: " + str(id))
+		connect_panel.show()
 	print("Player Connected: " + str(id))
 	if started:
 		rpc_id(id, "join_running_game")
