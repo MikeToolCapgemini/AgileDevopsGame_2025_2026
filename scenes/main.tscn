@@ -1,4 +1,4 @@
-[gd_scene load_steps=208 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=209 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -108,6 +108,7 @@
 [ext_resource type="Script" uid="uid://wqc4dac2wyhy" path="res://scripts/Hide_facilitator_button.gd" id="92_gm02q"]
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
 [ext_resource type="Script" uid="uid://bq01pxakqcfgj" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
+[ext_resource type="Script" uid="uid://ceamoqnkbfe7" path="res://scripts/disconnect.gd" id="103_gm02q"]
 [ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrx01"]
@@ -1773,7 +1774,6 @@ far = 25.0
 [node name="Connections" type="Node" parent="."]
 
 [node name="Interface_Facilitator" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
@@ -3843,6 +3843,29 @@ text = "Refresh UI"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../../../../..")
 
+[node name="Disconnect" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Exits the game"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kwiwa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f37ub")
+text = "Disconnect"
+script = ExtResource("103_gm02q")
+
 [node name="QuitGame" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
 custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
@@ -4374,6 +4397,7 @@ text = "No
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Resume" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" method="on_repick"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Disconnect" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Disconnect" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" method="_on_pressed"]
 [connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/Resume" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" method="_on_upload_button_pressed"]

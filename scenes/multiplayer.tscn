@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://kgixi5xrbejj"]
+[gd_scene load_steps=23 format=3 uid="uid://kgixi5xrbejj"]
 
 [ext_resource type="Script" uid="uid://bt5vowngsleoc" path="res://scripts/Multiplayer.gd" id="1_8yuej"]
 [ext_resource type="PackedScene" uid="uid://bq4jyntltiheo" path="res://scenes/main.tscn" id="2_of8yj"]
@@ -7,6 +7,11 @@
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="5_uvo4r"]
 [ext_resource type="Script" uid="uid://ghufwxohnaar" path="res://scripts/delayed_editable_panel.gd" id="6_uvo4r"]
 [ext_resource type="StyleBox" uid="uid://dijgsweldy4qb" path="res://Styles/Cards_Background.tres" id="7_a6lh4"]
+[ext_resource type="Script" uid="uid://br1s2wprncugw" path="res://scenes/editable_panel.gd" id="8_gpc4n"]
+[ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="10_05036"]
+[ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="11_6mtek"]
+[ext_resource type="Script" uid="uid://cuklitumim1gx" path="res://scripts/UX/QuitGame.gd" id="12_ue6mp"]
+[ext_resource type="FontFile" uid="uid://bgwubnrnnxe2s" path="res://addons/fontawesome/fonts/fa-regular-400.woff2" id="13_n1wk1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vwpp"]
 bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
@@ -77,11 +82,24 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="multiplayer" type="Node" node_paths=PackedStringArray("connect_panel", "disconnect_panel")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxhos"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.34509805, 0.67058825, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="multiplayer" type="Node" node_paths=PackedStringArray("connect_panel", "disconnect_panel", "disconnect_server_panel")]
 script = ExtResource("1_8yuej")
 GameScene = ExtResource("2_of8yj")
 connect_panel = NodePath("Interface_Connect")
 disconnect_panel = NodePath("Interface_Disconnect")
+disconnect_server_panel = NodePath("CanvasLayer/Interface_Disconnect_server")
 
 [node name="Debug Interface" type="Control" parent="."]
 layout_mode = 3
@@ -370,7 +388,7 @@ grow_horizontal = 2
 theme = ExtResource("5_uvo4r")
 script = ExtResource("6_uvo4r")
 textLabel = NodePath("Panel/Connect_notif")
-delayTime = 1
+delayTime = 2
 
 [node name="Panel" type="PanelContainer" parent="Interface_Connect"]
 material = SubResource("CanvasItemMaterial_gpc4n")
@@ -397,6 +415,164 @@ text = "[center]Connected[/center]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Interface_Disconnect_server" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("textLabel")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_uvo4r")
+script = ExtResource("8_gpc4n")
+textLabel = NodePath("Panel/HBoxContainer/Disconnect_notif")
+
+[node name="BlackoutBG" type="Panel" parent="CanvasLayer/Interface_Disconnect_server"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/Interface_Disconnect_server"]
+material = SubResource("CanvasItemMaterial_gpc4n")
+custom_minimum_size = Vector2(3742, 56)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1871.0
+offset_top = -28.0
+offset_right = 1871.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_r3wt4")
+theme_override_styles/panel = SubResource("StyleBoxFlat_nrdfo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Interface_Disconnect_server/Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Disconnect_notif" type="RichTextLabel" parent="CanvasLayer/Interface_Disconnect_server/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(400, 27)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_4vwpp")
+bbcode_enabled = true
+text = "[center]Disconnected[/center]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReConnect" type="Button" parent="CanvasLayer/Interface_Disconnect_server/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Try to reconnect to server"
+theme_override_styles/normal = SubResource("StyleBoxFlat_lxhos")
+
+[node name="FontAwesome" type="Label" parent="CanvasLayer/Interface_Disconnect_server/Panel/HBoxContainer/ReConnect"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("10_05036")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_6mtek")
+icon_size = 35
+icon_name = "arrows-rotate"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="Home" type="Button" parent="CanvasLayer/Interface_Disconnect_server/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Go back to the home screen"
+theme_override_styles/normal = SubResource("StyleBoxFlat_lxhos")
+
+[node name="FontAwesome" type="Label" parent="CanvasLayer/Interface_Disconnect_server/Panel/HBoxContainer/Home"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("10_05036")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_6mtek")
+icon_size = 35
+icon_name = "house"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="Close" type="Button" parent="CanvasLayer/Interface_Disconnect_server/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Close game and quit"
+theme_override_styles/normal = SubResource("StyleBoxFlat_lxhos")
+script = ExtResource("12_ue6mp")
+
+[node name="FontAwesome" type="Label" parent="CanvasLayer/Interface_Disconnect_server/Panel/HBoxContainer/Close"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("13_n1wk1")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_6mtek")
+icon_size = 35
+icon_type = "regular"
+icon_name = "circle-xmark"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
 [connection signal="pressed" from="Debug Interface/Host Button" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="Debug Interface/Join Button" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="Debug Interface/Start Button" to="." method="_on_start_button_pressed"]
@@ -409,3 +585,7 @@ vertical_alignment = 1
 [connection signal="pressed" from="Show Interface/Toggle Button" to="." method="_on_toggle_button_pressed"]
 [connection signal="visibility_changed" from="Interface_Disconnect" to="Interface_Disconnect" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="Interface_Connect" to="Interface_Connect" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="CanvasLayer/Interface_Disconnect_server" to="CanvasLayer/Interface_Disconnect_server" method="_on_visibility_changed"]
+[connection signal="pressed" from="CanvasLayer/Interface_Disconnect_server/Panel/HBoxContainer/ReConnect" to="." method="_on_reconnect_pressed"]
+[connection signal="pressed" from="CanvasLayer/Interface_Disconnect_server/Panel/HBoxContainer/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="CanvasLayer/Interface_Disconnect_server/Panel/HBoxContainer/Close" to="CanvasLayer/Interface_Disconnect_server/Panel/HBoxContainer/Close" method="_on_pressed"]
