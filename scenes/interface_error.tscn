@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://1ec0yh1sisff"]
+
+[ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="1_3deei"]
+[ext_resource type="Script" uid="uid://dhts0hni6o6ni" path="res://scripts/error_notif.gd" id="2_rfloq"]
+[ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="3_k55p5"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_83607"]
+
+[sub_resource type="Theme" id="Theme_vny5k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1hbcg"]
+bg_color = Color(0.56078434, 0.19607843, 0.21568628, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.30588236, 0.3019608, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Interface_Error" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+theme = ExtResource("1_3deei")
+script = ExtResource("2_rfloq")
+
+[node name="Panel" type="PanelContainer" parent="."]
+material = SubResource("CanvasItemMaterial_83607")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1871.0
+offset_right = 1871.0
+offset_bottom = 56.0
+grow_horizontal = 2
+theme = SubResource("Theme_vny5k")
+theme_override_styles/panel = SubResource("StyleBoxFlat_1hbcg")
+
+[node name="Disconnect_notif" type="RichTextLabel" parent="Panel"]
+custom_minimum_size = Vector2(400, 27)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_k55p5")
+bbcode_enabled = true
+text = "[center]Error[/center]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
