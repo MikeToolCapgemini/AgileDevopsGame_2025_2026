@@ -21,11 +21,12 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="Interface_Error" type="CanvasLayer"]
+[node name="Interface_Error" type="CanvasLayer" node_paths=PackedStringArray("error_label")]
 layer = 1000
 script = ExtResource("1_rfloq")
+error_label = NodePath("Interface_Error")
 
-[node name="Interface_Error" type="Control" parent="."]
+[node name="Interface_Error" type="Control" parent="." node_paths=PackedStringArray("textLabel")]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -34,6 +35,7 @@ anchor_right = 0.5
 grow_horizontal = 2
 theme = ExtResource("1_3deei")
 script = ExtResource("2_rfloq")
+textLabel = NodePath("Panel/Disconnect_notif")
 
 [node name="Panel" type="PanelContainer" parent="Interface_Error"]
 material = SubResource("CanvasItemMaterial_83607")
