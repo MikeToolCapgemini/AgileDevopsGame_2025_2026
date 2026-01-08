@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://1ec0yh1sisff"]
+[gd_scene load_steps=8 format=3 uid="uid://1ec0yh1sisff"]
 
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="1_3deei"]
+[ext_resource type="Script" uid="uid://c2xvkp8qr4s16" path="res://scenes/interface_error.gd" id="1_rfloq"]
 [ext_resource type="Script" uid="uid://dhts0hni6o6ni" path="res://scripts/error_notif.gd" id="2_rfloq"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="3_k55p5"]
 
@@ -20,7 +21,11 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="Interface_Error" type="Control" node_paths=PackedStringArray("textLabel")]
+[node name="Interface_Error" type="CanvasLayer"]
+layer = 1000
+script = ExtResource("1_rfloq")
+
+[node name="Interface_Error" type="Control" parent="."]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -29,9 +34,8 @@ anchor_right = 0.5
 grow_horizontal = 2
 theme = ExtResource("1_3deei")
 script = ExtResource("2_rfloq")
-textLabel = NodePath("Panel/Disconnect_notif")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="Interface_Error"]
 material = SubResource("CanvasItemMaterial_83607")
 layout_mode = 1
 anchors_preset = 5
@@ -44,7 +48,7 @@ grow_horizontal = 2
 theme = SubResource("Theme_vny5k")
 theme_override_styles/panel = SubResource("StyleBoxFlat_1hbcg")
 
-[node name="Disconnect_notif" type="RichTextLabel" parent="Panel"]
+[node name="Disconnect_notif" type="RichTextLabel" parent="Interface_Error/Panel"]
 custom_minimum_size = Vector2(400, 27)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -56,4 +60,4 @@ text = "[center]Error[/center]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="Interface_Error" to="Interface_Error" method="_on_visibility_changed"]
