@@ -75,3 +75,12 @@ func _on_open_page_button_pressed():
 	
 func _on_upload_button_pressed():
 	upload_save()
+	
+func _on_copy_link_button_pressed():
+	if pending_url == "":
+		return
+
+	DisplayServer.clipboard_set(pending_url)
+	saveManager.saveNotifText.text = "Save link copied to clipboard"
+	saveManager.saveNotificationUI.show()
+	print("Save link copied to clipboard")

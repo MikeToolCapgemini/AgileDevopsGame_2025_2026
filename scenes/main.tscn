@@ -3920,6 +3920,7 @@ text = "Quit Game"
 script = ExtResource("52_v5wqd")
 
 [node name="Interface_DiscardPile" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -4287,6 +4288,39 @@ text = "[center]Uploaded[/center]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="CopyLink" type="Button" parent="Interface_Upload_Notification/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Copy link to clipboard"
+theme_override_styles/normal = SubResource("StyleBoxFlat_joh2r")
+
+[node name="FontAwesome" type="Label" parent="Interface_Upload_Notification/Panel/HBoxContainer/CopyLink"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 35
+icon_name = "copy"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
 [node name="Open Page" type="Button" parent="Interface_Upload_Notification/Panel/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -4590,6 +4624,7 @@ text = "No
 [connection signal="visibility_changed" from="Interface_Interrupt" to="Interface_Interrupt" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="Interface_Save_notif" to="Interface_Save_notif" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="Interface_Upload_Notification" to="Interface_Upload_Notification" method="_on_visibility_changed"]
+[connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/CopyLink" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" method="_on_copy_link_button_pressed"]
 [connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/Open Page" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" method="_on_open_page_button_pressed"]
 [connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/Close" to="Interface_Upload_Notification/Panel/HBoxContainer/Close" method="_on_pressed"]
 [connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/Facilitator" to="Interface_SaveOverwrite" method="_on_facilitator_pressed"]
