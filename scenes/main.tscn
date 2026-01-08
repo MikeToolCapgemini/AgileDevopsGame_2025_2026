@@ -1,4 +1,4 @@
-[gd_scene load_steps=214 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=218 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -110,7 +110,8 @@
 [ext_resource type="Script" uid="uid://bq01pxakqcfgj" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
 [ext_resource type="Script" uid="uid://ceamoqnkbfe7" path="res://scripts/disconnect.gd" id="103_gm02q"]
 [ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
-[ext_resource type="Script" uid="uid://br1s2wprncugw" path="res://scenes/editable_panel.gd" id="110_07pt3"]
+[ext_resource type="Script" uid="uid://br1s2wprncugw" path="res://scripts/editable_panel.gd" id="110_07pt3"]
+[ext_resource type="Script" uid="uid://dhts0hni6o6ni" path="res://scripts/error_notif.gd" id="112_37xlc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrx01"]
 size = Vector3(11, 0.7, 5)
@@ -578,6 +579,22 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_83607"]
+
+[sub_resource type="Theme" id="Theme_vny5k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1hbcg"]
+bg_color = Color(0.56078434, 0.19607843, 0.21568628, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.30588236, 0.3019608, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="Main" type="Node" node_paths=PackedStringArray("Cursors", "World", "Camera")]
 script = ExtResource("1_b3gvj")
@@ -4510,6 +4527,40 @@ theme_override_styles/hover = ExtResource("46_171dt")
 text = "No
 "
 
+[node name="Interface_Error" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+theme = ExtResource("74_roort")
+script = ExtResource("112_37xlc")
+
+[node name="Panel" type="PanelContainer" parent="Interface_Error"]
+material = SubResource("CanvasItemMaterial_83607")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1871.0
+offset_right = 1871.0
+offset_bottom = 56.0
+grow_horizontal = 2
+theme = SubResource("Theme_vny5k")
+theme_override_styles/panel = SubResource("StyleBoxFlat_1hbcg")
+
+[node name="Disconnect_notif" type="RichTextLabel" parent="Interface_Error/Panel"]
+custom_minimum_size = Vector2(400, 27)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+bbcode_enabled = true
+text = "[center]Error[/center]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="input_event" from="World/Interactables/Pawns/Pawn0/StaticBodyPurple1" to="World/Interactables/Pawns/Pawn0" method="_on_static_body_3d_input_event"]
 [connection signal="mouse_entered" from="World/Interactables/Pawns/Pawn0/StaticBodyPurple1" to="World/Interactables/Pawns/Pawn0" method="_on_static_body_3d_mouse_entered"]
 [connection signal="mouse_exited" from="World/Interactables/Pawns/Pawn0/StaticBodyPurple1" to="World/Interactables/Pawns/Pawn0" method="_on_static_body_3d_mouse_exited"]
@@ -4629,3 +4680,4 @@ text = "No
 [connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/Close" to="Interface_Upload_Notification/Panel/HBoxContainer/Close" method="_on_pressed"]
 [connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/Facilitator" to="Interface_SaveOverwrite" method="_on_facilitator_pressed"]
 [connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/Player" to="Interface_SaveOverwrite" method="_on_player_pressed"]
+[connection signal="visibility_changed" from="Interface_Error" to="Interface_Error" method="_on_visibility_changed"]

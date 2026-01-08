@@ -35,6 +35,8 @@ func upload_save():
 func _on_request_completed(result, response_code, headers, body):
 	if result != HTTPRequest.RESULT_SUCCESS:
 		push_error("HTTPRequest failed: %s" % result)
+		ErrorLabel.edit_text("HTTPRequest failed: %s" % result)
+		ErrorLabel.show()
 		return
 
 	if response_code != 200:

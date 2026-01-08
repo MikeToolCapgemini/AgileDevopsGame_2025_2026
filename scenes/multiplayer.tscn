@@ -7,7 +7,7 @@
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="5_uvo4r"]
 [ext_resource type="Script" uid="uid://ghufwxohnaar" path="res://scripts/delayed_editable_panel.gd" id="6_uvo4r"]
 [ext_resource type="StyleBox" uid="uid://dijgsweldy4qb" path="res://Styles/Cards_Background.tres" id="7_a6lh4"]
-[ext_resource type="Script" uid="uid://br1s2wprncugw" path="res://scenes/editable_panel.gd" id="8_gpc4n"]
+[ext_resource type="Script" uid="uid://br1s2wprncugw" path="res://scripts/editable_panel.gd" id="8_gpc4n"]
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="10_05036"]
 [ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="11_6mtek"]
 [ext_resource type="Script" uid="uid://cuklitumim1gx" path="res://scripts/UX/QuitGame.gd" id="12_ue6mp"]
