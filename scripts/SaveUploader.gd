@@ -3,6 +3,7 @@ extends Node
 @export var upload_url := "https://miketool.eu/devopsbookmark/upload.php"
 @export var view_url := "https://miketool.eu/devopsbookmark"
 @export var saveManager : SaveSystem 
+@export var MailInputField : LineEdit
 
 @export var Upload_notification : Control
 
@@ -85,3 +86,71 @@ func _on_copy_link_button_pressed():
 	saveManager.saveNotifText.text = "Save link copied to clipboard"
 	saveManager.saveNotificationUI.show()
 	print("Save link copied to clipboard")
+	
+
+func _on_send_mail_pressed():
+	var mailadress := MailInputField.text
+	send_email_via_client(mailadress)
+	
+
+# This function is called when the user presses the button
+func send_email_via_client(user_email: String):
+	# Basic validation
+	if not user_email.contains("@") or not user_email.contains("."):
+		push_error("Invalid email address")
+		ErrorLabel.show_error("Invalid email address")
+		return
+
+	# Subject and body (with line breaks)
+	var subject = "Your Devops Bookmark access link"
+	var body = "Hello! %0D%0A%0D%0A
+	Here is your access link to view your cards:" + pending_url + "%0D%0A%0D%0AThank you!"
+
+	# Build the mailto: URL
+	var mailto_url = "mailto:%s?subject=%s&body=%s" % [user_email, subject, body]
+
+	# Open default email client
+	OS.shell_open(mailto_url)
+	
+	
+	
+
+
+func send_email_request_trough_web(mailto):
+	if not mailto.contains("@") or not mailto.contains("."):
+		push_error("Invalid email address")
+		ErrorLabel.show_error("Invalid email address")
+		return
+	
+	var http := HTTPRequest.new()
+	add_child(http)
+	http.request_completed.connect(_on_email_request_completed)
+
+	var url = "https://miketool.eu/devopsbookmark/send_email.php"
+	var headers = ["Content-Type: application/json"]
+
+	var data = {
+		"to": mailto,
+		"subject": "Devops Website token adress",
+		"message": pending_url
+	}
+
+	var err = http.request(
+		url,
+		headers,
+		HTTPClient.METHOD_POST,
+		JSON.stringify(data)
+	)
+	
+	if err != OK:
+		push_error("HTTPRequest failed to start")
+		ErrorLabel.show_error("HTTPRequest failed to start")
+		
+	
+func _on_email_request_completed(result, response_code, headers, body):
+	if response_code == 200:
+		print("Email sent successfully")
+	else:
+		var failmsg = "Email failed:" + str(response_code) + body.get_string_from_utf8()
+		print(failmsg)
+		ErrorLabel.show_error(failmsg)

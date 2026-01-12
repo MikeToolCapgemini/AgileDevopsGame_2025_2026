@@ -1,4 +1,4 @@
-[gd_scene load_steps=214 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=215 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -562,6 +562,13 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0.34509805, 0.67058825, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1hbcg"]
+bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -4055,7 +4062,7 @@ icon_size = 35
 icon_name = "circle-xmark"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
-[node name="BookmarkSite" type="Button" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons" node_paths=PackedStringArray("saveManager", "Upload_notification")]
+[node name="BookmarkSite" type="Button" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons" node_paths=PackedStringArray("saveManager", "MailInputField", "Upload_notification")]
 custom_minimum_size = Vector2(50, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -4075,6 +4082,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
 script = ExtResource("102_37xlc")
 saveManager = NodePath("../../../../../Interface_Facilitator/MultiSave")
+MailInputField = NodePath("../../../../../Interface_Upload_Notification/Panel/HBoxContainer/Mailto/MarginContainer/CollapsibleContainer/MarginContainer/PanelContainer/HBoxContainer/MailNameField")
 Upload_notification = NodePath("../../../../../Interface_Upload_Notification")
 
 [node name="FontAwesome" type="Label" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite"]
@@ -4334,6 +4342,128 @@ vertical_alignment = 1
 script = ExtResource("88_wvlrk")
 icon_size = 35
 icon_name = "copy"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="Mailto" type="Button" parent="Interface_Upload_Notification/Panel/HBoxContainer" node_paths=PackedStringArray("collapse", "iconToSwap")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Toggling the input field to Send the token over mail"
+theme_override_styles/normal = SubResource("StyleBoxFlat_joh2r")
+script = ExtResource("78_raiwf")
+collapse = NodePath("MarginContainer/CollapsibleContainer")
+iconToSwap = NodePath("FontAwesome")
+foldedIcon = "envelope"
+unfoldedIcon = "envelope-open"
+
+[node name="FontAwesome" type="Label" parent="Interface_Upload_Notification/Panel/HBoxContainer/Mailto"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 35
+icon_name = "envelope"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Upload_Notification/Panel/HBoxContainer/Mailto"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = -50.00001
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_constants/margin_top = -50
+
+[node name="CollapsibleContainer" type="Control" parent="Interface_Upload_Notification/Panel/HBoxContainer/Mailto/MarginContainer"]
+process_mode = 3
+editor_description = "
+			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
+			
+Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
+clip_contents = true
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+script = ExtResource("78_engxj")
+starts_opened = false
+folding_direction_preset = 12
+sizing_constraint = 1
+sizing_node = NodePath("MarginContainer/PanelContainer")
+metadata/_custom_type_script = "uid://btlh4wrv04rc3"
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Upload_Notification/Panel/HBoxContainer/Mailto/MarginContainer/CollapsibleContainer"]
+layout_mode = 1
+offset_right = 200.0
+offset_bottom = 50.0
+size_flags_horizontal = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="Interface_Upload_Notification/Panel/HBoxContainer/Mailto/MarginContainer/CollapsibleContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_Upload_Notification/Panel/HBoxContainer/Mailto/MarginContainer/CollapsibleContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MailNameField" type="LineEdit" parent="Interface_Upload_Notification/Panel/HBoxContainer/Mailto/MarginContainer/CollapsibleContainer/MarginContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.69803923)
+theme_override_styles/normal = SubResource("StyleBoxFlat_1hbcg")
+placeholder_text = "name@mail.com"
+
+[node name="SendMail" type="Button" parent="Interface_Upload_Notification/Panel/HBoxContainer/Mailto/MarginContainer/CollapsibleContainer/MarginContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Send the token over mail"
+theme_override_styles/normal = SubResource("StyleBoxFlat_joh2r")
+
+[node name="FontAwesome" type="Label" parent="Interface_Upload_Notification/Panel/HBoxContainer/Mailto/MarginContainer/CollapsibleContainer/MarginContainer/PanelContainer/HBoxContainer/SendMail"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 35
+icon_name = "caret-right"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Open Page" type="Button" parent="Interface_Upload_Notification/Panel/HBoxContainer"]
@@ -4640,6 +4770,8 @@ text = "No
 [connection signal="visibility_changed" from="Interface_Save_notif" to="Interface_Save_notif" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="Interface_Upload_Notification" to="Interface_Upload_Notification" method="_on_visibility_changed"]
 [connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/CopyLink" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" method="_on_copy_link_button_pressed"]
+[connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/Mailto" to="Interface_Upload_Notification/Panel/HBoxContainer/Mailto" method="_toggle_collapse"]
+[connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/Mailto/MarginContainer/CollapsibleContainer/MarginContainer/PanelContainer/HBoxContainer/SendMail" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" method="_on_send_mail_pressed"]
 [connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/Open Page" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" method="_on_open_page_button_pressed"]
 [connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/Close" to="Interface_Upload_Notification/Panel/HBoxContainer/Close" method="_on_pressed"]
 [connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/Facilitator" to="Interface_SaveOverwrite" method="_on_facilitator_pressed"]
