@@ -8,6 +8,7 @@ class_name CardManager
 @onready var ImportData = get_node("/root/ImportData")
 
 var active = false
+var answerShown : bool = false
 var curType
 var curKey
 var cardTypeData
@@ -18,7 +19,31 @@ func _ready():
 	var ImportDataFull = ImportData.duplicate()
 	pass # Replace with function body.
 
+func get_state() -> Dictionary:
+	var state = {
+		"active" : active,
+		"answerShown" : answerShown,
+		"type" : curType,
+		"curKey" : curKey,
+		"curTypeData" : cardTypeData
+	}
+	print("Getting current card state: " + str(state))
+	return state
 
+func apply_state(state: Dictionary) -> void:
+	active = state["active"]
+	curType = state["type"]
+	curKey = state["curKey"]
+	answerShown = state["answerShown"]
+	cardTypeData = state["curTypeData"]
+	if active:
+		if curType == "action":
+			display_action_card(curKey)
+		else:
+			set_bg_on_type(curType)
+			display_default_card(curKey-1)
+	_sync_cardshown(active, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)
+	_sync_answershown(answerShown)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -36,14 +61,48 @@ func set_bg_color(newStyle : Color):
 func draw(type):
 	active = true
 	visible = true
-	CardUIManager.AnswerObject.visible = false
-	CardUIManager.AnswerBackground.visible = false
 	CardUIManager.bookmark.visible = false
+	_sync_answershown(false)
 	_sync_answershown.rpc(false)
 	## temp draw card function, seperate function from show_panel later (time!!)
 	print("-- card drawn --")
 	
 	print(type)
+	set_bg_on_type(type)
+	set_bg_on_type.rpc(type)
+	# action cards
+	var rng = RandomNumberGenerator.new()
+	if rng.randi_range(1, 21) >= 19: #19 is defualt
+		var roll = rng.randi_range(1,actionDict.size()-1)
+		curType = "action"
+		curKey = roll
+		display_action_card(roll)
+		display_action_card.rpc(roll)
+		toggle_top_bar(true)
+		toggle_top_bar.rpc(true)
+	else:
+		var d = randi_range(0, cardTypeData.size() - 1)
+		print(d)
+		display_default_card(d)
+		toggle_top_bar(false)
+		toggle_top_bar.rpc(false)
+		curType = type
+		curKey = d+1
+		rpc_id(1,"set_current_vars_for_server",active,curType,curKey)
+		card_discard(cardTypeData,cardTypeData, type, d+1)
+		card_discard.rpc(cardTypeData,cardTypeData, type, d+1)
+	print(curType + str(curKey))
+	_sync_cardshown.rpc(visible, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)
+
+@rpc("any_peer")
+func set_current_vars_for_server(isactive,type,key):
+	active = isactive
+	curType = type
+	curKey = key
+	
+
+@rpc("any_peer")
+func set_bg_on_type(type):
 	var bgColor = GlobalColors.CapgeminiBlue
 	if type == "Plan":
 		cardTypeData = ImportData.PlanCardData
@@ -80,9 +139,19 @@ func draw(type):
 		bgColor = GlobalColors.MonitorBlue 
 		set_bg_color(GlobalColors.MonitorBlue)
 		set_bg_color.rpc(GlobalColors.MonitorBlue)
-		
-	var d = randi_range(0, cardTypeData.size() - 1)
-	print(d)
+
+
+@rpc("any_peer")
+func toggle_top_bar(isaction: bool):
+	if isaction:
+		CardUIManager.UXTagObject.visible = false
+		CardUIManager.ActionTagObject.visible = true
+	else:
+		CardUIManager.UXTagObject.visible = true
+		CardUIManager.ActionTagObject.visible = false
+
+func display_default_card(d):
+	var lType = cardTypeData[d]["Basis / Prof"]
 	var cType = cardTypeData[d]["Type"]
 	var cSubType = cardTypeData[d]["Subtype"]
 	var cQuestion = cardTypeData[d]["Question"]
@@ -95,30 +164,10 @@ func draw(type):
 	var cAnswer = cardTypeData[d]["Answer"]
 	var cExplanation = cardTypeData[d]["Toelichting"]
 	
-	# action cards
-	var rng = RandomNumberGenerator.new()
-	if rng.randi_range(1, 21) >= 19: #19 is defualt
-		display_action_card()
-		display_action_card.rpc()
-	else:
-		print("###")
-		print(cQuestion)
-		card_setup(cType,cSubType,d+1, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer,cExplanation)
-		card_setup.rpc(cType,cSubType,d+1, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer,cExplanation)
-		CardUIManager.UXTagObject.visible = true
-		CardUIManager.ActionTagObject.visible = false
-		set_bg_color.rpc(bgColor)
-		curType = type
-		curKey = d+1
-		card_discard(cardTypeData,cardTypeData, type, d+1)
-		card_discard.rpc(cardTypeData,cardTypeData, type, d+1)
-		print(curType + str(curKey))
-	_sync_cardshown.rpc(visible, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)
+	card_setup(cType,cSubType,d+1, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer,cExplanation,lType)
+	card_setup.rpc(cType,cSubType,d+1, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer,cExplanation,lType)
 
-@rpc("any_peer")
-func display_action_card():
-	var rng = RandomNumberGenerator.new()
-	var actionDict = [
+var actionDict = [
 	"Your delivery does not fit in the release calendar: skip a turn",
 	"Synchronization issue: Move your front pawn back to the square where your second pawn is. If you only have one pawn in the game, you can take your second pawn, and place both pawns on your starting space",
 	"Fix security issue together: you and the person after you skip this turn",
@@ -132,12 +181,13 @@ func display_action_card():
 	"Test: The acceptance test is successful, go directly into production (to your finish)",
 	"Management: CICD chain no longer works, put all pawns (of all players) back a whole phase"
 	]
-	var roll = rng.randi_range(1,actionDict.size()-1)
-	CardUIManager.UXTagObject.visible = false
-	CardUIManager.ActionTagObject.visible = true
+
+@rpc("any_peer")
+func display_action_card(roll : int):
+
 	print(actionDict[roll] + str(multiplayer.get_unique_id()))
-	card_setup("action", "","", actionDict[roll], "", "", "", "", "","")
-	card_setup.rpc("action", "","", actionDict[roll], "", "", "", "", "","")
+	card_setup("action", "","", actionDict[roll], "", "", "", "", "","","")
+	card_setup.rpc("action", "","", actionDict[roll], "", "", "", "", "","","")
 
 func set_card_choice_string(tag, cardTypeData):
 	if cardTypeData == "":
@@ -169,13 +219,14 @@ func card_discard(cardTypeData,cardTypeDataVar, cardTypeString, keyVar):
 	#SaveSystem.save_game()
 
 @rpc("any_peer")
-func card_setup(type, subtype, nr, question, choiceA, choiceB, choiceC, choiceD, answer,explanation):
+func card_setup(type, subtype, nr, question, choiceA, choiceB, choiceC, choiceD, answer,explanation,level):
 	print("####")
 	print(type)
 	set_card_icon(type)
 	set_panel_layout(type)
 	CardUIManager.TypeNumberTextObject.text = "#" + str(nr)
 	CardUIManager.TypeTextObject.text = type
+	CardUIManager.LevelTypeTextObject.text = level.to_upper()
 	CardUIManager.SubtypeTextObject.text = subtype
 	CardUIManager.QuestionObject.text = question
 	CardUIManager.AnswerATextObject.text = choiceA

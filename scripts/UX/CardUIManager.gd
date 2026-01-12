@@ -24,6 +24,7 @@ class_name CardUIManager
 @export var UXTagObject : PanelContainer
 @export var ActionTagObject : Panel
 @export var TypeNumberTextObject : RichTextLabel
+@export var LevelTypeTextObject : RichTextLabel
 @export var bookmark : TextureRect
 @export var QuestionIcon : FontAwesome
 @export var DiscussionIcon : FontAwesome

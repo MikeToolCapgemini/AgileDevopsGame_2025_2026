@@ -3051,7 +3051,7 @@ folding_direction_preset = 3
 sizing_node = NodePath("CardPanel")
 metadata/_custom_type_script = "uid://btlh4wrv04rc3"
 
-[node name="CardPanel" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionPanel", "DiscussionPanel", "QuestionPanelTextObject", "DiscussionPanelTextObject", "QuestionObject", "AnswerObject", "AnswerPanel", "AnswerFacilitatorTextObject", "AnswerExplanationTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "TypeNumberTextObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
+[node name="CardPanel" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionPanel", "DiscussionPanel", "QuestionPanelTextObject", "DiscussionPanelTextObject", "QuestionObject", "AnswerObject", "AnswerPanel", "AnswerFacilitatorTextObject", "AnswerExplanationTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "TypeNumberTextObject", "LevelTypeTextObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
 custom_minimum_size = Vector2(600, 300)
 layout_mode = 0
 offset_right = 706.0
@@ -3082,6 +3082,7 @@ CancelBookmarkButton = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainM
 UXTagObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG")
 ActionTagObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/ActionCardBG")
 TypeNumberTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer/NumberPanel/NumberTypeText")
+LevelTypeTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer/LevelPanel/LevelTypeText")
 bookmark = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer/bookmark")
 QuestionIcon = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon/MarginContainer/Question")
 DiscussionIcon = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/Icon/MarginContainer/Discussion")
@@ -3163,6 +3164,20 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 [node name="HBoxContainer" type="HBoxContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
+
+[node name="LevelPanel" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("42_ot4pa")
+
+[node name="LevelTypeText" type="RichTextLabel" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer/LevelPanel"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+text = "B"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="NumberPanel" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
