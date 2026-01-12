@@ -4120,14 +4120,13 @@ theme = ExtResource("74_roort")
 
 [node name="Panel" type="PanelContainer" parent="Interface_InterruptFacilitator2"]
 material = SubResource("CanvasItemMaterial_nw32i")
-custom_minimum_size = Vector2(522, 56)
+custom_minimum_size = Vector2(250, 56)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -297.0
-offset_right = 490.0
+offset_top = -304.0
+offset_right = 200.0
 offset_bottom = -241.0
 grow_vertical = 0
 theme = SubResource("Theme_6nfnn")
@@ -4135,21 +4134,23 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_8b7kw")
 
 [node name="MarginContainer" type="MarginContainer" parent="Interface_InterruptFacilitator2/Panel"]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Interface_InterruptFacilitator2/Panel/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 10
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(140, 28)
+custom_minimum_size = Vector2(150, 28)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
-text = "[right]Interrupt![/right]"
+text = "Timer has finished!"
+fit_content = true
 
 [node name="Delay" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("TimerObject", "InterruptUIFac")]
 custom_minimum_size = Vector2(143, 43)
@@ -4166,6 +4167,7 @@ TimerObject = NodePath("../../../../../World/Interactables/hourglassAnimated")
 InterruptUIFac = NodePath("../../../..")
 
 [node name="Show" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("InterruptUIPlayers", "InterruptUIFac")]
+visible = false
 custom_minimum_size = Vector2(180, 43)
 layout_mode = 2
 tooltip_text = "Show to interrupt to players"
