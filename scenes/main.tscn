@@ -3041,7 +3041,6 @@ Answer
 Answer
 Answer
 Answer"
-scroll_active = false
 
 [node name="AnswerBoxOpener" type="Button" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer" node_paths=PackedStringArray("collapse", "iconToSwap")]
 custom_minimum_size = Vector2(15, 10)
