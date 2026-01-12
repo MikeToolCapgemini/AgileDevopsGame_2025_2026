@@ -23,6 +23,7 @@ GlobalColors="*res://scripts/Global/GlobalColors.gd"
 SaveSystem="*res://scripts/Global/SaveSystem.gd"
 GlobalSettings="*res://scripts/Global/GlobalSettings.gd"
 PlayerSettings="*res://scripts/Global/PlayerSettings.gd"
+ErrorLabel="*res://scenes/interface_error.tscn"
 
 [dotnet]
 

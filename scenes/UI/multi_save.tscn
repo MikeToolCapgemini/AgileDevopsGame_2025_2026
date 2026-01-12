@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://dbxyj6ca7okx3"]
 
-[ext_resource type="Script" uid="uid://ddn46v8kt3jwd" path="res://scenes/collapseButton.gd" id="1_2x0m5"]
+[ext_resource type="Script" uid="uid://ddn46v8kt3jwd" path="res://scripts/collapseButton.gd" id="1_2x0m5"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="1_i0ouf"]
 [ext_resource type="Script" uid="uid://btlh4wrv04rc3" path="res://addons/collapsible_container/collapsible_elements/collapsible_container.gd" id="1_p3b0w"]
 [ext_resource type="Script" uid="uid://pb8rquvjh5r4" path="res://scripts/Global/SaveSystem.gd" id="1_tovra"]
@@ -68,7 +68,7 @@ corner_radius_bottom_left = 3
 
 [sub_resource type="Theme" id="Theme_v6try"]
 
-[node name="MultiSave" type="MarginContainer" node_paths=PackedStringArray("SaveNameField", "LoadedSavesContainer", "collapsible", "saveNotificationUI", "saveNotifText", "SaveOverWriteInterface")]
+[node name="MultiSave" type="MarginContainer" node_paths=PackedStringArray("SaveNameField", "LoadedSavesContainer", "collapsible", "SaveOverWriteInterface")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -85,8 +85,6 @@ script = ExtResource("1_tovra")
 SaveNameField = NodePath("CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SaveNameField")
 LoadedSavesContainer = NodePath("CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer")
 collapsible = NodePath("CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer")
-saveNotificationUI = NodePath("")
-saveNotifText = NodePath("")
 SaveOverWriteInterface = NodePath("Interface_SaveOverwrite")
 
 [node name="OpenSaveButton" type="Button" parent="." node_paths=PackedStringArray("collapse")]

@@ -1,0 +1,2 @@
+class_name Error_Label
+extends Editable_timed_panel

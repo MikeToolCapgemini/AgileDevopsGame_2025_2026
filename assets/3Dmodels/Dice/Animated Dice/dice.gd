@@ -1,3 +1,4 @@
+class_name Dice
 extends RigidBody3D
 
 @onready var raycasts = $Raycasts.get_children()
@@ -40,6 +41,36 @@ func _ready() -> void:
 		sleeping = true
 	start_pos = global_position
 	start_y_rot = global_rotation.y
+
+func get_state() -> Dictionary:
+	var state = {
+		"position" : global_position,
+		"rotation" : global_rotation,
+		"linear_velocity" : linear_velocity,
+		"angular_velocity" : angular_velocity,
+		"is_rolling" : is_rolling,
+		"sleeping" : sleeping,
+		"last_roll" : LabelObject.text
+	}
+	print("Saving dice state " + str(state))
+	return state
+
+func apply_state(state: Dictionary) -> void:
+	print("Applying dice state")
+	freeze = false
+	sleeping = false
+	
+	global_position = state["position"]
+	global_rotation = state["rotation"]
+	linear_velocity = state["linear_velocity"]
+	angular_velocity = state["angular_velocity"]
+	
+	is_rolling = state["is_rolling"]
+	sleeping = state["sleeping"]
+	LabelObject.text = state["last_roll"]
+	
+	if sleeping:
+		freeze = true
 
 
 

@@ -1,3 +1,4 @@
+class_name DelayedHide
 extends Control
 var timerRunning = false
 @export var delayTime = 3

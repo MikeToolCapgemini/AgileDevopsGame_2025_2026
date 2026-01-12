@@ -9,28 +9,56 @@ extends Node
 var peer = ENetMultiplayerPeer.new()
 var webPeer = WebSocketMultiplayerPeer.new()
 
+var started : bool = false
+
+@export var connect_panel : Control
+@export var disconnect_panel : Control
+@export var disconnect_server_panel : Control
 
 func _ready():
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
+	multiplayer.server_disconnected.connect(on_server_disconnected)
 	if OS.has_feature("dedicated_server"):
 		print("Starting dedicated server...")
 		host_game()
 
 func peer_connected(id):
+	if id != 1:
+		connect_panel.edit_text("Player Connected: " + str(id))
+		connect_panel.show()
 	print("Player Connected: " + str(id))
+	if started:
+		rpc_id(id, "join_running_game")
+		var state_sync = get_tree().root.get_node("Main/StateSynchronizer")
+		state_sync.call_deferred("send_state_to_peer",id)
 
 func peer_disconnected(id):
+	if GameManager.Players.has(id):
+		var pName = GameManager.Players[id].name
+		disconnect_panel.edit_text("Player: " + str(pName) + " Disconnected!" )
+		disconnect_panel.show()
+		GameManager.Players.erase(id)
+		update_text_field()
 	print("Player Disconnected: " + str(id))
 
 func connected_to_server():
+	connect_panel.edit_text("Connected to server")
+	connect_panel.show()
 	print("Connected to server")
 	send_player_information.rpc_id(1, $"Debug Interface/NameField".text, multiplayer.get_unique_id())
 
 func connection_failed():
+	disconnect_panel.edit_text("Connection Failed")
+	disconnect_panel.show()
 	print("Connection Failed")
+	
+func on_server_disconnected():
+	disconnect_server_panel.edit_text("Disconnected from server")
+	disconnect_server_panel.show()
+	print("Disconnected from server")
 
 # Sends information about the player and updates/synchronizes the Players dict in GameManager
 @rpc("any_peer")
@@ -41,7 +69,6 @@ func send_player_information(playername, id):
 			"name" : playername,
 			"id" : id
 		}
-	
 	# calls update for player information to all connected clients if current client = server.
 	if multiplayer.is_server():
 		for p in GameManager.Players:
@@ -49,12 +76,42 @@ func send_player_information(playername, id):
 		
 	update_text_field()
 
-@rpc("any_peer", "call_local")
+@rpc("any_peer","call_local")
+func request_start_game():
+	if multiplayer.is_server() and not started:
+		start_game()
+
+@rpc("authority")
 func start_game():
 	var scene = GameScene.instantiate()
 	get_tree().root.add_child(scene) # connects Main to Multiplayer as child.
-	toggle_interface() 
+	call_deferred("hide_multiplayer_ui")
+	started = true
 	GameManager.set_manager(scene)
+	# Tell all connected clients to join
+	for peer_id in multiplayer.get_peers():
+		if peer_id != multiplayer.get_unique_id(): # skip host if already done
+			rpc_id(peer_id, "join_running_game")
+
+
+@rpc("authority")
+func join_running_game():
+
+	var scene = GameScene.instantiate()
+	get_tree().root.add_child(scene)
+
+	call_deferred("hide_multiplayer_ui")
+	GameManager.set_manager(scene)
+	
+
+
+func show_multiplayer_ui():
+	$"Debug Interface".visible = true
+
+func hide_multiplayer_ui():
+	$"Debug Interface".visible = false
+
+
 
 # Toggles the connection interface on/off.
 func toggle_interface():
@@ -89,12 +146,12 @@ func join_game():
 	#webPeer.create_client("wss://" + Adress + ":" + str(Port))
 	multiplayer.set_multiplayer_peer(peer)
 	GameManager.You = multiplayer.get_unique_id()
-	
-
+	GameManager.last_address = Adress
+	GameManager.last_port = Port
 
 ## Interface Functions ##
 func _on_start_button_pressed():
-	start_game.rpc()
+	request_start_game.rpc_id(1)
 
 func _on_host_button_pressed():
 	host_game()
@@ -128,3 +185,41 @@ func incrementTheValue(v):
 
 func _on_ip_field_text_changed():
 	Adress = $"Debug Interface/IPField".text
+
+func cleanup_multiplayer():
+	show_multiplayer_ui()
+	if multiplayer.multiplayer_peer:
+		multiplayer.multiplayer_peer.close()
+		multiplayer.multiplayer_peer = null
+
+	started = false
+	GameManager.Players.clear()
+	update_text_field()
+
+	# Remove game scene if it exists
+	if get_tree().root.has_node("Main"):
+		get_tree().root.get_node("Main").queue_free()
+	disconnect_server_panel.hide()
+
+
+func _on_reconnect_pressed():
+	if GameManager.last_address.is_empty():
+		return
+
+	disconnect_server_panel.edit_text("Reconnecting...")
+	disconnect_server_panel.show()
+
+	# FULL cleanup
+	cleanup_multiplayer()
+
+	await get_tree().process_frame
+
+	# NEW peer instance (critical)
+	peer = ENetMultiplayerPeer.new()
+	peer.create_client(GameManager.last_address, GameManager.last_port)
+	multiplayer.multiplayer_peer = peer
+
+
+func _on_home_pressed() -> void:
+	cleanup_multiplayer()
+	

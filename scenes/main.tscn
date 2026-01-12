@@ -1,7 +1,8 @@
-[gd_scene load_steps=206 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=214 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
+[ext_resource type="Script" uid="uid://ds5sql610u4u7" path="res://scripts/state_synchronizer.gd" id="2_roort"]
 [ext_resource type="Script" uid="uid://d0fm7jh06timq" path="res://scripts/Player.gd" id="3_ogtpu"]
 [ext_resource type="Script" uid="uid://b60tex7gvarge" path="res://scripts/InterfaceManager.gd" id="4_4m4b7"]
 [ext_resource type="Script" uid="uid://cc4a3cr7u20kl" path="res://scripts/CursorManager.gd" id="4_hwpl5"]
@@ -12,7 +13,7 @@
 [ext_resource type="ArrayMesh" uid="uid://menvinsnf4an" path="res://assets/Grass.res" id="7_ttw4a"]
 [ext_resource type="ArrayMesh" uid="uid://b3dcm7uqde6rj" path="res://assets/PlayingField/Field_2.obj" id="8_irh7k"]
 [ext_resource type="ArrayMesh" uid="uid://btu4h5g5xt21m" path="res://assets/PlayingField/Field_3.obj" id="9_55j84"]
-[ext_resource type="Script" uid="uid://0k8d32bhacuo" path="res://scenes/Rotate.gd" id="9_wvxrh"]
+[ext_resource type="Script" uid="uid://0k8d32bhacuo" path="res://scripts/Rotate.gd" id="9_wvxrh"]
 [ext_resource type="Material" uid="uid://cjnca600vhyrw" path="res://Materials/CodeRed.tres" id="10_d0dfl"]
 [ext_resource type="ArrayMesh" uid="uid://dabrtcc33ot6w" path="res://assets/PlayingField/Field_4.obj" id="10_vgipp"]
 [ext_resource type="ArrayMesh" uid="uid://c0w2uclwcr23" path="res://assets/PlayingField/Field_5.obj" id="11_edxct"]
@@ -93,7 +94,7 @@
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="74_roort"]
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="75_roort"]
 [ext_resource type="Script" uid="uid://btlh4wrv04rc3" path="res://addons/collapsible_container/collapsible_elements/collapsible_container.gd" id="78_engxj"]
-[ext_resource type="Script" uid="uid://ddn46v8kt3jwd" path="res://scenes/collapseButton.gd" id="78_raiwf"]
+[ext_resource type="Script" uid="uid://ddn46v8kt3jwd" path="res://scripts/collapseButton.gd" id="78_raiwf"]
 [ext_resource type="Script" uid="uid://yhh3kfgvk00x" path="res://scripts/UX/CardUIManager.gd" id="81_4ue30"]
 [ext_resource type="Script" uid="uid://chkh3ytq3t6lm" path="res://scripts/reset_game.gd" id="81_raiwf"]
 [ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
@@ -104,10 +105,12 @@
 [ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="88_wvlrk"]
 [ext_resource type="FontFile" uid="uid://2ike7sp4qiyi" path="res://assets/fonts/Ubuntu/Ubuntu-BoldItalic.ttf" id="89_mgpkq"]
 [ext_resource type="FontFile" uid="uid://b23akitg4yjxd" path="res://assets/fonts/Ubuntu/Ubuntu-Italic.ttf" id="90_xmrkg"]
-[ext_resource type="Script" uid="uid://wqc4dac2wyhy" path="res://scenes/Hide_facilitator_button.gd" id="92_gm02q"]
+[ext_resource type="Script" uid="uid://wqc4dac2wyhy" path="res://scripts/Hide_facilitator_button.gd" id="92_gm02q"]
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
 [ext_resource type="Script" uid="uid://bq01pxakqcfgj" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
+[ext_resource type="Script" uid="uid://ceamoqnkbfe7" path="res://scripts/disconnect.gd" id="103_gm02q"]
 [ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
+[ext_resource type="Script" uid="uid://br1s2wprncugw" path="res://scripts/editable_panel.gd" id="110_07pt3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrx01"]
 size = Vector3(11, 0.7, 5)
@@ -459,6 +462,9 @@ bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpru0"]
 bg_color = Color(0, 0.41568628, 0.23529412, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh25q"]
+bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.25882354)
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n6mxd"]
 
 [sub_resource type="Theme" id="Theme_sjgq0"]
@@ -545,11 +551,47 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_37xlc"]
+
+[sub_resource type="Theme" id="Theme_83607"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joh2r"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.34509805, 0.67058825, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cr71"]
+bg_color = Color(0.56078434, 0.19607843, 0.21568628, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.30588236, 0.3019608, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [node name="Main" type="Node" node_paths=PackedStringArray("Cursors", "World", "Camera")]
 script = ExtResource("1_b3gvj")
 Cursors = NodePath("World/Cursors")
 World = NodePath("World/Floor")
 Camera = NodePath("Camera3D")
+
+[node name="StateSynchronizer" type="Node" parent="." node_paths=PackedStringArray("pawnManager", "cardManager", "diceManager", "timeManager", "interruptManager")]
+script = ExtResource("2_roort")
+pawnManager = NodePath("../World/Interactables/Pawns")
+cardManager = NodePath("../Interface_Cards")
+diceManager = NodePath("../World/Interactables/Dice")
+timeManager = NodePath("../World/Interactables/hourglassAnimated")
+interruptManager = NodePath("../Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show")
 
 [node name="Game" type="Node" parent="."]
 
@@ -3616,11 +3658,9 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 unique_name_in_owner = true
 visible = false
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("74_roort")
@@ -3631,8 +3671,18 @@ FacilitatorUI = NodePath("../Interface_Facilitator")
 FacilitatorKitButton = NodePath("../Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides/facilitatorkit")
 OptionsPanel = NodePath("../Interface_Buttons")
 
+[node name="BlackoutBG" type="Panel" parent="Setup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eh25q")
+
 [node name="Panel" type="PanelContainer" parent="Setup"]
 material = SubResource("CanvasItemMaterial_n6mxd")
+custom_minimum_size = Vector2(618, 241)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -3838,6 +3888,29 @@ text = "Refresh UI"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../../../../..")
 
+[node name="Disconnect" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Exits the game"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kwiwa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f37ub")
+text = "Disconnect"
+script = ExtResource("103_gm02q")
+
 [node name="QuitGame" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
 custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
@@ -3943,7 +4016,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Resume" type="Button" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons" node_paths=PackedStringArray("hideObject")]
-custom_minimum_size = Vector2(127, 43)
+custom_minimum_size = Vector2(50, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -3960,16 +4033,34 @@ theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
-text = "Resume"
 script = ExtResource("49_4jv7h")
 hideObject = NodePath("../../../..")
 
-[node name="BookmarkSite" type="Button" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons" node_paths=PackedStringArray("saveManager")]
-custom_minimum_size = Vector2(127, 43)
+[node name="FontAwesome" type="Label" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/Resume"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 35
+icon_name = "circle-xmark"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="BookmarkSite" type="Button" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons" node_paths=PackedStringArray("saveManager", "Upload_notification")]
+custom_minimum_size = Vector2(50, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-tooltip_text = "Go to the bookmark website using the current saved cards"
+tooltip_text = "Upload the current saved cards to bookmark website"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -3982,9 +4073,28 @@ theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
-text = "Open in website"
 script = ExtResource("102_37xlc")
 saveManager = NodePath("../../../../../Interface_Facilitator/MultiSave")
+Upload_notification = NodePath("../../../../../Interface_Upload_Notification")
+
+[node name="FontAwesome" type="Label" parent="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 35
+icon_name = "cloud-arrow-up"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Interface_InterruptFacilitator2" type="Control" parent="."]
 visible = false
@@ -4144,6 +4254,156 @@ bbcode_enabled = true
 text = "[center]Saved![/center]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Interface_Upload_Notification" type="Control" parent="." node_paths=PackedStringArray("textLabel")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_right = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("74_roort")
+script = ExtResource("110_07pt3")
+textLabel = NodePath("Panel/HBoxContainer/Upload_Notif")
+
+[node name="Panel" type="PanelContainer" parent="Interface_Upload_Notification"]
+material = SubResource("CanvasItemMaterial_37xlc")
+custom_minimum_size = Vector2(3742, 56)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1871.0
+offset_top = -28.0
+offset_right = 1871.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_83607")
+theme_override_styles/panel = ExtResource("42_ot4pa")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_Upload_Notification/Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Upload_Notif" type="RichTextLabel" parent="Interface_Upload_Notification/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(400, 27)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+bbcode_enabled = true
+text = "[center]Uploaded[/center]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CopyLink" type="Button" parent="Interface_Upload_Notification/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Copy link to clipboard"
+theme_override_styles/normal = SubResource("StyleBoxFlat_joh2r")
+
+[node name="FontAwesome" type="Label" parent="Interface_Upload_Notification/Panel/HBoxContainer/CopyLink"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 35
+icon_name = "copy"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="Open Page" type="Button" parent="Interface_Upload_Notification/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Open The bookmark website"
+theme_override_styles/normal = SubResource("StyleBoxFlat_joh2r")
+
+[node name="FontAwesome" type="Label" parent="Interface_Upload_Notification/Panel/HBoxContainer/Open Page"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 35
+icon_name = "arrow-up-right-from-square"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="Close" type="Button" parent="Interface_Upload_Notification/Panel/HBoxContainer" node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Close panel"
+theme_override_styles/normal = SubResource("StyleBoxFlat_2cr71")
+script = ExtResource("49_4jv7h")
+hideObject = NodePath("../../..")
+
+[node name="FontAwesome" type="Label" parent="Interface_Upload_Notification/Panel/HBoxContainer/Close"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("87_xmrkg")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 35
+icon_type = "regular"
+icon_name = "circle-xmark"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Interface_Slideout_HowToPlay" parent="." instance=ExtResource("105_07pt3")]
 visible = false
@@ -4369,6 +4629,7 @@ text = "No
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Resume" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" method="on_repick"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Disconnect" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Disconnect" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" method="_on_pressed"]
 [connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/Resume" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" method="_on_upload_button_pressed"]
@@ -4377,5 +4638,9 @@ text = "No
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Hide" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Hide" method="_on_pressed"]
 [connection signal="visibility_changed" from="Interface_Interrupt" to="Interface_Interrupt" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="Interface_Save_notif" to="Interface_Save_notif" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="Interface_Upload_Notification" to="Interface_Upload_Notification" method="_on_visibility_changed"]
+[connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/CopyLink" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" method="_on_copy_link_button_pressed"]
+[connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/Open Page" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" method="_on_open_page_button_pressed"]
+[connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/Close" to="Interface_Upload_Notification/Panel/HBoxContainer/Close" method="_on_pressed"]
 [connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/Facilitator" to="Interface_SaveOverwrite" method="_on_facilitator_pressed"]
 [connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/Player" to="Interface_SaveOverwrite" method="_on_player_pressed"]
