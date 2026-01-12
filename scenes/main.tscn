@@ -2806,7 +2806,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 160.0
-offset_bottom = 145.0
+offset_bottom = 197.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -2965,7 +2965,7 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -117.0
+offset_top = -170.0
 offset_right = 689.0
 grow_vertical = 0
 mouse_filter = 2
@@ -2982,7 +2982,7 @@ editor_description = "
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
 clip_contents = true
-custom_minimum_size = Vector2(679, 120)
+custom_minimum_size = Vector2(680, 160)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -2993,9 +2993,14 @@ sizing_node = NodePath("AnswerPanel")
 metadata/_custom_type_script = "uid://btlh4wrv04rc3"
 
 [node name="AnswerPanel" type="PanelContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer"]
-layout_mode = 0
-offset_right = 679.0
-offset_bottom = 90.0
+custom_minimum_size = Vector2(680, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -160.0
+offset_right = 636.0
+grow_vertical = 0
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ann2e")
@@ -3005,7 +3010,6 @@ layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer"]
 layout_mode = 2
@@ -3027,12 +3031,14 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_bottom = 0
 
 [node name="AnswerFNote" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer/VBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(600, 70)
+custom_minimum_size = Vector2(600, 120)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 mouse_filter = 2
 text = "Answer
+Answer
+Answer
 Answer
 Answer"
 scroll_active = false
