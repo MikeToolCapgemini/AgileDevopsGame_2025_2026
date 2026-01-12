@@ -107,7 +107,7 @@ theme_override_constants/margin_left = -10
 theme_override_constants/margin_top = 15
 
 [node name="IconSphere" type="PanelContainer" parent="IconMargin"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -118,11 +118,11 @@ auto_translate_mode = 2
 layout_mode = 2
 localize_numeral_system = false
 theme_override_fonts/font = ExtResource("2_ex3kh")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 35
 text = ""
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_lmh6x")
-icon_size = 40
+icon_size = 35
 icon_name = "users"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
