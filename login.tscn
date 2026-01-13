@@ -1,0 +1,136 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbgiyn1iu18xr"]
+
+[ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="1_cau7c"]
+[ext_resource type="Script" uid="uid://dxbmtc0q4ppog" path="res://scripts/UX/ShowSecret.gd" id="2_bvvwm"]
+[ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="3_6hqeh"]
+[ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="4_edd8a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqty5"]
+bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvvwm"]
+bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6hqeh"]
+bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_edd8a"]
+bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
+
+[node name="Login" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cau7c")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 22
+text = "Login to access"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 29
+
+[node name="UsernameLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Username"
+horizontal_alignment = 1
+
+[node name="Username" type="LineEdit" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "username"
+
+[node name="PasswordLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Password"
+horizontal_alignment = 1
+
+[node name="Password" type="LineEdit" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "password"
+secret = true
+
+[node name="Hide_ShowPass" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password" node_paths=PackedStringArray("SecretLineEdit", "SwapIcon")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -17.5
+offset_bottom = 17.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_eqty5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bvvwm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6hqeh")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_edd8a")
+script = ExtResource("2_bvvwm")
+SecretLineEdit = NodePath("..")
+SwapIcon = NodePath("FontAwesome")
+visibleIcon = "eye"
+hiddenIcon = "eye-slash"
+
+[node name="FontAwesome" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password/Hide_ShowPass"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("3_6hqeh")
+theme_override_font_sizes/font_size = 26
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_edd8a")
+icon_size = 26
+icon_name = "eye"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="Button" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Submit"
+
+[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password/Hide_ShowPass" to="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password/Hide_ShowPass" method="_on_pressed"]
