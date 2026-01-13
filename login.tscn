@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbgiyn1iu18xr"]
+[gd_scene load_steps=12 format=3 uid="uid://cbgiyn1iu18xr"]
 
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="1_cau7c"]
 [ext_resource type="Script" uid="uid://dxbmtc0q4ppog" path="res://scripts/UX/ShowSecret.gd" id="2_bvvwm"]
+[ext_resource type="Script" uid="uid://bww1tb5si04x6" path="res://scripts/UX/login.gd" id="2_eqty5"]
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="3_6hqeh"]
+[ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="3_ma4wh"]
+[ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="4_0s12h"]
 [ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="4_edd8a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqty5"]
@@ -25,6 +28,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_cau7c")
+script = ExtResource("2_eqty5")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -51,7 +55,17 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_ma4wh")
+theme_override_fonts/bold_font = ExtResource("4_0s12h")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[center][b]Login to access"
+
 [node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -128,9 +142,10 @@ icon_size = 26
 icon_name = "eye"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
-[node name="Button" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Submit" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 text = "Submit"
 
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password/Hide_ShowPass" to="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password/Hide_ShowPass" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Submit" to="." method="_on_submit_pressed"]
