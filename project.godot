@@ -31,7 +31,7 @@ project/assembly_name="Dev Ops Game V 1.1"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/collapsible_container/plugin.cfg", "res://addons/fontawesome/plugin.cfg")
+enabled=PackedStringArray("res://addons/collapsible_container/plugin.cfg", "res://addons/fontawesome/plugin.cfg", "res://addons/godot-sqlite/plugin.cfg")
 
 [input]
 
