@@ -155,6 +155,7 @@ layout_mode = 2
 text = "Login"
 
 [node name="CreateUser" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 text = "Create User"
