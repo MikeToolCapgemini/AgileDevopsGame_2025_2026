@@ -29,7 +29,11 @@ func InsertUserData(name,password,salt):
 
 
 func GetUserFromDB(username):
-	var query = db.query("SELECT salt,password,id from users where name = '" + username + "'")
+	var query = "SELECT salt,password,id from users where name = ?"
+	var paramBindings = [username]
+	db.query_with_bindings(query,paramBindings)
+	
+	
 	for i in db.query_result:
 		return {
 			"id" : i["id"],

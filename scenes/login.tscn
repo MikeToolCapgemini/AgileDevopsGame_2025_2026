@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbgiyn1iu18xr"]
+[gd_scene load_steps=13 format=3 uid="uid://cbgiyn1iu18xr"]
 
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="1_cau7c"]
 [ext_resource type="Script" uid="uid://dxbmtc0q4ppog" path="res://scripts/UX/ShowSecret.gd" id="2_bvvwm"]
 [ext_resource type="Script" uid="uid://bww1tb5si04x6" path="res://scripts/UX/login.gd" id="2_eqty5"]
+[ext_resource type="PackedScene" uid="uid://kgixi5xrbejj" path="res://scenes/multiplayer.tscn" id="3_0s12h"]
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="3_6hqeh"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="3_ma4wh"]
 [ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="4_0s12h"]
@@ -31,6 +32,7 @@ theme = ExtResource("1_cau7c")
 script = ExtResource("2_eqty5")
 UserNameField = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Username")
 PasswordField = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password")
+next_scene = ExtResource("3_0s12h")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

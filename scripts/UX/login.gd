@@ -4,6 +4,8 @@ extends Control
 @export var UserNameField : LineEdit
 @export var PasswordField : LineEdit
 
+@export var next_scene : PackedScene
+
 var Username : String
 var Password : String
 
@@ -20,7 +22,9 @@ func _get_TextBox_Values():
 
 func _on_Login_pressed() -> void:
 	_get_TextBox_Values()
-	_check_user_information(Username,Password)
+	var isCorrect = _check_user_information(Username,Password)
+	if isCorrect:
+		get_tree().change_scene_to_file("res://scenes/multiplayer.tscn")
 	
 
 func createUser(username,password):
@@ -35,11 +39,14 @@ func _check_user_information(username,password):
 	
 	if userData == null:
 		ErrorLabel.show_error("Login Failed, invalid username")
+		return false
 	else:
 		if userData["hashedPassword"] == passHasher.HashPassword(password,userData["salt"]):
 			print(userData)
+			return true
 		else:
 			ErrorLabel.show_error("Login Failed, invalid password")
+			return false
 
 
 func _on_create_user_pressed() -> void:
