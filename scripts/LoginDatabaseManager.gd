@@ -11,8 +11,8 @@ func _init() -> void:
 	var table = {
 		"id" : {"data_type": "int","primary_key": true, "not_null" : true, "auto_increment" : true},
 		"name": {"data_type" : "text"},
-		"password": {"data_type" : "text"},
-		"salt":{"data_type": "int", "not_null" : true}
+		"password_hash": {"data_type" : "text"},
+		"salt":{"data_type": "text", "not_null" : true}
 	}
 	
 	db.create_table("users", table)
@@ -22,7 +22,7 @@ func _init() -> void:
 func InsertUserData(name,password,salt):
 	var data = {
 		"name" : name,
-		"password" : password,
+		"password_hash" : password,
 		"salt" : salt
 	}
 	db.insert_row("users", data)
@@ -37,7 +37,7 @@ func GetUserFromDB(username):
 	for i in db.query_result:
 		return {
 			"id" : i["id"],
-			"hashedPassword" : i["password"],
+			"hashedPassword" : i["password_hash"],
 			"salt" : i["salt"],
 			"name" : username
 		}
