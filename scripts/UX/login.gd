@@ -8,11 +8,14 @@ var Username : String
 var Password : String
 
 var ldm = LDM.new()
+var passHasher = PassHasher.new()
 
 
 func _get_TextBox_Values():
 	Username = UserNameField.text
 	Password = PasswordField.text
+	Username = Username.strip_edges(true,true)
+	Password = Password.strip_edges(true,true)
 
 
 func _on_Login_pressed() -> void:
@@ -21,7 +24,9 @@ func _on_Login_pressed() -> void:
 	
 
 func createUser(username,password):
-	ldm.InsertUserData(username,password,131231)
+	var salt = passHasher.GenerateSalt()
+	var hashedPassword = passHasher.HashPassword(password,salt)
+	ldm.InsertUserData(username,hashedPassword,salt)
 
 
 
@@ -31,7 +36,7 @@ func _check_user_information(username,password):
 	if userData == null:
 		ErrorLabel.show_error("Login Failed, invalid username")
 	else:
-		if userData["hashedPassword"] == password:
+		if userData["hashedPassword"] == passHasher.HashPassword(password,userData["salt"]):
 			print(userData)
 		else:
 			ErrorLabel.show_error("Login Failed, invalid password")
