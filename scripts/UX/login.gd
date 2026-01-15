@@ -3,6 +3,7 @@ extends Control
 
 @export var UserNameField : LineEdit
 @export var PasswordField : LineEdit
+@export var CreateButton : Button
 
 @export var next_scene : PackedScene
 
@@ -12,6 +13,24 @@ var Password : String
 var ldm = LDM.new()
 var passHasher = PassHasher.new()
 
+
+func _process(delta: float) -> void:
+	if DevMode.DevModeEnabled:
+		if Input.is_action_just_pressed("DevmodeC"):
+			toggle_create_button()
+	else:
+		hide_create_button()
+	
+
+func hide_create_button():
+	createVisible = false
+	CreateButton.visible = false
+
+var createVisible : bool = false
+func toggle_create_button():
+	createVisible = !createVisible
+	CreateButton.visible = createVisible
+	
 
 func _get_TextBox_Values():
 	Username = UserNameField.text

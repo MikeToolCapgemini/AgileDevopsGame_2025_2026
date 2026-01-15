@@ -21,7 +21,7 @@ bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_edd8a"]
 bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
 
-[node name="Login" type="Control" node_paths=PackedStringArray("UserNameField", "PasswordField")]
+[node name="Login" type="Control" node_paths=PackedStringArray("UserNameField", "PasswordField", "CreateButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,6 +32,7 @@ theme = ExtResource("1_cau7c")
 script = ExtResource("2_eqty5")
 UserNameField = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Username")
 PasswordField = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password")
+CreateButton = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CreateUser")
 next_scene = ExtResource("3_0s12h")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
