@@ -137,7 +137,10 @@ func host_game():
 	multiplayer.set_multiplayer_peer(peer)
 	GameManager.You = multiplayer.get_unique_id()
 	print("Waiting for players")
-	send_player_information($"Debug Interface/NameField".text, multiplayer.get_unique_id())
+	if OS.has_feature("dedicated_server"):
+		send_player_information("Dedicated Server:", multiplayer.get_unique_id())
+	else :
+		send_player_information($"Debug Interface/NameField".text, multiplayer.get_unique_id())
 
 func join_game():
 	var clientCAS = load("res://Fullchain.crt")

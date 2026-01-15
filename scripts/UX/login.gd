@@ -13,6 +13,11 @@ var Password : String
 var ldm = LDM.new()
 var passHasher = PassHasher.new()
 
+func _ready() -> void:
+	if OS.has_feature("dedicated_server"):
+		print("skipping login screen")
+		_go_to_next_scene()
+
 
 func _process(delta: float) -> void:
 	if DevMode.DevModeEnabled:
@@ -43,10 +48,14 @@ func _on_Login_pressed() -> void:
 	_get_TextBox_Values()
 	var isCorrect = _check_user_information(Username,Password)
 	if isCorrect:
-		get_tree().change_scene_to_file("res://scenes/multiplayer.tscn")
+		_go_to_next_scene()
 	
 
+func _go_to_next_scene():
+	get_tree().change_scene_to_packed(next_scene)
+
 func createUser(username,password):
+	print("Creating user " + username)
 	var salt = passHasher.GenerateSalt()
 	var hashedPassword = passHasher.HashPassword(password,salt)
 	ldm.InsertUserData(username,hashedPassword,salt)
