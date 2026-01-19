@@ -3,8 +3,8 @@ extends Node
 
 # Basic Server Information
 @export var GameScene : PackedScene
-@export var Adress = "localhost"
-@export var Port = 8080
+@export var Adress = "srv1161281.hstgr.cloud"
+@export var Port = 8081
 @export var MaxPlayers = 12
 var peer = ENetMultiplayerPeer.new()
 var webPeer = WebSocketMultiplayerPeer.new()
@@ -130,11 +130,13 @@ func update_text_field():
 func host_game():
 	var serverCert = load("res://Fullchain.crt")
 	var serverKey = load("res://DevopsPrivate.key")
-	#var error = webPeer.create_server(Port)
+	var web_error = webPeer.create_server(Port)
 	#var error = webPeer.create_server(Port, "*", TLSOptions.server(serverKey, serverCert))
-	var error = peer.create_server(Port)
-	print("cannot host: " + str(error))
-	multiplayer.set_multiplayer_peer(peer)
+	#var error = peer.create_server(Port)
+	if web_error != OK:
+		push_error("WebSocket server failed: " + str(web_error))
+		return
+	multiplayer.set_multiplayer_peer(webPeer)
 	GameManager.You = multiplayer.get_unique_id()
 	print("Waiting for players")
 	if OS.has_feature("dedicated_server"):
@@ -146,8 +148,8 @@ func join_game():
 	var clientCAS = load("res://Fullchain.crt")
 	#webPeer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
 	peer.create_client(Adress,Port)
-	#webPeer.create_client("wss://" + Adress + ":" + str(Port))
-	multiplayer.set_multiplayer_peer(peer)
+	webPeer.create_client("wss://" + Adress + ":" + str(Port))
+	multiplayer.set_multiplayer_peer(webPeer)
 	GameManager.You = multiplayer.get_unique_id()
 	GameManager.last_address = Adress
 	GameManager.last_port = Port
