@@ -81,16 +81,22 @@ func draw(type):
 		toggle_top_bar(true)
 		toggle_top_bar.rpc(true)
 	else:
-		var d = randi_range(0, cardTypeData.size() - 1)
+		if cardTypeData.size() == 0:
+			print("No cards left")
+			ErrorLabel.show_error("No cards left of this type")
+			return
+		var keys = cardTypeData.keys()
+		var d = keys[randi_range(0, keys.size() - 1)]
+		#var d = randi_range(0, cardTypeData.size() - 1)
 		print(d)
 		display_default_card(d)
 		toggle_top_bar(false)
 		toggle_top_bar.rpc(false)
 		curType = type
-		curKey = d+1
+		curKey = d
 		rpc_id(1,"set_current_vars_for_server",active,curType,curKey)
-		card_discard(cardTypeData,cardTypeData, type, d+1)
-		card_discard.rpc(cardTypeData,cardTypeData, type, d+1)
+		card_discard(cardTypeData,cardTypeData, type, d)
+		card_discard.rpc(cardTypeData,cardTypeData, type, d)
 	print(curType + str(curKey))
 	_sync_cardshown.rpc(visible, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)
 
@@ -151,6 +157,7 @@ func toggle_top_bar(isaction: bool):
 		CardUIManager.ActionTagObject.visible = false
 
 func display_default_card(d):
+	
 	var lType = cardTypeData[d]["Basis / Prof"]
 	var cType = cardTypeData[d]["Type"]
 	var cSubType = cardTypeData[d]["Subtype"]
@@ -164,8 +171,8 @@ func display_default_card(d):
 	var cAnswer = cardTypeData[d]["Answer"]
 	var cExplanation = cardTypeData[d]["Toelichting"]
 	
-	card_setup(cType,cSubType,d+1, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer,cExplanation,lType)
-	card_setup.rpc(cType,cSubType,d+1, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer,cExplanation,lType)
+	card_setup(cType,cSubType,d, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer,cExplanation,lType)
+	card_setup.rpc(cType,cSubType,d, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer,cExplanation,lType)
 
 var actionDict = [
 	"Your delivery does not fit in the release calendar: skip a turn",

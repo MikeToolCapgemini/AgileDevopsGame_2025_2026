@@ -5,14 +5,14 @@ var CardData : Array
 #var path = "res://database/Cards.csv"
 #var TestPath = "C:/Users/miche/Desktop/PlaytestProject/DevOps_Game_v0.10/DevOps_Game_v0.9/database/Cards.csv"
 
-var PlanCardData : Dictionary
-var CodeCardData : Dictionary
-var BuildCardData : Dictionary
-var TestCardData : Dictionary
-var ReleaseCardData : Dictionary
-var DeployCardData : Dictionary
-var OperateCardData : Dictionary
-var MonitorCardData : Dictionary
+var PlanCardData : Dictionary = {}
+var CodeCardData : Dictionary = {}
+var BuildCardData : Dictionary = {}
+var TestCardData : Dictionary = {}
+var ReleaseCardData : Dictionary = {}
+var DeployCardData : Dictionary = {}
+var OperateCardData : Dictionary = {}
+var MonitorCardData : Dictionary = {}
 var AllCardData = [PlanCardData, CodeCardData, BuildCardData, TestCardData, ReleaseCardData, DeployCardData, OperateCardData, MonitorCardData]
 
 func load_json_data():
@@ -55,44 +55,44 @@ func import_data():
 	
 	print("card data created")
 	for Card in CardData:
-		if Card["Type"] == "Question" or "Discussion":
+		if Card["Type"] == "Question" or Card["Type"] == "Discussion":
 			if Card["Subtype"] == "Plan":
-				PlanCardData[PlanCardData.size()] = Card
+				PlanCardData[int(Card["UID"])] = Card
 	
 	for Card in CardData:
-		if Card["Type"] == "Question" or "Discussion":
+		if Card["Type"] == "Question" or Card["Type"] == "Discussion":
 			if Card["Subtype"] == "Build":
-				BuildCardData[BuildCardData.size()] = Card
+				BuildCardData[int(Card["UID"])] = Card
 				
 	for Card in CardData:
-		if Card["Type"] == "Question" or "Discussion":
+		if Card["Type"] == "Question" or Card["Type"] == "Discussion":
 			if Card["Subtype"] == "Test":
-				TestCardData[TestCardData.size()] = Card
+				TestCardData[int(Card["UID"])] = Card
 				
 	for Card in CardData:
-		if Card["Type"] == "Question" or "Discussion":
+		if Card["Type"] == "Question" or Card["Type"] == "Discussion":
 			if Card["Subtype"] == "Deploy":
-				DeployCardData[DeployCardData.size()] = Card
+				DeployCardData[int(Card["UID"])] = Card
 				
 	for Card in CardData:
-		if Card["Type"] == "Question" or "Discussion":
+		if Card["Type"] == "Question" or Card["Type"] == "Discussion":
 			if Card["Subtype"] == "Code":
-				CodeCardData[CodeCardData.size()] = Card
+				CodeCardData[int(Card["UID"])] = Card
 				
 	for Card in CardData:
-		if Card["Type"] == "Question" or "Discussion":
+		if Card["Type"] == "Question" or Card["Type"] == "Discussion":
 			if Card["Subtype"] == "Release":
-				ReleaseCardData[ReleaseCardData.size()] = Card
+				ReleaseCardData[int(Card["UID"])] = Card
 				
 	for Card in CardData:
-		if Card["Type"] == "Question" or "Discussion":
+		if Card["Type"] == "Question" or Card["Type"] == "Discussion":
 			if Card["Subtype"] == "Operate":
-				OperateCardData[OperateCardData.size()] = Card
+				OperateCardData[int(Card["UID"])] = Card
 				
 	for Card in CardData:
-		if Card["Type"] == "Question" or "Discussion":
+		if Card["Type"] == "Question" or Card["Type"] == "Discussion":
 			if Card["Subtype"] == "Monitor":
-				MonitorCardData[MonitorCardData.size()] = Card
+				MonitorCardData[int(Card["UID"])] = Card
 			
 	#for each in CardData:
 		#if(CardData[each][1] == "Build"):
