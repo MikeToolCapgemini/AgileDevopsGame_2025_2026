@@ -489,8 +489,8 @@ bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.25882354)
 
 [sub_resource type="Theme" id="Theme_6nfnn"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b7kw"]
-bg_color = Color(1, 0.305882, 0.301961, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m4o51"]
+bg_color = Color(1, 0.30588236, 0.3019608, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -4130,7 +4130,7 @@ offset_right = 200.0
 offset_bottom = -241.0
 grow_vertical = 0
 theme = SubResource("Theme_6nfnn")
-theme_override_styles/panel = SubResource("StyleBoxFlat_8b7kw")
+theme_override_styles/panel = SubResource("StyleBoxFlat_m4o51")
 
 [node name="MarginContainer" type="MarginContainer" parent="Interface_InterruptFacilitator2/Panel"]
 layout_mode = 2
@@ -4153,6 +4153,7 @@ text = "Timer has finished!"
 fit_content = true
 
 [node name="Delay" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("TimerObject", "InterruptUIFac")]
+visible = false
 custom_minimum_size = Vector2(143, 43)
 layout_mode = 2
 tooltip_text = "Delay Timer by 5 minutes"
@@ -4408,7 +4409,7 @@ editor_description = "
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
 clip_contents = true
-custom_minimum_size = Vector2(250, 50)
+custom_minimum_size = Vector2(256, 56)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
