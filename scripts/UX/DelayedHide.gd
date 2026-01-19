@@ -16,7 +16,6 @@ func _process(delta):
 		if timer <= 0:
 			timerRunning = false
 			visible = false
-		print(timer)
 
 func _on_visibility_changed():
 	if visible:
