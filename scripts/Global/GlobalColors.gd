@@ -3,7 +3,7 @@ extends Node
 var BuildOrange = Color("ff6500")
 var PlanningYellow = Color("d7cd00ff")
 var ReleasePurple = Color("7c00ff")
-var OperateBrown = Color("aa4123")
+var OperateBrown = Color("5e301c")
 var MonitorBlue = Color("0028ff")
 var TestGreen = Color("00a500")
 var DeployTeal = Color("00b0ff")

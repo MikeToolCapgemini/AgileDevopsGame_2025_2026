@@ -1,4 +1,4 @@
-[gd_scene load_steps=215 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=216 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -477,6 +477,9 @@ bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.25882354)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f37ub"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m4o51"]
+bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.25882354)
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4ue30"]
 
 [sub_resource type="Theme" id="Theme_k42av"]
@@ -489,7 +492,7 @@ bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.25882354)
 
 [sub_resource type="Theme" id="Theme_6nfnn"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m4o51"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b7kw"]
 bg_color = Color(1, 0.30588236, 0.3019608, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
@@ -3963,6 +3966,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m4o51")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Interface_DiscardPile/BlackoutBG"]
 layout_mode = 2
@@ -4130,7 +4134,7 @@ offset_right = 200.0
 offset_bottom = -241.0
 grow_vertical = 0
 theme = SubResource("Theme_6nfnn")
-theme_override_styles/panel = SubResource("StyleBoxFlat_m4o51")
+theme_override_styles/panel = SubResource("StyleBoxFlat_8b7kw")
 
 [node name="MarginContainer" type="MarginContainer" parent="Interface_InterruptFacilitator2/Panel"]
 layout_mode = 2
@@ -4153,7 +4157,6 @@ text = "Timer has finished!"
 fit_content = true
 
 [node name="Delay" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("TimerObject", "InterruptUIFac")]
-visible = false
 custom_minimum_size = Vector2(143, 43)
 layout_mode = 2
 tooltip_text = "Delay Timer by 5 minutes"
