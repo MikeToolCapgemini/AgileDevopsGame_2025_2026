@@ -13,11 +13,23 @@ var started_at_unix := 0.0
 @export var EditMinObject : TextEdit
 @export var EditSecObject : TextEdit
 @export var InterruptUI : Node
+@onready var interrupt_panel: PanelContainer = InterruptUI.get_node("Panel")
 @export var LabelObject : Label
+
+@onready var panel_style: StyleBoxFlat
+	
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SpinTimer.wait_time = animator.get_animation("Spin").length
+	panel_style = interrupt_panel.get_theme_stylebox("panel")
+
+	if panel_style is not StyleBoxFlat:
+		push_error("Interrupt panel style is not StyleBoxFlat!")
+		return
+
+	panel_style = panel_style.duplicate()
+	interrupt_panel.add_theme_stylebox_override("panel", panel_style)
 	pass # Replace with function body.
 
 func get_state() -> Dictionary:
@@ -166,6 +178,44 @@ func _on_set_pressed():
 func interrupt():
 	if PlayerSettings.role == "facilitator":
 		InterruptUI.visible = true
+		
+		start_safe_flash_interrupt()
+		
+var interrupt_tween: Tween
+
+func start_safe_flash_interrupt(duration: float = 3.0):
+	if interrupt_tween:
+		interrupt_tween.kill()
+
+	var strong_red := Color("#ff4e4d")
+	var pale_red := Color("ffa39bff")
+
+	interrupt_tween = create_tween()
+	interrupt_tween.set_loops()
+
+	interrupt_tween.tween_property(
+		panel_style,
+		"bg_color",
+		pale_red,
+		0.3
+	).set_trans(Tween.TRANS_SINE)
+
+	interrupt_tween.tween_property(
+		panel_style,
+		"bg_color",
+		strong_red,
+		0.3
+	).set_trans(Tween.TRANS_SINE)
+
+	get_tree().create_timer(duration).timeout.connect(stop_safe_flash_interrupt)
+
+func stop_safe_flash_interrupt():
+	if interrupt_tween:
+		interrupt_tween.kill()
+		interrupt_tween = null
+
+	# Optional: reset to base color
+	panel_style.bg_color = Color("#ff4e4d")
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
