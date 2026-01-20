@@ -103,15 +103,15 @@ func LoadSaveButtons(saves: Array):
 func load_game(saveName : String):
 	SaveNameField.text = saveName.replace('.json','')
 	if multiplayer.is_server():
-		load_game_from_file(saveName)
+		load_game_from_file(saveName,1)
 	else:
-		rpc_id(1,"request_file_load",saveName)
+		rpc_id(1,"request_file_load",saveName,multiplayer.get_unique_id())
 
 @rpc('any_peer')
-func request_file_load(saveName: String):
-	load_game_from_file(saveName)
+func request_file_load(saveName: String,sender_id):
+	load_game_from_file(saveName,sender_id)
 
-func load_game_from_file(saveName : String):
+func load_game_from_file(saveName : String,sender_id):
 	var save = SavePath + saveName
 	var file = FileAccess.open(save, FileAccess.READ)
 	if (file == null):
@@ -125,10 +125,15 @@ func load_game_from_file(saveName : String):
 	if SaveData.has("PawnPositions"):
 		GlobalSettings.PawnPositions = SaveData["PawnPositions"]
 		Pawnmanager.apply_state(GlobalSettings.PawnPositions)
+		Pawnmanager.apply_state.rpc(GlobalSettings.PawnPositions)
 	GlobalSettings.sync_self_to_clients()
+	rpc_id(sender_id,"show_loaded_notification",saveName)
+	print("Game loaded...")
+
+@rpc("any_peer")
+func show_loaded_notification(saveName):
 	saveNotificationUI.show()
 	saveNotifText.text = "loaded game %s!" % saveName
-	print("Game loaded...")
 
 func check_save_dir():
 	var persist_dir := DirAccess.open("user://")

@@ -50,7 +50,7 @@ func get_state() -> Dictionary:
 		index += 1
 	return state
 
-
+@rpc("any_peer")
 func apply_state(state: Dictionary):
 	if !state.has("pawns"):
 		return

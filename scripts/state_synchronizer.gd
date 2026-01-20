@@ -14,6 +14,7 @@ func _ready() -> void:
 
 # Called when someone reconnects or someone joins in late
 func send_state_to_peer(peer_id: int):
+	GlobalSettings.sync_self_to_clients()
 	print("sending state to " + str(peer_id))
 	if not multiplayer.is_server():
 		return
