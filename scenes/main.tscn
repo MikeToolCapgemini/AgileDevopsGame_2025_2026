@@ -2292,7 +2292,7 @@ tooltip_text = "Load Game"
 text = "Load Saved Game"
 script = ExtResource("42_u5l1c")
 
-[node name="MultiSave" parent="Interface_Facilitator" node_paths=PackedStringArray("saveNotificationUI", "saveNotifText") instance=ExtResource("92_sgvw8")]
+[node name="MultiSave" parent="Interface_Facilitator" node_paths=PackedStringArray("Pawnmanager", "saveNotificationUI", "saveNotifText") instance=ExtResource("92_sgvw8")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -2305,6 +2305,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
+Pawnmanager = NodePath("../../World/Interactables/Pawns")
 saveNotificationUI = NodePath("../../Interface_Save_notif")
 saveNotifText = NodePath("../../Interface_Save_notif/Panel/save_notif")
 
