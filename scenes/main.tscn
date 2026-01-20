@@ -1,4 +1,4 @@
-[gd_scene load_steps=216 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=217 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -99,6 +99,7 @@
 [ext_resource type="Script" uid="uid://chkh3ytq3t6lm" path="res://scripts/reset_game.gd" id="81_raiwf"]
 [ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
+[ext_resource type="Script" uid="uid://b0vl6xxjb2of5" path="res://scenes/stopSession.gd" id="86_37xlc"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="87_1uevf"]
 [ext_resource type="FontFile" uid="uid://bgwubnrnnxe2s" path="res://addons/fontawesome/fonts/fa-regular-400.woff2" id="87_xmrkg"]
 [ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="88_0tljd"]
@@ -275,6 +276,14 @@ albedo_texture = ExtResource("49_qc7wb")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ofc2t"]
 albedo_color = Color(0.930763, 0.953832, 0.990685, 1)
 albedo_texture = ExtResource("57_v1ccq")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_07pt3"]
+
+[sub_resource type="Theme" id="Theme_37xlc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_83607"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vny5k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yton5"]
 bg_color = Color(0, 0.34509805, 0.67058825, 1)
@@ -468,14 +477,6 @@ bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.25882354)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n6mxd"]
 
 [sub_resource type="Theme" id="Theme_sjgq0"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6nfnn"]
-
-[sub_resource type="Theme" id="Theme_4ue30"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kwiwa"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f37ub"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m4o51"]
 bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.25882354)
@@ -1812,7 +1813,215 @@ far = 25.0
 
 [node name="Connections" type="Node" parent="."]
 
-[node name="Interface_Facilitator" type="Control" parent="."]
+[node name="Interface_Options" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("74_roort")
+
+[node name="BlackoutBG" type="Panel" parent="Interface_Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainPanel" type="PanelContainer" parent="Interface_Options"]
+material = SubResource("CanvasItemMaterial_07pt3")
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -150.0
+offset_right = 100.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_37xlc")
+theme_override_styles/panel = ExtResource("42_ot4pa")
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Options/MainPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 50
+
+[node name="Options" type="VBoxContainer" parent="Interface_Options/MainPanel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="OptionsLabel" type="RichTextLabel" parent="Interface_Options/MainPanel/MarginContainer/Options"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+theme_override_fonts/bold_font = ExtResource("88_0tljd")
+theme_override_fonts/bold_italics_font = ExtResource("89_mgpkq")
+theme_override_fonts/italics_font = ExtResource("90_xmrkg")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]Options[center]"
+
+[node name="Buttons" type="VBoxContainer" parent="Interface_Options/MainPanel/MarginContainer/Options"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Resume" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Close options"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_83607")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vny5k")
+text = "Resume"
+script = ExtResource("49_4jv7h")
+hideObject = NodePath("../../../../..")
+
+[node name="RolePick" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject") groups=["DevmodeUI"]]
+visible = false
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Pick another role"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_83607")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vny5k")
+text = "Repick Role"
+script = ExtResource("84_r4ag1")
+hideObject = NodePath("../../../../..")
+
+[node name="RefreshUI" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
+visible = false
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Refresh UI"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_83607")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vny5k")
+text = "Refresh UI"
+script = ExtResource("49_4jv7h")
+hideObject = NodePath("../../../../..")
+
+[node name="Disconnect" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Exits the game"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_83607")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vny5k")
+text = "Disconnect"
+script = ExtResource("103_gm02q")
+
+[node name="Stop" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" groups=["FacilitatorUI"]]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Stop session and Exit game"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_83607")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vny5k")
+text = "Stop session"
+script = ExtResource("86_37xlc")
+
+[node name="QuitGame" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Exits the game"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_83607")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vny5k")
+text = "Quit Game"
+script = ExtResource("52_v5wqd")
+
+[node name="Interface_Facilitator" type="Control" parent="." groups=["FacilitatorUI"]]
 visible = false
 layout_mode = 3
 anchors_preset = 12
@@ -2524,7 +2733,7 @@ text = "Game Design"
 script = ExtResource("49_hpq24")
 showObject = NodePath("../../../../../../../../../../Interface_Slideout_Game_Design")
 
-[node name="facilitatorkit" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides" node_paths=PackedStringArray("showObject")]
+[node name="facilitatorkit" type="Button" parent="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/GuidesTitle/GuideFoldableContainer/Guides" node_paths=PackedStringArray("showObject") groups=["FacilitatorUI"]]
 custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2803,7 +3012,7 @@ theme = ExtResource("74_roort")
 script = ExtResource("41_lgecp")
 CardUIManager = NodePath("MarginContainer/CollapsibleContainer/CardPanel")
 
-[node name="FacilitatorPanels" type="Control" parent="Interface_Cards"]
+[node name="FacilitatorPanels" type="Control" parent="Interface_Cards" groups=["FacilitatorUI"]]
 custom_minimum_size = Vector2(860, 645)
 layout_mode = 1
 anchors_preset = 15
@@ -3766,190 +3975,6 @@ theme_override_styles/hover = ExtResource("46_171dt")
 text = "Player
 "
 
-[node name="Interface_Options" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("74_roort")
-
-[node name="BlackoutBG" type="Panel" parent="Interface_Options"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MainPanel" type="PanelContainer" parent="Interface_Options"]
-material = SubResource("CanvasItemMaterial_6nfnn")
-custom_minimum_size = Vector2(200, 300)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -150.0
-offset_right = 100.0
-offset_bottom = 150.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_4ue30")
-theme_override_styles/panel = ExtResource("42_ot4pa")
-
-[node name="MarginContainer" type="MarginContainer" parent="Interface_Options/MainPanel"]
-layout_mode = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 50
-
-[node name="Options" type="VBoxContainer" parent="Interface_Options/MainPanel/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_constants/separation = 10
-
-[node name="OptionsLabel" type="RichTextLabel" parent="Interface_Options/MainPanel/MarginContainer/Options"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_fonts/normal_font = ExtResource("87_1uevf")
-theme_override_fonts/bold_font = ExtResource("88_0tljd")
-theme_override_fonts/bold_italics_font = ExtResource("89_mgpkq")
-theme_override_fonts/italics_font = ExtResource("90_xmrkg")
-theme_override_font_sizes/normal_font_size = 20
-bbcode_enabled = true
-text = "[center]Options[center]"
-
-[node name="Buttons" type="VBoxContainer" parent="Interface_Options/MainPanel/MarginContainer/Options"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Resume" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
-custom_minimum_size = Vector2(121, 43)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-tooltip_text = "Close options"
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("87_1uevf")
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_kwiwa")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_f37ub")
-text = "Resume"
-script = ExtResource("49_4jv7h")
-hideObject = NodePath("../../../../..")
-
-[node name="RolePick" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
-custom_minimum_size = Vector2(121, 43)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-tooltip_text = "Pick another role"
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("87_1uevf")
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_kwiwa")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_f37ub")
-text = "Repick Role"
-script = ExtResource("84_r4ag1")
-hideObject = NodePath("../../../../..")
-
-[node name="RefreshUI" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
-visible = false
-custom_minimum_size = Vector2(121, 43)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-tooltip_text = "Refresh UI"
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("87_1uevf")
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_kwiwa")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_f37ub")
-text = "Refresh UI"
-script = ExtResource("49_4jv7h")
-hideObject = NodePath("../../../../..")
-
-[node name="Disconnect" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
-custom_minimum_size = Vector2(121, 43)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-tooltip_text = "Exits the game"
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("87_1uevf")
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_kwiwa")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_f37ub")
-text = "Disconnect"
-script = ExtResource("103_gm02q")
-
-[node name="QuitGame" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
-custom_minimum_size = Vector2(121, 43)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-tooltip_text = "Exits the game"
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("87_1uevf")
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = ExtResource("45_fv0h2")
-theme_override_styles/pressed = ExtResource("46_171dt")
-theme_override_styles/hover = ExtResource("46_171dt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_kwiwa")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_f37ub")
-text = "Quit Game"
-script = ExtResource("52_v5wqd")
-
 [node name="Interface_DiscardPile" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -4733,6 +4758,12 @@ text = "No
 [connection signal="mouse_exited" from="World/Interactables/CardsGroup/Cards7/StaticBody3D" to="World/Interactables/CardsGroup/Cards7" method="_on_static_body_3d_mouse_exited"]
 [connection signal="mouse_entered" from="World/Interactables/CardsGroup/Cards8/StaticBody3D" to="World/Interactables/CardsGroup/Cards8" method="_on_static_body_3d_mouse_entered"]
 [connection signal="mouse_exited" from="World/Interactables/CardsGroup/Cards8/StaticBody3D" to="World/Interactables/CardsGroup/Cards8" method="_on_static_body_3d_mouse_exited"]
+[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Resume" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Resume" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" method="on_repick"]
+[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Disconnect" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Disconnect" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Stop" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Stop" method="_on_stop_pressed"]
+[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/OpenTimerButton" to="Interface_Facilitator/FacilitatorsideBtns/OpenTimerButton" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/SetTimer/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/Set" to="World/Interactables/hourglassAnimated" method="_on_set_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/StartButton" to="World/Interactables/hourglassAnimated" method="_on_start_button_pressed"]
@@ -4768,11 +4799,6 @@ text = "No
 [connection signal="pressed" from="Interface_Cards/HideButtonMargin/Hide_Show" to="Interface_Cards/HideButtonMargin/Hide_Show" method="_toggle_collapse"]
 [connection signal="pressed" from="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer/Facilitator" to="Setup" method="_on_facilitator_pressed"]
 [connection signal="pressed" from="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer/Player" to="Setup" method="_on_player_pressed"]
-[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Resume" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Resume" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RolePick" method="on_repick"]
-[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Disconnect" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Disconnect" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" method="_on_pressed"]
 [connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/Resume" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" method="_on_upload_button_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" method="_on_pressed"]

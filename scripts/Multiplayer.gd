@@ -3,7 +3,8 @@ extends Node
 
 # Basic Server Information
 @export var GameScene : PackedScene
-@export var Adress = "srv1161281.hstgr.cloud"
+#@export var Adress = "srv1161281.hstgr.cloud"
+@export var Adress = "localhost"
 @export var Port = 8081
 @export var MaxPlayers = 12
 var peer = ENetMultiplayerPeer.new()
@@ -16,6 +17,7 @@ var started : bool = false
 @export var disconnect_server_panel : Control
 
 func _ready():
+	GameManager.multiplayer_manager = self
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
@@ -93,6 +95,43 @@ func start_game():
 		if peer_id != multiplayer.get_unique_id(): # skip host if already done
 			rpc_id(peer_id, "join_running_game")
 
+func reset_server_session():
+	# Kick any remaining peers (usually none)
+	for peer_id in multiplayer.get_peers():
+		rpc_id(peer_id, "server_resetting")
+		multiplayer.disconnect_peer(peer_id)
+
+	# Reset game state
+	started = false
+
+	GameManager.Players.clear()
+	update_text_field()
+
+	# Remove game scene if it exists
+	if get_tree().root.has_node("Main"):
+		get_tree().root.get_node("Main").queue_free()
+
+	# Return to lobby state
+	show_multiplayer_ui()
+	disconnect_server_panel.hide()
+
+@rpc("authority")
+func request_server_reset():
+	# Optional: only allow certain players to trigger it
+	#if not is_player_allowed_to_reset(get_tree().get_rpc_sender_id()):
+		#return
+	
+	reset_server_session()
+
+
+@rpc("authority")
+func server_resetting():
+	ErrorLabel.show_error("Server session ended, Server is resetting")
+
+func _on_stop_game_button_pressed():
+	# Tell the server to reset the session
+	rpc_id(1, "request_server_reset") # assuming host ID is 1
+
 
 @rpc("authority")
 func join_running_game():
@@ -132,11 +171,14 @@ func host_game():
 	var serverKey = load("res://DevopsPrivate.key")
 	var web_error = webPeer.create_server(Port)
 	#var error = webPeer.create_server(Port, "*", TLSOptions.server(serverKey, serverCert))
-	#var error = peer.create_server(Port)
+	var error = peer.create_server(Port)
 	if web_error != OK:
 		push_error("WebSocket server failed: " + str(web_error))
 		return
-	multiplayer.set_multiplayer_peer(webPeer)
+	if error != OK:
+		push_error("Peer server connection failed: " + str(web_error))
+		return
+	multiplayer.set_multiplayer_peer(peer)
 	GameManager.You = multiplayer.get_unique_id()
 	print("Waiting for players")
 	if OS.has_feature("dedicated_server"):
@@ -149,7 +191,7 @@ func join_game():
 	#webPeer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
 	peer.create_client(Adress,Port)
 	webPeer.create_client("wss://" + Adress + ":" + str(Port))
-	multiplayer.set_multiplayer_peer(webPeer)
+	multiplayer.set_multiplayer_peer(peer)
 	GameManager.You = multiplayer.get_unique_id()
 	GameManager.last_address = Adress
 	GameManager.last_port = Port

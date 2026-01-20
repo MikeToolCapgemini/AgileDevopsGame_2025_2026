@@ -34,6 +34,10 @@ project/assembly_name="Dev Ops Game V 1.1"
 
 enabled=PackedStringArray("res://addons/collapsible_container/plugin.cfg", "res://addons/fontawesome/plugin.cfg", "res://addons/godot-sqlite/plugin.cfg")
 
+[global_group]
+
+DevmodeUI="Specific UI that's only accesible during Devmode"
+
 [input]
 
 mouse_left_click={
