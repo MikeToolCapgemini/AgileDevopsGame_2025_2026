@@ -6,7 +6,7 @@ var SaveData = {}
 var currentSave : String = ""
 @export var SaveNameField : LineEdit
 @export var LoadedSavesContainer : VBoxContainer
-@export var pawns_path: NodePath
+@export var Pawnmanager : PawnManager
 @export var collapsible : CollapsibleContainer
 @export var saveNotificationUI : Control
 @export var saveNotifText : RichTextLabel
@@ -19,12 +19,13 @@ func _ready() -> void:
 	save_completed.connect(_on_save_completed)
 
 func save_game(saveName: String = ""):
+	Pawnmanager.save_pawn_positions()
 	if saveName == "":
 		saveName = get_save_name()
 	SaveData["DataDiscardedCards"] = GlobalSettings.DataDiscardedCards
 	SaveData["DiscardedCards"] = GlobalSettings.DiscardedCards
 	SaveData["BookmarkedCards"] = GlobalSettings.BookmarkedCards
-	#SaveData["PawnPositions"] = GlobalSettings.PawnPositions
+	SaveData["PawnPositions"] = GlobalSettings.PawnPositions
 	if multiplayer.is_server():
 		save_game_file(saveName,SaveData)
 	else:
@@ -34,7 +35,7 @@ func get_save_json() -> String:
 	SaveData["DataDiscardedCards"] = GlobalSettings.DataDiscardedCards
 	SaveData["DiscardedCards"] = GlobalSettings.DiscardedCards
 	SaveData["BookmarkedCards"] = GlobalSettings.BookmarkedCards
-	#SaveData["PawnPositions"] = GlobalSettings.PawnPositions
+	SaveData["PawnPositions"] = GlobalSettings.PawnPositions
 
 	return JSON.stringify(SaveData)
 
@@ -121,6 +122,9 @@ func load_game_from_file(saveName : String):
 	GlobalSettings.DataDiscardedCards = SaveData["DataDiscardedCards"]
 	GlobalSettings.DiscardedCards = SaveData["DiscardedCards"]
 	GlobalSettings.BookmarkedCards = SaveData["BookmarkedCards"]
+	if SaveData.has("PawnPositions"):
+		GlobalSettings.PawnPositions = SaveData["PawnPositions"]
+		Pawnmanager.apply_state(GlobalSettings.PawnPositions)
 	GlobalSettings.sync_self_to_clients()
 	saveNotificationUI.show()
 	saveNotifText.text = "loaded game %s!" % saveName
