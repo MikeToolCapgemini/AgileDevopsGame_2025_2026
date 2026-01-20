@@ -59,7 +59,7 @@ func set_bg_color(newStyle : Color):
 	print("set color of "," to ", newStyle)
 
 func draw(type):
-	active = true
+	toggle_active.rpc(true)
 	visible = true
 	CardUIManager.bookmark.visible = false
 	_sync_answershown(false)
@@ -298,11 +298,15 @@ func _sync_answershown(state):
 func close_answer():
 	CardUIManager.BookmarkButton.show()
 	CardUIManager.CancelBookmarkButton.hide()
-	active = false
+	toggle_active.rpc(false)
 	visible = false
 	#if !$"Panel".visible:
 		#$"Panel".visible = true
 	_sync_cardshown.rpc(active, "", "")
+
+@rpc("any_peer","call_local")
+func toggle_active(toggle: bool):
+	active = toggle
 
 func show_answer():
 	CardUIManager.AnswerObject.visible = true
