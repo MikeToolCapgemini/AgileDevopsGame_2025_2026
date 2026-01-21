@@ -29,19 +29,21 @@ func _ready():
 
 
 func sort_data():
+	import_data()
 	if !GlobalSettings.QuestionsBasic:
-		for each in AllCardData:
-			sort_data_pop("b", each)
+		for cardDict in AllCardData:
+			sort_data_on_type("b", cardDict)
 
 	if !GlobalSettings.QuestionsPro:
-		for each in AllCardData:
-			sort_data_pop("p", each)
+		for cardDict in AllCardData:
+			sort_data_on_type("p", cardDict)
+	
 
 
-func sort_data_pop(type, dict):
-	for every in dict.keys():
-			if dict[every][12] == type:
-				dict.erase(every)
+func sort_data_on_type(type, dict):
+	for key in dict.keys():
+			if dict[key]["Basis / Prof"] == type:
+				dict.erase(key)
 	print(dict.keys())
 
 

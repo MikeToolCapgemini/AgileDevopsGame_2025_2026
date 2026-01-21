@@ -1,4 +1,4 @@
-[gd_scene load_steps=217 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=220 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -106,6 +106,7 @@
 [ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="88_wvlrk"]
 [ext_resource type="FontFile" uid="uid://2ike7sp4qiyi" path="res://assets/fonts/Ubuntu/Ubuntu-BoldItalic.ttf" id="89_mgpkq"]
 [ext_resource type="FontFile" uid="uid://b23akitg4yjxd" path="res://assets/fonts/Ubuntu/Ubuntu-Italic.ttf" id="90_xmrkg"]
+[ext_resource type="Script" uid="uid://df05tjlkygvok" path="res://scripts/UX/Toggle.gd" id="92_83607"]
 [ext_resource type="Script" uid="uid://wqc4dac2wyhy" path="res://scripts/Hide_facilitator_button.gd" id="92_gm02q"]
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
 [ext_resource type="Script" uid="uid://bq01pxakqcfgj" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
@@ -285,6 +286,8 @@ albedo_texture = ExtResource("57_v1ccq")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vny5k"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8lcmr"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yton5"]
 bg_color = Color(0, 0.34509805, 0.67058825, 1)
 border_width_left = 2
@@ -292,6 +295,18 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0.34509805, 0.67058825, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jp61a"]
+bg_color = Color(0.56078434, 0.19607843, 0.21568628, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.5058824, 0.43137255, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -2022,16 +2037,160 @@ text = "Quit Game"
 script = ExtResource("52_v5wqd")
 
 [node name="Interface_Facilitator" type="Control" parent="." groups=["FacilitatorUI"]]
-visible = false
 layout_mode = 3
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("74_roort")
+
+[node name="TopButtons" type="PanelContainer" parent="Interface_Facilitator"]
+layout_mode = 1
+offset_right = 56.0
+offset_bottom = 56.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8lcmr")
+
+[node name="OpenCardSettings" type="Button" parent="Interface_Facilitator/TopButtons" node_paths=PackedStringArray("collapse")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Open Card Settings panel"
+theme_override_styles/normal = SubResource("StyleBoxFlat_yton5")
+script = ExtResource("78_raiwf")
+collapse = NodePath("../../CardSettings")
+folded = true
+
+[node name="FontAwesome" type="Label" parent="Interface_Facilitator/TopButtons/OpenCardSettings"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 35
+icon_name = "rectangle-list"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="CardSettings" type="Control" parent="Interface_Facilitator"]
+process_mode = 3
+editor_description = "
+			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
+			
+Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
+clip_contents = true
+custom_minimum_size = Vector2(300, 150)
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 150.0
+script = ExtResource("78_engxj")
+starts_opened = false
+sizing_node = NodePath("PanelContainer")
+metadata/_custom_type_script = "uid://btlh4wrv04rc3"
+
+[node name="PanelContainer" type="PanelContainer" parent="Interface_Facilitator/CardSettings"]
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 1
+offset_right = 6.0
+offset_bottom = 6.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Facilitator/CardSettings/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]Card Settings"
+
+[node name="Cards Tag" type="Label" parent="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("87_1uevf")
+text = "What card type's are active"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CheckButton" type="CheckButton" parent="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("92_83607")
+QuestionsType = "basic"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+text = "Basic"
+fit_content = true
+
+[node name="CheckButton2" type="CheckButton" parent="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("92_83607")
+QuestionsType = "pro"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+text = "Pro"
+
+[node name="CloseCardSettingsButton" type="Button" parent="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "Close Card Settings Panel"
+theme_override_styles/normal = SubResource("StyleBoxFlat_jp61a")
+
+[node name="FontAwesome" type="Label" parent="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer/CloseCardSettingsButton"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -8.0
+offset_right = 6.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 15
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 15
+icon_name = "x"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="FacilitatorsideBtns" type="HBoxContainer" parent="Interface_Facilitator"]
 layout_mode = 1
@@ -4764,6 +4923,10 @@ text = "No
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Disconnect" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Disconnect" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Stop" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Stop" method="_on_stop_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Facilitator/TopButtons/OpenCardSettings" to="Interface_Facilitator/TopButtons/OpenCardSettings" method="_toggle_collapse"]
+[connection signal="toggled" from="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton" to="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton" method="_on_toggled"]
+[connection signal="toggled" from="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton2" to="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton2" method="_on_toggled"]
+[connection signal="pressed" from="Interface_Facilitator/CardSettings/PanelContainer/MarginContainer/CloseCardSettingsButton" to="Interface_Facilitator/TopButtons/OpenCardSettings" method="_on_collapse_close"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/OpenTimerButton" to="Interface_Facilitator/FacilitatorsideBtns/OpenTimerButton" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/SetTimer/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/Set" to="World/Interactables/hourglassAnimated" method="_on_set_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/StartButton" to="World/Interactables/hourglassAnimated" method="_on_start_button_pressed"]
