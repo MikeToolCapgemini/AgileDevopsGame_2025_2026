@@ -22,6 +22,8 @@ func save_game(saveName: String = ""):
 	Pawnmanager.save_pawn_positions()
 	if saveName == "":
 		saveName = get_save_name()
+	SaveData["QuestionsBasic"] = GlobalSettings.QuestionsBasic
+	SaveData["QuestionsPro"] = GlobalSettings.QuestionsPro
 	SaveData["DataDiscardedCards"] = GlobalSettings.DataDiscardedCards
 	SaveData["DiscardedCards"] = GlobalSettings.DiscardedCards
 	SaveData["BookmarkedCards"] = GlobalSettings.BookmarkedCards
@@ -119,10 +121,15 @@ func load_game_from_file(saveName : String,sender_id):
 	var json = file.get_as_text()
 	
 	var SaveData = JSON.parse_string(json)
+	
+	if SaveData.has("QuestionsBasic") && SaveData.has("QuestionsPro"): #to have backwards compatibility with older saves 
+		GlobalSettings.QuestionsBasic = SaveData["QuestionsBasic"]
+		GlobalSettings.QuestionsPro = SaveData["QuestionsPro"]
 	GlobalSettings.DataDiscardedCards = SaveData["DataDiscardedCards"]
 	GlobalSettings.DiscardedCards = SaveData["DiscardedCards"]
 	GlobalSettings.BookmarkedCards = SaveData["BookmarkedCards"]
-	if SaveData.has("PawnPositions"):
+	ImportData.sort_data()
+	if SaveData.has("PawnPositions"): #to have backwards compatibility with older saves
 		GlobalSettings.PawnPositions = SaveData["PawnPositions"]
 		Pawnmanager.apply_state(GlobalSettings.PawnPositions)
 		Pawnmanager.apply_state.rpc(GlobalSettings.PawnPositions)

@@ -4,11 +4,17 @@ extends Button
 @onready var ImportData = get_node("/root/ImportData")
 
 func _ready() -> void:
+	refresh()
+		
+
+func _process(delta: float) -> void:
+	refresh()
+
+func refresh():
 	if QuestionsType == "basic":
 		button_pressed = GlobalSettings.QuestionsBasic
 	if QuestionsType == "pro":
 		button_pressed = GlobalSettings.QuestionsPro
-		
 
 func _on_pressed():
 	if QuestionsType == "basic":

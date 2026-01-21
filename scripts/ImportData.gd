@@ -38,6 +38,28 @@ func sort_data():
 		for cardDict in AllCardData:
 			sort_data_on_type("p", cardDict)
 	
+	if GlobalSettings.DataDiscardedCards.size() > 0:
+		for entry in GlobalSettings.DataDiscardedCards:
+			var type_string = entry.get("cardTypeString", null)
+			var dataDict = get_dict_on_subtype(type_string)
+			card_pop(dataDict,entry.get("keyVar"))
+			#discard the card again.
+			
+	
+
+func get_dict_on_subtype(subtype):
+	match subtype:
+		"Plan": return PlanCardData
+		"Code": return CodeCardData
+		"Build": return BuildCardData
+		"Test": return TestCardData
+		"Release": return ReleaseCardData
+		"Deploy": return DeployCardData
+		"Operate": return OperateCardData
+		"Monitor": return MonitorCardData
+	
+	
+	
 
 
 func sort_data_on_type(type, dict):
@@ -50,6 +72,7 @@ func sort_data_on_type(type, dict):
 func card_pop(dict, key):
 	dict.erase(key)
 	print("card popped")
+	print(dict.keys())
 	
 
 func import_data():
