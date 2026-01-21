@@ -2037,6 +2037,7 @@ text = "Quit Game"
 script = ExtResource("52_v5wqd")
 
 [node name="Interface_Facilitator" type="Control" parent="." groups=["FacilitatorUI"]]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
