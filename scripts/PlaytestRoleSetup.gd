@@ -8,6 +8,8 @@ extends Node
 
 @export_category("Other Objects to Show when done")
 @export var OptionsPanel : Node
+@export var Top_left_buttons : Control
+@export var ColorSelectPanel : Control
 
 func _ready():
 	self.visible = true
@@ -18,6 +20,7 @@ func _on_facilitator_pressed():
 	self.visible = false
 	toggleFacilitatorbuttons(true)
 	OptionsPanel.visible = true
+	Top_left_buttons.visible = true
 	pass # Replace with function body.
 
 func toggleFacilitatorbuttons(visible : bool):
@@ -38,4 +41,6 @@ func _on_player_pressed():
 	self.visible = false
 	toggleFacilitatorbuttons(false)
 	OptionsPanel.visible = true
+	Top_left_buttons.visible = true
+	ColorSelectPanel.visible = true
 	pass # Replace with function body.

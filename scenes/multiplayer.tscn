@@ -281,7 +281,6 @@ offset_right = 844.0
 offset_bottom = 367.0
 theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "What cards to use:"
-metadata/_edit_use_anchors_ = true
 
 [node name="CheckButton" type="CheckButton" parent="Debug Interface/Cards Tag"]
 layout_mode = 0
