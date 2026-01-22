@@ -11,6 +11,7 @@ var Username : String
 var Password : String
 
 var ldm = LDM.new()
+var ljm = LJM.new()
 var passHasher = PassHasher.new()
 
 func _ready() -> void:
@@ -58,7 +59,7 @@ func createUser(username,password):
 	print("Creating user " + username)
 	var salt = passHasher.GenerateSalt()
 	var hashedPassword = passHasher.HashPassword(password,salt)
-	ldm.InsertUserData(username,hashedPassword,salt)
+	ljm.add_user(username,hashedPassword,salt)
 
 
 
@@ -66,7 +67,7 @@ func _check_user_information(username,password):
 	if DevMode.DevModeEnabled:
 		if username == "DEVELOPER" && password == "C4PGEM1N!":
 			return true
-	var userData = ldm.GetUserFromDB(username)
+	var userData = ljm.get_user(username)
 	
 	if userData == null:
 		ErrorLabel.show_error("Login Failed, invalid username")

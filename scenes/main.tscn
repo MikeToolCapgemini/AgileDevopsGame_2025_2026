@@ -2194,6 +2194,7 @@ icon_name = "address-card"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="PlayerSettings" type="Control" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings"]
+process_mode = 3
 editor_description = "
 			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
 			
