@@ -14,8 +14,7 @@ func load_users() -> void:
 	if FileAccess.file_exists(users_file):
 		var file := FileAccess.open(users_file, FileAccess.READ)
 		var json_result = JSON.parse_string(file.get_as_text())
-		if json_result.error == OK:
-			users_data = json_result.result
+		users_data = json_result
 		file.close()
 	else:
 		# Default accounts for small-scale setup

@@ -69,7 +69,7 @@ func _check_user_information(username,password):
 			return true
 	var userData = ljm.get_user(username)
 	
-	if userData == null:
+	if userData.size() < 1:
 		ErrorLabel.show_error("Login Failed, invalid username")
 		return false
 	else:
