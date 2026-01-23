@@ -3,9 +3,9 @@ extends Node
 
 # Basic Server Information
 @export var GameScene : PackedScene
-@export var Adress = "srv1161281.hstgr.cloud"
-#@export var Adress = "localhost"
-@export var Port = 8081
+#@export var Adress = "srv1161281.hstgr.cloud"
+@export var Adress := "localhost"
+@export var Port := 8081
 @export var MaxPlayers = 12
 var peer = ENetMultiplayerPeer.new()
 var webPeer = WebSocketMultiplayerPeer.new()
@@ -190,11 +190,20 @@ func host_game():
 	else :
 		send_player_information($"Debug Interface/NameField".text, multiplayer.get_unique_id())
 
+var sir : ServerInfoRequester = ServerInfoRequester.new()
+
 func join_game():
 	var clientCAS = load("res://Fullchain.crt")
+	var connect_address := Adress
+	var connect_port := Port
+
+	if sir.server_address != "":
+		connect_address = sir.server_address
+	if sir.server_port != 0:
+		connect_port = sir.server_port
 	#webPeer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
 	#peer.create_client(Adress,Port)
-	var err = webPeer.create_client("wss://" + Adress + ":" + str(Port))
+	var err = webPeer.create_client("wss://" + connect_address + ":" + str(connect_port))
 	if err != OK:
 		print("Failed to start WebSocket client:", err)
 	multiplayer.set_multiplayer_peer(webPeer)

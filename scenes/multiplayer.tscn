@@ -206,7 +206,7 @@ offset_top = 31.0
 offset_right = 209.0
 offset_bottom = 57.0
 theme_override_fonts/font = ExtResource("3_4vwpp")
-text = "DevOps Game v0.1.4"
+text = "DevOps Game v0.1.8"
 
 [node name="TextField" type="Label" parent="Debug Interface"]
 layout_mode = 0
