@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://kgixi5xrbejj"]
+[gd_scene load_steps=29 format=3 uid="uid://kgixi5xrbejj"]
 
 [ext_resource type="Script" uid="uid://bt5vowngsleoc" path="res://scripts/Multiplayer.gd" id="1_8yuej"]
 [ext_resource type="PackedScene" uid="uid://bq4jyntltiheo" path="res://scenes/main.tscn" id="2_of8yj"]
@@ -7,8 +7,11 @@
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="5_uvo4r"]
 [ext_resource type="Script" uid="uid://ghufwxohnaar" path="res://scripts/delayed_editable_panel.gd" id="6_uvo4r"]
 [ext_resource type="StyleBox" uid="uid://dijgsweldy4qb" path="res://Styles/Cards_Background.tres" id="7_a6lh4"]
+[ext_resource type="Script" uid="uid://dm015sicbwm2" path="res://scripts/PlaytestRoleSetup.gd" id="8_6mtek"]
 [ext_resource type="Script" uid="uid://br1s2wprncugw" path="res://scripts/editable_panel.gd" id="8_gpc4n"]
+[ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="9_ue6mp"]
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="10_05036"]
+[ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="10_n1wk1"]
 [ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="11_6mtek"]
 [ext_resource type="Script" uid="uid://cuklitumim1gx" path="res://scripts/UX/QuitGame.gd" id="12_ue6mp"]
 [ext_resource type="FontFile" uid="uid://bgwubnrnnxe2s" path="res://addons/fontawesome/fonts/fa-regular-400.woff2" id="13_n1wk1"]
@@ -82,6 +85,13 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p0qsu"]
+bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.25882354)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q51lj"]
+
+[sub_resource type="Theme" id="Theme_fij7i"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxhos"]
 bg_color = Color(0, 0.34509805, 0.67058825, 1)
 border_width_left = 2
@@ -122,7 +132,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4vwpp")
 
-[node name="Host Button" type="Button" parent="Debug Interface"]
+[node name="Host Button" type="Button" parent="Debug Interface" groups=["DevmodeUI"]]
 layout_mode = 0
 offset_left = 150.0
 offset_top = 110.0
@@ -142,7 +152,7 @@ theme_override_fonts/font = ExtResource("3_4vwpp")
 theme_override_styles/normal = SubResource("StyleBoxFlat_36d77")
 text = "Join"
 
-[node name="Start Button" type="Button" parent="Debug Interface"]
+[node name="Start Button" type="Button" parent="Debug Interface" groups=["DevmodeUI"]]
 layout_mode = 0
 offset_left = 374.0
 offset_top = 110.0
@@ -161,7 +171,7 @@ offset_bottom = 104.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_uvo4r")
 text = "testplayername"
 
-[node name="IPField" type="TextEdit" parent="Debug Interface"]
+[node name="IPField" type="TextEdit" parent="Debug Interface" groups=["DevmodeUI"]]
 layout_mode = 0
 offset_left = 150.0
 offset_top = 246.0
@@ -179,7 +189,7 @@ offset_bottom = 97.0
 theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "Name:"
 
-[node name="Debug Button" type="Button" parent="Debug Interface"]
+[node name="Debug Button" type="Button" parent="Debug Interface" groups=["DevmodeUI"]]
 layout_mode = 0
 offset_left = 150.0
 offset_top = 152.0
@@ -217,7 +227,7 @@ scale = Vector2(0.6, 0.6)
 theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "Connected Players:"
 
-[node name="Plus Button" type="Button" parent="Debug Interface"]
+[node name="Plus Button" type="Button" parent="Debug Interface" groups=["DevmodeUI"]]
 layout_mode = 0
 offset_left = 135.0
 offset_top = 418.0
@@ -227,7 +237,7 @@ theme_override_fonts/font = ExtResource("3_4vwpp")
 theme_override_styles/normal = SubResource("StyleBoxFlat_a6lh4")
 text = "+"
 
-[node name="Minus Button" type="Button" parent="Debug Interface"]
+[node name="Minus Button" type="Button" parent="Debug Interface" groups=["DevmodeUI"]]
 layout_mode = 0
 offset_left = 240.0
 offset_top = 418.0
@@ -237,7 +247,7 @@ theme_override_fonts/font = ExtResource("3_4vwpp")
 theme_override_styles/normal = SubResource("StyleBoxFlat_a6lh4")
 text = "-"
 
-[node name="Data Test Text1" type="Label" parent="Debug Interface"]
+[node name="Data Test Text1" type="Label" parent="Debug Interface" groups=["DevmodeUI"]]
 layout_mode = 0
 offset_left = 135.0
 offset_top = 350.0
@@ -246,7 +256,7 @@ offset_bottom = 376.0
 theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "Multiplayer live data transmission test"
 
-[node name="ValueText" type="Label" parent="Debug Interface"]
+[node name="ValueText" type="Label" parent="Debug Interface" groups=["DevmodeUI"]]
 layout_mode = 0
 offset_left = 197.0
 offset_top = 380.0
@@ -255,16 +265,16 @@ offset_bottom = 406.0
 theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "0"
 
-[node name="DataTestText3" type="Label" parent="Debug Interface"]
+[node name="DataTestText3" type="Label" parent="Debug Interface" groups=["DevmodeUI"]]
 layout_mode = 0
 offset_left = 135.0
 offset_top = 380.0
-offset_right = 432.0
+offset_right = 184.0
 offset_bottom = 406.0
 theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "Value: "
 
-[node name="Tag Name2" type="Label" parent="Debug Interface"]
+[node name="Tag Name2" type="Label" parent="Debug Interface" groups=["DevmodeUI"]]
 layout_mode = 0
 offset_left = 158.0
 offset_top = 217.0
@@ -273,7 +283,7 @@ offset_bottom = 243.0
 theme_override_fonts/font = ExtResource("3_4vwpp")
 text = "Connection Adress:"
 
-[node name="Cards Tag" type="Label" parent="Debug Interface"]
+[node name="Cards Tag" type="Label" parent="Debug Interface" groups=["FacilitatorUI"]]
 layout_mode = 0
 offset_left = 547.0
 offset_top = 341.0
@@ -300,7 +310,7 @@ offset_bottom = 24.0
 theme_override_fonts/normal_font = ExtResource("3_4vwpp")
 text = "Basic"
 
-[node name="CheckButton2" type="CheckButton" parent="Debug Interface/Cards Tag"]
+[node name="CheckButton2" type="CheckButton" parent="Debug Interface/Cards Tag" groups=["FacilitatorUI"]]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 46.0
@@ -413,6 +423,97 @@ bbcode_enabled = true
 text = "[center]Connected[/center]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Setup" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_uvo4r")
+script = ExtResource("8_6mtek")
+
+[node name="BlackoutBG" type="Panel" parent="Setup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p0qsu")
+
+[node name="Panel" type="PanelContainer" parent="Setup"]
+material = SubResource("CanvasItemMaterial_q51lj")
+custom_minimum_size = Vector2(618, 241)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -309.0
+offset_top = -120.5
+offset_right = 309.0
+offset_bottom = 120.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_fij7i")
+theme_override_styles/panel = ExtResource("7_a6lh4")
+
+[node name="MarginContainer" type="MarginContainer" parent="Setup/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Setup/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Setup/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_4vwpp")
+bbcode_enabled = true
+text = "[center]Select your role:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Setup/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="Facilitator" type="Button" parent="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+tooltip_text = "Set Role to Facilitator"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("3_4vwpp")
+theme_override_styles/normal = ExtResource("9_ue6mp")
+theme_override_styles/pressed = ExtResource("10_n1wk1")
+theme_override_styles/hover = ExtResource("10_n1wk1")
+text = "Facilitator"
+
+[node name="Player" type="Button" parent="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(127, 43)
+layout_mode = 2
+tooltip_text = "Set Role by player"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("3_4vwpp")
+theme_override_styles/normal = ExtResource("9_ue6mp")
+theme_override_styles/pressed = ExtResource("10_n1wk1")
+theme_override_styles/hover = ExtResource("10_n1wk1")
+text = "Player
+"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 100
@@ -584,6 +685,8 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 [connection signal="pressed" from="Show Interface/Toggle Button" to="." method="_on_toggle_button_pressed"]
 [connection signal="visibility_changed" from="Interface_Disconnect" to="Interface_Disconnect" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="Interface_Connect" to="Interface_Connect" method="_on_visibility_changed"]
+[connection signal="pressed" from="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer/Facilitator" to="Setup" method="_on_facilitator_pressed"]
+[connection signal="pressed" from="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer/Player" to="Setup" method="_on_player_pressed"]
 [connection signal="visibility_changed" from="CanvasLayer/Interface_Disconnect_server" to="CanvasLayer/Interface_Disconnect_server" method="_on_visibility_changed"]
 [connection signal="pressed" from="CanvasLayer/Interface_Disconnect_server/Panel/HBoxContainer/ReConnect" to="." method="_on_reconnect_pressed"]
 [connection signal="pressed" from="CanvasLayer/Interface_Disconnect_server/Panel/HBoxContainer/Home" to="." method="_on_home_pressed"]

@@ -12,16 +12,24 @@ extends Node
 @export var ColorSelectPanel : Control
 
 func _ready():
-	self.visible = true
-	toggleFacilitatorbuttons(false)
+	match(PlayerSettings.role):
+		"none":
+			self.visible = true
+		"facilitator":
+			toggleFacilitatorbuttons(true)
+		"player":
+			toggleFacilitatorbuttons(false)
+			if ColorSelectPanel:
+				ColorSelectPanel.visible = true
+	if OptionsPanel:
+		OptionsPanel.visible = true
+	if Top_left_buttons:
+		Top_left_buttons.visible = true
 
 func _on_facilitator_pressed():
 	PlayerSettings.role = "facilitator"
 	self.visible = false
 	toggleFacilitatorbuttons(true)
-	OptionsPanel.visible = true
-	Top_left_buttons.visible = true
-	pass # Replace with function body.
 
 func toggleFacilitatorbuttons(visible : bool):
 	
@@ -30,17 +38,9 @@ func toggleFacilitatorbuttons(visible : bool):
 			node.visible = visible
 		elif node is VisualInstance3D:
 			node.visible = visible
-	#TimerObject.visible = visible
-	#FacilitatorCardPanel.visible = visible
-	#FacilitatorUI.visible = visible
-	#FacilitatorKitButton.visible = visible
 
 
 func _on_player_pressed():
 	PlayerSettings.role = "player"
 	self.visible = false
 	toggleFacilitatorbuttons(false)
-	OptionsPanel.visible = true
-	Top_left_buttons.visible = true
-	ColorSelectPanel.visible = true
-	pass # Replace with function body.

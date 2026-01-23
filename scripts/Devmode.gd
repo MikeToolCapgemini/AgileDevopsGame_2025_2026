@@ -4,6 +4,7 @@ var DevModeEnabled : bool = false
 
 func _ready():
 	get_tree().node_added.connect(_on_node_added)
+	toggle_devmode_UI(DevModeEnabled)
 
 func _on_node_added(node: Node):
 	if node.is_in_group("DevmodeUI"):

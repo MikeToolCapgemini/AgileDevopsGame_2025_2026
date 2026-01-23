@@ -3,8 +3,8 @@ extends Node
 
 # Basic Server Information
 @export var GameScene : PackedScene
-#@export var Adress = "srv1161281.hstgr.cloud"
-@export var Adress = "localhost"
+@export var Adress = "srv1161281.hstgr.cloud"
+#@export var Adress = "localhost"
 @export var Port = 8081
 @export var MaxPlayers = 12
 var peer = ENetMultiplayerPeer.new()
@@ -26,6 +26,10 @@ func _ready():
 	if OS.has_feature("dedicated_server"):
 		print("Starting dedicated server...")
 		host_game()
+
+func _process(_delta):
+	if OS.has_feature("dedicated_server"):
+		print(webPeer.get_connection_status())
 
 func peer_connected(id):
 	if id != 1:
@@ -171,14 +175,14 @@ func host_game():
 	var serverKey = load("res://DevopsPrivate.key")
 	var web_error = webPeer.create_server(Port)
 	#var error = webPeer.create_server(Port, "*", TLSOptions.server(serverKey, serverCert))
-	var error = peer.create_server(Port)
+	#var error = peer.create_server(Port)
 	if web_error != OK:
 		push_error("WebSocket server failed: " + str(web_error))
 		return
-	if error != OK:
-		push_error("Peer server connection failed: " + str(web_error))
-		return
-	multiplayer.set_multiplayer_peer(peer)
+	#if error != OK:
+		#push_error("Peer server connection failed: " + str(web_error))
+		#return
+	multiplayer.set_multiplayer_peer(webPeer)
 	GameManager.You = multiplayer.get_unique_id()
 	print("Waiting for players")
 	if OS.has_feature("dedicated_server"):
@@ -189,9 +193,11 @@ func host_game():
 func join_game():
 	var clientCAS = load("res://Fullchain.crt")
 	#webPeer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
-	peer.create_client(Adress,Port)
-	webPeer.create_client("wss://" + Adress + ":" + str(Port))
-	multiplayer.set_multiplayer_peer(peer)
+	#peer.create_client(Adress,Port)
+	var err = webPeer.create_client("wss://" + Adress + ":" + str(Port))
+	if err != OK:
+		print("Failed to start WebSocket client:", err)
+	multiplayer.set_multiplayer_peer(webPeer)
 	GameManager.You = multiplayer.get_unique_id()
 	GameManager.last_address = Adress
 	GameManager.last_port = Port

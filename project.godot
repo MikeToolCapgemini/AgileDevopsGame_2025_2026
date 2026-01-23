@@ -37,6 +37,7 @@ enabled=PackedStringArray("res://addons/collapsible_container/plugin.cfg", "res:
 [global_group]
 
 DevmodeUI="Specific UI that's only accesible during Devmode"
+FacilitatorUI=""
 
 [input]
 
