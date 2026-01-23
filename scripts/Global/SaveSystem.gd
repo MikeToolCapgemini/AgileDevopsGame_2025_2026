@@ -54,14 +54,6 @@ func save_game_file(saveName : String,saveData, checkname := true):
 		if check_if_saveName_exists(savePath):
 			SaveOverWriteInterface._show_overwrite_UI(self,saveName,saveData)
 			return
-	
-	
-		
-	#if currentSave != saveName:
-		#savePath = SavePath + currentSave + ".json"
-	#else:
-		#savePath = SavePath + saveName + ".json"
-		#currentSave = saveName
 	var file = FileAccess.open(savePath, FileAccess.WRITE)
 	var json = JSON.stringify(saveData)
 	
@@ -189,6 +181,30 @@ func get_save_name() -> String:
 		var number = randi()% 100
 		saveName = "savegame"+ str(number)
 	return saveName
+
+var tc : TimeConverter = TimeConverter.new()
+func delete_saves_by_date(months_old : int = 2):
+	check_save_dir()
+	var dir_path = "user://saves"
+	var saves = get_save_files()
+	
+	var now_dict = Time.get_datetime_dict_from_system()
+	var cutoff_dict = tc.subtract_months(
+		now_dict,
+		months_old
+	)
+	var cutoff_time = Time.get_unix_time_from_datetime_dict(cutoff_dict)
+	
+	var filesDeleted : int = 0
+	for save in saves:
+		var full_path = dir_path + "/" + save
+		var last_modified_time = FileAccess.get_modified_time(full_path)
+		
+		if last_modified_time < cutoff_time:
+			DirAccess.remove_absolute(full_path)
+			filesDeleted += 1
+	
+	print("Deleted " + str(filesDeleted) + " files")
 
 func reset_data():
 	SaveData = DefaultData.duplicate(true)
