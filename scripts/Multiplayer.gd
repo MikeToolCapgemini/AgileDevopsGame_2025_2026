@@ -193,14 +193,18 @@ func host_game():
 var sir : ServerInfoRequester = ServerInfoRequester.new()
 
 func join_game():
+	add_child(sir)
+	await sir.server_info_ready
 	var clientCAS = load("res://Fullchain.crt")
 	var connect_address := Adress
 	var connect_port := Port
-
+	print("Trying to join game")
 	if sir.server_address != "":
 		connect_address = sir.server_address
+		print("found server address")
 	if sir.server_port != 0:
 		connect_port = sir.server_port
+		print("found server port")
 	#webPeer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
 	#peer.create_client(Adress,Port)
 	var err = webPeer.create_client("wss://" + connect_address + ":" + str(connect_port))
@@ -208,8 +212,8 @@ func join_game():
 		print("Failed to start WebSocket client:", err)
 	multiplayer.set_multiplayer_peer(webPeer)
 	GameManager.You = multiplayer.get_unique_id()
-	GameManager.last_address = Adress
-	GameManager.last_port = Port
+	GameManager.last_address = connect_address
+	GameManager.last_port = connect_port
 
 ## Interface Functions ##
 func _on_start_button_pressed():
