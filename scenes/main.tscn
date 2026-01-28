@@ -1,4 +1,4 @@
-[gd_scene load_steps=231 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=232 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -101,6 +101,7 @@
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
 [ext_resource type="Script" uid="uid://b0vl6xxjb2of5" path="res://scenes/stopSession.gd" id="86_37xlc"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="87_1uevf"]
+[ext_resource type="Script" uid="uid://cskqhgbr0hwpc" path="res://scenes/return_to_main_menu.gd" id="87_ga3rw"]
 [ext_resource type="FontFile" uid="uid://bgwubnrnnxe2s" path="res://addons/fontawesome/fonts/fa-regular-400.woff2" id="87_xmrkg"]
 [ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="88_0tljd"]
 [ext_resource type="Script" uid="uid://boe0hs34d60l3" path="res://scenes/PlayerSettingsUI.gd" id="88_8lcmr"]
@@ -1933,7 +1934,6 @@ far = 25.0
 [node name="Connections" type="Node" parent="."]
 
 [node name="Interface_Options" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2117,7 +2117,32 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_vny5k")
 text = "Stop session"
 script = ExtResource("86_37xlc")
 
+[node name="ReturnToMainMenu" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
+visible = false
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Exits the game"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_83607")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vny5k")
+text = "Return To Main Menu"
+script = ExtResource("87_ga3rw")
+
 [node name="QuitGame" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
+visible = false
 custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
