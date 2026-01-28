@@ -1514,7 +1514,7 @@ LabelObject = NodePath("../DiceLabel/SubViewport/Label")
 roll_strength = 8
 returnSpeed = 0.8
 
-[node name="Hourglass3DLabel" type="Sprite3D" parent="World/Interactables"]
+[node name="Hourglass3DLabel" type="Sprite3D" parent="World/Interactables" groups=["FacilitatorUI"]]
 transform = Transform3D(-0.2214588, -1.1796012, 1.1796012, 0, 1.2011138, 1.2011138, -1.6858971, 0.23276514, -0.23276514, -2.3497815, 1.7972398, 4.0537663)
 billboard = 1
 texture = SubResource("ViewportTexture_oyljp")
