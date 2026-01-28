@@ -3,9 +3,8 @@ extends Node
 
 # Basic Server Information
 @export var GameScene : PackedScene
-#@export var Adress = "srv1161281.hstgr.cloud"
 @export var Adress := "localhost"
-@export var Port := 8081
+@export var Port := 8080
 @export var MaxPlayers = 12
 var peer = ENetMultiplayerPeer.new()
 var webPeer = WebSocketMultiplayerPeer.new()
@@ -26,10 +25,6 @@ func _ready():
 	if OS.has_feature("dedicated_server"):
 		print("Starting dedicated server...")
 		host_game()
-
-func _process(_delta):
-	if OS.has_feature("dedicated_server"):
-		print(webPeer.get_connection_status())
 
 func peer_connected(id):
 	if id != 1:
@@ -207,7 +202,7 @@ func join_game():
 		print("found server port")
 	#webPeer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
 	#peer.create_client(Adress,Port)
-	var err = webPeer.create_client("wss://" + connect_address + ":" + str(connect_port))
+	var err = webPeer.create_client("wss://" + connect_address)
 	if err != OK:
 		print("Failed to start WebSocket client:", err)
 	multiplayer.set_multiplayer_peer(webPeer)
