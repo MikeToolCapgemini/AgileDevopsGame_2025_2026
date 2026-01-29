@@ -15,6 +15,8 @@ var started : bool = false
 @export var disconnect_panel : Control
 @export var disconnect_server_panel : Control
 
+
+
 func _ready():
 	GameManager.multiplayer_manager = self
 	multiplayer.peer_connected.connect(peer_connected)
@@ -190,8 +192,12 @@ func host_game():
 var sir : ServerInfoRequester = ServerInfoRequester.new()
 
 func join_game():
+	var sir := ServerInfoRequester.new()
 	add_child(sir)
+
 	await sir.server_info_ready
+
+	# use sir.server_address / sir.server_port here
 	var clientCAS = load("res://Fullchain.crt")
 	var connect_address := Adress
 	var connect_port := Port
@@ -208,6 +214,7 @@ func join_game():
 	if err != OK:
 		print("Failed to start WebSocket client:", err)
 	multiplayer.set_multiplayer_peer(webPeer)
+	sir.queue_free()
 	GameManager.You = multiplayer.get_unique_id()
 	GameManager.last_address = connect_address
 	GameManager.last_port = connect_port
@@ -278,11 +285,10 @@ func _on_reconnect_pressed():
 	await get_tree().process_frame
 
 	# NEW peer instance (critical)
-	peer = ENetMultiplayerPeer.new()
-	peer.create_client(GameManager.last_address, GameManager.last_port)
-	multiplayer.multiplayer_peer = peer
+	webPeer = WebSocketMultiplayerPeer.new()
+	webPeer.create_client("wss://" + GameManager.last_address)
+	multiplayer.multiplayer_peer = webPeer
 
 
 func _on_home_pressed() -> void:
 	cleanup_multiplayer()
-	
