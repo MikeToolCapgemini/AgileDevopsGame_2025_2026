@@ -95,6 +95,7 @@ func start_game():
 			rpc_id(peer_id, "join_running_game")
 
 func reset_server_session():
+	print("session reset in progress")
 	# Kick any remaining peers (usually none)
 	for peer_id in multiplayer.get_peers():
 		rpc_id(peer_id, "server_resetting")
@@ -114,21 +115,22 @@ func reset_server_session():
 	show_multiplayer_ui()
 	disconnect_server_panel.hide()
 
-@rpc("authority")
+@rpc("any_peer")
 func request_server_reset():
 	# Optional: only allow certain players to trigger it
 	#if not is_player_allowed_to_reset(get_tree().get_rpc_sender_id()):
 		#return
-	
+	print("resetting")
 	reset_server_session()
 
 
-@rpc("authority")
+@rpc("any_peer")
 func server_resetting():
 	ErrorLabel.show_error("Server session ended, Server is resetting")
 
 func _on_stop_game_button_pressed():
 	# Tell the server to reset the session
+	print("telling host to stop session")
 	rpc_id(1, "request_server_reset") # assuming host ID is 1
 
 
