@@ -12,6 +12,7 @@ var Password : String
 
 var ldm = LDM.new()
 var ljm = LJM.new()
+var sam = SupabaseAuthManager.new()
 var passHasher = PassHasher.new()
 
 func _ready() -> void:
@@ -56,10 +57,12 @@ func _go_to_next_scene():
 	get_tree().change_scene_to_packed(next_scene)
 
 func createUser(username,password):
+	
 	print("Creating user " + username)
-	var salt = passHasher.GenerateSalt()
-	var hashedPassword = passHasher.HashPassword(password,salt)
-	ljm.add_user(username,hashedPassword,salt)
+	sam.register(username,password)
+	#var salt = passHasher.GenerateSalt()
+	#var hashedPassword = passHasher.HashPassword(password,salt)
+	#ljm.add_user(username,hashedPassword,salt)
 
 
 
@@ -67,18 +70,33 @@ func _check_user_information(username,password):
 	if DevMode.DevModeEnabled:
 		if username == "DEVELOPER" && password == "C4PGEM1N!":
 			return true
-	var userData = ljm.get_user(username)
 	
-	if userData.size() < 1:
-		ErrorLabel.show_error("Login Failed, invalid username")
-		return false
+	
+	sam.login(username,password)
+	
+	var salt = passHasher.GenerateSalt()
+	var hashed_password = passHasher.HashPassword(password,salt)
+	
+	var login_response = sam.login(username,password)
+	
+	if login_response != null && login_response.has("user_id"):
+		print("Login successful for user:",username)
+		return true
 	else:
-		if userData["hashedPassword"] == passHasher.HashPassword(password,userData["salt"]):
-			print(userData)
-			return true
-		else:
-			ErrorLabel.show_error("Login Failed, invalid password")
-			return false
+		ErrorLabel.show_error("Login Failed, invalid username or password")
+		return false
+	#var userData = ljm.get_user(username)
+	
+	#if userData.size() < 1:
+		#ErrorLabel.show_error("Login Failed, invalid username")
+		#return false
+	#else:
+		#if userData["hashedPassword"] == passHasher.HashPassword(password,userData["salt"]):
+			#print(userData)
+			#return true
+		#else:
+			#ErrorLabel.show_error("Login Failed, invalid password")
+			#return false
 
 
 func _on_create_user_pressed() -> void:
