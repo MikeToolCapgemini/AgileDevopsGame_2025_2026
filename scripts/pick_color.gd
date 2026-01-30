@@ -6,5 +6,5 @@ extends Button
 
 func _on_pressed() -> void:
 	PlayerSettings.color = PlayerColor
-	PlayerSettings.rpc("notify_players_updated")
+	PlayerSettings.rpc("set_player_color",multiplayer.get_unique_id(),PlayerColor)
 	mainPanel.hide()
