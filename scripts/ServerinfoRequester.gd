@@ -3,6 +3,7 @@ class_name ServerInfoRequester
 
 var server_address: String = ""
 var server_port: int = 0
+var use_port : bool = false
 
 signal server_info_ready
 
@@ -38,6 +39,7 @@ func _on_request_completed(result: int, response_code: int, headers: Array, body
 		if err == OK:
 			var data = json.data
 			server_address = str(data.get("address", ""))
+			use_port = bool(data.get("use-port"))
 			server_port = int(data.get("port", 0))
 			print("Server info received:", server_address, server_port)
 			emit_signal("server_info_ready")

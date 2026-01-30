@@ -44,6 +44,7 @@ func peer_disconnected(id):
 		disconnect_panel.edit_text("Player: " + str(pName) + " Disconnected!" )
 		disconnect_panel.show()
 		GameManager.Players.erase(id)
+		GameManager.players_updated.emit()
 		update_text_field()
 	print("Player Disconnected: " + str(id))
 
@@ -72,6 +73,7 @@ func send_player_information(playername, id):
 			"name" : playername,
 			"id" : id
 		}
+	GameManager.players_updated.emit()
 	# calls update for player information to all connected clients if current client = server.
 	if multiplayer.is_server():
 		for p in GameManager.Players:
@@ -192,6 +194,16 @@ func host_game():
 var sir : ServerInfoRequester = ServerInfoRequester.new()
 
 func join_game():
+	var err= ""
+	if OS.has_feature("editor"):
+		err = webPeer.create_client("ws://" + Adress + ":" + str(Port))
+		if err != OK:
+			print("Failed to start WebSocket client:", err)
+		multiplayer.set_multiplayer_peer(webPeer)
+		GameManager.You = multiplayer.get_unique_id()
+		GameManager.last_address = Adress
+		GameManager.last_port = Port
+		return
 	var sir := ServerInfoRequester.new()
 	add_child(sir)
 
@@ -210,7 +222,11 @@ func join_game():
 		print("found server port")
 	#webPeer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
 	#peer.create_client(Adress,Port)
-	var err = webPeer.create_client("wss://" + connect_address)
+	
+	if sir.use_port:
+		err = webPeer.create_client("wss://" + connect_address + ":" + str(connect_port))
+	else:
+		err = webPeer.create_client("wss://" + connect_address)
 	if err != OK:
 		print("Failed to start WebSocket client:", err)
 	multiplayer.set_multiplayer_peer(webPeer)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=232 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=233 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -99,18 +99,19 @@
 [ext_resource type="Script" uid="uid://chkh3ytq3t6lm" path="res://scripts/reset_game.gd" id="81_raiwf"]
 [ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
-[ext_resource type="Script" uid="uid://b0vl6xxjb2of5" path="res://scenes/stopSession.gd" id="86_37xlc"]
+[ext_resource type="Script" uid="uid://b0vl6xxjb2of5" path="res://scripts/stopSession.gd" id="86_37xlc"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="87_1uevf"]
-[ext_resource type="Script" uid="uid://cskqhgbr0hwpc" path="res://scenes/return_to_main_menu.gd" id="87_ga3rw"]
+[ext_resource type="Script" uid="uid://cskqhgbr0hwpc" path="res://scripts/return_to_main_menu.gd" id="87_ga3rw"]
 [ext_resource type="FontFile" uid="uid://bgwubnrnnxe2s" path="res://addons/fontawesome/fonts/fa-regular-400.woff2" id="87_xmrkg"]
 [ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="88_0tljd"]
-[ext_resource type="Script" uid="uid://boe0hs34d60l3" path="res://scenes/PlayerSettingsUI.gd" id="88_8lcmr"]
+[ext_resource type="Script" uid="uid://boe0hs34d60l3" path="res://scripts/PlayerSettingsUI.gd" id="88_8lcmr"]
 [ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="88_wvlrk"]
 [ext_resource type="FontFile" uid="uid://2ike7sp4qiyi" path="res://assets/fonts/Ubuntu/Ubuntu-BoldItalic.ttf" id="89_mgpkq"]
 [ext_resource type="FontFile" uid="uid://b23akitg4yjxd" path="res://assets/fonts/Ubuntu/Ubuntu-Italic.ttf" id="90_xmrkg"]
 [ext_resource type="Script" uid="uid://df05tjlkygvok" path="res://scripts/UX/Toggle.gd" id="92_83607"]
 [ext_resource type="Script" uid="uid://wqc4dac2wyhy" path="res://scripts/Hide_facilitator_button.gd" id="92_gm02q"]
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
+[ext_resource type="Script" uid="uid://dd03peyrwpfdy" path="res://scripts/player_list.gd" id="95_f5chs"]
 [ext_resource type="Script" uid="uid://bq01pxakqcfgj" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
 [ext_resource type="Script" uid="uid://ceamoqnkbfe7" path="res://scripts/disconnect.gd" id="103_gm02q"]
 [ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
@@ -2167,7 +2168,6 @@ text = "Quit Game"
 script = ExtResource("52_v5wqd")
 
 [node name="Interface_top_left_buttons" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2446,6 +2446,136 @@ tooltip_text = "Close Card Settings Panel"
 theme_override_styles/normal = SubResource("StyleBoxFlat_jp61a")
 
 [node name="FontAwesome" type="Label" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/CloseCardSettingsButton"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -8.0
+offset_right = 6.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 15
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 15
+icon_name = "x"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="playerList" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer" groups=["FacilitatorUI"]]
+layout_mode = 2
+
+[node name="OpenPlayerList" type="Button" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList" node_paths=PackedStringArray("collapse")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Open Card Settings panel"
+theme_override_styles/normal = SubResource("StyleBoxFlat_yton5")
+script = ExtResource("78_raiwf")
+collapse = NodePath("../PlayerList")
+folded = true
+
+[node name="FontAwesome" type="Label" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/OpenPlayerList"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 35
+icon_name = "users"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="PlayerList" type="Control" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList"]
+process_mode = 3
+editor_description = "
+			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
+			
+Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
+clip_contents = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+script = ExtResource("78_engxj")
+starts_opened = false
+folding_direction_preset = 9
+sizing_constraint = 2
+sizing_node = NodePath("PlayerListContainer")
+metadata/_custom_type_script = "uid://btlh4wrv04rc3"
+
+[node name="PlayerListContainer" type="PanelContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList" node_paths=PackedStringArray("PlayerVbox", "PlayerLabel")]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 0
+offset_right = 6.0
+offset_bottom = 6.0
+script = ExtResource("95_f5chs")
+PlayerVbox = NodePath("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer")
+PlayerLabel = NodePath("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlayerLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]List Of Players"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(194, 0)
+layout_mode = 2
+
+[node name="PlayerLabel" type="RichTextLabel" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+text = "Player"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="CloseCardSettingsButton" type="Button" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "Close Card Settings Panel"
+theme_override_styles/normal = SubResource("StyleBoxFlat_jp61a")
+
+[node name="FontAwesome" type="Label" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer/CloseCardSettingsButton"]
 auto_translate_mode = 2
 layout_mode = 1
 anchors_preset = 8
@@ -5411,6 +5541,8 @@ text = "No
 [connection signal="toggled" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton" method="_on_toggled"]
 [connection signal="toggled" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton2" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton2" method="_on_toggled"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/CloseCardSettingsButton" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/OpenCardSettings" method="_on_collapse_close"]
+[connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/OpenPlayerList" to="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/OpenPlayerList" method="_toggle_collapse"]
+[connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer/CloseCardSettingsButton" to="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/OpenPlayerList" method="_on_collapse_close"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/OpenTimerButton" to="Interface_Facilitator/FacilitatorsideBtns/OpenTimerButton" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/SetTimer/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/Set" to="World/Interactables/hourglassAnimated" method="_on_set_pressed"]
 [connection signal="pressed" from="Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/TimerPanel/MarginContainer/VBoxContainer/HBoxContainer/StartButton" to="World/Interactables/hourglassAnimated" method="_on_start_button_pressed"]
