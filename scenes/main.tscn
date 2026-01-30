@@ -1,4 +1,4 @@
-[gd_scene load_steps=233 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=235 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -111,11 +111,13 @@
 [ext_resource type="Script" uid="uid://df05tjlkygvok" path="res://scripts/UX/Toggle.gd" id="92_83607"]
 [ext_resource type="Script" uid="uid://wqc4dac2wyhy" path="res://scripts/Hide_facilitator_button.gd" id="92_gm02q"]
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
+[ext_resource type="Script" uid="uid://3k654ysj1nsk" path="res://scripts/change_color.gd" id="94_joh2r"]
 [ext_resource type="Script" uid="uid://dd03peyrwpfdy" path="res://scripts/player_list.gd" id="95_f5chs"]
 [ext_resource type="Script" uid="uid://bq01pxakqcfgj" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
 [ext_resource type="Script" uid="uid://ceamoqnkbfe7" path="res://scripts/disconnect.gd" id="103_gm02q"]
 [ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
 [ext_resource type="Script" uid="uid://bfpqk8gkgkx6p" path="res://scripts/pick_color.gd" id="107_vny5k"]
+[ext_resource type="Script" uid="uid://cc745mejagtln" path="res://scripts/select_color_ui.gd" id="108_eh25q"]
 [ext_resource type="Script" uid="uid://br1s2wprncugw" path="res://scripts/editable_panel.gd" id="110_07pt3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrx01"]
@@ -2168,6 +2170,7 @@ text = "Quit Game"
 script = ExtResource("52_v5wqd")
 
 [node name="Interface_top_left_buttons" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2291,6 +2294,31 @@ text = "Color:"
 custom_minimum_size = Vector2(150, 25)
 layout_mode = 2
 text = "None"
+
+[node name="ChangeColor" type="Button" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer/Color" node_paths=PackedStringArray("color_ui")]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+tooltip_text = "Change your team color"
+script = ExtResource("94_joh2r")
+color_ui = NodePath("../../../../../../../../../../Interface_SelectColor")
+
+[node name="FontAwesome" type="Label" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer/Color/ChangeColor"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 16
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_name = "palette"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="ClosePlayerSettingsButton" type="Button" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(25, 25)
@@ -4467,6 +4495,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("74_roort")
+script = ExtResource("108_eh25q")
 
 [node name="BlackoutBG" type="Panel" parent="Interface_SelectColor"]
 layout_mode = 1
@@ -5536,6 +5565,7 @@ text = "No
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" method="_on_pressed"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/OpenCardSettings" to="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/OpenCardSettings" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/OpenCardSettings" to="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer" method="Show_Settings"]
+[connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer/Color/ChangeColor" to="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer/Color/ChangeColor" method="_on_pressed"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/ClosePlayerSettingsButton" to="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/OpenCardSettings" method="_on_collapse_close"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/OpenCardSettings" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/OpenCardSettings" method="_toggle_collapse"]
 [connection signal="toggled" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton" method="_on_toggled"]

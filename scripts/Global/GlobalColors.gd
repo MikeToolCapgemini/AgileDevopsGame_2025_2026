@@ -2,7 +2,7 @@ extends Node
 
 const TeamColors = {
 	"BuildOrange": Color("ff6500"),
-	"PlanningYellow": Color("d7cd00ff"),
+	"PlanYellow": Color("d7cd00ff"),
 	"ReleasePurple": Color("7c00ff"),
 	"OperateBrown": Color("5e301c"),
 	"MonitorBlue": Color("0028ff"),

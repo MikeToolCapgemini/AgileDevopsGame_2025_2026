@@ -9,7 +9,7 @@ extends Node
 @export_category("Other Objects to Show when done")
 @export var OptionsPanel : Node
 @export var Top_left_buttons : Control
-@export var ColorSelectPanel : Control
+@export var ColorSelectPanel : select_color_ui
 
 func _ready():
 	match(PlayerSettings.role):
@@ -20,7 +20,7 @@ func _ready():
 		"player":
 			toggleFacilitatorbuttons(false)
 			if ColorSelectPanel:
-				ColorSelectPanel.visible = true
+				ColorSelectPanel.show_ui()
 	if OptionsPanel:
 		OptionsPanel.visible = true
 	if Top_left_buttons:
