@@ -25,6 +25,16 @@ func _on_pressed():
 		print(GlobalSettings.QuestionsPro)
 
 
+@rpc("authority") # Only the server executes this
+func _server_update_setting(setting_name: String, value: bool):
+	match setting_name:
+		"basic":
+			GlobalSettings.QuestionsBasic = value
+		"pro":
+			GlobalSettings.QuestionsPro = value
+	# Sync to all clients
+	GlobalSettings.sync_self_to_clients()
+
 func _on_toggled(toggled_on: bool) -> void:
 	if QuestionsType == "basic":
 		GlobalSettings.QuestionsBasic = toggled_on
@@ -32,5 +42,6 @@ func _on_toggled(toggled_on: bool) -> void:
 	if QuestionsType == "pro":
 		GlobalSettings.QuestionsPro = toggled_on
 		print(GlobalSettings.QuestionsPro)
+	rpc_id(1,"_server_update_setting",QuestionsType,toggled_on)
 	ImportData.sort_data.rpc()
 	

@@ -59,8 +59,7 @@ func set_bg_color(newStyle : Color):
 	print("set color of "," to ", newStyle)
 
 func draw(type):
-	toggle_active.rpc(true)
-	visible = true
+
 	CardUIManager.bookmark.visible = false
 	_sync_answershown(false)
 	_sync_answershown.rpc(false)
@@ -81,11 +80,11 @@ func draw(type):
 		toggle_top_bar(true)
 		toggle_top_bar.rpc(true)
 	else:
+		var keys = cardTypeData.keys()
 		if cardTypeData.size() == 0:
 			print("No cards left")
 			ErrorLabel.show_error("No cards left of this type")
 			return
-		var keys = cardTypeData.keys()
 		var d = keys[randi_range(0, keys.size() - 1)]
 		#var d = randi_range(0, cardTypeData.size() - 1)
 		print(d)
@@ -97,6 +96,8 @@ func draw(type):
 		rpc_id(1,"set_current_vars_for_server",active,curType,curKey)
 		card_discard(cardTypeData,cardTypeData, type, d)
 		card_discard.rpc(cardTypeData,cardTypeData, type, d)
+	toggle_active.rpc(true)
+	visible = true
 	print(curType + str(curKey))
 	_sync_cardshown.rpc(visible, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)
 
