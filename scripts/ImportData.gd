@@ -27,7 +27,7 @@ func load_json_data():
 func _ready():
 	import_data()
 
-
+@rpc("any_peer","call_local")
 func sort_data():
 	import_data()
 	if !GlobalSettings.QuestionsBasic:

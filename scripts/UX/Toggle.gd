@@ -32,5 +32,5 @@ func _on_toggled(toggled_on: bool) -> void:
 	if QuestionsType == "pro":
 		GlobalSettings.QuestionsPro = toggled_on
 		print(GlobalSettings.QuestionsPro)
-	ImportData.sort_data()
+	ImportData.sort_data.rpc()
 	

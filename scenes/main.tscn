@@ -2184,6 +2184,7 @@ theme = ExtResource("74_roort")
 layout_mode = 1
 offset_right = 354.0
 offset_bottom = 110.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_8lcmr")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Interface_top_left_buttons/TopButtons"]
@@ -2251,6 +2252,7 @@ custom_minimum_size = Vector2(300, 110)
 layout_mode = 1
 offset_right = 6.0
 offset_bottom = 6.0
+mouse_filter = 2
 script = ExtResource("88_8lcmr")
 RoleTextField = NodePath("MarginContainer/VBoxContainer/Role/Role")
 ColorTextField = NodePath("MarginContainer/VBoxContainer/Color/Color")
@@ -2271,28 +2273,34 @@ text = "[center]Player Settings"
 
 [node name="Role" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Title" type="RichTextLabel" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer/Role"]
 custom_minimum_size = Vector2(75, 25)
 layout_mode = 2
+mouse_filter = 2
 text = "Role:"
 
 [node name="Role" type="RichTextLabel" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer/Role"]
 custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
+mouse_filter = 2
 text = "None"
 
 [node name="Color" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Title" type="RichTextLabel" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer/Color"]
 custom_minimum_size = Vector2(75, 25)
 layout_mode = 2
+mouse_filter = 2
 text = "Color:"
 
 [node name="Color" type="RichTextLabel" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer/Color"]
 custom_minimum_size = Vector2(150, 25)
 layout_mode = 2
+mouse_filter = 2
 text = "None"
 
 [node name="ChangeColor" type="Button" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer/Color" node_paths=PackedStringArray("color_ui")]
@@ -2416,6 +2424,7 @@ custom_minimum_size = Vector2(300, 110)
 layout_mode = 1
 offset_right = 6.0
 offset_bottom = 6.0
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer"]
 layout_mode = 2
@@ -2501,6 +2510,7 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="playerList" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer" groups=["FacilitatorUI"]]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="OpenPlayerList" type="Button" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList" node_paths=PackedStringArray("collapse")]
 custom_minimum_size = Vector2(50, 50)
@@ -2567,9 +2577,11 @@ PlayerLabel = NodePath("MarginContainer/VBoxContainer/ScrollContainer/VBoxContai
 
 [node name="MarginContainer" type="MarginContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
@@ -2581,15 +2593,18 @@ text = "[center]List Of Players"
 [node name="ScrollContainer" type="ScrollContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 custom_minimum_size = Vector2(194, 0)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="PlayerLabel" type="RichTextLabel" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("87_1uevf")
 text = "Player"
 horizontal_alignment = 1
