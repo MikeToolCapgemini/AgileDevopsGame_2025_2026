@@ -12,6 +12,7 @@ var answerShown : bool = false
 var curType
 var curKey
 var cardTypeData
+var answerexplanationtext
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,9 +42,8 @@ func apply_state(state: Dictionary) -> void:
 			display_action_card(curKey)
 		else:
 			set_bg_on_type(curType)
-			display_default_card(curKey-1)
+			display_default_card(curKey)
 	_sync_cardshown(active, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)
-	_sync_answershown(answerShown)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -158,6 +158,10 @@ func toggle_top_bar(isaction: bool):
 		CardUIManager.ActionTagObject.visible = false
 
 func display_default_card(d):
+	if not cardTypeData.has(d):
+		ErrorLabel.show_error("no card found for key: %s" % str(d))
+		return
+
 	
 	var lType = cardTypeData[d]["Basis / Prof"]
 	var cType = cardTypeData[d]["Type"]
@@ -170,10 +174,11 @@ func display_default_card(d):
 	#var cChoiceE = set_card_choice_string("E. ", cardTypeData[d]["ChoiceE"])
 	
 	var cAnswer = cardTypeData[d]["Answer"]
-	var cExplanation = cardTypeData[d]["Toelichting"]
+	var cQuestionExplanation = cardTypeData[d]["QuestionExplanation"]
+	var cAnswerExplanation = cardTypeData[d]["AnswerExplanation"]
 	
-	card_setup(cType,cSubType,d, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer,cExplanation,lType)
-	card_setup.rpc(cType,cSubType,d, cQuestion, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer,cExplanation,lType)
+	card_setup(cType,cSubType,d, cQuestion,cQuestionExplanation, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer,cAnswerExplanation,lType)
+	card_setup.rpc(cType,cSubType,d, cQuestion,cQuestionExplanation, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer,cAnswerExplanation,lType)
 
 var actionDict = [
 	"Your delivery does not fit in the release calendar: skip a turn",
@@ -194,8 +199,8 @@ var actionDict = [
 func display_action_card(roll : int):
 
 	print(actionDict[roll] + str(multiplayer.get_unique_id()))
-	card_setup("action", "","", actionDict[roll], "", "", "", "", "","","")
-	card_setup.rpc("action", "","", actionDict[roll], "", "", "", "", "","","")
+	card_setup("action", "","", actionDict[roll],"", "", "", "", "", "","","")
+	card_setup.rpc("action", "","", actionDict[roll],"", "", "", "", "", "","","")
 
 func set_card_choice_string(tag, cardTypeData):
 	if cardTypeData == "":
@@ -227,7 +232,7 @@ func card_discard(cardTypeData,cardTypeDataVar, cardTypeString, keyVar):
 	#SaveSystem.save_game()
 
 @rpc("any_peer")
-func card_setup(type, subtype, nr, question, choiceA, choiceB, choiceC, choiceD, answer,explanation,level):
+func card_setup(type, subtype, nr, question,qexplanation, choiceA, choiceB, choiceC, choiceD, answer,aexplanation,level):
 	print("####")
 	print(type)
 	set_card_icon(type)
@@ -241,20 +246,43 @@ func card_setup(type, subtype, nr, question, choiceA, choiceB, choiceC, choiceD,
 	CardUIManager.AnswerBTextObject.text = choiceB
 	CardUIManager.AnswerCTextObject.text = choiceC
 	CardUIManager.AnswerDTextObject.text = choiceD
-	if answer != "" || explanation != "":
+	
+	
+	
+	if answer != "" || qexplanation != "" || aexplanation != "":
 		CardUIManager.AnswerPanel.visible = true
 	else:
 		CardUIManager.AnswerPanel.visible = false
 		
+	if PlayerSettings.role == "player":
+		if aexplanation != "" && answerShown:
+			CardUIManager.AnswerPanel.visible = true
+		elif qexplanation != "":
+			print("Question explanation "+qexplanation)
+			CardUIManager.AnswerPanel.visible = true
+			CardUIManager.AnswerExplanationTextObject.visible = true
+			CardUIManager.AnswerExplanationTextObject.text = "Explanation: " + qexplanation
+		else:
+			CardUIManager.AnswerPanel.visible = false
+			
+	if aexplanation != "":
+		answerexplanationtext = aexplanation
 	CardUIManager.AnswerObject.text = answer
 	CardUIManager.AnswerFacilitatorTextObject.text = "Answer: " + answer
-	if explanation != "" && answer == "":
-		CardUIManager.AnswerFacilitatorTextObject.text = "Possible answers:"
-	if explanation == "":
-		CardUIManager.AnswerExplanationTextObject.visible = false
-	else:
-		CardUIManager.AnswerExplanationTextObject.visible = true
-	CardUIManager.AnswerExplanationTextObject.text = "Explanation: " + explanation
+	#setting the answer explanation
+	if PlayerSettings.role == "facilitator":
+		if aexplanation != "" && answer == "":
+			answerexplanationtext = aexplanation
+			CardUIManager.AnswerFacilitatorTextObject.text = "Possible answers:"
+		if aexplanation != "":
+			answerexplanationtext = aexplanation
+			CardUIManager.AnswerExplanationTextObject.visible = true
+			CardUIManager.AnswerExplanationTextObject.text = "Explanation: " + aexplanation
+		else:
+			CardUIManager.AnswerExplanationTextObject.visible = false
+	if answerShown:
+		_sync_answershown(answerShown)
+
 	
 
 func set_card_icon(type):
@@ -292,8 +320,17 @@ func _sync_cardshown(state, answer = "-", question = "-"):
 
 @rpc("any_peer")
 func _sync_answershown(state):
+	answerShown = state
 	CardUIManager.AnswerObject.visible = state
 	CardUIManager.AnswerBackground.visible = state
+	if PlayerSettings.role == "player":
+		if answerexplanationtext != "" && answerShown:
+			CardUIManager.AnswerPanel.visible = true
+			CardUIManager.AnswerExplanationTextObject.visible = true
+			CardUIManager.AnswerExplanationTextObject.text = "Explanation: " + answerexplanationtext
+	
+	if answerexplanationtext != "":
+		CardUIManager.AnswerPanel.visible = state
 
 @rpc("call_local")
 func close_answer():

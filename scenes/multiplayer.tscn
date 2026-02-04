@@ -152,7 +152,7 @@ theme_override_fonts/font = ExtResource("3_4vwpp")
 theme_override_styles/normal = SubResource("StyleBoxFlat_36d77")
 text = "Join"
 
-[node name="Start Button" type="Button" parent="Debug Interface" groups=["FacilitatorUI"]]
+[node name="Start Button" type="Button" parent="Debug Interface" groups=["DevmodeUI", "FacilitatorUI"]]
 layout_mode = 0
 offset_left = 374.0
 offset_top = 110.0

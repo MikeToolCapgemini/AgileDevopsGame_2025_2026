@@ -1,4 +1,4 @@
-[gd_scene load_steps=235 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=236 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -119,6 +119,7 @@
 [ext_resource type="Script" uid="uid://bfpqk8gkgkx6p" path="res://scripts/pick_color.gd" id="107_vny5k"]
 [ext_resource type="Script" uid="uid://cc745mejagtln" path="res://scripts/select_color_ui.gd" id="108_eh25q"]
 [ext_resource type="Script" uid="uid://br1s2wprncugw" path="res://scripts/editable_panel.gd" id="110_07pt3"]
+[ext_resource type="Script" uid="uid://ee3j21fjacdt" path="res://scripts/ForceCard.gd" id="120_yton5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrx01"]
 size = Vector3(11, 0.7, 5)
@@ -2362,7 +2363,7 @@ icon_size = 15
 icon_name = "x"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
-[node name="CardSettings" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer" groups=["FacilitatorUI"]]
+[node name="CardSettings" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer" groups=["DevmodeUI", "FacilitatorUI"]]
 layout_mode = 2
 
 [node name="OpenCardSettings" type="Button" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings" node_paths=PackedStringArray("collapse")]
@@ -2408,7 +2409,7 @@ editor_description = "
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
 clip_contents = true
-custom_minimum_size = Vector2(300, 110)
+custom_minimum_size = Vector2(300, 111)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -2473,6 +2474,50 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("87_1uevf")
 text = "Pro"
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer" groups=["DevmodeUI"]]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="DebugButtons" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="OpenForceCardScreen" type="Button" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/DebugButtons" node_paths=PackedStringArray("showObject")]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Open Card Settings panel"
+theme_override_styles/normal = SubResource("StyleBoxFlat_yton5")
+script = ExtResource("49_hpq24")
+showObject = NodePath("../../../../../../../../../../../ForceCardPop-up")
+
+[node name="FontAwesome" type="Label" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/DebugButtons/OpenForceCardScreen"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 15
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 15
+icon_name = "eject"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="CloseCardSettingsButton" type="Button" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(25, 25)
@@ -3634,7 +3679,7 @@ theme = ExtResource("74_roort")
 script = ExtResource("41_lgecp")
 CardUIManager = NodePath("MarginContainer/CollapsibleContainer/CardPanel")
 
-[node name="FacilitatorPanels" type="Control" parent="Interface_Cards" groups=["FacilitatorUI"]]
+[node name="FacilitatorPanels" type="Control" parent="Interface_Cards"]
 custom_minimum_size = Vector2(860, 645)
 layout_mode = 1
 anchors_preset = 15
@@ -3646,7 +3691,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="FaciltatorPanelMainMargin" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels"]
+[node name="FaciltatorPanelMainMargin" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels" groups=["FacilitatorUI"]]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -3851,7 +3896,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="AnswerF" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer/VBoxContainer"]
+[node name="AnswerF" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/CollapsibleContainer/AnswerPanel/MarginContainer/VBoxContainer" groups=["FacilitatorUI"]]
 custom_minimum_size = Vector2(600, 30)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -5506,6 +5551,134 @@ theme_override_styles/hover = ExtResource("46_171dt")
 text = "No
 "
 
+[node name="ForceCardPop-up" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("74_roort")
+
+[node name="Panel" type="PanelContainer" parent="ForceCardPop-up"]
+material = SubResource("CanvasItemMaterial_n6mxd")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -309.0
+offset_top = -120.5
+offset_right = 309.0
+offset_bottom = 120.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sjgq0")
+theme_override_styles/panel = ExtResource("49_6ggbb")
+
+[node name="MarginContainer" type="MarginContainer" parent="ForceCardPop-up/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ForceCardPop-up/Panel/MarginContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ForceCardPop-up/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(11.345, 50)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+bbcode_enabled = true
+text = "Select Which Card Type you want to force in
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ForceCardPop-up/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="CardtypeLabel" type="RichTextLabel" parent="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "CardType"
+
+[node name="CardType" type="LineEdit" parent="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="NumberLabel" type="RichTextLabel" parent="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Number"
+
+[node name="Number" type="LineEdit" parent="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Button" type="Button" parent="ForceCardPop-up/Panel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("mainPanel", "cardManager", "cardTypeTextEdit", "numberTextEdit")]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Force Card"
+script = ExtResource("120_yton5")
+mainPanel = NodePath("../../../..")
+cardManager = NodePath("../../../../../Interface_Cards")
+cardTypeTextEdit = NodePath("../HBoxContainer/CardType")
+numberTextEdit = NodePath("../HBoxContainer/Number")
+
+[node name="CloseCardSettingsButton" type="Button" parent="ForceCardPop-up/Panel" node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "Close Card Settings Panel"
+theme_override_styles/normal = SubResource("StyleBoxFlat_jp61a")
+script = ExtResource("49_4jv7h")
+hideObject = NodePath("../..")
+
+[node name="FontAwesome" type="Label" parent="ForceCardPop-up/Panel/CloseCardSettingsButton"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -8.0
+offset_right = 6.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 15
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 15
+icon_name = "x"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
 [connection signal="input_event" from="World/Interactables/Pawns/Pawn0/StaticBodyPurple1" to="World/Interactables/Pawns/Pawn0" method="_on_static_body_3d_input_event"]
 [connection signal="mouse_entered" from="World/Interactables/Pawns/Pawn0/StaticBodyPurple1" to="World/Interactables/Pawns/Pawn0" method="_on_static_body_3d_mouse_entered"]
 [connection signal="mouse_exited" from="World/Interactables/Pawns/Pawn0/StaticBodyPurple1" to="World/Interactables/Pawns/Pawn0" method="_on_static_body_3d_mouse_exited"]
@@ -5585,6 +5758,7 @@ text = "No
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/OpenCardSettings" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/OpenCardSettings" method="_toggle_collapse"]
 [connection signal="toggled" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton" method="_on_toggled"]
 [connection signal="toggled" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton2" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton2" method="_on_toggled"]
+[connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/DebugButtons/OpenForceCardScreen" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/DebugButtons/OpenForceCardScreen" method="_on_pressed"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/CloseCardSettingsButton" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/OpenCardSettings" method="_on_collapse_close"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/OpenPlayerList" to="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/OpenPlayerList" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer/MarginContainer/CloseCardSettingsButton" to="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/OpenPlayerList" method="_on_collapse_close"]
@@ -5646,3 +5820,5 @@ text = "No
 [connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/Close" to="Interface_Upload_Notification/Panel/HBoxContainer/Close" method="_on_pressed"]
 [connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/Facilitator" to="Interface_SaveOverwrite" method="_on_facilitator_pressed"]
 [connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/Player" to="Interface_SaveOverwrite" method="_on_player_pressed"]
+[connection signal="pressed" from="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/Button" to="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/Button" method="_on_pressed"]
+[connection signal="pressed" from="ForceCardPop-up/Panel/CloseCardSettingsButton" to="ForceCardPop-up/Panel/CloseCardSettingsButton" method="_on_pressed"]
