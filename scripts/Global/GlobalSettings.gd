@@ -14,7 +14,7 @@ func sync_self_to_clients():
 		rpc("receive_sync",data)
 		
 
-@rpc("authority")
+@rpc("any_peer")
 func receive_sync(data:Dictionary):
 	deserialize_state(data)
 
@@ -34,3 +34,4 @@ func deserialize_state(data:Dictionary):
 	for key in data.keys():
 		if properties.has(key):
 			set(key, data[key])
+	print(properties)
