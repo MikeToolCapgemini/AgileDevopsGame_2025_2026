@@ -16,15 +16,23 @@ func _init() -> void:
 	
 	
 	
-func login(username: String, password: String):
-	var body = {
-		"username" : username,
-		"password" : password
-	}
-	
-	_send_request_sync("login", body)
+signal login_success(user_id)
+signal login_failed(message)
 
-func register(username: String, password : String) -> void:
+func login(username: String, password: String, callback: Callable) -> void:
+	# Send raw password; hashing is done on the server
+	var body = {
+		"username": username,
+		"password": password
+	}
+
+	_send_request_async("login", body, callback)
+
+
+
+
+
+func register(username: String, password : String, callback: Callable) -> void:
 	print("registering user")
 	var salt = passHasher.GenerateSalt()
 	var hashed_password = passHasher.HashPassword(password,salt)
@@ -34,7 +42,7 @@ func register(username: String, password : String) -> void:
 		"salt" : salt
 	}
 	
-	_send_request_async("register",body)
+	_send_request_async("register",body,callback)
 	
 	
 func is_logged_in() -> bool:
@@ -44,55 +52,20 @@ func is_logged_in() -> bool:
 func get_user_id() -> int:
 	return user_id
 
-func _send_request_async(endpoint: String, body: Dictionary) -> void:
-	print("sending Request")
-	var headers = [
-		"Content-Type: application/json",
-		"apikey: %s" % SUPABASE_ANON_KEY
-	]
-
-	var json_body = JSON.stringify(body)
-	_http.request(
-		SUPABASE_URL + "/" + endpoint,
-		headers,
-		HTTPClient.METHOD_POST,
-		json_body
-	)
-	
-func _send_request_sync(endpoint: String, body: Dictionary) -> Dictionary:
-	var done := false
-	var result_data = null
-
-	# Create a temporary HTTPRequest node
+func _send_request_async(endpoint: String, body: Dictionary, callback: Callable) -> void:
 	var http := HTTPRequest.new()
 	Engine.get_main_loop().root.add_child(http)
 
-	# Connect completion signal
 	http.request_completed.connect(func(result, response_code, headers, body_bytes):
-		if response_code != 200:
-			result_data = null
-		else:
-			result_data = JSON.parse_string(body_bytes.get_string_from_utf8())
-		done = true
+		var data = null
+		if response_code == 200:
+			data = JSON.parse_string(body_bytes.get_string_from_utf8())
+		callback.call(data, response_code)
+		http.queue_free()
 	)
+	var headers = ["Content-Type: application/json"]
+	http.request(SUPABASE_URL + "/" + endpoint, headers, HTTPClient.METHOD_POST, JSON.stringify(body))
 
-	# Send request
-	var headers = [
-		"Content-Type: application/json",
-		"apikey: %s" % SUPABASE_ANON_KEY
-	]
-	http.request(
-		SUPABASE_URL + "/" + endpoint,
-		headers,
-		HTTPClient.METHOD_POST,
-		JSON.stringify(body)
-	)
-
-	# Wait until done
-	while not done:
-		OS.delay_msec(10)
-
-	return result_data
 
 	
 func _on_request_completed(result, response_code, headers, body) -> void:

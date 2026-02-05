@@ -10,8 +10,8 @@ extends Control
 var Username : String
 var Password : String
 
-var ldm = LDM.new()
-var ljm = LJM.new()
+#var ldm = LDM.new()
+#var ljm = LJM.new()
 var sam = SupabaseAuthManager.new()
 var passHasher = PassHasher.new()
 
@@ -48,9 +48,34 @@ func _get_TextBox_Values():
 
 func _on_Login_pressed() -> void:
 	_get_TextBox_Values()
-	var isCorrect = _check_user_information(Username,Password)
-	if isCorrect:
-		_go_to_next_scene()
+
+	# Dev backdoor
+	if DevMode.DevModeEnabled:
+		if Username == "DEVELOPER" and Password == "C4PGEM1N!":
+			_go_to_next_scene()
+			return
+
+	# Async login
+	sam.login(Username, Password, _on_login_response)
+
+# Handle login response
+func _on_login_response(data, response_code):
+	print("Login response code:", response_code)
+	print("Raw response data:", data)
+
+	if response_code != 200:
+		ErrorLabel.show_error("Login failed!\nCode: %d\nData: %s" % [response_code, str(data)])
+		return
+
+	if data == null or not data.has("id"):
+		ErrorLabel.show_error("Login failed! Invalid data returned: %s" % str(data))
+		return
+
+	print("Login successful for user id:", data["id"])
+	_go_to_next_scene()
+
+
+
 	
 
 func _go_to_next_scene():
@@ -59,44 +84,35 @@ func _go_to_next_scene():
 func createUser(username,password):
 	
 	print("Creating user " + username)
-	sam.register(username,password)
+	sam.register(username,password,_on_register_response)
 	#var salt = passHasher.GenerateSalt()
 	#var hashedPassword = passHasher.HashPassword(password,salt)
 	#ljm.add_user(username,hashedPassword,salt)
 
+func _on_register_response(data, response_code):
+	if response_code != 200 or data == null or not data.has("user_id"):
+		ErrorLabel.show_error("Registration failed")
+		return
+	print("User registered with ID:", data["user_id"])
 
 
-func _check_user_information(username,password):
-	if DevMode.DevModeEnabled:
-		if username == "DEVELOPER" && password == "C4PGEM1N!":
-			return true
-	
-	
-	sam.login(username,password)
-	
-	var salt = passHasher.GenerateSalt()
-	var hashed_password = passHasher.HashPassword(password,salt)
-	
-	var login_response = sam.login(username,password)
-	
-	if login_response != null && login_response.has("user_id"):
-		print("Login successful for user:",username)
-		return true
-	else:
-		ErrorLabel.show_error("Login Failed, invalid username or password")
-		return false
-	#var userData = ljm.get_user(username)
-	
-	#if userData.size() < 1:
-		#ErrorLabel.show_error("Login Failed, invalid username")
-		#return false
-	#else:
-		#if userData["hashedPassword"] == passHasher.HashPassword(password,userData["salt"]):
-			#print(userData)
+
+
+#func _check_user_information(username, password):
+	## Dev backdoor
+	#if DevMode.DevModeEnabled:
+		#if username == "DEVELOPER" and password == "C4PGEM1N!":
 			#return true
-		#else:
-			#ErrorLabel.show_error("Login Failed, invalid password")
-			#return false
+#
+	#var login_response = sam.login(username, password)
+#
+	#if login_response != null and login_response.has("user_id"):
+		#print("Login successful for user:", username)
+		#return true
+	#else:
+		#ErrorLabel.show_error("Login Failed, invalid username or password")
+		#return false
+
 
 
 func _on_create_user_pressed() -> void:
