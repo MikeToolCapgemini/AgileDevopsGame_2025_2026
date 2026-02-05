@@ -2,7 +2,7 @@ extends RefCounted
 class_name SupabaseAuthManager
 
 const SUPABASE_URL := "https://toudisnarpddnrqkykmo.supabase.co/functions/v1"
-const SUPABASE_ANON_KEY := "sb_publishable_uCWRYRWqziLSBA5WGjYXcA_l5K8dvb0"
+const SUPABASE_ANON_KEY := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRvdWRpc25hcnBkZG5ycWt5a21vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk1OTc3ODgsImV4cCI6MjA4NTE3Mzc4OH0.aNv5_lxWcWkzvYJ1hqBjusDn2Le05bnMsLT0tdEUOu4"
 
 var access_token : String = ""
 var user_id := -1

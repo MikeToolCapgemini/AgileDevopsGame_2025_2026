@@ -9,6 +9,7 @@ extends Control
 
 var Username : String
 var Password : String
+var user_id
 
 #var ldm = LDM.new()
 #var ljm = LJM.new()
@@ -63,16 +64,15 @@ func _on_login_response(data, response_code):
 	print("Login response code:", response_code)
 	print("Raw response data:", data)
 
-	if response_code != 200:
-		ErrorLabel.show_error("Login failed!\nCode: %d\nData: %s" % [response_code, str(data)])
+	if response_code != 200 or data == null:
+		var msg = data != null and str(data.get("error","Unknown error")) or "No response"
+		ErrorLabel.show_error("Login failed: %s" % msg)
 		return
 
-	if data == null or not data.has("id"):
-		ErrorLabel.show_error("Login failed! Invalid data returned: %s" % str(data))
-		return
-
-	print("Login successful for user id:", data["id"])
+	user_id = data["id"]
+	#emit_signal("login_success", user_id)
 	_go_to_next_scene()
+
 
 
 
@@ -90,10 +90,11 @@ func createUser(username,password):
 	#ljm.add_user(username,hashedPassword,salt)
 
 func _on_register_response(data, response_code):
-	if response_code != 200 or data == null or not data.has("user_id"):
+	if response_code != 200 or data == null or not data.has("id"):
 		ErrorLabel.show_error("Registration failed")
 		return
-	print("User registered with ID:", data["user_id"])
+	print("User registered with ID:", data["id"])
+
 
 
 
