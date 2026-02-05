@@ -25,6 +25,23 @@ func _on_pressed():
 		print(GlobalSettings.QuestionsPro)
 
 
+@rpc("any_peer") # Only the server executes this
+func _server_update_setting(setting_name: String, value: bool):
+	match setting_name:
+		"basic":
+			GlobalSettings.QuestionsBasic = value
+		"pro":
+			GlobalSettings.QuestionsPro = value
+	# Sync to all clients
+	GlobalSettings.sync_self_to_clients()
+	
+	# Trigger sort on all clients after sync
+	trigger_sort.rpc()
+
+@rpc("any_peer")
+func trigger_sort():
+	ImportData.sort_data.rpc()
+
 func _on_toggled(toggled_on: bool) -> void:
 	if QuestionsType == "basic":
 		GlobalSettings.QuestionsBasic = toggled_on
@@ -32,5 +49,5 @@ func _on_toggled(toggled_on: bool) -> void:
 	if QuestionsType == "pro":
 		GlobalSettings.QuestionsPro = toggled_on
 		print(GlobalSettings.QuestionsPro)
-	ImportData.sort_data()
+	rpc_id(1,"_server_update_setting",QuestionsType,toggled_on)
 	

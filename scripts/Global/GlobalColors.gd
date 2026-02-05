@@ -1,5 +1,19 @@
 extends Node
 
+const TeamColors = {
+	"BuildOrange": Color("ff6500"),
+	"PlanYellow": Color("d7cd00ff"),
+	"ReleasePurple": Color("7c00ff"),
+	"OperateBrown": Color("5e301c"),
+	"MonitorBlue": Color("0028ff"),
+	"TestGreen": Color("00a500"),
+	"DeployTeal": Color("00b0ff"),
+	"CodeRed": Color("e50000"),
+	"CapgeminiBlue": Color("2c85d2")
+}
+
+
+
 var BuildOrange = Color("ff6500")
 var PlanningYellow = Color("d7cd00ff")
 var ReleasePurple = Color("7c00ff")
@@ -19,6 +33,19 @@ var TestGreenStyle:StyleBoxFlat = StyleBoxFlat.new()
 var DeployTealStyle:StyleBoxFlat = StyleBoxFlat.new()
 var CodeRedStyle:StyleBoxFlat = StyleBoxFlat.new()
 var CapgeminiBlueStyle:StyleBoxFlat = StyleBoxFlat.new()
+
+#const TeamThemes = {
+	#"BuildOrange": BuildOrangeStyle,
+	#"PlanningYellow": PlanningYellowStyle,
+	#"ReleasePurple": ReleasePurpleStyle,
+	#"OperateBrown": OperateBrownStyle,
+	#"MonitorBlue": MonitorBlueStyle,
+	#"TestGreen": TestGreenStyle,
+	#"DeployTeal": DeployTealStyle,
+	#"CodeRed": CodeRedStyle,
+	#"CapgeminiBlue": CapgeminiBlueStyle
+	#
+#}
 
 func _ready():
 	PlanningYellowStyle.bg_color = PlanningYellow

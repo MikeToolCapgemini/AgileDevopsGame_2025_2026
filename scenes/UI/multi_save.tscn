@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dbxyj6ca7okx3"]
+[gd_scene load_steps=22 format=3 uid="uid://dbxyj6ca7okx3"]
 
 [ext_resource type="Script" uid="uid://ddn46v8kt3jwd" path="res://scripts/collapseButton.gd" id="1_2x0m5"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="1_i0ouf"]
@@ -67,6 +67,14 @@ corner_radius_bottom_left = 3
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4i711"]
 
 [sub_resource type="Theme" id="Theme_v6try"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8abny"]
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 0.95686275)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.34509805, 0.67058825, 1)
 
 [node name="MultiSave" type="MarginContainer" node_paths=PackedStringArray("SaveNameField", "LoadedSavesContainer", "collapsible", "SaveOverWriteInterface")]
 anchors_preset = 8
@@ -401,6 +409,39 @@ theme_override_styles/hover = ExtResource("11_7wxx2")
 text = "No but add a number
 "
 
+[node name="Debug Actions" type="MarginContainer" parent="." groups=["DevmodeUI"]]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_top = -50
+
+[node name="PanelContainer" type="PanelContainer" parent="Debug Actions"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8abny")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Debug Actions/PanelContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Debug Actions/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+text = "Debug Actions:"
+vertical_alignment = 1
+
+[node name="DeleteButton" type="Button" parent="Debug Actions/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(94, 31)
+layout_mode = 2
+tooltip_text = "Delete Old saves by 2 months"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_i0ouf")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_g8xcl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_uamr3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uamr3")
+text = "Delete old saves"
+
 [connection signal="pressed" from="OpenSaveButton" to="OpenSaveButton" method="_on_collapse_open"]
 [connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/LoadedSavesCollapsableContainer/MarginContainer/LoadedsaveGames/HideSavedgames" to="." method="_on_hide_savedgames_pressed"]
 [connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer/SplitContainer/SaveButton" to="." method="_on_save_game_button_pressed"]
@@ -408,3 +449,4 @@ text = "No but add a number
 [connection signal="pressed" from="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/CloseTimerButton" to="OpenSaveButton" method="_on_collapse_close"]
 [connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/Yes" to="Interface_SaveOverwrite" method="_on_yes_pressed"]
 [connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/No" to="Interface_SaveOverwrite" method="_on_no_pressed"]
+[connection signal="pressed" from="Debug Actions/PanelContainer/HBoxContainer/DeleteButton" to="." method="delete_saves_by_date"]

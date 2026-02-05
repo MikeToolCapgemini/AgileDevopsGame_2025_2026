@@ -1,0 +1,52 @@
+extends Node
+class_name ServerInfoRequester
+
+var server_address: String = ""
+var server_port: int = 0
+var use_port : bool = false
+
+signal server_info_ready
+
+func _ready():
+	print("requesting server info")
+	var http := HTTPRequest.new()
+	add_child(http)
+
+	http.connect("request_completed", Callable(self, "_on_request_completed"))
+
+	# Build dynamic URL based on host
+	var protocol := "http"
+	var host := "localhost"  # fallback for editor / desktop
+
+	if OS.has_feature("web"):
+		var js := JavaScriptBridge
+		protocol = "https" if js.eval("window.location.protocol") == "https:" else "http"
+		host = js.eval("window.location.hostname")
+
+	var url := "%s://%s/server-info.json" % [protocol, host]
+	print("Fetching server info from: ", url)
+	
+	var err := http.request(url)
+	if err != OK:
+		push_error("HTTPRequest failed to start: " + str(err))
+
+
+func _on_request_completed(result: int, response_code: int, headers: Array, body: PackedByteArray):
+	if response_code == 200:
+		var json := JSON.new()
+		var err := json.parse(body.get_string_from_utf8())
+
+		if err == OK:
+			var data = json.data
+			server_address = str(data.get("address", ""))
+			use_port = bool(data.get("use-port"))
+			server_port = int(data.get("port", 0))
+			print("Server info received:", server_address, server_port)
+			emit_signal("server_info_ready")
+
+			# Now you can connect your WebSocket here
+			# connect_to_server()
+		else:
+			push_error("Failed to parse JSON: " + str(json.error_string))
+	else:
+		push_error("Failed to get server info. HTTP code: " + str(response_code))

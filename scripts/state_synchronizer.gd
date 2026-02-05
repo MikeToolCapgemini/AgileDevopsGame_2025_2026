@@ -12,6 +12,22 @@ func _ready() -> void:
 	managers = [pawnManager,cardManager,diceManager,timeManager,interruptManager]
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_FOCUS_IN:
+		if multiplayer.has_multiplayer_peer():
+			rpc_id(1,"request_state")
+	elif what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		print("player has focused out")
+		
+
+@rpc("any_peer")
+func request_state():
+	if not multiplayer.is_server():
+		return
+
+	var peer_id := multiplayer.get_remote_sender_id()
+	send_state_to_peer(peer_id)
+
 # Called when someone reconnects or someone joins in late
 func send_state_to_peer(peer_id: int):
 	GlobalSettings.sync_self_to_clients()
@@ -24,9 +40,9 @@ func send_state_to_peer(peer_id: int):
 		if m:
 			var state = m.get_state()
 			rpc_id(peer_id, "apply_state", index,state)
-			index += 1
+		index += 1
 
-@rpc("authority")
+@rpc("any_peer")
 func apply_state(manager_id: int, state : Dictionary):
 	# Client applies the state
 	print("Applying states")

@@ -3,9 +3,8 @@ extends Node
 
 # Basic Server Information
 @export var GameScene : PackedScene
-@export var Adress = "srv1161281.hstgr.cloud"
-#@export var Adress = "localhost"
-@export var Port = 8081
+@export var Adress := "localhost"
+@export var Port := 8080
 @export var MaxPlayers = 12
 var peer = ENetMultiplayerPeer.new()
 var webPeer = WebSocketMultiplayerPeer.new()
@@ -15,6 +14,8 @@ var started : bool = false
 @export var connect_panel : Control
 @export var disconnect_panel : Control
 @export var disconnect_server_panel : Control
+
+
 
 func _ready():
 	GameManager.multiplayer_manager = self
@@ -26,10 +27,6 @@ func _ready():
 	if OS.has_feature("dedicated_server"):
 		print("Starting dedicated server...")
 		host_game()
-
-func _process(_delta):
-	if OS.has_feature("dedicated_server"):
-		print(webPeer.get_connection_status())
 
 func peer_connected(id):
 	if id != 1:
@@ -47,6 +44,7 @@ func peer_disconnected(id):
 		disconnect_panel.edit_text("Player: " + str(pName) + " Disconnected!" )
 		disconnect_panel.show()
 		GameManager.Players.erase(id)
+		GameManager.players_updated.emit()
 		update_text_field()
 	print("Player Disconnected: " + str(id))
 
@@ -75,6 +73,7 @@ func send_player_information(playername, id):
 			"name" : playername,
 			"id" : id
 		}
+	GameManager.players_updated.emit()
 	# calls update for player information to all connected clients if current client = server.
 	if multiplayer.is_server():
 		for p in GameManager.Players:
@@ -100,6 +99,7 @@ func start_game():
 			rpc_id(peer_id, "join_running_game")
 
 func reset_server_session():
+	print("session reset in progress")
 	# Kick any remaining peers (usually none)
 	for peer_id in multiplayer.get_peers():
 		rpc_id(peer_id, "server_resetting")
@@ -119,21 +119,22 @@ func reset_server_session():
 	show_multiplayer_ui()
 	disconnect_server_panel.hide()
 
-@rpc("authority")
+@rpc("any_peer")
 func request_server_reset():
 	# Optional: only allow certain players to trigger it
 	#if not is_player_allowed_to_reset(get_tree().get_rpc_sender_id()):
 		#return
-	
+	print("resetting")
 	reset_server_session()
 
 
-@rpc("authority")
+@rpc("any_peer")
 func server_resetting():
 	ErrorLabel.show_error("Server session ended, Server is resetting")
 
 func _on_stop_game_button_pressed():
 	# Tell the server to reset the session
+	print("telling host to stop session")
 	rpc_id(1, "request_server_reset") # assuming host ID is 1
 
 
@@ -190,17 +191,49 @@ func host_game():
 	else :
 		send_player_information($"Debug Interface/NameField".text, multiplayer.get_unique_id())
 
+var sir : ServerInfoRequester = ServerInfoRequester.new()
+
 func join_game():
+	var err= ""
+	if OS.has_feature("editor"):
+		err = webPeer.create_client("ws://" + Adress + ":" + str(Port))
+		if err != OK:
+			print("Failed to start WebSocket client:", err)
+		multiplayer.set_multiplayer_peer(webPeer)
+		GameManager.You = multiplayer.get_unique_id()
+		GameManager.last_address = Adress
+		GameManager.last_port = Port
+		return
+	var sir := ServerInfoRequester.new()
+	add_child(sir)
+
+	await sir.server_info_ready
+
+	# use sir.server_address / sir.server_port here
 	var clientCAS = load("res://Fullchain.crt")
+	var connect_address := Adress
+	var connect_port := Port
+	print("Trying to join game")
+	if sir.server_address != "":
+		connect_address = sir.server_address
+		print("found server address")
+	if sir.server_port != 0:
+		connect_port = sir.server_port
+		print("found server port")
 	#webPeer.create_client("wss://" + Adress + ":" + str(Port),TLSOptions.client_unsafe(clientCAS))
 	#peer.create_client(Adress,Port)
-	var err = webPeer.create_client("wss://" + Adress + ":" + str(Port))
+	
+	if sir.use_port:
+		err = webPeer.create_client("wss://" + connect_address + ":" + str(connect_port))
+	else:
+		err = webPeer.create_client("wss://" + connect_address)
 	if err != OK:
 		print("Failed to start WebSocket client:", err)
 	multiplayer.set_multiplayer_peer(webPeer)
+	sir.queue_free()
 	GameManager.You = multiplayer.get_unique_id()
-	GameManager.last_address = Adress
-	GameManager.last_port = Port
+	GameManager.last_address = connect_address
+	GameManager.last_port = connect_port
 
 ## Interface Functions ##
 func _on_start_button_pressed():
@@ -268,11 +301,10 @@ func _on_reconnect_pressed():
 	await get_tree().process_frame
 
 	# NEW peer instance (critical)
-	peer = ENetMultiplayerPeer.new()
-	peer.create_client(GameManager.last_address, GameManager.last_port)
-	multiplayer.multiplayer_peer = peer
+	webPeer = WebSocketMultiplayerPeer.new()
+	webPeer.create_client("wss://" + GameManager.last_address)
+	multiplayer.multiplayer_peer = webPeer
 
 
 func _on_home_pressed() -> void:
 	cleanup_multiplayer()
-	
