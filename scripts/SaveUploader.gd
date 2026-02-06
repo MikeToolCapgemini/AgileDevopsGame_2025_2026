@@ -1,7 +1,7 @@
 extends Node
 
-@export var upload_url := "https://miketool.eu/devopsbookmark/upload.php"
-@export var view_url := "https://miketool.eu/devopsbookmark"
+@export var upload_url := "https://agiledevops.nl/upload.php"
+@export var view_url := "https://agiledevops.nl/bookmark.html"
 @export var saveManager : SaveSystem 
 @export var MailInputField : LineEdit
 
