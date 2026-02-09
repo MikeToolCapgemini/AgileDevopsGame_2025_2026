@@ -1,8 +1,9 @@
-[gd_resource type="Theme" load_steps=22 format=3 uid="uid://d24lkhtvfma1b"]
+[gd_resource type="Theme" load_steps=25 format=3 uid="uid://d24lkhtvfma1b"]
 
 [ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="1_lot4o"]
 [ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="2_dtsk2"]
 [ext_resource type="StyleBox" uid="uid://qlf17vlcegnm" path="res://Styles/Tooltip.tres" id="3_87f7k"]
+[ext_resource type="StyleBox" uid="uid://w6rqcv3acgjg" path="res://Styles/Panel_Popup.tres" id="3_tl2el"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="4_dtsk2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ocjn3"]
@@ -75,6 +76,26 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0, 0.34509805, 0.67058825, 1)
 
+[sub_resource type="DPITexture" id="DPITexture_87f7k"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"5.5\" fill=\"#1a1a1a\" stroke=\"#fff\" stroke-opacity=\".75\" stroke-width=\"3\"/></svg>
+"
+color_map = {
+Color(1, 1, 1, 1): Color(0.059087098, 0.14044613, 0.19988817, 1),
+Color(0.101960786, 0.101960786, 0.101960786, 1): Color(0.2487196, 0.58933014, 0.9837039, 1)
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cqwbt"]
+bg_color = Color(0, 0.1764706, 0.34117648, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17qps"]
 content_margin_left = 5.0
 content_margin_top = 5.0
@@ -142,6 +163,9 @@ Button/styles/disabled = SubResource("StyleBoxEmpty_ocjn3")
 Button/styles/hover = ExtResource("1_lot4o")
 Button/styles/normal = ExtResource("2_dtsk2")
 Button/styles/pressed = ExtResource("1_lot4o")
+CheckBox/colors/checkbox_checked_color = Color(0.15704867, 0.56654596, 0.6459757, 1)
+CheckButton/colors/button_checked_color = Color(0.08084924, 0.53885424, 0.99995, 1)
+CheckButton/colors/button_unchecked_color = Color(0, 0.5081281, 0.911684, 1)
 HScrollBar/styles/grabber = SubResource("StyleBoxFlat_lot4o")
 HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_87f7k")
 HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_tl2el")
@@ -150,7 +174,11 @@ HSlider/styles/grabber_area = SubResource("StyleBoxFlat_d83yc")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_ju7d3")
 HSlider/styles/slider = SubResource("StyleBoxFlat_ttsfv")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_uvo4r")
+OptionButton/styles/pressed = ExtResource("3_tl2el")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_pd4vi")
+PopupMenu/icons/radio_checked = SubResource("DPITexture_87f7k")
+PopupMenu/styles/hover = ExtResource("1_lot4o")
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_cqwbt")
 TooltipLabel/fonts/font = ExtResource("4_dtsk2")
 TooltipLabel/styles/normal = SubResource("StyleBoxFlat_17qps")
 TooltipPanel/font_sizes/title_font_size = 12

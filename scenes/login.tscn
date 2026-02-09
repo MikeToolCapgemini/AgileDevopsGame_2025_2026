@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://chaqxel77co4a"]
+[gd_scene load_steps=14 format=3 uid="uid://chaqxel77co4a"]
 
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="1_cau7c"]
 [ext_resource type="Script" uid="uid://dxbmtc0q4ppog" path="res://scripts/UX/ShowSecret.gd" id="2_bvvwm"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="3_6hqeh"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="3_ma4wh"]
 [ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="4_0s12h"]
+[ext_resource type="Script" uid="uid://epphmhppfuev" path="res://scripts/UX/backend_picker.gd" id="4_1u3ka"]
 [ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="4_edd8a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqty5"]
@@ -160,6 +161,29 @@ visible = false
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 text = "Create User"
+
+[node name="BackendManagerPicker" type="MarginContainer" parent="." groups=["DevmodeUI"]]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 30.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BackendManagerPicker"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BackendManagerPicker/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Login Backend Manager"
+
+[node name="OptionButton" type="OptionButton" parent="BackendManagerPicker/VBoxContainer" node_paths=PackedStringArray("login_manager")]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+script = ExtResource("4_1u3ka")
+login_manager = NodePath("../../..")
 
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password/Hide_ShowPass" to="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password/Hide_ShowPass" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Login" to="." method="_on_Login_pressed"]
