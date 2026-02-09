@@ -1,4 +1,4 @@
-extends RefCounted
+extends Node
 class_name VPSAuthManager
 
 # ---------------------------
@@ -11,7 +11,7 @@ enum Backend {
 	Json
 }
 
-@export var backend: Backend = Backend.SUPABASE
+@export var backend: Backend = Backend.Json
 
 # Supabase
 const SUPABASE_URL := "https://toudisnarpddnrqkykmo.supabase.co/functions/v1"
@@ -38,6 +38,22 @@ signal register_failed(message)
 
 func _init() -> void:
 	Engine.get_main_loop().root.add_child(_http)
+
+func _ready() -> void:
+	add_child(jsonManager)
+
+func _login_using_token(username:String,tokenmanager: WebTokenManager):
+	match backend:
+		Backend.Json:
+			var user = jsonManager.get_user(username)
+			if user.empty():
+				tokenmanager.clear_token()
+				return
+			else:
+				user_id = user["id"]
+				print("Auto-logged in via token! User ID:", user_id)
+				login_success.emit()
+				
 
 # ---------------------------
 # LOGIN

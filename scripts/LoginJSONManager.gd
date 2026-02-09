@@ -12,7 +12,7 @@ var passHasher = PassHasher.new()
 var jsonLoader = json_loader.new()
 
 signal users_ready
-signal  user_created(success)
+signal user_created(success)
 
 var upload_endpoint := "save_user.php"
 
@@ -20,9 +20,12 @@ var upload_endpoint := "save_user.php"
 
 func _ready() -> void:
 	add_child(jsonLoader)
-	jsonLoader.data_ready.connect()
+	jsonLoader.data_ready.connect(_on_users_loaded)
+	jsonLoader.load_json(PATH_JSON_DATA,WEB_PATH)
+	
 
 func _on_users_loaded(data: Array):
+	print("Users loaded, count:", data.size())
 	if data.size() > 0:
 		# Web or res:// data becomes master
 		users_data = data
@@ -30,27 +33,36 @@ func _on_users_loaded(data: Array):
 		# If both web AND res failed → try user:// backup
 		load_local_backup()
 
-	emit_signal("users_ready")
+	users_ready.emit()
 
 
 func load_local_backup() -> void:
-	if FileAccess.file_exists(users_file):
-		var file := FileAccess.open(users_file, FileAccess.READ)
-		var json_result = JSON.parse_string(file.get_as_text())
-
-		if json_result != null:
-			users_data = json_result
-		else:
-			users_data = []
-
+	if not FileAccess.file_exists(users_file):
+		# Create a new file with empty array if it doesn't exist
+		var file = FileAccess.open(users_file, FileAccess.WRITE)
+		file.store_string("[]")  # empty array as JSON
 		file.close()
-	else:
 		users_data = []
+		print("No backup found. Created new file:", users_file)
+		return
+
+	# File exists → read it
+	var file := FileAccess.open(users_file, FileAccess.READ)
+	var text := file.get_as_text()
+	file.close()
+
+	var json_result = JSON.parse_string(text)
+	if typeof(json_result) != TYPE_ARRAY and typeof(json_result) != TYPE_DICTIONARY:
+		# Parsing failed → reset to empty array
+		users_data = []
+		print("Failed to parse backup. Resetting:", users_file)
+	else:
+		users_data = json_result
+
+	print("Loaded users data:", users_data)
+
 
 func _login_json(username: String, password: String, callback: Callable) -> void:
-
-	# Wait until JSON data is ready
-	await users_ready
 
 	var user = get_user(username)
 
@@ -63,7 +75,7 @@ func _login_json(username: String, password: String, callback: Callable) -> void
 
 	if hashed == user["hashedPassword"]:
 		callback.call({
-			"user_id": user["id"],
+			"id": user["id"],
 			"role": user["role"]
 		}, 200)
 	else:
@@ -90,8 +102,6 @@ func save_users_local():
 	
 
 func _register_json(username: String, hashed: String, salt: String, callback: Callable) -> void:
-
-	await users_ready
 
 	if not get_user(username).is_empty():
 		callback.call({"error": "User already exists"}, 400)
@@ -120,7 +130,7 @@ func add_user(name: String, hashed_password: String, salt: String, role: String 
 		upload_user_to_web(new_user)
 	else:
 		save_users_local()
-		emit_signal("user_created", true)
+		user_created.emit(true)
 
 func upload_user_to_web(user:Dictionary) -> void:
 	var http = HTTPRequest.new()
@@ -136,11 +146,11 @@ func upload_user_to_web(user:Dictionary) -> void:
 
 func _on_user_uploaded(result, response_code, headers, body):
 	if result == HTTPRequest.RESULT_SUCCESS and response_code == 200:
-		emit_signal("user_created", true)
+		user_created.emit(true)
 	else:
 		# Fallback → save locally if web failed
 		save_users_local()
-		emit_signal("user_created", false)
+		user_created.emit(false)
 
 
 
@@ -164,3 +174,13 @@ func get_role(username: String) -> String:
 	if u.empty():
 		return ""
 	return u["role"]
+	
+func generate_token(username: String) -> Dictionary:
+	var timestamp = Time.get_unix_time_from_system()
+	var raw = "%s:%d" % [username, timestamp]
+	var context := HashingContext.new()
+	context.start(HashingContext.HASH_MD5)
+	context.update(raw.to_utf8())
+	var digest : PackedByteArray = context.finish()
+	var token := digest.hex_encode()
+	return {"token": token, "timestamp": timestamp}

@@ -16,7 +16,7 @@ func load_json(path_local: String, path_web: String) -> void:
 
 func finish_loading():
 	data_loaded = true
-	emit_signal("data_ready", data)
+	data_ready.emit(data)
 
 
 func load_json_local(path: String):

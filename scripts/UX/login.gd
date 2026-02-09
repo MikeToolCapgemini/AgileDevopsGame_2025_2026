@@ -13,11 +13,16 @@ var user_id
 
 #var ldm = LDM.new()
 #var ljm = LJM.new()
-var sam = SupabaseAuthManager.new()
+#var sam = SupabaseAuthManager.new()
 var auth = VPSAuthManager.new()
 var passHasher = PassHasher.new()
+var tokenmanager = WebTokenManager.new()
 
 func _ready() -> void:
+	add_child(auth)
+	add_child(tokenmanager)
+	auth.login_success.connect(on_login_success)
+	
 	if OS.has_feature("dedicated_server"):
 		print("skipping login screen")
 		_go_to_next_scene()
@@ -94,7 +99,12 @@ func _on_login_response(data, response_code):
 	emit_signal("login_failed", str(data))
 
 
-
+func on_login_success(userid):
+	print()
+	user_id = userid
+	_go_to_next_scene()
+	var token = tokenmanager.generate_token(Username)
+	tokenmanager.save_token(token)
 
 
 	
