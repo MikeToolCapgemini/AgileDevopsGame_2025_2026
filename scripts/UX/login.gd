@@ -1,5 +1,5 @@
 extends Control
-
+class_name  Login_Manager
 
 @export var UserNameField : LineEdit
 @export var PasswordField : LineEdit
