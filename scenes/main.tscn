@@ -299,6 +299,18 @@ albedo_texture = ExtResource("57_v1ccq")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vny5k"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jp61a"]
+bg_color = Color(0.56078434, 0.19607843, 0.21568628, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.5058824, 0.43137255, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8lcmr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yton5"]
@@ -308,18 +320,6 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0.34509805, 0.67058825, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jp61a"]
-bg_color = Color(0.56078434, 0.19607843, 0.21568628, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 0.5058824, 0.43137255, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -2010,6 +2010,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="Resume" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons" node_paths=PackedStringArray("hideObject")]
+visible = false
 custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -2199,6 +2200,42 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_83607")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_vny5k")
 text = "Quit Game"
 script = ExtResource("52_v5wqd")
+
+[node name="CloseOptionsButton" type="Button" parent="Interface_Options/MainPanel" node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "Close Options Panel"
+theme_override_styles/normal = SubResource("StyleBoxFlat_jp61a")
+script = ExtResource("49_4jv7h")
+hideObject = NodePath("../..")
+
+[node name="FontAwesome" type="Label" parent="Interface_Options/MainPanel/CloseOptionsButton"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -8.0
+offset_right = 6.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 15
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 15
+icon_name = "x"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Interface_top_left_buttons" type="Control" parent="."]
 visible = false
@@ -2720,6 +2757,7 @@ icon_name = "x"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Interface_Facilitator" type="Control" parent="." groups=["FacilitatorUI"]]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -5781,6 +5819,7 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Stop" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Stop" method="_on_stop_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/logout" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/logout" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Options/MainPanel/CloseOptionsButton" to="Interface_Options/MainPanel/CloseOptionsButton" method="_on_pressed"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/OpenCardSettings" to="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/OpenCardSettings" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/OpenCardSettings" to="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer" method="Show_Settings"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer/Color/ChangeColor" to="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer/Color/ChangeColor" method="_on_pressed"]
