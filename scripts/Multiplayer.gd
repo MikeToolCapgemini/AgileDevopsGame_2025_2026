@@ -148,6 +148,7 @@ func join_running_game():
 	get_tree().root.add_child(scene)
 
 	call_deferred("hide_multiplayer_ui")
+	GlobalSignals.show_logout_button.emit(false)
 	GameManager.set_manager(scene)
 	
 
