@@ -1,5 +1,5 @@
 extends Node
-
+class_name PlayerList
 
 @export var PlayerVbox : VBoxContainer
 @export var PlayerLabel : RichTextLabel
@@ -8,9 +8,8 @@ func _ready() -> void:
 	PlayerLabel.name = "_TemplatePlayerLabel"
 	PlayerLabel.visible = false
 	GameManager.players_updated.connect(update_player_list)
+	PlayerSettings.players_colors_updated.connect(update_player_list)
 	update_player_list() # initial populate
-
-
 
 func clear_list():
 	for child in PlayerVbox.get_children():
@@ -18,6 +17,8 @@ func clear_list():
 			child.queue_free()
 
 func update_player_list():
+	if not multiplayer.is_server():
+		PlayerSettings.request_all_colors.rpc_id(1)
 	clear_list()
 	for id in GameManager.Players:
 		var player_data = GameManager.Players[id]

@@ -720,13 +720,14 @@ Cursors = NodePath("World/Cursors")
 World = NodePath("World/Floor")
 Camera = NodePath("Camera3D")
 
-[node name="StateSynchronizer" type="Node" parent="." node_paths=PackedStringArray("pawnManager", "cardManager", "diceManager", "timeManager", "interruptManager")]
+[node name="StateSynchronizer" type="Node" parent="." node_paths=PackedStringArray("pawnManager", "cardManager", "diceManager", "timeManager", "interruptManager", "playerList")]
 script = ExtResource("2_roort")
 pawnManager = NodePath("../World/Interactables/Pawns")
 cardManager = NodePath("../Interface_Cards")
 diceManager = NodePath("../World/Interactables/Dice")
 timeManager = NodePath("../World/Interactables/hourglassAnimated")
 interruptManager = NodePath("../Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show")
+playerList = NodePath("../Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/PlayerList/PlayerListContainer")
 
 [node name="Game" type="Node" parent="."]
 

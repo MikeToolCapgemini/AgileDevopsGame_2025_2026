@@ -5,6 +5,7 @@ extends Node
 @export var diceManager : Dice
 @export var timeManager : Hourglass
 @export var interruptManager : Interrupt
+@export var playerList : PlayerList
 
 var managers: Array = []
 
@@ -16,6 +17,7 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_IN:
 		if multiplayer.has_multiplayer_peer():
 			rpc_id(1,"request_state")
+			playerList.update_player_list()
 	elif what == NOTIFICATION_APPLICATION_FOCUS_OUT:
 		print("player has focused out")
 		
@@ -24,9 +26,9 @@ func _notification(what: int) -> void:
 func request_state():
 	if not multiplayer.is_server():
 		return
-
 	var peer_id := multiplayer.get_remote_sender_id()
 	send_state_to_peer(peer_id)
+	PlayerSettings.request_all_colors.rpc_id(peer_id)
 
 # Called when someone reconnects or someone joins in late
 func send_state_to_peer(peer_id: int):
@@ -34,6 +36,7 @@ func send_state_to_peer(peer_id: int):
 	print("sending state to " + str(peer_id))
 	if not multiplayer.is_server():
 		return
+	
 	
 	var index: int = 0
 	for m in managers:

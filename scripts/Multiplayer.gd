@@ -38,6 +38,7 @@ func peer_connected(id):
 		rpc_id(id, "join_running_game")
 		var state_sync = get_tree().root.get_node("Main/StateSynchronizer")
 		state_sync.call_deferred("send_state_to_peer",id)
+		GameManager.players_updated.emit()
 
 func peer_disconnected(id):
 	if GameManager.Players.has(id):
