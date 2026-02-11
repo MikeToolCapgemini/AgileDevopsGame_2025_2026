@@ -6,14 +6,15 @@ var saveName : String
 var saveData
 var saveSystem : SaveSystem
 
-func _show_overwrite_UI(system,savename,savedata):
-	_set_overwrite_variables(system,savename,savedata)
+@rpc("any_peer")
+func _show_overwrite_UI(savename, savedata):
+	_set_overwrite_variables(savename, savedata)
 	show()
 
-func _set_overwrite_variables(system,savename,savedata):
-	saveSystem = system
+func _set_overwrite_variables(savename, savedata):
 	saveName = savename
 	saveData = savedata
+
 	_set_overwrite_title(saveName)
 
 
@@ -23,7 +24,10 @@ func _set_overwrite_title(saveName : String):
 
 
 func _on_yes_pressed() -> void:
-	saveSystem.save_game_file(saveName,saveData,false)
+	if multiplayer.is_server():
+		saveSystem.save_game_file(saveName,saveData,1)
+	else:
+		saveSystem.rpc_id(1,"request_saving_game",saveName,saveData,multiplayer.get_unique_id(),false)
 	hide()
 
 

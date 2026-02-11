@@ -19,6 +19,7 @@ func _ready() -> void:
 	save_completed.connect(_on_save_completed)
 
 func save_game(saveName: String = ""):
+	SaveOverWriteInterface.saveSystem = self
 	Pawnmanager.save_pawn_positions()
 	if saveName == "":
 		saveName = get_save_name()
@@ -29,9 +30,9 @@ func save_game(saveName: String = ""):
 	SaveData["BookmarkedCards"] = GlobalSettings.BookmarkedCards
 	SaveData["PawnPositions"] = GlobalSettings.PawnPositions
 	if multiplayer.is_server():
-		save_game_file(saveName,SaveData)
+		save_game_file(saveName,SaveData,1)
 	else:
-		rpc_id(1,"request_saving_game",saveName,SaveData)
+		rpc_id(1,"request_saving_game",saveName,SaveData,multiplayer.get_unique_id())
 
 func get_save_json() -> String:
 	SaveData["DataDiscardedCards"] = GlobalSettings.DataDiscardedCards
@@ -43,24 +44,28 @@ func get_save_json() -> String:
 
 
 @rpc("any_peer")
-func request_saving_game(saveName: String,saveData):
-	save_game_file(saveName,saveData)
+func request_saving_game(saveName: String,saveData,requester_id,checkname := true):
+	save_game_file(saveName,saveData,requester_id,checkname)
 
-func save_game_file(saveName : String,saveData, checkname := true):
+func save_game_file(saveName : String,saveData,requester_id, checkname := true,):
 	check_save_dir()
 	var savePath
 	savePath = SavePath + saveName + ".json"
 	if checkname:
 		if check_if_saveName_exists(savePath):
-			SaveOverWriteInterface._show_overwrite_UI(self,saveName,saveData)
+			SaveOverWriteInterface.rpc_id(requester_id,"_show_overwrite_UI",saveName,saveData)
 			return
 	var file = FileAccess.open(savePath, FileAccess.WRITE)
 	var json = JSON.stringify(saveData)
 	
 	file.store_string(json)
 	file.close()
-	emit_signal("save_completed", saveName)
+	rpc_id(requester_id,"notify_save_completed",saveName)
+	
 
+@rpc("any_peer")
+func notify_save_completed(saveName: String):
+	emit_signal("save_completed", saveName)
 
 func _on_save_completed(saveName: String) -> void:
 	if saveNotificationUI != null:
