@@ -24,6 +24,7 @@ func _ready():
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
 	multiplayer.server_disconnected.connect(on_server_disconnected)
+	GlobalSignals.logout.connect(_on_logout)
 	if OS.has_feature("dedicated_server"):
 		print("Starting dedicated server...")
 		host_game()
@@ -92,6 +93,7 @@ func start_game():
 	get_tree().root.add_child(scene) # connects Main to Multiplayer as child.
 	call_deferred("hide_multiplayer_ui")
 	started = true
+	GlobalSignals.show_logout_button.emit(false)
 	GameManager.set_manager(scene)
 	# Tell all connected clients to join
 	for peer_id in multiplayer.get_peers():
@@ -237,7 +239,10 @@ func join_game():
 
 ## Interface Functions ##
 func _on_start_button_pressed():
-	request_start_game.rpc_id(1)
+	if multiplayer.has_multiplayer_peer():
+		request_start_game.rpc_id(1)
+	else:
+		start_game()
 
 func _on_host_button_pressed():
 	host_game()
@@ -305,6 +310,8 @@ func _on_reconnect_pressed():
 	webPeer.create_client("wss://" + GameManager.last_address)
 	multiplayer.multiplayer_peer = webPeer
 
+func _on_logout():
+	cleanup_multiplayer()
 
 func _on_home_pressed() -> void:
 	cleanup_multiplayer()

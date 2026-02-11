@@ -1,4 +1,4 @@
-[gd_scene load_steps=236 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=238 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -101,6 +101,7 @@
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
 [ext_resource type="Script" uid="uid://b0vl6xxjb2of5" path="res://scripts/stopSession.gd" id="86_37xlc"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="87_1uevf"]
+[ext_resource type="Script" uid="uid://c6ukc6vsneomw" path="res://scripts/logout_button.gd" id="87_4ahvx"]
 [ext_resource type="Script" uid="uid://cskqhgbr0hwpc" path="res://scripts/return_to_main_menu.gd" id="87_ga3rw"]
 [ext_resource type="FontFile" uid="uid://bgwubnrnnxe2s" path="res://addons/fontawesome/fonts/fa-regular-400.woff2" id="87_xmrkg"]
 [ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="88_0tljd"]
@@ -120,6 +121,7 @@
 [ext_resource type="Script" uid="uid://cc745mejagtln" path="res://scripts/select_color_ui.gd" id="108_eh25q"]
 [ext_resource type="Script" uid="uid://br1s2wprncugw" path="res://scripts/editable_panel.gd" id="110_07pt3"]
 [ext_resource type="Script" uid="uid://ee3j21fjacdt" path="res://scripts/ForceCard.gd" id="120_yton5"]
+[ext_resource type="ArrayMesh" uid="uid://fncthxf2lbjd" path="res://assets/3Dmodels/Flag/flag.obj" id="122_2cr71"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrx01"]
 size = Vector3(11, 0.7, 5)
@@ -765,7 +767,7 @@ mesh = ExtResource("6_4vpm6")
 skeleton = NodePath("../../../..")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="World/PlayingField/Field/Field0"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 1.30974, 0.44676, 0.5426)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.70710707, 0.70710707, 1.5279721, 0.44676012, -0.098139465)
 mesh = SubResource("TextMesh_3o00s")
 
 [node name="Field1" type="MeshInstance3D" parent="World/PlayingField/Field"]
@@ -1028,6 +1030,10 @@ transform = Transform3D(0.21920303, 3.832669e-08, 0.21920303, -5.42021e-08, 0.31
 mesh = ExtResource("33_8lcmr")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_8lcmr")
+
+[node name="Flag" type="MeshInstance3D" parent="World/Floor"]
+transform = Transform3D(-0.17088206, -0.087028734, -0.16745032, -0.0025932505, 0.27641976, -0.097119756, 0.1824626, -0.07757656, -0.15820287, 1.9679214, 0.047240138, -0.39408097)
+mesh = ExtResource("122_2cr71")
 
 [node name="Lighting" type="Node3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99685, 0)
@@ -2122,6 +2128,29 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_vny5k")
 text = "Stop session"
 script = ExtResource("86_37xlc")
 
+[node name="logout" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
+custom_minimum_size = Vector2(121, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Stop session and Exit game"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_83607")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vny5k")
+text = "Logout"
+script = ExtResource("87_4ahvx")
+
 [node name="ReturnToMainMenu" type="Button" parent="Interface_Options/MainPanel/MarginContainer/Options/Buttons"]
 visible = false
 custom_minimum_size = Vector2(121, 43)
@@ -2562,7 +2591,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-tooltip_text = "Open Card Settings panel"
+tooltip_text = "Open Player List"
 theme_override_styles/normal = SubResource("StyleBoxFlat_yton5")
 script = ExtResource("78_raiwf")
 collapse = NodePath("../PlayerList")
@@ -2690,7 +2719,6 @@ icon_name = "x"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Interface_Facilitator" type="Control" parent="." groups=["FacilitatorUI"]]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -5750,6 +5778,7 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/RefreshUI" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Disconnect" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Disconnect" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Stop" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/Stop" method="_on_stop_pressed"]
+[connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/logout" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/logout" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" to="Interface_Options/MainPanel/MarginContainer/Options/Buttons/QuitGame" method="_on_pressed"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/OpenCardSettings" to="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/OpenCardSettings" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/OpenCardSettings" to="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer" method="Show_Settings"]

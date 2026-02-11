@@ -25,6 +25,7 @@ GlobalSettings="*res://scripts/Global/GlobalSettings.gd"
 PlayerSettings="*res://scripts/Global/PlayerSettings.gd"
 ErrorLabel="*res://scenes/interface_error.tscn"
 DevMode="*res://scripts/Devmode.gd"
+GlobalSignals="*res://scripts/Global/Global_Signals.gd"
 
 [dotnet]
 

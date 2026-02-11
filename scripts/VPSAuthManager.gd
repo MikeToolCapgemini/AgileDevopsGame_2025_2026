@@ -41,18 +41,23 @@ func _init() -> void:
 
 func _ready() -> void:
 	add_child(jsonManager)
+	jsonManager.users_ready.connect(_on_users_ready)
+
+signal users_ready
+func _on_users_ready():
+	users_ready.emit()
 
 func _login_using_token(username:String,tokenmanager: WebTokenManager):
 	match backend:
 		Backend.Json:
 			var user = jsonManager.get_user(username)
-			if user.empty():
-				tokenmanager.clear_token()
+			if user.is_empty():
+				tokenmanager.clear_token_cookie()
 				return
 			else:
 				user_id = user["id"]
 				print("Auto-logged in via token! User ID:", user_id)
-				login_success.emit()
+				login_success.emit(user_id,true)
 				
 
 # ---------------------------

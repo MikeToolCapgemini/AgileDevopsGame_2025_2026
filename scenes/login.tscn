@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://chaqxel77co4a"]
+[gd_scene load_steps=15 format=3 uid="uid://chaqxel77co4a"]
 
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="1_cau7c"]
 [ext_resource type="Script" uid="uid://dxbmtc0q4ppog" path="res://scripts/UX/ShowSecret.gd" id="2_bvvwm"]
@@ -22,47 +22,68 @@ bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_edd8a"]
 bg_color = Color(0.09019608, 0.25882354, 0.38431373, 1)
 
-[node name="Login" type="Control" node_paths=PackedStringArray("UserNameField", "PasswordField", "CreateButton")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbijj"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="Login" type="Control" node_paths=PackedStringArray("UserNameField", "PasswordField", "CreateButton", "logoutButton", "mainPanel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_cau7c")
 script = ExtResource("2_eqty5")
-UserNameField = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Username")
-PasswordField = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password")
-CreateButton = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CreateUser")
+UserNameField = NodePath("MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Username")
+PasswordField = NodePath("MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password")
+CreateButton = NodePath("MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CreateUser")
+logoutButton = NodePath("Logout/LogoutButton")
+mainPanel = NodePath("MainUI")
 next_scene = ExtResource("3_0s12h")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
+[node name="MainUI" type="CanvasLayer" parent="."]
+layer = 88
+
+[node name="MarginContainer" type="MarginContainer" parent="MainUI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_cau7c")
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MainUI/MarginContainer"]
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MainUI/MarginContainer/PanelContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MainUI/MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("3_ma4wh")
 theme_override_fonts/bold_font = ExtResource("4_0s12h")
 theme_override_font_sizes/normal_font_size = 22
@@ -70,7 +91,7 @@ theme_override_font_sizes/bold_font_size = 32
 bbcode_enabled = true
 text = "[center][b]Login to access"
 
-[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer"]
+[node name="Label" type="Label" parent="MainUI/MarginContainer/PanelContainer/MarginContainer"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
@@ -78,35 +99,36 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 22
 text = "Login to access"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainUI/MarginContainer/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/separation = 29
 
-[node name="UsernameLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="UsernameLabel" type="Label" parent="MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Username"
 horizontal_alignment = 1
 
-[node name="Username" type="LineEdit" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Username" type="LineEdit" parent="MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 placeholder_text = "username"
 
-[node name="PasswordLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PasswordLabel" type="Label" parent="MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Password"
 horizontal_alignment = 1
 
-[node name="Password" type="LineEdit" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Password" type="LineEdit" parent="MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 placeholder_text = "password"
 secret = true
 
-[node name="Hide_ShowPass" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password" node_paths=PackedStringArray("SecretLineEdit", "SwapIcon")]
+[node name="Hide_ShowPass" type="Button" parent="MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password" node_paths=PackedStringArray("SecretLineEdit", "SwapIcon")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 1
 anchors_preset = 6
@@ -129,7 +151,7 @@ SwapIcon = NodePath("FontAwesome")
 visibleIcon = "eye"
 hiddenIcon = "eye-slash"
 
-[node name="FontAwesome" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password/Hide_ShowPass"]
+[node name="FontAwesome" type="Label" parent="MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password/Hide_ShowPass"]
 auto_translate_mode = 2
 layout_mode = 1
 anchors_preset = 15
@@ -148,43 +170,80 @@ icon_size = 26
 icon_name = "eye"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Login" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Login" type="Button" parent="MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 text = "Login"
 
-[node name="CreateUser" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CreateUser" type="Button" parent="MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 text = "Create User"
 
-[node name="BackendManagerPicker" type="MarginContainer" parent="." groups=["DevmodeUI"]]
-layout_mode = 0
-offset_right = 100.0
-offset_bottom = 30.0
+[node name="BackendManagerPicker" type="MarginContainer" parent="MainUI" groups=["DevmodeUI"]]
+offset_right = 159.0
+offset_bottom = 61.0
+mouse_filter = 2
+theme = ExtResource("1_cau7c")
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BackendManagerPicker"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainUI/BackendManagerPicker"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="BackendManagerPicker/VBoxContainer"]
+[node name="Label" type="Label" parent="MainUI/BackendManagerPicker/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Login Backend Manager"
 
-[node name="OptionButton" type="OptionButton" parent="BackendManagerPicker/VBoxContainer" node_paths=PackedStringArray("login_manager")]
+[node name="OptionButton" type="OptionButton" parent="MainUI/BackendManagerPicker/VBoxContainer" node_paths=PackedStringArray("login_manager")]
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 script = ExtResource("4_1u3ka")
-login_manager = NodePath("../../..")
+login_manager = NodePath("../../../..")
 
-[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password/Hide_ShowPass" to="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password/Hide_ShowPass" method="_on_pressed"]
-[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Login" to="." method="_on_Login_pressed"]
-[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CreateUser" to="." method="_on_create_user_pressed"]
+[node name="Logout" type="CanvasLayer" parent="."]
+layer = 99
+
+[node name="LogoutButton" type="Button" parent="Logout"]
+custom_minimum_size = Vector2(30, 30)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -30.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_tbijj")
+
+[node name="FontAwesome" type="Label" parent="Logout/LogoutButton"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("3_6hqeh")
+theme_override_font_sizes/font_size = 25
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_edd8a")
+icon_size = 25
+icon_name = "arrow-right-from-bracket"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[connection signal="pressed" from="MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password/Hide_ShowPass" to="MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Password/Hide_ShowPass" method="_on_pressed"]
+[connection signal="pressed" from="MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Login" to="." method="_on_Login_pressed"]
+[connection signal="pressed" from="MainUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CreateUser" to="." method="_on_create_user_pressed"]
+[connection signal="pressed" from="Logout/LogoutButton" to="." method="_on_logout_button_pressed"]

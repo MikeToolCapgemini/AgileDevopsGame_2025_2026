@@ -174,13 +174,3 @@ func get_role(username: String) -> String:
 	if u.empty():
 		return ""
 	return u["role"]
-	
-func generate_token(username: String) -> Dictionary:
-	var timestamp = Time.get_unix_time_from_system()
-	var raw = "%s:%d" % [username, timestamp]
-	var context := HashingContext.new()
-	context.start(HashingContext.HASH_MD5)
-	context.update(raw.to_utf8())
-	var digest : PackedByteArray = context.finish()
-	var token := digest.hex_encode()
-	return {"token": token, "timestamp": timestamp}
