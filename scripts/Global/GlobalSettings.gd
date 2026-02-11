@@ -7,6 +7,15 @@ var DataDiscardedCards = []
 var BookmarkedCards = []
 var PawnPositions = {}
 
+@rpc("any_peer")
+func clear_settings():
+	DiscardedCards = []
+	DataDiscardedCards = []
+	BookmarkedCards = []
+	PawnPositions = {}
+	sync_self_to_clients()
+	
+
 # Called when the node enters the scene tree for the first time.
 func sync_self_to_clients():
 	if multiplayer.is_server():
