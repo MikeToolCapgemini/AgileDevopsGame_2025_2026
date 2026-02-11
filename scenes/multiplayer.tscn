@@ -110,6 +110,7 @@ GameScene = ExtResource("2_of8yj")
 connect_panel = NodePath("Interface_Connect")
 disconnect_panel = NodePath("Interface_Disconnect")
 disconnect_server_panel = NodePath("CanvasLayer/Interface_Disconnect_server")
+reset_day_limit = 3
 
 [node name="Debug Interface" type="Control" parent="."]
 layout_mode = 3

@@ -16,6 +16,9 @@ var started : bool = false
 @export var disconnect_server_panel : Control
 
 
+var empty_server_timer : Timer
+@export var reset_day_limit : int
+var EMPTY_LIMIT = reset_day_limit * 24 * 60 * 60   # 3 days
 
 func _ready():
 	GameManager.multiplayer_manager = self
@@ -25,9 +28,21 @@ func _ready():
 	multiplayer.connection_failed.connect(connection_failed)
 	multiplayer.server_disconnected.connect(on_server_disconnected)
 	GlobalSignals.logout.connect(_on_logout)
+	
+	empty_server_timer = Timer.new()
+	empty_server_timer.one_shot = true
+	empty_server_timer.wait_time = EMPTY_LIMIT
+	add_child(empty_server_timer)
+
+	empty_server_timer.timeout.connect(_on_empty_timeout)
+
+	
 	if OS.has_feature("dedicated_server"):
 		print("Starting dedicated server...")
 		host_game()
+		
+
+
 
 func peer_connected(id):
 	if id != 1:
@@ -35,12 +50,14 @@ func peer_connected(id):
 		connect_panel.show()
 	print("Player Connected: " + str(id))
 	if started:
+		_update_empty_timer()
 		rpc_id(id, "join_running_game")
 		var state_sync = get_tree().root.get_node("Main/StateSynchronizer")
 		state_sync.call_deferred("send_state_to_peer",id)
 		GameManager.players_updated.emit()
 
 func peer_disconnected(id):
+	
 	if GameManager.Players.has(id):
 		var pName = GameManager.Players[id].name
 		disconnect_panel.edit_text("Player: " + str(pName) + " Disconnected!" )
@@ -48,6 +65,8 @@ func peer_disconnected(id):
 		GameManager.Players.erase(id)
 		GameManager.players_updated.emit()
 		update_text_field()
+	if started:
+		_update_empty_timer()	
 	print("Player Disconnected: " + str(id))
 
 func connected_to_server():
@@ -317,3 +336,35 @@ func _on_logout():
 
 func _on_home_pressed() -> void:
 	cleanup_multiplayer()
+
+func get_real_player_count() -> int:
+	var count = 0
+	for id in multiplayer.get_peers():
+		# skip server itself (ID 1)
+		if id != 1:
+			count += 1
+	return count
+
+func _update_empty_timer():
+	# Only care if a session is running
+	if not started:
+		empty_server_timer.stop()
+		return
+
+	var players = get_real_player_count()
+
+	if players == 0:
+		if empty_server_timer.is_stopped():
+			print("No players left → starting 3 day shutdown timer")
+			empty_server_timer.start()
+	else:
+		if not empty_server_timer.is_stopped():
+			print("Player joined → cancelling shutdown timer")
+			empty_server_timer.stop()
+
+
+func _on_empty_timeout():
+	if !started:
+		return
+	
+	reset_server_session()
