@@ -126,6 +126,8 @@ func on_login_success(userid,auto_logged_in : bool = false):
 	_go_to_next_scene()
 
 func _go_to_next_scene():
+	if OS.has_feature("dedicated_server"):
+		get_tree().change_scene_to_packed(next_scene)
 	hide_login_UI()
 	var scene = next_scene.instantiate()
 	nextActiveScene = scene
