@@ -208,9 +208,9 @@ func display_action_card(roll : int,localonly = false):
 	CardUIManager.SaveActionButton.show()
 	opened_locally = localonly
 	print(actionDict[roll] + str(multiplayer.get_unique_id()))
-	card_setup("action", "","", actionDict[roll],"", "", "", "", "", "","","")
+	card_setup("action", "",roll, actionDict[roll],"", "", "", "", "", "","","")
 	if !localonly:
-		card_setup.rpc("action", "","", actionDict[roll],"", "", "", "", "", "","","")
+		card_setup.rpc("action", "",roll, actionDict[roll],"", "", "", "", "", "","","")
 
 func set_card_choice_string(tag, cardTypeData):
 	if cardTypeData == "":
@@ -401,5 +401,6 @@ func _on_use_card_pressed() -> void:
 	else:
 		set_bg_on_type(curType)
 		display_default_card(int(curKey))
+	PlayerSettings.remove_action_card.rpc(PlayerSettings.color,int(curKey))
 	_sync_cardshown(active, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)
 	_sync_cardshown.rpc(active, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)

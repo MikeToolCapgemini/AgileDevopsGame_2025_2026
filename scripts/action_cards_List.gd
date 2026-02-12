@@ -21,8 +21,8 @@ func fillActionCardList():
 	for child in ActiongridList.get_children():
 		if child != CardButtonTemplate:
 			child.queue_free()
-	#if PlayerSettings.actionCards.size() <= 0:
-		#CardButtonTemplate.hide()
+	if PlayerSettings.actionCards.size() <= 0:
+		CardButtonTemplate.hide()
 	for cardData in PlayerSettings.actionCards:
 		var button : CardButton
 		if ActiongridList.get_child_count() == 0:

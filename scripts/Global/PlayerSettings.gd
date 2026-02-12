@@ -5,7 +5,7 @@ var color = ""
 var actionCards = []
 signal players_colors_updated
 
-@rpc("any_peer")
+@rpc("any_peer","call_local")
 func add_action_card(TeamColor,key):
 	print("adding action card to " + TeamColor)
 	if color == TeamColor:
@@ -15,6 +15,16 @@ func add_action_card(TeamColor,key):
 				"key":key
 				}
 		)
+@rpc("any_peer","call_local")
+func remove_action_card(TeamColor, key):
+	if color != TeamColor:
+		return
+
+	# Find the first card with matching type and key
+	for i in range(actionCards.size()):
+		if actionCards[i]["type"] == "action" and actionCards[i]["key"] == key:
+			actionCards.remove_at(i)
+			break  # remove only the first match
 
 @rpc("any_peer","call_local")
 func get_player_color() -> String:
