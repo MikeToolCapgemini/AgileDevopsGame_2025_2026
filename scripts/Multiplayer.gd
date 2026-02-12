@@ -17,7 +17,7 @@ var started : bool = false
 
 
 var empty_server_timer : Timer
-@export var reset_day_limit : int
+@export var reset_day_limit : int = 3
 var EMPTY_LIMIT = reset_day_limit * 24 * 60 * 60   # 3 days
 
 func _ready():
@@ -28,7 +28,7 @@ func _ready():
 	multiplayer.connection_failed.connect(connection_failed)
 	multiplayer.server_disconnected.connect(on_server_disconnected)
 	GlobalSignals.logout.connect(_on_logout)
-	
+	EMPTY_LIMIT = reset_day_limit * 24 * 60 * 60
 	empty_server_timer = Timer.new()
 	empty_server_timer.one_shot = true
 	empty_server_timer.wait_time = EMPTY_LIMIT
