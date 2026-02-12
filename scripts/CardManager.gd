@@ -93,7 +93,8 @@ func draw(type):
 		toggle_top_bar.rpc(false)
 		curType = type
 		curKey = d
-		rpc_id(1,"set_current_vars_for_server",active,curType,curKey)
+		#rpc_id(1,"set_current_vars_for_server",active,curType,curKey)
+		set_current_vars_for_everyone.rpc(active,curType,curKey)
 		card_discard(cardTypeData,cardTypeData, type, d)
 		card_discard.rpc(cardTypeData,cardTypeData, type, d)
 	toggle_active.rpc(true)
@@ -102,7 +103,7 @@ func draw(type):
 	_sync_cardshown.rpc(visible, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)
 
 @rpc("any_peer")
-func set_current_vars_for_server(isactive,type,key):
+func set_current_vars_for_everyone(isactive,type,key):
 	active = isactive
 	curType = type
 	curKey = key
@@ -338,12 +339,16 @@ func _sync_answershown(state):
 @rpc("call_local")
 func close_answer():
 	CardUIManager.BookmarkButton.show()
+	CardUIManager.RevealButton.show()
 	CardUIManager.CancelBookmarkButton.hide()
 	toggle_active.rpc(false)
 	visible = false
 	#if !$"Panel".visible:
 		#$"Panel".visible = true
 	_sync_cardshown.rpc(active, "", "")
+	curType = null
+	curKey = null
+	active = false
 
 @rpc("any_peer","call_local")
 func toggle_active(toggle: bool):

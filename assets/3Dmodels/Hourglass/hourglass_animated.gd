@@ -117,12 +117,12 @@ func _start_animation(target_duration : float):
 	else:
 		_reset_animation()
 		reset_speed()
-		animator.queue("Spin")
+		animator.play("Spin")
 		spin_in_progress = true
 		animation_duration = target_duration
 		SpinTimer.start()
 		
-		animator.queue("SandFlow")
+		
 	
 @rpc("any_peer", "call_local")
 func _stop_animation():
@@ -220,11 +220,13 @@ func stop_safe_flash_interrupt():
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	print(anim_name + " is finished")
+	if anim_name == "Spin":
+		_start_sandflow_after_spin()
 	if anim_name == "SandFlow":
 		interrupt()
 
 
-func _on_spin_timer_timeout() -> void:
+func _start_sandflow_after_spin():
 	spin_in_progress = false
 	setTimerRunning.rpc(true)
 	var anim_length = animator.get_animation("SandFlow").length
@@ -232,4 +234,8 @@ func _on_spin_timer_timeout() -> void:
 		animation_duration = anim_length
 	var speed_scale = anim_length / animation_duration
 	animator.speed_scale = speed_scale
+	animator.play("SandFlow")
 	started_at_unix = Time.get_unix_time_from_system()
+
+func _on_spin_timer_timeout() -> void:
+	_start_sandflow_after_spin()
