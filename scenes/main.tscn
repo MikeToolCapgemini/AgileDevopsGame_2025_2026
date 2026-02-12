@@ -1,4 +1,4 @@
-[gd_scene load_steps=238 format=4 uid="uid://bq4jyntltiheo"]
+[gd_scene load_steps=241 format=4 uid="uid://bq4jyntltiheo"]
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
@@ -117,9 +117,12 @@
 [ext_resource type="Script" uid="uid://bq01pxakqcfgj" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
 [ext_resource type="Script" uid="uid://ceamoqnkbfe7" path="res://scripts/disconnect.gd" id="103_gm02q"]
 [ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
+[ext_resource type="Script" uid="uid://c5axln2573qn7" path="res://scripts/save_action.gd" id="107_1hbcg"]
 [ext_resource type="Script" uid="uid://bfpqk8gkgkx6p" path="res://scripts/pick_color.gd" id="107_vny5k"]
 [ext_resource type="Script" uid="uid://cc745mejagtln" path="res://scripts/select_color_ui.gd" id="108_eh25q"]
 [ext_resource type="Script" uid="uid://br1s2wprncugw" path="res://scripts/editable_panel.gd" id="110_07pt3"]
+[ext_resource type="Script" uid="uid://dq0w6oyg4sebd" path="res://scripts/action_cards_List.gd" id="118_jp61a"]
+[ext_resource type="Script" uid="uid://dptgan0vgmp2m" path="res://scripts/card_button.gd" id="118_m4o51"]
 [ext_resource type="Script" uid="uid://ee3j21fjacdt" path="res://scripts/ForceCard.gd" id="120_yton5"]
 [ext_resource type="ArrayMesh" uid="uid://fncthxf2lbjd" path="res://assets/3Dmodels/Flag/flag.obj" id="122_2cr71"]
 
@@ -466,46 +469,6 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ann2e"]
-bg_color = Color(0, 0.34509805, 0.67058825, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gm02q"]
-bg_color = Color(0.262745, 0.643137, 0.843137, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07pt3"]
-bg_color = Color(0, 0.34509805, 0.67058825, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x52v5"]
-bg_color = Color(0.415686, 0.14902, 0.184314, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05u6v"]
-bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_roort"]
-bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlsfy"]
-bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpru0"]
-bg_color = Color(0, 0.41568628, 0.23529412, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh25q"]
-bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.25882354)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n6mxd"]
-
-[sub_resource type="Theme" id="Theme_sjgq0"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_esrwe"]
 bg_color = Color(0.65918607, 0.6280019, 0, 1)
 border_width_left = 1
@@ -601,6 +564,46 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ann2e"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gm02q"]
+bg_color = Color(0.262745, 0.643137, 0.843137, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07pt3"]
+bg_color = Color(0, 0.34509805, 0.67058825, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x52v5"]
+bg_color = Color(0.415686, 0.14902, 0.184314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05u6v"]
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_roort"]
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlsfy"]
+bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpru0"]
+bg_color = Color(0, 0.41568628, 0.23529412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh25q"]
+bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.25882354)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n6mxd"]
+
+[sub_resource type="Theme" id="Theme_sjgq0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m4o51"]
 bg_color = Color(0.039215688, 0.039215688, 0.039215688, 0.25882354)
@@ -2238,7 +2241,6 @@ icon_name = "x"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Interface_top_left_buttons" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2430,7 +2432,7 @@ icon_size = 15
 icon_name = "x"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
-[node name="CardSettings" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer" groups=["DevmodeUI", "FacilitatorUI"]]
+[node name="CardSettings" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer"]
 layout_mode = 2
 
 [node name="OpenCardSettings" type="Button" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings" node_paths=PackedStringArray("collapse")]
@@ -2476,7 +2478,7 @@ editor_description = "
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
 clip_contents = true
-custom_minimum_size = Vector2(300, 111)
+custom_minimum_size = Vector2(300, 150)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -2507,36 +2509,95 @@ mouse_filter = 2
 bbcode_enabled = true
 text = "[center]Card Settings"
 
-[node name="Cards Tag" type="Label" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ActionCardList" type="Button" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Show action Cards"
+script = ExtResource("49_4jv7h")
+hideObject = NodePath("../../../../../../../../../../Interface_ActionCards")
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ActionCardList"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ActionCardList/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="FontAwesome3" type="Label" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ActionCardList/MarginContainer/HBoxContainer2"]
+auto_translate_mode = 2
+layout_mode = 2
+size_flags_horizontal = 0
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 15
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 15
+icon_name = "bolt"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="FontAwesome2" type="Label" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ActionCardList/MarginContainer/HBoxContainer2"]
+auto_translate_mode = 2
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 15
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 15
+icon_name = "list"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="CardTypeSelector" type="VBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer" groups=["FacilitatorUI"]]
+layout_mode = 2
+
+[node name="Cards Tag" type="Label" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/CardTypeSelector"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("87_1uevf")
 text = "What card type's are active"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/CardTypeSelector"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="CheckButton" type="CheckButton" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CheckButton" type="CheckButton" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/CardTypeSelector/HBoxContainer"]
 layout_mode = 2
 button_pressed = true
 script = ExtResource("92_83607")
 QuestionsType = "basic"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/CardTypeSelector/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("87_1uevf")
 text = "Basic"
 fit_content = true
 
-[node name="CheckButton2" type="CheckButton" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CheckButton2" type="CheckButton" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/CardTypeSelector/HBoxContainer"]
 layout_mode = 2
 button_pressed = true
 script = ExtResource("92_83607")
 QuestionsType = "pro"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/CardTypeSelector/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("87_1uevf")
@@ -3758,7 +3819,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="FaciltatorPanelMainMargin" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels" groups=["FacilitatorUI"]]
+[node name="FaciltatorPanelMainMargin" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -3770,11 +3831,11 @@ grow_horizontal = 0
 mouse_filter = 2
 theme_override_constants/margin_top = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin"]
+[node name="FacilatorPanel" type="HBoxContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin" groups=["FacilitatorUI"]]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="FacilitatorPanelCollapsable" type="Control" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer"]
+[node name="FacilitatorPanelCollapsable" type="Control" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel"]
 process_mode = 3
 editor_description = "
 			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
@@ -3791,33 +3852,32 @@ sizing_constraint = 2
 sizing_node = NodePath("FacilitatorPanelMargin")
 metadata/_custom_type_script = "uid://btlh4wrv04rc3"
 
-[node name="FacilitatorPanelMargin" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable"]
+[node name="FacilitatorPanelMargin" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable"]
 custom_minimum_size = Vector2(157, 466)
 layout_mode = 0
 offset_right = 157.0
 offset_bottom = 466.0
-grow_horizontal = 0
 theme_override_constants/margin_left = -5
 
-[node name="FacilitatorCardPanel" type="PanelContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin"]
+[node name="FacilitatorCardPanel" type="PanelContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7l7aa")
 script = ExtResource("42_pfsrv")
 
-[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer"]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="PanelLabel" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
+[node name="PanelLabel" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(111, 51)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("87_1uevf")
@@ -3825,7 +3885,7 @@ text = "Facilitator
 Panel"
 scroll_active = false
 
-[node name="RevealButton" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
+[node name="RevealButton" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 33)
 layout_mode = 2
 tooltip_text = "Reveals the answer to everyone"
@@ -3835,7 +3895,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
 theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
 text = "Reveal Answer"
 
-[node name="SaveQuestion" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("cardManagerObject", "bookmarkIcon")]
+[node name="SaveQuestion" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("cardManagerObject", "bookmarkIcon")]
 custom_minimum_size = Vector2(120, 33)
 layout_mode = 2
 tooltip_text = "Bookmark the card for later use"
@@ -3848,7 +3908,194 @@ script = ExtResource("45_n88qk")
 cardManagerObject = NodePath("../../../../../../../../..")
 bookmarkIcon = NodePath("../../../../../../../../../MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer/bookmark")
 
-[node name="CancelSave" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
+[node name="SaveAction" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("collapse")]
+custom_minimum_size = Vector2(120, 33)
+layout_mode = 2
+tooltip_text = "Save the card to a team, for them to use later."
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
+text = "Save Action
+ To team"
+script = ExtResource("78_raiwf")
+collapse = NodePath("../SaveActionColorPicker")
+folded = true
+
+[node name="SaveActionColorPicker" type="Control" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
+process_mode = 3
+editor_description = "
+			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
+			
+Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
+clip_contents = true
+custom_minimum_size = Vector2(126, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+script = ExtResource("78_engxj")
+starts_opened = false
+folding_direction_preset = 10
+sizing_constraint = 1
+sizing_node = NodePath("PanelContainer")
+metadata/_custom_type_script = "uid://btlh4wrv04rc3"
+
+[node name="PanelContainer" type="PanelContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 34.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 11
+text = "Select Team Color"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlanYellow" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("collapeToggler", "cardManager")]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Set Role to Facilitator"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_esrwe")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+script = ExtResource("107_1hbcg")
+collapeToggler = NodePath("../../../../../SaveAction")
+TeamColor = "PlanYellow"
+cardManager = NodePath("../../../../../../../../../../../../..")
+
+[node name="CodeRed" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("collapeToggler", "cardManager")]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Set Role to Facilitator"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4b36k")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+script = ExtResource("107_1hbcg")
+collapeToggler = NodePath("../../../../../SaveAction")
+TeamColor = "CodeRed"
+cardManager = NodePath("../../../../../../../../../../../../..")
+
+[node name="BuildOrange" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("collapeToggler", "cardManager")]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Set Role to Facilitator"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1v8b0")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+script = ExtResource("107_1hbcg")
+collapeToggler = NodePath("../../../../../SaveAction")
+TeamColor = "BuildOrange"
+cardManager = NodePath("../../../../../../../../../../../../..")
+
+[node name="TestGreen" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("collapeToggler", "cardManager")]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Set Role to Facilitator"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_683hg")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+script = ExtResource("107_1hbcg")
+collapeToggler = NodePath("../../../../../SaveAction")
+TeamColor = "TestGreen"
+cardManager = NodePath("../../../../../../../../../../../../..")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ReleasePurple" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("collapeToggler", "cardManager")]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+tooltip_text = "Set Role to Facilitator"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ow8of")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+script = ExtResource("107_1hbcg")
+collapeToggler = NodePath("../../../../../SaveAction")
+TeamColor = "ReleasePurple"
+cardManager = NodePath("../../../../../../../../../../../../..")
+
+[node name="DeployTeal" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("collapeToggler", "cardManager")]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+tooltip_text = "Set Role to Facilitator"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hj4tt")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+script = ExtResource("107_1hbcg")
+collapeToggler = NodePath("../../../../../SaveAction")
+TeamColor = "DeployTeal"
+cardManager = NodePath("../../../../../../../../../../../../..")
+
+[node name="OperateBrown" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("collapeToggler", "cardManager")]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+tooltip_text = "Set Role to Facilitator"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_kqx4a")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+script = ExtResource("107_1hbcg")
+collapeToggler = NodePath("../../../../../SaveAction")
+TeamColor = "OperateBrown"
+cardManager = NodePath("../../../../../../../../../../../../..")
+
+[node name="MonitorBlue" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("collapeToggler", "cardManager")]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+tooltip_text = "Set Role to Facilitator"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pfcs8")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+script = ExtResource("107_1hbcg")
+collapeToggler = NodePath("../../../../../SaveAction")
+TeamColor = "MonitorBlue"
+cardManager = NodePath("../../../../../../../../../../../../..")
+
+[node name="CancelSave" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(120, 54)
 layout_mode = 2
@@ -3860,7 +4107,7 @@ text = "Cancel
 Bookmark
 "
 
-[node name="CloseButton" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer"]
+[node name="CloseButton" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer"]
 custom_minimum_size = Vector2(120, 33)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -3872,7 +4119,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
 theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
 text = "Close card"
 
-[node name="FacilitatorPanelOpener" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer" node_paths=PackedStringArray("collapse", "iconToSwap")]
+[node name="FacilitatorPanelOpener" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel" node_paths=PackedStringArray("collapse", "iconToSwap")]
 custom_minimum_size = Vector2(15, 10)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -3883,7 +4130,119 @@ iconToSwap = NodePath("FontAwesome")
 foldedIcon = "caret-right"
 unfoldedIcon = "caret-left"
 
-[node name="FontAwesome" type="Label" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelOpener"]
+[node name="FontAwesome" type="Label" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelOpener"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 16
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_name = "caret-right"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
+[node name="PlayerPanel" type="HBoxContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PlayerPanelCollapsable" type="Control" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel"]
+editor_description = "
+			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
+			
+Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
+clip_contents = true
+custom_minimum_size = Vector2(157, 466)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+script = ExtResource("78_engxj")
+folding_direction_preset = 11
+sizing_constraint = 2
+sizing_node = NodePath("PlayerPanelMargin")
+metadata/_custom_type_script = "uid://btlh4wrv04rc3"
+
+[node name="PlayerPanelMargin" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel/PlayerPanelCollapsable"]
+custom_minimum_size = Vector2(157, 466)
+layout_mode = 0
+offset_right = 157.0
+offset_bottom = 466.0
+theme_override_constants/margin_left = -5
+
+[node name="PlayerCardPanel" type="PanelContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel/PlayerPanelCollapsable/PlayerPanelMargin"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7l7aa")
+script = ExtResource("42_pfsrv")
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel/PlayerPanelCollapsable/PlayerPanelMargin/PlayerCardPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel/PlayerPanelCollapsable/PlayerPanelMargin/PlayerCardPanel/MarginContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="PanelLabel" type="RichTextLabel" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel/PlayerPanelCollapsable/PlayerPanelMargin/PlayerCardPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(111, 51)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("87_1uevf")
+text = "Player Panel"
+scroll_active = false
+
+[node name="UseCard" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel/PlayerPanelCollapsable/PlayerPanelMargin/PlayerCardPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 33)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+tooltip_text = "Close the card"
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
+text = "Use Card"
+
+[node name="CloseButton" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel/PlayerPanelCollapsable/PlayerPanelMargin/PlayerCardPanel/MarginContainer"]
+custom_minimum_size = Vector2(120, 33)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+tooltip_text = "Close the card"
+theme_override_fonts/font = ExtResource("87_1uevf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ykn3p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h2xon")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w8u2x")
+text = "Close card"
+
+[node name="FacilitatorPanelOpener" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel" node_paths=PackedStringArray("collapse", "iconToSwap")]
+custom_minimum_size = Vector2(15, 10)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_8lcmr")
+script = ExtResource("78_raiwf")
+collapse = NodePath("../PlayerPanelCollapsable")
+iconToSwap = NodePath("FontAwesome")
+foldedIcon = "caret-right"
+unfoldedIcon = "caret-left"
+
+[node name="FontAwesome" type="Label" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel/FacilitatorPanelOpener"]
 auto_translate_mode = 2
 layout_mode = 1
 anchors_preset = 8
@@ -4052,7 +4411,7 @@ folding_direction_preset = 3
 sizing_node = NodePath("CardPanel")
 metadata/_custom_type_script = "uid://btlh4wrv04rc3"
 
-[node name="CardPanel" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionPanel", "DiscussionPanel", "QuestionPanelTextObject", "DiscussionPanelTextObject", "QuestionObject", "AnswerObject", "AnswerPanel", "AnswerFacilitatorTextObject", "AnswerExplanationTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "RevealButton", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "TypeNumberTextObject", "LevelTypeTextObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
+[node name="CardPanel" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionPanel", "DiscussionPanel", "QuestionPanelTextObject", "DiscussionPanelTextObject", "PlayerCardContainer", "QuestionObject", "AnswerObject", "AnswerPanel", "AnswerFacilitatorTextObject", "AnswerExplanationTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "RevealButton", "BookmarkButton", "CancelBookmarkButton", "SaveActionButton", "UXTagObject", "ActionTagObject", "TypeNumberTextObject", "LevelTypeTextObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
 custom_minimum_size = Vector2(600, 300)
 layout_mode = 0
 offset_right = 706.0
@@ -4068,6 +4427,7 @@ QuestionPanel = NodePath("CardPanelMarginContainer/VBoxContainer/Question_Answer
 DiscussionPanel = NodePath("CardPanelMarginContainer/VBoxContainer/Discussion")
 QuestionPanelTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/Question")
 DiscussionPanelTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Discussion/QuestionD")
+PlayerCardContainer = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel")
 QuestionObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/Question")
 AnswerObject = NodePath("CardPanelMarginContainer/VBoxContainer/AnswerPanelBG/Answer")
 AnswerPanel = NodePath("../../../FacilitatorPanels/AnswerPanelMargin")
@@ -4078,9 +4438,10 @@ AnswerATextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_An
 AnswerBTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceB")
 AnswerCTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceC")
 AnswerDTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceD")
-RevealButton = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/RevealButton")
-BookmarkButton = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion")
-CancelBookmarkButton = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/CancelSave")
+RevealButton = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/RevealButton")
+BookmarkButton = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion")
+CancelBookmarkButton = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/CancelSave")
+SaveActionButton = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveAction")
 UXTagObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG")
 ActionTagObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/ActionCardBG")
 TypeNumberTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer/NumberPanel/NumberTypeText")
@@ -5066,6 +5427,127 @@ icon_size = 35
 icon_name = "cloud-arrow-up"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
+[node name="Interface_ActionCards" type="Control" parent="." node_paths=PackedStringArray("cardManager", "ActiongridList", "mainPanel", "CardButtonTemplate")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("74_roort")
+script = ExtResource("118_jp61a")
+cardManager = NodePath("../Interface_Cards")
+ActiongridList = NodePath("BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/ActionCardsContainer/ActionCardsList")
+mainPanel = NodePath(".")
+CardButtonTemplate = NodePath("BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/ActionCardsContainer/ActionCardsList/CardButton")
+
+[node name="BlackoutBG" type="PanelContainer" parent="Interface_ActionCards"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m4o51")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_ActionCards/BlackoutBG"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Panel" type="PanelContainer" parent="Interface_ActionCards/BlackoutBG/VBoxContainer"]
+material = SubResource("CanvasItemMaterial_4ue30")
+custom_minimum_size = Vector2(514, 226)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_k42av")
+theme_override_styles/panel = ExtResource("42_ot4pa")
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface_ActionCards/BlackoutBG/VBoxContainer/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_ActionCards/BlackoutBG/VBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ActionCardsContainer" type="VBoxContainer" parent="Interface_ActionCards/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ActionLabel" type="RichTextLabel" parent="Interface_ActionCards/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/ActionCardsContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+bbcode_enabled = true
+text = "[center]Action Cards[/center]"
+
+[node name="ActionCardsList" type="GridContainer" parent="Interface_ActionCards/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/ActionCardsContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 5
+
+[node name="CardButton" type="Button" parent="Interface_ActionCards/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/ActionCardsContainer/ActionCardsList" node_paths=PackedStringArray("mainPanel", "cardManager")]
+custom_minimum_size = Vector2(75, 20)
+layout_mode = 2
+text = "Action_1"
+script = ExtResource("118_m4o51")
+mainPanel = NodePath("../../../../../../../..")
+cardManager = NodePath("../../../../../../../../../Interface_Cards")
+cardTypevar = "action"
+cardKey = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Interface_ActionCards/BlackoutBG/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Resume" type="Button" parent="Interface_ActionCards/BlackoutBG/VBoxContainer/Buttons" node_paths=PackedStringArray("hideObject")]
+custom_minimum_size = Vector2(50, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+tooltip_text = "Close Discard/Bookmark pile"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = ExtResource("45_fv0h2")
+theme_override_styles/pressed = ExtResource("46_171dt")
+theme_override_styles/hover = ExtResource("46_171dt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6nfnn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4ue30")
+script = ExtResource("49_4jv7h")
+hideObject = NodePath("../../../..")
+
+[node name="FontAwesome" type="Label" parent="Interface_ActionCards/BlackoutBG/VBoxContainer/Buttons/Resume"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 35
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 35
+icon_name = "circle-xmark"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
+
 [node name="Interface_InterruptFacilitator2" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -5699,17 +6181,34 @@ custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="Button" type="Button" parent="ForceCardPop-up/Panel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("mainPanel", "cardManager", "cardTypeTextEdit", "numberTextEdit")]
+[node name="HBoxContainer2" type="HBoxContainer" parent="ForceCardPop-up/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ForceCard" type="Button" parent="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("mainPanel", "cardManager", "cardTypeTextEdit", "numberTextEdit")]
 custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Force Card"
 script = ExtResource("120_yton5")
-mainPanel = NodePath("../../../..")
-cardManager = NodePath("../../../../../Interface_Cards")
-cardTypeTextEdit = NodePath("../HBoxContainer/CardType")
-numberTextEdit = NodePath("../HBoxContainer/Number")
+mainPanel = NodePath("../../../../..")
+cardManager = NodePath("../../../../../../Interface_Cards")
+cardTypeTextEdit = NodePath("../../HBoxContainer/CardType")
+numberTextEdit = NodePath("../../HBoxContainer/Number")
+
+[node name="ForceCardLocally" type="Button" parent="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("mainPanel", "cardManager", "cardTypeTextEdit", "numberTextEdit")]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Force Card Local"
+script = ExtResource("120_yton5")
+mainPanel = NodePath("../../../../..")
+cardManager = NodePath("../../../../../../Interface_Cards")
+cardTypeTextEdit = NodePath("../../HBoxContainer/CardType")
+numberTextEdit = NodePath("../../HBoxContainer/Number")
 
 [node name="CloseCardSettingsButton" type="Button" parent="ForceCardPop-up/Panel" node_paths=PackedStringArray("hideObject")]
 custom_minimum_size = Vector2(25, 25)
@@ -5826,8 +6325,9 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer/Color/ChangeColor" to="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/VBoxContainer/Color/ChangeColor" method="_on_pressed"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/PlayerSettings/PanelContainer/MarginContainer/ClosePlayerSettingsButton" to="Interface_top_left_buttons/TopButtons/VBoxContainer/PlayerSettings/OpenCardSettings" method="_on_collapse_close"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/OpenCardSettings" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/OpenCardSettings" method="_toggle_collapse"]
-[connection signal="toggled" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton" method="_on_toggled"]
-[connection signal="toggled" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton2" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CheckButton2" method="_on_toggled"]
+[connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ActionCardList" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ActionCardList" method="_on_pressed"]
+[connection signal="toggled" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/CardTypeSelector/HBoxContainer/CheckButton" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/CardTypeSelector/HBoxContainer/CheckButton" method="_on_toggled"]
+[connection signal="toggled" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/CardTypeSelector/HBoxContainer/CheckButton2" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/CardTypeSelector/HBoxContainer/CheckButton2" method="_on_toggled"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/DebugButtons/OpenForceCardScreen" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/DebugButtons/OpenForceCardScreen" method="_on_pressed"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/CloseCardSettingsButton" to="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/OpenCardSettings" method="_on_collapse_close"]
 [connection signal="pressed" from="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/OpenPlayerList" to="Interface_top_left_buttons/TopButtons/VBoxContainer/playerList/OpenPlayerList" method="_toggle_collapse"]
@@ -5857,11 +6357,23 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 [connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/SlideOutExample" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QuickRefFoldableContainer2/QuickReference/SlideOutExample" method="_on_pressed"]
 [connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QRListOpener" to="Interface_Buttons/MarginContainer/OptionsContianer/PanelContainer/MarginContainer/AllButtons/QRTitle/QRListOpener" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_Buttons/MarginContainer/OptionsContianer/CloseTimerButton" to="Interface_Buttons/MarginContainer/OpenOptionsButton" method="_toggle_collapse"]
-[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/RevealButton" to="Interface_Cards" method="_on_reveal_button_pressed"]
-[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" method="_on_pressed"]
-[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/CancelSave" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" method="on_Cancel"]
-[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/CloseButton" to="Interface_Cards" method="_on_close_button_pressed"]
-[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelOpener" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelOpener" method="_toggle_collapse"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/RevealButton" to="Interface_Cards" method="_on_reveal_button_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveAction" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveAction" method="_toggle_collapse"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer/PlanYellow" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer/PlanYellow" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer/CodeRed" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer/CodeRed" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer/BuildOrange" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer/BuildOrange" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer/TestGreen" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer/TestGreen" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer2/ReleasePurple" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer2/ReleasePurple" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer2/DeployTeal" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer2/DeployTeal" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer2/OperateBrown" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer2/OperateBrown" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer2/MonitorBlue" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveActionColorPicker/PanelContainer/VBoxContainer/HBoxContainer2/MonitorBlue" method="_on_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/CancelSave" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion" method="on_Cancel"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/CloseButton" to="Interface_Cards" method="_on_close_button_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelOpener" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelOpener" method="_toggle_collapse"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel/PlayerPanelCollapsable/PlayerPanelMargin/PlayerCardPanel/MarginContainer/VBoxContainer/UseCard" to="Interface_Cards" method="_on_use_card_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel/PlayerPanelCollapsable/PlayerPanelMargin/PlayerCardPanel/MarginContainer/CloseButton" to="Interface_Cards" method="_on_close_button_pressed"]
+[connection signal="pressed" from="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel/FacilitatorPanelOpener" to="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/PlayerPanel/FacilitatorPanelOpener" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/AnswerBoxOpener" to="Interface_Cards/FacilitatorPanels/AnswerPanelMargin/VBoxContainer/AnswerBoxOpener" method="_toggle_collapse"]
 [connection signal="pressed" from="Interface_Cards/HideButtonMargin/Hide_Show" to="Interface_Cards/HideButtonMargin" method="_toggle_facilitator_panels"]
 [connection signal="pressed" from="Interface_Cards/HideButtonMargin/Hide_Show" to="Interface_Cards/HideButtonMargin/Hide_Show" method="_toggle_collapse"]
@@ -5877,6 +6389,8 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 [connection signal="pressed" from="Setup/Panel/MarginContainer/VBoxContainer/HBoxContainer/Player" to="Setup" method="_on_player_pressed"]
 [connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/Resume" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" to="Interface_DiscardPile/BlackoutBG/VBoxContainer/Buttons/BookmarkSite" method="_on_upload_button_pressed"]
+[connection signal="pressed" from="Interface_ActionCards/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/ActionCardsContainer/ActionCardsList/CardButton" to="Interface_ActionCards/BlackoutBG/VBoxContainer/Panel/MarginContainer/VBoxContainer/ActionCardsContainer/ActionCardsList/CardButton" method="pressed_using_vars"]
+[connection signal="pressed" from="Interface_ActionCards/BlackoutBG/VBoxContainer/Buttons/Resume" to="Interface_ActionCards/BlackoutBG/VBoxContainer/Buttons/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Hide" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Hide" method="_on_pressed"]
@@ -5890,5 +6404,6 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 [connection signal="pressed" from="Interface_Upload_Notification/Panel/HBoxContainer/Close" to="Interface_Upload_Notification/Panel/HBoxContainer/Close" method="_on_pressed"]
 [connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/Facilitator" to="Interface_SaveOverwrite" method="_on_facilitator_pressed"]
 [connection signal="pressed" from="Interface_SaveOverwrite/Panel/MarginContainer/VBoxContainer/HBoxContainer/Player" to="Interface_SaveOverwrite" method="_on_player_pressed"]
-[connection signal="pressed" from="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/Button" to="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/Button" method="_on_pressed"]
+[connection signal="pressed" from="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/HBoxContainer2/ForceCard" to="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/HBoxContainer2/ForceCard" method="_on_pressed"]
+[connection signal="pressed" from="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/HBoxContainer2/ForceCardLocally" to="ForceCardPop-up/Panel/MarginContainer/VBoxContainer/HBoxContainer2/ForceCardLocally" method="_force_card_local"]
 [connection signal="pressed" from="ForceCardPop-up/Panel/CloseCardSettingsButton" to="ForceCardPop-up/Panel/CloseCardSettingsButton" method="_on_pressed"]

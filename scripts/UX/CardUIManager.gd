@@ -8,7 +8,7 @@ class_name CardUIManager
 @export var DiscussionPanel : MarginContainer
 @export var QuestionPanelTextObject: RichTextLabel
 @export var DiscussionPanelTextObject: RichTextLabel
-
+@export var PlayerCardContainer : Container
 @export var QuestionObject : RichTextLabel
 @export var AnswerObject : RichTextLabel
 @export var AnswerPanel : Container
@@ -22,6 +22,7 @@ class_name CardUIManager
 @export var RevealButton : Button
 @export var BookmarkButton : Button
 @export var CancelBookmarkButton : Button
+@export var SaveActionButton : Button
 @export var UXTagObject : PanelContainer
 @export var ActionTagObject : Panel
 @export var TypeNumberTextObject : RichTextLabel

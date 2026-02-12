@@ -2,7 +2,19 @@ extends Node
 
 var role = "none"
 var color = ""
+var actionCards = []
 signal players_colors_updated
+
+@rpc("any_peer")
+func add_action_card(TeamColor,key):
+	print("adding action card to " + TeamColor)
+	if color == TeamColor:
+		actionCards.append(
+			{
+				"type":"action",
+				"key":key
+				}
+		)
 
 @rpc("any_peer","call_local")
 func get_player_color() -> String:
