@@ -19,6 +19,7 @@ class_name CardUIManager
 @export var AnswerBTextObject : RichTextLabel
 @export var AnswerCTextObject : RichTextLabel
 @export var AnswerDTextObject : RichTextLabel
+@export var RevealButton : Button
 @export var BookmarkButton : Button
 @export var CancelBookmarkButton : Button
 @export var UXTagObject : PanelContainer

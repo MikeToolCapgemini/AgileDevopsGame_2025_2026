@@ -4052,7 +4052,7 @@ folding_direction_preset = 3
 sizing_node = NodePath("CardPanel")
 metadata/_custom_type_script = "uid://btlh4wrv04rc3"
 
-[node name="CardPanel" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionPanel", "DiscussionPanel", "QuestionPanelTextObject", "DiscussionPanelTextObject", "QuestionObject", "AnswerObject", "AnswerPanel", "AnswerFacilitatorTextObject", "AnswerExplanationTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "TypeNumberTextObject", "LevelTypeTextObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
+[node name="CardPanel" type="PanelContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer" node_paths=PackedStringArray("CardPanel", "TypeTextObject", "SubtypeTextObject", "QuestionPanel", "DiscussionPanel", "QuestionPanelTextObject", "DiscussionPanelTextObject", "QuestionObject", "AnswerObject", "AnswerPanel", "AnswerFacilitatorTextObject", "AnswerExplanationTextObject", "AnswerBackground", "AnswerATextObject", "AnswerBTextObject", "AnswerCTextObject", "AnswerDTextObject", "RevealButton", "BookmarkButton", "CancelBookmarkButton", "UXTagObject", "ActionTagObject", "TypeNumberTextObject", "LevelTypeTextObject", "bookmark", "QuestionIcon", "DiscussionIcon")]
 custom_minimum_size = Vector2(600, 300)
 layout_mode = 0
 offset_right = 706.0
@@ -4078,6 +4078,7 @@ AnswerATextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_An
 AnswerBTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceB")
 AnswerCTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceC")
 AnswerDTextObject = NodePath("CardPanelMarginContainer/VBoxContainer/Question_AnswerBox/Question_AnswerVBox/MarginContainer/Answers/ChoiceD")
+RevealButton = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/RevealButton")
 BookmarkButton = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/SaveQuestion")
 CancelBookmarkButton = NodePath("../../../FacilitatorPanels/FaciltatorPanelMainMargin/HBoxContainer/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer/CancelSave")
 UXTagObject = NodePath("CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG")

@@ -197,7 +197,9 @@ var actionDict = [
 
 @rpc("any_peer")
 func display_action_card(roll : int):
-
+	CardUIManager.BookmarkButton.hide()
+	CardUIManager.CancelBookmarkButton.hide()
+	CardUIManager.RevealButton.hide()
 	print(actionDict[roll] + str(multiplayer.get_unique_id()))
 	card_setup("action", "","", actionDict[roll],"", "", "", "", "", "","","")
 	card_setup.rpc("action", "","", actionDict[roll],"", "", "", "", "", "","","")
@@ -233,6 +235,7 @@ func card_discard(cardTypeData,cardTypeDataVar, cardTypeString, keyVar):
 
 @rpc("any_peer")
 func card_setup(type, subtype, nr, question,qexplanation, choiceA, choiceB, choiceC, choiceD, answer,aexplanation,level):
+	CardUIManager.bookmark.visible = false
 	print("####")
 	print(type)
 	set_card_icon(type)
