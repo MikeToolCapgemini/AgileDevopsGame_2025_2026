@@ -1,7 +1,5 @@
 extends Node
 
-signal data_ready
-
 var PATH_JSON_DATA = "res://Data/csvjson.json"
 var WEB_PATH = "Data/csvjson.json"
 var jsonLoader = json_loader.new()
