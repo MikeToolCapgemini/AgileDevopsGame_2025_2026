@@ -211,13 +211,13 @@ text = "DevOps Game v0.1.8"
 
 [node name="PlayerList" type="Label" parent="Debug Interface"]
 layout_mode = 0
-offset_left = 489.99997
+offset_left = 492.0
 offset_top = 71.0
-offset_right = 987.1428
+offset_right = 789.1428
 offset_bottom = 446.71426
 scale = Vector2(0.7, 0.7)
 theme_override_fonts/font = ExtResource("3_4vwpp")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 24
 
 [node name="Tag Players" type="Label" parent="Debug Interface"]
 layout_mode = 0
@@ -227,7 +227,7 @@ offset_right = 638.0
 offset_bottom = 79.0
 scale = Vector2(0.6, 0.6)
 theme_override_fonts/font = ExtResource("3_4vwpp")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 26
 text = "Connected Players:"
 
 [node name="Plus Button" type="Button" parent="Debug Interface" groups=["DevmodeUI"]]
