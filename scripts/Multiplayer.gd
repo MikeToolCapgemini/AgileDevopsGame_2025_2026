@@ -195,8 +195,13 @@ func update_text_field():
 	$"Debug Interface/TextField".text = newText
 
 func host_game():
-	var serverCert = load("res://cert/cert.crt")
-	var serverKey = load("res://cert/key.key")
+	var serverCert = X509Certificate.new()
+	serverCert.load("res://cert/cert.crt")
+	var serverKey = CryptoKey.new()
+	serverKey.load("res://cert/key.key") 
+	#var serverCert = load("res://cert/cert.crt")
+	#var serverKey = load("res://cert/key.key")
+
 	#var web_error = webPeer.create_server(Port)
 	var web_error = webPeer.create_server(Port, "*", TLSOptions.server(serverKey, serverCert))
 	#var error = peer.create_server(Port)
