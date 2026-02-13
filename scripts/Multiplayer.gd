@@ -192,7 +192,7 @@ func update_text_field():
 	var newText = ""
 	for player in GameManager.Players:
 		newText += GameManager.Players[player].name + "\n"
-	$"Debug Interface/TextField".text = newText
+	$"Debug Interface/PlayerList".text = newText
 
 func host_game():
 	var serverCert = load("res://Fullchain.crt")
