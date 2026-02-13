@@ -5228,7 +5228,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Interface_Upload_Notification" type="Control" parent="." node_paths=PackedStringArray("textLabel")]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -5309,6 +5308,7 @@ icon_name = "copy"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Mailto" type="Button" parent="Interface_Upload_Notification/Panel/HBoxContainer" node_paths=PackedStringArray("collapse", "iconToSwap")]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
