@@ -4,7 +4,7 @@ extends Node
 # Basic Server Information
 @export var GameScene : PackedScene
 @export var Adress := "localhost"
-@export var Port := 8080
+@export var Port := 27443
 @export var MaxPlayers = 12
 var peer = ENetMultiplayerPeer.new()
 var webPeer = WebSocketMultiplayerPeer.new()
@@ -195,10 +195,10 @@ func update_text_field():
 	$"Debug Interface/TextField".text = newText
 
 func host_game():
-	var serverCert = load("res://Fullchain.crt")
-	var serverKey = load("res://DevopsPrivate.key")
-	var web_error = webPeer.create_server(Port)
-	#var error = webPeer.create_server(Port, "*", TLSOptions.server(serverKey, serverCert))
+	var serverCert = load("res://cert/cert.crt")
+	var serverKey = load("res://cert/key.key")
+	#var web_error = webPeer.create_server(Port)
+	var web_error = webPeer.create_server(Port, "*", TLSOptions.server(serverKey, serverCert))
 	#var error = peer.create_server(Port)
 	if web_error != OK:
 		push_error("WebSocket server failed: " + str(web_error))
