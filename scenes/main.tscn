@@ -961,6 +961,7 @@ texture = SubResource("ViewportTexture_2cr71")
 
 [node name="SubViewport" type="SubViewport" parent="World/PlayingField/Field/Field16/FlagIcon" node_paths=PackedStringArray("Labelobject")]
 transparent_bg = true
+handle_input_locally = false
 size = Vector2i(32, 32)
 script = ExtResource("38_g5xr8")
 Labelobject = NodePath("FontAwesome")
@@ -974,7 +975,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 1
 localize_numeral_system = false
-theme_override_colors/font_color = Color(0.5787526, 0.11852979, 0.082917474, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("75_roort")
 theme_override_font_sizes/font_size = 32
 text = ""
