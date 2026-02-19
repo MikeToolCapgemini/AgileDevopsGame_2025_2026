@@ -198,7 +198,7 @@ func display_action_card(roll : int,localonly = false):
 	CardUIManager.BookmarkButton.hide()
 	CardUIManager.CancelBookmarkButton.hide()
 	CardUIManager.RevealButton.hide()
-	CardUIManager.SaveActionButton.show()
+	#CardUIManager.SaveActionButton.show()
 	opened_locally = localonly
 	var action_text = ""
 	var action_card = get_action_by_uid(roll)
