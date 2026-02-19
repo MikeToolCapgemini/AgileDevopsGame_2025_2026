@@ -188,6 +188,9 @@ text = "Operate"
 [sub_resource type="TextMesh" id="TextMesh_qdl5p"]
 text = "Monitor"
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_2cr71"]
+viewport_path = NodePath("World/PlayingField/Field/Field16/FlagIcon/SubViewport")
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_iavad"]
 top_radius = 0.75
 bottom_radius = 0.75
@@ -771,7 +774,7 @@ mesh = ExtResource("6_4vpm6")
 skeleton = NodePath("../../../..")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="World/PlayingField/Field/Field0"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.70710707, 0.70710707, 1.5279721, 0.44676012, -0.098139465)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.70710707, 0.70710707, 1.6877593, 0.44676036, 0.8579807)
 mesh = SubResource("TextMesh_3o00s")
 
 [node name="Field1" type="MeshInstance3D" parent="World/PlayingField/Field"]
@@ -873,7 +876,7 @@ mesh = ExtResource("14_6q7oi")
 skeleton = NodePath("../../../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/PlayingField/Field/Field8"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.0111417, 0.44676, 1.75691)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.70710707, 0.70710707, -0.07534802, 0.44675934, 1.8080536)
 mesh = SubResource("TextMesh_c4qfq")
 
 [node name="Field9" type="MeshInstance3D" parent="World/PlayingField/Field"]
@@ -954,6 +957,37 @@ mesh = SubResource("TextMesh_qdl5p")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08780128, 0.0184336, 0.009346783)
 mesh = ExtResource("22_ifimr")
 skeleton = NodePath("../../../..")
+
+[node name="FlagIcon" type="Sprite3D" parent="World/PlayingField/Field/Field16"]
+transform = Transform3D(0.9526975, -0.015243322, 0.30353993, -0.15795931, 0.82841796, 0.53737503, -0.25964928, -0.559903, 0.7868239, 1.7425134, 0.5786674, 1.3643852)
+texture = SubResource("ViewportTexture_2cr71")
+
+[node name="SubViewport" type="SubViewport" parent="World/PlayingField/Field/Field16/FlagIcon" node_paths=PackedStringArray("Labelobject")]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(32, 32)
+script = ExtResource("38_g5xr8")
+Labelobject = NodePath("FontAwesome")
+
+[node name="FontAwesome" type="Label" parent="World/PlayingField/Field/Field16/FlagIcon/SubViewport"]
+auto_translate_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+localize_numeral_system = false
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 32
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 32
+icon_name = "flag"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/PlayingField"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 3.5139208, -1.8714095, 2.2646317)
@@ -1037,6 +1071,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_8lcmr")
 
 [node name="Flag" type="MeshInstance3D" parent="World/Floor"]
 transform = Transform3D(-0.17088206, -0.087028734, -0.16745032, -0.0025932505, 0.27641976, -0.097119756, 0.1824626, -0.07757656, -0.15820287, 1.9679214, 0.047240138, -0.39408097)
+visible = false
 mesh = ExtResource("122_2cr71")
 
 [node name="Lighting" type="Node3D" parent="World"]
@@ -5791,6 +5826,7 @@ icon_name = "copy"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Mailto" type="Button" parent="Interface_Upload_Notification/Panel/HBoxContainer" node_paths=PackedStringArray("collapse", "iconToSwap")]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
