@@ -242,10 +242,10 @@ func card_discard(cardTypeData,cardTypeDataVar, cardTypeString, keyVar):
 @rpc("any_peer")
 func card_setup(type, subtype, nr, question,qexplanation, choiceA, choiceB, choiceC, choiceD, answer,aexplanation,level):
 	CardUIManager.bookmark.visible = false
-	if type != "action":
-		CardUIManager.SaveActionButton.hide()
-	else:
-		CardUIManager.SaveActionButton.show()
+	#if type != "action":
+		#CardUIManager.SaveActionButton.hide()
+	#else:
+		#CardUIManager.SaveActionButton.show()
 	print("####")
 	print(type)
 	curKey = nr

@@ -94,7 +94,7 @@
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="74_roort"]
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="75_roort"]
 [ext_resource type="Script" uid="uid://btlh4wrv04rc3" path="res://addons/collapsible_container/collapsible_elements/collapsible_container.gd" id="78_engxj"]
-[ext_resource type="Script" path="res://scripts/collapseButton.gd" id="78_raiwf"]
+[ext_resource type="Script" uid="uid://ddn46v8kt3jwd" path="res://scripts/collapseButton.gd" id="78_raiwf"]
 [ext_resource type="Script" uid="uid://yhh3kfgvk00x" path="res://scripts/UX/CardUIManager.gd" id="81_4ue30"]
 [ext_resource type="Script" path="res://scripts/reset_game.gd" id="81_raiwf"]
 [ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
@@ -117,12 +117,12 @@
 [ext_resource type="Script" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
 [ext_resource type="Script" path="res://scripts/disconnect.gd" id="103_gm02q"]
 [ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
-[ext_resource type="Script" path="res://scripts/save_action.gd" id="107_1hbcg"]
+[ext_resource type="Script" uid="uid://c5axln2573qn7" path="res://scripts/save_action.gd" id="107_1hbcg"]
 [ext_resource type="Script" path="res://scripts/pick_color.gd" id="107_vny5k"]
 [ext_resource type="Script" path="res://scripts/select_color_ui.gd" id="108_eh25q"]
 [ext_resource type="Script" path="res://scripts/editable_panel.gd" id="110_07pt3"]
-[ext_resource type="Script" path="res://scripts/action_cards_List.gd" id="118_jp61a"]
-[ext_resource type="Script" path="res://scripts/card_button.gd" id="118_m4o51"]
+[ext_resource type="Script" uid="uid://dq0w6oyg4sebd" path="res://scripts/action_cards_List.gd" id="118_jp61a"]
+[ext_resource type="Script" uid="uid://dptgan0vgmp2m" path="res://scripts/card_button.gd" id="118_m4o51"]
 [ext_resource type="Script" uid="uid://ee3j21fjacdt" path="res://scripts/ForceCard.gd" id="120_yton5"]
 [ext_resource type="ArrayMesh" uid="uid://fncthxf2lbjd" path="res://assets/3Dmodels/Flag/flag.obj" id="122_2cr71"]
 
@@ -2470,7 +2470,7 @@ icon_size = 15
 icon_name = "x"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
-[node name="CardSettings" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer"]
+[node name="CardSettings" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer" groups=["FacilitatorUI"]]
 layout_mode = 2
 
 [node name="OpenCardSettings" type="Button" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings" node_paths=PackedStringArray("collapse")]
@@ -2552,6 +2552,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="ActionCardList" type="Button" parent="Interface_top_left_buttons/TopButtons/VBoxContainer/CardSettings/CardSettings/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("hideObject")]
+visible = false
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -3947,6 +3948,7 @@ cardManagerObject = NodePath("../../../../../../../../..")
 bookmarkIcon = NodePath("../../../../../../../../../MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer/TypeBox/TypeBG/MarginContainer/HBoxContainer/bookmark")
 
 [node name="SaveAction" type="Button" parent="Interface_Cards/FacilitatorPanels/FaciltatorPanelMainMargin/FacilatorPanel/FacilitatorPanelCollapsable/FacilitatorPanelMargin/FacilitatorCardPanel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("collapse")]
+visible = false
 custom_minimum_size = Vector2(120, 33)
 layout_mode = 2
 tooltip_text = "Save the card to a team, for them to use later."
@@ -3966,6 +3968,7 @@ editor_description = "
 			A custom/plugin Control node capable of hiding and revealing its children by folding and unfolding.
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
+visible = false
 clip_contents = true
 custom_minimum_size = Vector2(126, 70)
 layout_mode = 2
@@ -4910,9 +4913,10 @@ text = "Question
 Question
 Question
 Question"
+fit_content = true
 scroll_active = false
 horizontal_alignment = 1
-vertical_alignment = 3
+vertical_alignment = 1
 
 [node name="AnswerPanelBG" type="Panel" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer"]
 visibility_layer = 4
