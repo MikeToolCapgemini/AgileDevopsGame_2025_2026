@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
-[ext_resource type="Script" uid="uid://ds5sql610u4u7" path="res://scripts/state_synchronizer.gd" id="2_roort"]
+[ext_resource type="Script" path="res://scripts/state_synchronizer.gd" id="2_roort"]
 [ext_resource type="Script" uid="uid://d0fm7jh06timq" path="res://scripts/Player.gd" id="3_ogtpu"]
 [ext_resource type="Script" uid="uid://b60tex7gvarge" path="res://scripts/InterfaceManager.gd" id="4_4m4b7"]
 [ext_resource type="Script" uid="uid://cc4a3cr7u20kl" path="res://scripts/CursorManager.gd" id="4_hwpl5"]
@@ -13,7 +13,7 @@
 [ext_resource type="ArrayMesh" uid="uid://menvinsnf4an" path="res://assets/Grass.res" id="7_ttw4a"]
 [ext_resource type="ArrayMesh" uid="uid://b3dcm7uqde6rj" path="res://assets/PlayingField/Field_2.obj" id="8_irh7k"]
 [ext_resource type="ArrayMesh" uid="uid://btu4h5g5xt21m" path="res://assets/PlayingField/Field_3.obj" id="9_55j84"]
-[ext_resource type="Script" uid="uid://0k8d32bhacuo" path="res://scripts/Rotate.gd" id="9_wvxrh"]
+[ext_resource type="Script" path="res://scripts/Rotate.gd" id="9_wvxrh"]
 [ext_resource type="Material" uid="uid://cjnca600vhyrw" path="res://Materials/CodeRed.tres" id="10_d0dfl"]
 [ext_resource type="ArrayMesh" uid="uid://dabrtcc33ot6w" path="res://assets/PlayingField/Field_4.obj" id="10_vgipp"]
 [ext_resource type="ArrayMesh" uid="uid://c0w2uclwcr23" path="res://assets/PlayingField/Field_5.obj" id="11_edxct"]
@@ -94,33 +94,33 @@
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="74_roort"]
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="75_roort"]
 [ext_resource type="Script" uid="uid://btlh4wrv04rc3" path="res://addons/collapsible_container/collapsible_elements/collapsible_container.gd" id="78_engxj"]
-[ext_resource type="Script" uid="uid://ddn46v8kt3jwd" path="res://scripts/collapseButton.gd" id="78_raiwf"]
+[ext_resource type="Script" path="res://scripts/collapseButton.gd" id="78_raiwf"]
 [ext_resource type="Script" uid="uid://yhh3kfgvk00x" path="res://scripts/UX/CardUIManager.gd" id="81_4ue30"]
-[ext_resource type="Script" uid="uid://chkh3ytq3t6lm" path="res://scripts/reset_game.gd" id="81_raiwf"]
+[ext_resource type="Script" path="res://scripts/reset_game.gd" id="81_raiwf"]
 [ext_resource type="Texture2D" uid="uid://ddamqjsnbpm21" path="res://assets/icons/bookmarkStar.png" id="83_6nfnn"]
 [ext_resource type="Script" uid="uid://cn748y8xmxepj" path="res://scripts/repick_role.gd" id="84_r4ag1"]
-[ext_resource type="Script" uid="uid://b0vl6xxjb2of5" path="res://scripts/stopSession.gd" id="86_37xlc"]
+[ext_resource type="Script" path="res://scripts/stopSession.gd" id="86_37xlc"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="87_1uevf"]
-[ext_resource type="Script" uid="uid://c6ukc6vsneomw" path="res://scripts/logout_button.gd" id="87_4ahvx"]
-[ext_resource type="Script" uid="uid://cskqhgbr0hwpc" path="res://scripts/return_to_main_menu.gd" id="87_ga3rw"]
+[ext_resource type="Script" path="res://scripts/logout_button.gd" id="87_4ahvx"]
+[ext_resource type="Script" path="res://scripts/return_to_main_menu.gd" id="87_ga3rw"]
 [ext_resource type="FontFile" uid="uid://bgwubnrnnxe2s" path="res://addons/fontawesome/fonts/fa-regular-400.woff2" id="87_xmrkg"]
 [ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="88_0tljd"]
-[ext_resource type="Script" uid="uid://boe0hs34d60l3" path="res://scripts/PlayerSettingsUI.gd" id="88_8lcmr"]
+[ext_resource type="Script" path="res://scripts/PlayerSettingsUI.gd" id="88_8lcmr"]
 [ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="88_wvlrk"]
 [ext_resource type="FontFile" uid="uid://2ike7sp4qiyi" path="res://assets/fonts/Ubuntu/Ubuntu-BoldItalic.ttf" id="89_mgpkq"]
 [ext_resource type="FontFile" uid="uid://b23akitg4yjxd" path="res://assets/fonts/Ubuntu/Ubuntu-Italic.ttf" id="90_xmrkg"]
 [ext_resource type="Script" uid="uid://df05tjlkygvok" path="res://scripts/UX/Toggle.gd" id="92_83607"]
-[ext_resource type="Script" uid="uid://wqc4dac2wyhy" path="res://scripts/Hide_facilitator_button.gd" id="92_gm02q"]
+[ext_resource type="Script" path="res://scripts/Hide_facilitator_button.gd" id="92_gm02q"]
 [ext_resource type="PackedScene" uid="uid://dbxyj6ca7okx3" path="res://scenes/UI/multi_save.tscn" id="92_sgvw8"]
-[ext_resource type="Script" uid="uid://3k654ysj1nsk" path="res://scripts/change_color.gd" id="94_joh2r"]
-[ext_resource type="Script" uid="uid://dd03peyrwpfdy" path="res://scripts/player_list.gd" id="95_f5chs"]
-[ext_resource type="Script" uid="uid://bq01pxakqcfgj" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
-[ext_resource type="Script" uid="uid://ceamoqnkbfe7" path="res://scripts/disconnect.gd" id="103_gm02q"]
+[ext_resource type="Script" path="res://scripts/change_color.gd" id="94_joh2r"]
+[ext_resource type="Script" path="res://scripts/player_list.gd" id="95_f5chs"]
+[ext_resource type="Script" path="res://scripts/SaveUploader.gd" id="102_37xlc"]
+[ext_resource type="Script" path="res://scripts/disconnect.gd" id="103_gm02q"]
 [ext_resource type="PackedScene" uid="uid://b0eok2eloes3u" path="res://scenes/UI/Slideouts/Interface_Slideout_Editable.tscn" id="105_07pt3"]
-[ext_resource type="Script" uid="uid://bfpqk8gkgkx6p" path="res://scripts/pick_color.gd" id="107_vny5k"]
-[ext_resource type="Script" uid="uid://cc745mejagtln" path="res://scripts/select_color_ui.gd" id="108_eh25q"]
-[ext_resource type="Script" uid="uid://br1s2wprncugw" path="res://scripts/editable_panel.gd" id="110_07pt3"]
-[ext_resource type="Script" uid="uid://ee3j21fjacdt" path="res://scripts/ForceCard.gd" id="120_yton5"]
+[ext_resource type="Script" path="res://scripts/pick_color.gd" id="107_vny5k"]
+[ext_resource type="Script" path="res://scripts/select_color_ui.gd" id="108_eh25q"]
+[ext_resource type="Script" path="res://scripts/editable_panel.gd" id="110_07pt3"]
+[ext_resource type="Script" path="res://scripts/ForceCard.gd" id="120_yton5"]
 [ext_resource type="ArrayMesh" uid="uid://fncthxf2lbjd" path="res://assets/3Dmodels/Flag/flag.obj" id="122_2cr71"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrx01"]
@@ -495,6 +495,8 @@ corner_radius_top_right = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlsfy"]
 bg_color = Color(0.07058824, 0.101960786, 0.21960784, 1)
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpru0"]
 bg_color = Color(0, 0.41568628, 0.23529412, 1)
@@ -2135,7 +2137,7 @@ custom_minimum_size = Vector2(121, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-tooltip_text = "Stop session and Exit game"
+tooltip_text = "Log out of the portal"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
