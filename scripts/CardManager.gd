@@ -6,6 +6,7 @@ class_name CardManager
 #@export var UXTagObject : Panel
 @export var CardUIManager: CardUIManager
 @onready var ImportData = get_node("/root/ImportData")
+var actionCardData = ActionCardData.new()
 
 var opened_locally : bool = false
 var active = false
@@ -17,6 +18,7 @@ var answerexplanationtext
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_child(actionCardData)
 	ImportData.sort_data()
 	var ImportDataFull = ImportData.duplicate()
 	pass # Replace with function body.
@@ -73,7 +75,7 @@ func draw(type):
 	# action cards
 	var rng = RandomNumberGenerator.new()
 	if rng.randi_range(1, 21) >= 19: #19 is defualt
-		var roll = rng.randi_range(1,actionDict.size()-1)
+		var roll = rng.randi_range(1,actionCardData.actionDict.size())
 		curType = "action"
 		curKey = roll
 		set_current_vars_for_everyone.rpc(active,curType,curKey)
@@ -185,20 +187,11 @@ func display_default_card(d,localonly = false):
 	if !localonly:
 		card_setup.rpc(cType,cSubType,d, cQuestion,cQuestionExplanation, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer,cAnswerExplanation,lType)
 
-var actionDict = [
-	"Your delivery does not fit in the release calendar: skip a turn",
-	"Synchronization issue: Move your front pawn back to the square where your second pawn is. If you only have one pawn in the game, you can take your second pawn, and place both pawns on your starting space",
-	"Fix security issue together: you and the person after you skip this turn",
-	"Process joker: you can keep this card and use it when you want someone else to take your turn and assignment on a next turn",
-	"Content joker: you can keep this card and use it when skip a question you don't like and take another question",
-	"Management: you have to solve a big problem with high priority, your pawn may switch places with the pawn of another player",
-	"Blackmail: A user refuses to close an incident unless you give something extra in return, your front pawn will not move this round",
-	"Night shift, skip a turn",
-	"New Business Requirement: put the next pawn in the starting square",
-	"Test: SIT issues, two steps back",
-	"Test: The acceptance test is successful, go directly into production (to your finish)",
-	"Management: CICD chain no longer works, put all pawns (of all players) back a whole phase"
-	]
+func get_action_by_uid(uid: int) -> Dictionary:
+	for entry in actionCardData.actionDict:
+		if entry["UID"] == uid:
+			return entry
+	return {}
 
 @rpc("any_peer")
 func display_action_card(roll : int,localonly = false):
@@ -207,10 +200,15 @@ func display_action_card(roll : int,localonly = false):
 	CardUIManager.RevealButton.hide()
 	CardUIManager.SaveActionButton.show()
 	opened_locally = localonly
-	print(actionDict[roll] + str(multiplayer.get_unique_id()))
-	card_setup("action", "",roll, actionDict[roll],"", "", "", "", "", "","","")
-	if !localonly:
-		card_setup.rpc("action", "",roll, actionDict[roll],"", "", "", "", "", "","","")
+	var action_text = ""
+	var action_card = get_action_by_uid(roll)
+	if action_card.size() > 0:
+		action_text = action_card["action"]
+	
+		print(action_text + str(multiplayer.get_unique_id()))
+		card_setup("action", "",roll, action_text,"", "", "", "", "", "","","")
+		if !localonly:
+			card_setup.rpc("action", "",roll, action_text,"", "", "", "", "", "","","")
 
 func set_card_choice_string(tag, cardTypeData):
 	if cardTypeData == "":

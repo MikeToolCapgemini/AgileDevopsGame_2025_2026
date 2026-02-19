@@ -1,0 +1,74 @@
+[
+	{
+		"Type": "action",
+		"Subtype": "",
+		"UID": 1,
+		"action": "Your delivery does not fit in the release calendar: skip a turn"
+	},
+	{
+		"Type": "action",
+		"Subtype": "",
+		"UID": 2,
+		"action": "Synchronization issue: Move your front pawn back to the square where your second pawn is. If you only have one pawn in the game, you can take your second pawn, and place both pawns on your starting space"
+	},
+	{
+		"Type": "action",
+		"Subtype": "",
+		"UID": 3,
+		"action": "Fix security issue together: you and the person after you skip this turn"
+	},
+	{
+		"Type": "action",
+		"Subtype": "",
+		"UID": 4,
+		"action": "Process joker: you can keep this card and use it when you want someone else to take your turn and assignment on a next turn"
+	},
+	{
+		"Type": "action",
+		"Subtype": "",
+		"UID": 5,
+		"action": "Content joker: you can keep this card and use it when skip a question you don't like and take another question"
+	},
+	{
+		"Type": "action",
+		"Subtype": "",
+		"UID": 6,
+		"action": "Management: you have to solve a big problem with high priority, your pawn may switch places with the pawn of another player"
+	},
+	{
+		"Type": "action",
+		"Subtype": "",
+		"UID": 7,
+		"action": "Blackmail: A user refuses to close an incident unless you give something extra in return, your front pawn will not move this round"
+	},
+	{
+		"Type": "action",
+		"Subtype": "",
+		"UID": 8,
+		"action": "Night shift, skip a turn"
+	},
+	{
+		"Type": "action",
+		"Subtype": "",
+		"UID": 9,
+		"action": "New Business Requirement: put the next pawn in the starting square"
+	},
+	{
+		"Type": "action",
+		"Subtype": "",
+		"UID": 10,
+		"action": "Test: SIT issues, two steps back"
+	},
+	{
+		"Type": "action",
+		"Subtype": "",
+		"UID": 11,
+		"action": "Test: The acceptance test is successful, go directly into production (to your finish)"
+	},
+	{
+		"Type": "action",
+		"Subtype": "",
+		"UID": 12,
+		"action": "Management: CICD chain no longer works, put all pawns (of all players) back a whole phase"
+	}
+]

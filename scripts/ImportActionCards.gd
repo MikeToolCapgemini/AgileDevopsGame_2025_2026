@@ -1,10 +1,11 @@
 extends Node
+class_name ActionCardData
 
 var PATH_JSON_DATA = "res://Data/actions.json"
 var WEB_PATH = "Data/actions.json"
 var jsonLoader = json_loader.new()
 
-var actionDict : Dictionary = {}
+var actionDict : Array = []
 
 
 func _ready():
