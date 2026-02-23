@@ -44,6 +44,7 @@ func get_state() -> Dictionary:
 		state["pawns"].append({
 			"id": index, # unique id for matching
 			"position": pawn.global_position,
+			"target_position": pawn.target_position,
 			"rotation": pawn.global_rotation
 		})
 		print("Pawn " + str(index) + " has been set to position " + str(pawn.global_position))
@@ -57,9 +58,11 @@ func apply_state(state: Dictionary):
 	for pawn_data in state.get("pawns", []):
 		var pawn = pawns.get(pawn_data["id"])
 		if pawn:
+			pawn.target_position = read_vec3(pawn_data["target_position"])
 			pawn.global_position = read_vec3(pawn_data["position"])
 			pawn.global_rotation = read_vec3(pawn_data["rotation"])
 			print("Setting Pawn " + str(pawn_data["id"]) + " to position " + str(pawn_data["position"]))
+			pawn._sync_position(pawn_data["target_position"])
 
 
 func _on_reset_pawn_position_button_pressed() -> void:

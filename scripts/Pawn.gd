@@ -15,6 +15,9 @@ var hover = false
 var selected = false
 var HasBeenSet = false
 
+const SYNC_INTERVAL := 0.05
+var sync_timer := 0.0
+
 func _ready():
 	CameraObject = self.get_parent_node_3d().CameraObject
 	WorldObject = self.get_parent_node_3d().WorldObject
@@ -24,13 +27,22 @@ func _ready():
 	newMaterial.albedo_color = TargetColor
 	ObjectToColor.material_override = TargetMaterial
 	InitialPosition = position
+	if target_position == Vector3.ZERO:
+		target_position = InitialPosition
+	
 
 func _process(_delta):
 	if HasBeenSet:
 		_update_pawn_outline()
 		if selected:
 			_update_pawn_position()
+			sync_timer += _delta
+		if sync_timer >= SYNC_INTERVAL:
+			sync_timer = 0
+			_sync_position(position)
 			_sync_position.rpc(position)
+		if not selected:
+			position = position.lerp(target_position, 12.0 * _delta)
 
 func _update_pawn_position():
 	#var spaceState = get_world_3d().direct_space_state
@@ -69,10 +81,12 @@ func _on_static_body_3d_mouse_exited():
 	hover = false
 
 func _on_reset_pawn_position_button_pressed():
-	position = InitialPosition
-	_sync_position.rpc(position)
+	_sync_position(InitialPosition)
+	_sync_position.rpc(InitialPosition)
 	print("Position Reset")
 
-@rpc("any_peer")
+var target_position: Vector3 = Vector3.ZERO
+
+@rpc("any_peer", "call_remote", "unreliable")
 func _sync_position(newPosition: Vector3):
-	position = newPosition
+	target_position = newPosition

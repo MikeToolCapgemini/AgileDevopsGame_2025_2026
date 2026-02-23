@@ -9,6 +9,7 @@ extends Node
 var peer = ENetMultiplayerPeer.new()
 var webPeer = WebSocketMultiplayerPeer.new()
 
+var playername : String = ""
 var started : bool = false
 
 @export var connect_panel : Control
@@ -42,8 +43,17 @@ func _ready():
 		print("Starting dedicated server...")
 		host_game()
 		
-
-
+#var focused_out : bool
+#func _notification(what: int) -> void:
+	#if what == NOTIFICATION_APPLICATION_FOCUS_IN:
+		#if multiplayer.has_multiplayer_peer():
+			#if focused_out:
+				#_on_reconnect_pressed()
+			#focused_out = false
+			#print("player has focused in")
+	#elif what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		#focused_out = true
+		#print("player has focused out")
 
 func peer_connected(id):
 	if id != 1:
@@ -75,16 +85,20 @@ func connected_to_server():
 	connect_panel.show()
 	print("Connected to server")
 	join_button.hide()
-	send_player_information.rpc_id(1, $"Debug Interface/NameField".text, multiplayer.get_unique_id())
+	if playername == "":
+		playername = $"Debug Interface/NameField".text
+	send_player_information.rpc_id(1, playername, multiplayer.get_unique_id())
 
 func connection_failed():
 	disconnect_panel.edit_text("Connection Failed")
 	disconnect_panel.show()
+	join_button.show()
 	print("Connection Failed")
 	
 func on_server_disconnected():
 	disconnect_server_panel.edit_text("Disconnected from server")
 	disconnect_server_panel.show()
+	join_button.show()
 	print("Disconnected from server")
 
 # Sends information about the player and updates/synchronizes the Players dict in GameManager

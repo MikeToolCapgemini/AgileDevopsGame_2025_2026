@@ -18,6 +18,7 @@ func _notification(what: int) -> void:
 		if multiplayer.has_multiplayer_peer():
 			rpc_id(1,"request_state")
 			playerList.update_player_list()
+			print("player has focused in")
 	elif what == NOTIFICATION_APPLICATION_FOCUS_OUT:
 		print("player has focused out")
 		
