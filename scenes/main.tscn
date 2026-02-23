@@ -5592,7 +5592,6 @@ icon_name = "circle-xmark"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Interface_InterruptFacilitator2" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -5617,7 +5616,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_8b7kw")
 [node name="MarginContainer" type="MarginContainer" parent="Interface_InterruptFacilitator2/Panel"]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Interface_InterruptFacilitator2/Panel/MarginContainer"]
@@ -5693,6 +5694,7 @@ icon_name = "bell-slash"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Hide" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("hideObject")]
+visible = false
 custom_minimum_size = Vector2(43, 43)
 layout_mode = 2
 tooltip_text = "Close interrupt"
