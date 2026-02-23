@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dq4rnexfbwops" path="res://scripts/Main.gd" id="1_b3gvj"]
 [ext_resource type="Script" uid="uid://oocty8lsiski" path="res://scripts/PlayerManager.gd" id="1_b5k8w"]
-[ext_resource type="Script" path="res://scripts/state_synchronizer.gd" id="2_roort"]
+[ext_resource type="Script" uid="uid://ds5sql610u4u7" path="res://scripts/state_synchronizer.gd" id="2_roort"]
 [ext_resource type="Script" uid="uid://d0fm7jh06timq" path="res://scripts/Player.gd" id="3_ogtpu"]
 [ext_resource type="Script" uid="uid://b60tex7gvarge" path="res://scripts/InterfaceManager.gd" id="4_4m4b7"]
 [ext_resource type="Script" uid="uid://cc4a3cr7u20kl" path="res://scripts/CursorManager.gd" id="4_hwpl5"]
@@ -1591,11 +1591,12 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("58_engxj")
 text = "[00:00]"
 
-[node name="hourglassAnimated" parent="World/Interactables" node_paths=PackedStringArray("EditMinObject", "EditSecObject", "InterruptUI", "LabelObject") instance=ExtResource("31_wvlrk")]
+[node name="hourglassAnimated" parent="World/Interactables" node_paths=PackedStringArray("EditMinObject", "EditSecObject", "InterruptUI", "InterruptFacilitatorUI", "LabelObject") instance=ExtResource("31_wvlrk")]
 transform = Transform3D(0.27134666, 0, 0.3532564, 0, 0.45, 0, -0.37761885, 0, 0.25384048, -2.242013, 0.7542969, 4.2151003)
 EditMinObject = NodePath("../../../Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/SetTimer/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditMinutes")
 EditSecObject = NodePath("../../../Interface_Facilitator/FacilitatorsideBtns/MarginContainer/CollapsibleContainer/TimerPanels/SetTimer/SetTimerPanel/MarginContainer/VBoxContainer/SetButtons/TimerEditField/TextEditSeconds")
-InterruptUI = NodePath("../../../Interface_InterruptFacilitator2")
+InterruptUI = NodePath("../../../Interface_Interrupt")
+InterruptFacilitatorUI = NodePath("../../../Interface_InterruptFacilitator2")
 LabelObject = NodePath("../Hourglass3DLabel/HourglassViewPort/HourglassLabel")
 
 [node name="Timer" type="Node3D" parent="World/Interactables"]
@@ -2516,7 +2517,7 @@ editor_description = "
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
 clip_contents = true
-custom_minimum_size = Vector2(300, 150)
+custom_minimum_size = Vector2(300, 115)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -2720,7 +2721,7 @@ icon_size = 15
 icon_name = "x"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
-[node name="playerList" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer" groups=["FacilitatorUI"]]
+[node name="playerList" type="HBoxContainer" parent="Interface_top_left_buttons/TopButtons/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
@@ -4443,7 +4444,7 @@ editor_description = "
 			
 Give feedback at: https://github.com/ArshvirGoraya/Godot-Collapsible-Container"
 clip_contents = true
-custom_minimum_size = Vector2(706, 531)
+custom_minimum_size = Vector2(706, 885)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -4816,7 +4817,6 @@ text = "Deploy"
 scroll_active = false
 
 [node name="Question_AnswerBox" type="MarginContainer" parent="Interface_Cards/MarginContainer/CollapsibleContainer/CardPanel/CardPanelMarginContainer/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -4837,7 +4837,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("87_1uevf")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/normal_font_size = 22
 text = "Question
 Question
 Question
@@ -5592,7 +5592,6 @@ icon_name = "circle-xmark"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Interface_InterruptFacilitator2" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -5648,7 +5647,7 @@ script = ExtResource("53_nl7a3")
 TimerObject = NodePath("../../../../../World/Interactables/hourglassAnimated")
 InterruptUIFac = NodePath("../../../..")
 
-[node name="Show" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("InterruptUIPlayers", "InterruptUIFac")]
+[node name="Show" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(180, 43)
 layout_mode = 2
@@ -5659,9 +5658,38 @@ theme_override_styles/normal = ExtResource("45_fv0h2")
 theme_override_styles/pressed = ExtResource("46_171dt")
 theme_override_styles/hover = ExtResource("46_171dt")
 text = "Show to Players"
+
+[node name="End_interupt" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("InterruptUIPlayers", "InterruptUIFac")]
+custom_minimum_size = Vector2(43, 43)
+layout_mode = 2
+tooltip_text = "End the interrupt"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_37xlc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_83607")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vny5k")
 script = ExtResource("52_4vkqy")
 InterruptUIPlayers = NodePath("../../../../../Interface_Interrupt")
 InterruptUIFac = NodePath("../../../..")
+
+[node name="FontAwesome2" type="Label" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/End_interupt"]
+auto_translate_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("75_roort")
+theme_override_font_sizes/font_size = 32
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("88_wvlrk")
+icon_size = 32
+icon_name = "bell-slash"
+metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Hide" type="Button" parent="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer" node_paths=PackedStringArray("hideObject")]
 custom_minimum_size = Vector2(43, 43)
@@ -5684,7 +5712,6 @@ anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
 theme = ExtResource("74_roort")
-script = ExtResource("53_u67wn")
 
 [node name="Panel" type="PanelContainer" parent="Interface_Interrupt"]
 material = SubResource("CanvasItemMaterial_k42av")
@@ -6437,6 +6464,7 @@ metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 [connection signal="pressed" from="Interface_ActionCards/BlackoutBG/VBoxContainer/Buttons/Resume" to="Interface_ActionCards/BlackoutBG/VBoxContainer/Buttons/Resume" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Delay" method="_on_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Show" method="_on_pressed"]
+[connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/End_interupt" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/End_interupt" method="_on_stop_pressed"]
 [connection signal="pressed" from="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Hide" to="Interface_InterruptFacilitator2/Panel/MarginContainer/HBoxContainer/Hide" method="_on_pressed"]
 [connection signal="visibility_changed" from="Interface_Interrupt" to="Interface_Interrupt" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="Interface_Save_notif" to="Interface_Save_notif" method="_on_visibility_changed"]

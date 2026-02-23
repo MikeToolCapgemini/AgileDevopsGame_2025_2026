@@ -5,10 +5,10 @@
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="3_4vwpp"]
 [ext_resource type="Script" uid="uid://df05tjlkygvok" path="res://scripts/UX/Toggle.gd" id="3_cuu6e"]
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="5_uvo4r"]
-[ext_resource type="Script" uid="uid://ghufwxohnaar" path="res://scripts/delayed_editable_panel.gd" id="6_uvo4r"]
+[ext_resource type="Script" path="res://scripts/delayed_editable_panel.gd" id="6_uvo4r"]
 [ext_resource type="StyleBox" uid="uid://dijgsweldy4qb" path="res://Styles/Cards_Background.tres" id="7_a6lh4"]
 [ext_resource type="Script" uid="uid://dm015sicbwm2" path="res://scripts/PlaytestRoleSetup.gd" id="8_6mtek"]
-[ext_resource type="Script" uid="uid://br1s2wprncugw" path="res://scripts/editable_panel.gd" id="8_gpc4n"]
+[ext_resource type="Script" path="res://scripts/editable_panel.gd" id="8_gpc4n"]
 [ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="9_ue6mp"]
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="10_05036"]
 [ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="10_n1wk1"]
@@ -104,12 +104,13 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="multiplayer" type="Node" node_paths=PackedStringArray("connect_panel", "disconnect_panel", "disconnect_server_panel")]
+[node name="multiplayer" type="Node" node_paths=PackedStringArray("connect_panel", "disconnect_panel", "disconnect_server_panel", "join_button")]
 script = ExtResource("1_8yuej")
 GameScene = ExtResource("2_of8yj")
 connect_panel = NodePath("Interface_Connect")
 disconnect_panel = NodePath("Interface_Disconnect")
 disconnect_server_panel = NodePath("CanvasLayer/Interface_Disconnect_server")
+join_button = NodePath("Debug Interface/Join Button")
 
 [node name="Debug Interface" type="Control" parent="."]
 layout_mode = 3
