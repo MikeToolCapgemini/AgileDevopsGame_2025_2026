@@ -14,6 +14,7 @@ var started : bool = false
 @export var connect_panel : Control
 @export var disconnect_panel : Control
 @export var disconnect_server_panel : Control
+@export var join_button : Button
 
 
 var empty_server_timer : Timer
@@ -73,6 +74,7 @@ func connected_to_server():
 	connect_panel.edit_text("Connected to server")
 	connect_panel.show()
 	print("Connected to server")
+	join_button.hide()
 	send_player_information.rpc_id(1, $"Debug Interface/NameField".text, multiplayer.get_unique_id())
 
 func connection_failed():
