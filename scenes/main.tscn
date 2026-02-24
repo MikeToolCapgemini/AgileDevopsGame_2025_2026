@@ -5592,6 +5592,7 @@ icon_name = "circle-xmark"
 metadata/_custom_type_script = "uid://8mdwbu5lxn5m"
 
 [node name="Interface_InterruptFacilitator2" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
