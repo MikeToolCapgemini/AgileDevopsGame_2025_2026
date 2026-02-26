@@ -1209,6 +1209,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "ReleasePurple"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn0"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1228,6 +1229,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "ReleasePurple"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn1"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1247,6 +1249,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "MonitorBlue"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn2"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1266,6 +1269,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "MonitorBlue"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn3"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1285,6 +1289,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "OperateBrown"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn4"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1304,6 +1309,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "OperateBrown"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn5"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1324,6 +1330,7 @@ CameraObject = NodePath("../../../../Camera3D")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "DeployTeal"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn6"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1343,6 +1350,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "DeployTeal"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn7"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1362,6 +1370,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "TestGreen"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn8"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1381,6 +1390,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "TestGreen"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn9"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1400,6 +1410,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "BuildOrange"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn10"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1419,6 +1430,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "BuildOrange"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn11"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1438,6 +1450,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "PlanYellow"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn12"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1457,6 +1470,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "PlanYellow"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn13"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1476,6 +1490,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "CodeRed"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn14"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -1495,6 +1510,7 @@ script = ExtResource("37_d7tjx")
 CollisionObject = NodePath("StaticBodyPurple1/CollisionShape3D")
 OutlineMaterial = ExtResource("38_v5htu")
 ObjectToColor = NodePath("StaticBodyPurple1/MeshInstance3D")
+AssociatedTeam = "CodeRed"
 
 [node name="StaticBodyPurple1" type="StaticBody3D" parent="World/Interactables/Pawns/Pawn15"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
