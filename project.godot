@@ -60,8 +60,8 @@ DevmodeC={
 
 [network]
 
-limits/packet_peer_stream/max_buffer_po2=2048
-limits/webrtc/max_channel_in_buffer_kb=2048
+limits/packet_peer_stream/max_buffer_po2=4096
+limits/webrtc/max_channel_in_buffer_kb=4096
 
 [rendering]
 
