@@ -43,28 +43,28 @@ func _ready():
 		print("Starting dedicated server...")
 		host_game()
 		
-var focused_out : bool
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_APPLICATION_FOCUS_IN:
-		if multiplayer.has_multiplayer_peer():
-			if focused_out:
-				reset_peer()
-			focused_out = false
-			print("player has focused in")
-	elif what == NOTIFICATION_APPLICATION_FOCUS_OUT:
-		focused_out = true
-		print("player has focused out")
-
-func reset_peer():
-		if multiplayer.has_multiplayer_peer():
-			var old_peer = multiplayer.multiplayer_peer
-			multiplayer.multiplayer_peer = null
-			old_peer.close_connection()
-			webPeer.close()
-
-		var webPeer = WebSocketMultiplayerPeer.new()
-		webPeer.create_client("wss://" + GameManager.last_address)
-		multiplayer.multiplayer_peer = webPeer
+#var focused_out : bool
+#func _notification(what: int) -> void:
+	#if what == NOTIFICATION_APPLICATION_FOCUS_IN:
+		#if multiplayer.has_multiplayer_peer():
+			#if focused_out:
+				#reset_peer()
+			#focused_out = false
+			#print("player has focused in")
+	#elif what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		#focused_out = true
+		#print("player has focused out")
+#
+#func reset_peer():
+		#if multiplayer.has_multiplayer_peer():
+			#var old_peer = multiplayer.multiplayer_peer
+			#multiplayer.multiplayer_peer = null
+			#old_peer.close()
+			#webPeer.close()
+#
+		#var webPeer = WebSocketMultiplayerPeer.new()
+		#webPeer.create_client("wss://" + GameManager.last_address)
+		#multiplayer.multiplayer_peer = webPeer
 
 func peer_connected(id):
 	if id != 1:
