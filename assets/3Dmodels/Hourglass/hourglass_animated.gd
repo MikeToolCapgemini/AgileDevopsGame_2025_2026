@@ -13,6 +13,7 @@ var started_at_unix := 0.0
 @export var EditMinObject : TextEdit
 @export var EditSecObject : TextEdit
 @export var InterruptUI : Node
+@export var InterruptFacilitatorUI : Node
 @onready var interrupt_panel: PanelContainer = InterruptUI.get_node("Panel")
 @export var LabelObject : Label
 
@@ -29,6 +30,7 @@ func _ready():
 		return
 
 	panel_style = panel_style.duplicate()
+	interrupt_panel.add_theme_stylebox_override("panel", panel_style)
 	interrupt_panel.add_theme_stylebox_override("panel", panel_style)
 	pass # Replace with function body.
 
@@ -91,7 +93,8 @@ func _play_sandflow_from_time():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if timerRunning:
-		if currentTime <= 0:
+		if currentTime <= 0 && timerRunning:
+			setTimerRunning(false)
 			setTimerRunning.rpc(false)
 		currentTime = currentTime - (1*delta)
 	
@@ -177,13 +180,14 @@ func _on_set_pressed():
 
 func interrupt():
 	if PlayerSettings.role == "facilitator":
-		InterruptUI.visible = true
+		InterruptFacilitatorUI.visible = true
+	InterruptUI.visible = true
 		
-		start_safe_flash_interrupt()
+	start_safe_flash_interrupt()
 		
 var interrupt_tween: Tween
 
-func start_safe_flash_interrupt(duration: float = 3.0):
+func start_safe_flash_interrupt(duration: float = 10.0):
 	if interrupt_tween:
 		interrupt_tween.kill()
 

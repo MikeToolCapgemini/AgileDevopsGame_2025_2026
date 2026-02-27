@@ -24,3 +24,15 @@ func _on_pressed() -> void:
 	if cardManager.cardTypeData.has(key):
 		cardManager._sync_cardshown(cardManager.active, cardManager.CardUIManager.AnswerObject.text, cardManager.CardUIManager.QuestionObject.text)
 		cardManager._sync_cardshown.rpc(cardManager.active, cardManager.CardUIManager.AnswerObject.text, cardManager.CardUIManager.QuestionObject.text)
+
+func _force_card_local():
+	getTextInfo()
+	cardManager.active = true
+	if cardType == "action":
+		cardManager.display_action_card(key,true)
+	else:
+		cardManager.set_bg_on_type(cardType)
+		cardManager.display_default_card(key,true)
+	mainPanel.hide()
+	if cardManager.cardTypeData.has(key):
+		cardManager._sync_cardshown(cardManager.active, cardManager.CardUIManager.AnswerObject.text, cardManager.CardUIManager.QuestionObject.text)

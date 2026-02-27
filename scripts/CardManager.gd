@@ -6,7 +6,9 @@ class_name CardManager
 #@export var UXTagObject : Panel
 @export var CardUIManager: CardUIManager
 @onready var ImportData = get_node("/root/ImportData")
+var actionCardData = ActionCardData.new()
 
+var opened_locally : bool = false
 var active = false
 var answerShown : bool = false
 var curType
@@ -16,6 +18,7 @@ var answerexplanationtext
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_child(actionCardData)
 	ImportData.sort_data()
 	var ImportDataFull = ImportData.duplicate()
 	pass # Replace with function body.
@@ -72,9 +75,10 @@ func draw(type):
 	# action cards
 	var rng = RandomNumberGenerator.new()
 	if rng.randi_range(1, 21) >= 19: #19 is defualt
-		var roll = rng.randi_range(1,actionDict.size()-1)
+		var roll = rng.randi_range(1,actionCardData.actionDict.size())
 		curType = "action"
 		curKey = roll
+		set_current_vars_for_everyone.rpc(active,curType,curKey)
 		display_action_card(roll)
 		display_action_card.rpc(roll)
 		toggle_top_bar(true)
@@ -158,11 +162,12 @@ func toggle_top_bar(isaction: bool):
 		CardUIManager.UXTagObject.visible = true
 		CardUIManager.ActionTagObject.visible = false
 
-func display_default_card(d):
+func display_default_card(d,localonly = false):
+	
 	if not cardTypeData.has(d):
 		ErrorLabel.show_error("no card found for key: %s" % str(d))
 		return
-
+	opened_locally = localonly
 	
 	var lType = cardTypeData[d]["Basis / Prof"]
 	var cType = cardTypeData[d]["Type"]
@@ -179,31 +184,31 @@ func display_default_card(d):
 	var cAnswerExplanation = cardTypeData[d]["AnswerExplanation"]
 	
 	card_setup(cType,cSubType,d, cQuestion,cQuestionExplanation, cChoiceA, cChoiceB, cChoiceC, cChoiceD,  cAnswer,cAnswerExplanation,lType)
-	card_setup.rpc(cType,cSubType,d, cQuestion,cQuestionExplanation, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer,cAnswerExplanation,lType)
+	if !localonly:
+		card_setup.rpc(cType,cSubType,d, cQuestion,cQuestionExplanation, cChoiceA, cChoiceB, cChoiceC, cChoiceD, cAnswer,cAnswerExplanation,lType)
 
-var actionDict = [
-	"Your delivery does not fit in the release calendar: skip a turn",
-	"Synchronization issue: Move your front pawn back to the square where your second pawn is. If you only have one pawn in the game, you can take your second pawn, and place both pawns on your starting space",
-	"Fix security issue together: you and the person after you skip this turn",
-	"Process joker: you can keep this card and use it when you want someone else to take your turn and assignment on a next turn",
-	"Content joker: you can keep this card and use it when skip a question you don't like and take another question",
-	"Management: you have to solve a big problem with high priority, your pawn may switch places with the pawn of another player",
-	"Blackmail: A user refuses to close an incident unless you give something extra in return, your front pawn will not move this round",
-	"Night shift, skip a turn",
-	"New Business Requirement: put the next pawn in the starting square",
-	"Test: SIT issues, two steps back",
-	"Test: The acceptance test is successful, go directly into production (to your finish)",
-	"Management: CICD chain no longer works, put all pawns (of all players) back a whole phase"
-	]
+func get_action_by_uid(uid: int) -> Dictionary:
+	for entry in actionCardData.actionDict:
+		if entry["UID"] == uid:
+			return entry
+	return {}
 
 @rpc("any_peer")
-func display_action_card(roll : int):
+func display_action_card(roll : int,localonly = false):
 	CardUIManager.BookmarkButton.hide()
 	CardUIManager.CancelBookmarkButton.hide()
 	CardUIManager.RevealButton.hide()
-	print(actionDict[roll] + str(multiplayer.get_unique_id()))
-	card_setup("action", "","", actionDict[roll],"", "", "", "", "", "","","")
-	card_setup.rpc("action", "","", actionDict[roll],"", "", "", "", "", "","","")
+	#CardUIManager.SaveActionButton.show()
+	opened_locally = localonly
+	var action_text = ""
+	var action_card = get_action_by_uid(roll)
+	if action_card.size() > 0:
+		action_text = action_card["action"]
+	
+		print(action_text + str(multiplayer.get_unique_id()))
+		card_setup("action", "",roll, action_text,"", "", "", "", "", "","","")
+		if !localonly:
+			card_setup.rpc("action", "",roll, action_text,"", "", "", "", "", "","","")
 
 func set_card_choice_string(tag, cardTypeData):
 	if cardTypeData == "":
@@ -237,8 +242,14 @@ func card_discard(cardTypeData,cardTypeDataVar, cardTypeString, keyVar):
 @rpc("any_peer")
 func card_setup(type, subtype, nr, question,qexplanation, choiceA, choiceB, choiceC, choiceD, answer,aexplanation,level):
 	CardUIManager.bookmark.visible = false
+	#if type != "action":
+		#CardUIManager.SaveActionButton.hide()
+	#else:
+		#CardUIManager.SaveActionButton.show()
 	print("####")
 	print(type)
+	curKey = nr
+	curType = type
 	set_card_icon(type)
 	set_panel_layout(type)
 	CardUIManager.TypeNumberTextObject.text = "#" + str(nr)
@@ -315,6 +326,10 @@ func set_panel_layout(type):
 func _sync_cardshown(state, answer = "-", question = "-"):
 	print("syncing card")
 	#var tPanel = $"Panel"
+	if opened_locally:
+		CardUIManager.PlayerCardContainer.visible = true
+	else:
+		CardUIManager.PlayerCardContainer.visible = false
 	if !CardUIManager.CardPanel.visible:
 		CardUIManager.CardPanel.visible = true
 	CardUIManager.QuestionObject.text = question
@@ -341,11 +356,12 @@ func close_answer():
 	CardUIManager.BookmarkButton.show()
 	CardUIManager.RevealButton.show()
 	CardUIManager.CancelBookmarkButton.hide()
-	toggle_active.rpc(false)
+	if !opened_locally:
+		toggle_active.rpc(false)
+		_sync_cardshown.rpc(active, "", "")
 	visible = false
 	#if !$"Panel".visible:
 		#$"Panel".visible = true
-	_sync_cardshown.rpc(active, "", "")
 	curType = null
 	curKey = null
 	active = false
@@ -374,3 +390,15 @@ func _refresh_UI():
 func _on_refresh_ui_pressed():
 	print("ui refreshed")
 	_refresh_UI.rpc()
+
+
+func _on_use_card_pressed() -> void:
+	active = true
+	if curType == "action":
+		display_action_card(int(curKey))
+	else:
+		set_bg_on_type(curType)
+		display_default_card(int(curKey))
+	PlayerSettings.remove_action_card.rpc(PlayerSettings.color,int(curKey))
+	_sync_cardshown(active, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)
+	_sync_cardshown.rpc(active, CardUIManager.AnswerObject.text, CardUIManager.QuestionObject.text)

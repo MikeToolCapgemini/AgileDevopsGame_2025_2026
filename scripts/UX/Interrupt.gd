@@ -15,13 +15,21 @@ func apply_state(state: Dictionary) -> void:
 	interupt_active = state["interupt_active"]
 	if interupt_active:
 		show_interrupt()
+	else:
+		hide_interrupt()
 
-func _on_pressed():
-	show_interrupt.rpc()
+func _on_stop_pressed():
+	hide_interrupt.rpc()
 	pass # Replace with function body.
+
+@rpc("any_peer","call_local")
+func hide_interrupt():
+	interupt_active = false
+	InterruptUIPlayers.visible = false
+	InterruptUIFac.visible = false
 
 @rpc("any_peer","call_local")
 func show_interrupt():
 	interupt_active = true
 	InterruptUIPlayers.visible = true
-	InterruptUIFac.visible = false
+	InterruptUIFac.visible = true

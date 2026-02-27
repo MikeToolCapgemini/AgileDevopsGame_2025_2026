@@ -9,11 +9,13 @@ extends Node
 var peer = ENetMultiplayerPeer.new()
 var webPeer = WebSocketMultiplayerPeer.new()
 
+var playername : String = ""
 var started : bool = false
 
 @export var connect_panel : Control
 @export var disconnect_panel : Control
 @export var disconnect_server_panel : Control
+@export var join_button : Button
 
 
 var empty_server_timer : Timer
@@ -41,8 +43,28 @@ func _ready():
 		print("Starting dedicated server...")
 		host_game()
 		
-
-
+#var focused_out : bool
+#func _notification(what: int) -> void:
+	#if what == NOTIFICATION_APPLICATION_FOCUS_IN:
+		#if multiplayer.has_multiplayer_peer():
+			#if focused_out:
+				#reset_peer()
+			#focused_out = false
+			#print("player has focused in")
+	#elif what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		#focused_out = true
+		#print("player has focused out")
+#
+#func reset_peer():
+		#if multiplayer.has_multiplayer_peer():
+			#var old_peer = multiplayer.multiplayer_peer
+			#multiplayer.multiplayer_peer = null
+			#old_peer.close()
+			#webPeer.close()
+#
+		#var webPeer = WebSocketMultiplayerPeer.new()
+		#webPeer.create_client("wss://" + GameManager.last_address)
+		#multiplayer.multiplayer_peer = webPeer
 
 func peer_connected(id):
 	if id != 1:
@@ -73,16 +95,21 @@ func connected_to_server():
 	connect_panel.edit_text("Connected to server")
 	connect_panel.show()
 	print("Connected to server")
-	send_player_information.rpc_id(1, $"Debug Interface/NameField".text, multiplayer.get_unique_id())
+	join_button.hide()
+	if playername == "":
+		playername = $"Debug Interface/NameField".text
+	send_player_information.rpc_id(1, playername, multiplayer.get_unique_id())
 
 func connection_failed():
 	disconnect_panel.edit_text("Connection Failed")
 	disconnect_panel.show()
+	join_button.show()
 	print("Connection Failed")
 	
 func on_server_disconnected():
 	disconnect_server_panel.edit_text("Disconnected from server")
 	disconnect_server_panel.show()
+	join_button.show()
 	print("Disconnected from server")
 
 # Sends information about the player and updates/synchronizes the Players dict in GameManager
@@ -192,7 +219,7 @@ func update_text_field():
 	var newText = ""
 	for player in GameManager.Players:
 		newText += GameManager.Players[player].name + "\n"
-	$"Debug Interface/TextField".text = newText
+	$"Debug Interface/PlayerList".text = newText
 
 func host_game():
 	var serverCert = X509Certificate.new()

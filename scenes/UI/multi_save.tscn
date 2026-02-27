@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_5yltm"]
 [ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="3_uamr3"]
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="7_vikby"]
-[ext_resource type="Script" uid="uid://brboifcsqoflg" path="res://scripts/UX/save_overwrite_UI.gd" id="8_8abny"]
+[ext_resource type="Script" path="res://scripts/UX/save_overwrite_UI.gd" id="8_8abny"]
 [ext_resource type="StyleBox" uid="uid://dijgsweldy4qb" path="res://Styles/Cards_Background.tres" id="9_anvf0"]
 [ext_resource type="StyleBox" uid="uid://crbsxu7wnvy8j" path="res://Styles/Button_Wide_Normal.tres" id="10_ujgli"]
 [ext_resource type="StyleBox" uid="uid://cs0v80up287m0" path="res://Styles/Button_Wide_Hover.tres" id="11_7wxx2"]
@@ -252,7 +252,7 @@ size_flags_vertical = 8
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.69803923)
 theme_override_styles/normal = SubResource("StyleBoxFlat_2x0m5")
-placeholder_text = "Teamname_Date_Time"
+placeholder_text = "Teamname"
 alignment = 1
 
 [node name="SplitContainer" type="SplitContainer" parent="CollapsibleContainer/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/GridContainer"]

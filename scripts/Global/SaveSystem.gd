@@ -50,7 +50,9 @@ func request_saving_game(saveName: String,saveData,requester_id,checkname := tru
 func save_game_file(saveName : String,saveData,requester_id, checkname := true,):
 	check_save_dir()
 	var savePath
-	savePath = SavePath + saveName + ".json"
+	var datetime = Time.get_datetime_string_from_system(true)
+	datetime = datetime.replace(":", "_")
+	savePath = SavePath + saveName + datetime + ".json"
 	if checkname:
 		if check_if_saveName_exists(savePath):
 			SaveOverWriteInterface.rpc_id(requester_id,"_show_overwrite_UI",saveName,saveData)

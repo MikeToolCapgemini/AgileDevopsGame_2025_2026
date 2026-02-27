@@ -1,13 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://chaqxel77co4a"]
+[gd_scene load_steps=15 format=3 uid="uid://dnqcmcltn41ys"]
 
 [ext_resource type="Theme" uid="uid://d24lkhtvfma1b" path="res://Styles/Main_theme.tres" id="1_cau7c"]
-[ext_resource type="Script" uid="uid://dxbmtc0q4ppog" path="res://scripts/UX/ShowSecret.gd" id="2_bvvwm"]
-[ext_resource type="Script" uid="uid://bww1tb5si04x6" path="res://scripts/UX/login.gd" id="2_eqty5"]
+[ext_resource type="Script" path="res://scripts/UX/ShowSecret.gd" id="2_bvvwm"]
+[ext_resource type="Script" path="res://scripts/UX/login.gd" id="2_eqty5"]
 [ext_resource type="PackedScene" uid="uid://kgixi5xrbejj" path="res://scenes/multiplayer.tscn" id="3_0s12h"]
 [ext_resource type="FontFile" uid="uid://bq7d1pgd12bpk" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="3_6hqeh"]
 [ext_resource type="FontFile" uid="uid://drnjya52cc8g8" path="res://assets/fonts/Ubuntu/Ubuntu-Regular.ttf" id="3_ma4wh"]
 [ext_resource type="FontFile" uid="uid://c68m5pxwhdxpc" path="res://assets/fonts/Ubuntu/Ubuntu-Bold.ttf" id="4_0s12h"]
-[ext_resource type="Script" uid="uid://epphmhppfuev" path="res://scripts/UX/backend_picker.gd" id="4_1u3ka"]
+[ext_resource type="Script" path="res://scripts/UX/backend_picker.gd" id="4_1u3ka"]
 [ext_resource type="Script" uid="uid://8mdwbu5lxn5m" path="res://addons/fontawesome/FontAwesome.gd" id="4_edd8a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqty5"]

@@ -1,4 +1,5 @@
 extends Button
+class_name CollapseButton
 
 @export var collapse : CollapsibleContainer
 @export var folded : bool
